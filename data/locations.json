@@ -1,1 +1,149 @@
-{}
+{
+  "chase": {
+    "states": {
+      "CA": { "branches": 858, "atms": null },
+      "NY": { "branches": 580, "atms": null },
+      "TX": { "branches": 490, "atms": null },
+      "FL": { "branches": 434, "atms": null },
+      "IL": { "branches": 265, "atms": null },
+      "OH": { "branches": 233, "atms": null },
+      "AZ": { "branches": 189, "atms": null },
+      "NJ": { "branches": 189, "atms": null },
+      "MI": { "branches": 171, "atms": null },
+      "WA": { "branches": 149, "atms": null }
+    }
+  },
+  "bank_of_america": {
+    "states": {
+      "CA": { "branches": 684, "atms": null },
+      "FL": { "branches": 414, "atms": null },
+      "TX": { "branches": 313, "atms": null },
+      "NY": { "branches": 251, "atms": null },
+      "NJ": { "branches": 179, "atms": null },
+      "MA": { "branches": 146, "atms": null },
+      "GA": { "branches": 130, "atms": null },
+      "IL": { "branches": 121, "atms": null },
+      "WA": { "branches": 119, "atms": null },
+      "MD": { "branches": 114, "atms": null }
+    }
+  },
+  "wells_fargo": {
+    "states": {
+      "CA": { "branches": 769, "atms": null },
+      "TX": { "branches": 457, "atms": null },
+      "FL": { "branches": 458, "atms": null },
+      "NC": { "branches": 219, "atms": null },
+      "NJ": { "branches": 196, "atms": null },
+      "GA": { "branches": 179, "atms": null },
+      "VA": { "branches": 179, "atms": null },
+      "PA": { "branches": 168, "atms": null },
+      "AZ": { "branches": 153, "atms": null },
+      "MN": { "branches": 121, "atms": null }
+    }
+  },
+  "citibank": {
+    "states": {
+      "CA": { "branches": 271, "atms": null },
+      "NY": { "branches": 216, "atms": null },
+      "IL": { "branches": 57, "atms": null },
+      "FL": { "branches": 56, "atms": null },
+      "DC": { "branches": 15, "atms": null },
+      "CT": { "branches": 12, "atms": null },
+      "MD": { "branches": 11, "atms": null },
+      "NJ": { "branches": 8, "atms": null },
+      "NV": { "branches": 8, "atms": null },
+      "VA": { "branches": 8, "atms": null }
+    }
+  },
+  "capital_one": {
+    "states": {
+      "NY": { "branches": 77, "atms": null },
+      "LA": { "branches": 64, "atms": null },
+      "MD": { "branches": 41, "atms": null },
+      "TX": { "branches": 21, "atms": null },
+      "VA": { "branches": 21, "atms": null },
+      "NJ": { "branches": 16, "atms": null },
+      "DC": { "branches": 5, "atms": null },
+      "DE": { "branches": 3, "atms": null },
+      "CT": { "branches": 1, "atms": null }
+    }
+  },
+  "us_bank": {
+    "states": {
+      "CA": { "branches": 563, "atms": null },
+      "OH": { "branches": 161, "atms": null },
+      "IL": { "branches": 153, "atms": null },
+      "WA": { "branches": 136, "atms": null },
+      "MO": { "branches": 129, "atms": null },
+      "OR": { "branches": 114, "atms": null },
+      "MN": { "branches": 105, "atms": null },
+      "CO": { "branches": 102, "atms": null },
+      "WI": { "branches": 90, "atms": null }
+    }
+  },
+  "pnc_bank": {
+    "states": {
+      "TX": { "branches": 322, "atms": null },
+      "PA": { "branches": 262, "atms": null },
+      "OH": { "branches": 219, "atms": null },
+      "FL": { "branches": 200, "atms": null },
+      "NJ": { "branches": 174, "atms": null },
+      "IL": { "branches": 148, "atms": null },
+      "MI": { "branches": 124, "atms": null },
+      "CO": { "branches": 122, "atms": null },
+      "MD": { "branches": 115, "atms": null }
+    }
+  },
+  "truist": {
+    "states": {
+      "FL": { "branches": 441, "atms": null },
+      "NC": { "branches": 277, "atms": null },
+      "VA": { "branches": 259, "atms": null },
+      "GA": { "branches": 203, "atms": null },
+      "MD": { "branches": 138, "atms": null },
+      "PA": { "branches": 138, "atms": null },
+      "TN": { "branches": 98, "atms": null },
+      "TX": { "branches": 96, "atms": null },
+      "SC": { "branches": 95, "atms": null }
+    }
+  },
+  "mt_bank": {
+    "states": {
+      "NY": { "branches": 275, "atms": null },
+      "MD": { "branches": 152, "atms": null },
+      "PA": { "branches": 151, "atms": null },
+      "CT": { "branches": 109, "atms": null },
+      "NJ": { "branches": 65, "atms": null },
+      "MA": { "branches": 62, "atms": null },
+      "DE": { "branches": 36, "atms": null },
+      "VT": { "branches": 33, "atms": null },
+      "VA": { "branches": 25, "atms": null },
+      "NH": { "branches": 23, "atms": null }
+    }
+  },
+  "td_bank": {
+    "states": {
+      "NY": { "branches": 231, "atms": null },
+      "NJ": { "branches": 208, "atms": null },
+      "FL": { "branches": 159, "atms": null },
+      "MA": { "branches": 114, "atms": null },
+      "PA": { "branches": 71, "atms": null },
+      "CT": { "branches": 50, "atms": null },
+      "SC": { "branches": 50, "atms": null },
+      "NH": { "branches": 43, "atms": null },
+      "ME": { "branches": 28, "atms": null },
+      "VA": { "branches": 18, "atms": null }
+    }
+  },
+  "hsbc": {
+    "states": {
+      "NY": { "branches": 8, "atms": null },
+      "CA": { "branches": 6, "atms": null },
+      "FL": { "branches": 2, "atms": null },
+      "WA": { "branches": 2, "atms": null },
+      "VA": { "branches": 2, "atms": null },
+      "DC": { "branches": 1, "atms": null },
+      "NJ": { "branches": 1, "atms": null }
+    }
+  }
+}

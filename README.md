@@ -30,6 +30,8 @@ International students and professionals relocating to the US — recently gradu
 
 ## Data architecture — 3 levels, all field names in English
 
+Data was researched and last refreshed 2026-08. Before touching or re-researching any of `data/*.json`, read **[`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md)** first — it records which sources were used per field, which fields are `null` on purpose (and why), known business changes to re-check, and the exact rollup-recomputation logic for the `has_product_*` flags below. Treat it as the starting point for every future data refresh, not just a one-time research log.
+
 ### Level 1 — `data/banks.json`
 
 Per institution:
@@ -337,7 +339,7 @@ GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks:
 ## Build order
 
 1. Scaffold the repo structure and empty data files. *(done)*
-2. Research and populate the full dataset (all 15 institutions, all 3 levels) — flag any field where no reliable source was found rather than guessing.
+2. Research and populate the full dataset (all 15 institutions, all 3 levels) — flag any field where no reliable source was found rather than guessing. *(done — see [`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md) for sources and known gaps)*
 3. Download/source the 15 official logos, normalize them into the neutral card-token treatment.
 4. Build Browse Banks (hero + filters + grid) first, since every other page depends on this data being correctly loaded and rendered.
 5. Build Bank Detail pages with the flip-card product sections.

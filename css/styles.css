@@ -1,1 +1,86 @@
-/* Only what's needed beyond Tailwind utility classes — design tokens live in README.md. Built in Phase 4. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --mfb-bg: #FAFAF9;
+  --mfb-surface: #FFFFFF;
+  --mfb-border: #E4E3DD;
+  --mfb-text: #1F1F1D;
+  --mfb-text-secondary: #6B6B65;
+  --mfb-text-placeholder: #A3A29B;
+  --mfb-hover: #F2F1EC;
+  --mfb-green-fill: #3FA76B;
+  --mfb-green-fill-hover: #2E9563;
+  --mfb-green-tint: #E7F3EC;
+  --mfb-green-text: #1F6B42;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--mfb-bg);
+  color: var(--mfb-text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+}
+
+.font-numeric {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Flip card mechanics — no equivalent in Tailwind's default utility set. */
+.flip-card {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 450ms ease-in-out;
+  transform-style: preserve-3d;
+}
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Respect the OS-level reduced-motion preference everywhere, not just page transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .flip-card-inner {
+    transition: none !important;
+  }
+}
+
+/* Page transition helpers (Browse Banks <-> Bank Detail), applied via Alpine x-transition in app.js */
+.mfb-page-enter {
+  animation: mfb-slide-fade-in 300ms ease-in-out;
+}
+@keyframes mfb-slide-fade-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mfb-page-enter { animation: none; }
+}

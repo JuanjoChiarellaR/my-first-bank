@@ -4,9 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ask the Agent — MyFirstBank</title>
+  <meta name="description" content="Ask questions about US banks, savings, checking, and credit card options in any language — answers always in English, sourced only from this site's dataset." />
+  <link rel="icon" href="assets/logos/_mark.svg" type="image/svg+xml" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FAFAF9',
+            surface: '#FFFFFF',
+            border: '#E4E3DD',
+            ink: '#1F1F1D',
+            'ink-secondary': '#6B6B65',
+            'ink-placeholder': '#A3A29B',
+            hover: '#F2F1EC',
+            green: {
+              fill: '#3FA76B',
+              'fill-hover': '#2E9563',
+              tint: '#E7F3EC',
+              text: '#1F6B42',
+            },
+          },
+          fontFamily: {
+            display: ['Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
-<body>
-  <!-- Ask the Agent. Built in Phase 8 — see README.md for the full spec. -->
-  <p>Ask the Agent — coming soon.</p>
+<body data-page="agent" class="bg-bg text-ink font-sans antialiased">
+  <div id="site-navbar"></div>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[50vh]">
+    <p class="text-ink-secondary">Ask the Agent — coming soon.</p>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data-loader.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/agent.js"></script>
 </body>
 </html>

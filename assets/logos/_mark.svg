@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="MyFirstBank">
+  <defs>
+    <clipPath id="mfb-card-clip">
+      <rect x="15" y="28" width="70" height="46" rx="7" />
+    </clipPath>
+  </defs>
+  <g transform="rotate(-8 50 50)">
+    <rect x="15" y="28" width="70" height="46" rx="7" fill="#FFFFFF" stroke="#E4E3DD" stroke-width="1.5" />
+    <g clip-path="url(#mfb-card-clip)">
+      <!-- gray chip -->
+      <rect x="24" y="40" width="13" height="9" rx="1.5" fill="#A3A29B" />
+      <!-- contactless symbol: four concentric quarter-arcs of increasing radius -->
+      <g fill="none" stroke="#6B6B65" stroke-width="2" stroke-linecap="round">
+        <path d="M 73 34 A 5 5 0 0 1 78 29" />
+        <path d="M 69 34 A 9 9 0 0 1 78 25" />
+        <path d="M 65 34 A 13 13 0 0 1 78 21" />
+        <path d="M 61 34 A 17 17 0 0 1 78 17" />
+      </g>
+    </g>
+    <!-- green checkmark badge, overlapping the bottom-right corner -->
+    <circle cx="83" cy="72" r="11" fill="#3FA76B" stroke="#FFFFFF" stroke-width="2.5" />
+    <path d="M 78 72 L 81.5 75.5 L 88 68" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

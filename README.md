@@ -350,7 +350,7 @@ GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks:
 4. Build Browse Banks (hero + filters + grid) first, since every other page depends on this data being correctly loaded and rendered.
 5. Build Bank Detail pages with the flip-card product sections. *(done — all 15 pages generated from `banks/_template.html` via `scripts/generate-bank-pages.py`, re-run it after editing the template or the institution list)*
 6. Build Compare. *(done)*
-7. Build Ask the Agent (system prompt, semantic layer generation, the three context entry points, the two question modes, rate limiting) and the Cloudflare Worker proxy (CORS, secret key, worker-level rate limit).
+7. Build Ask the Agent (system prompt, semantic layer generation, the three context entry points, the two question modes, rate limiting) and the Cloudflare Worker proxy (CORS, secret key, worker-level rate limit). *(code done and verified client-side with a mocked Worker; live deploy needs the user to create an Anthropic key + Cloudflare account — see `worker/README.md` — `WORKER_URL` in `js/agent.js` ships empty until then, with a graceful "not connected" state instead of a broken fetch)*
 8. Add the footer, Privacy Policy page, and og:image.
 9. Wire up GoatCounter.
 10. **Run the full audit** — product, UX, visual design, data completeness, technical robustness, accessibility (WCAG AA contrast on the green accent, `prefers-reduced-motion`, full keyboard navigation), and copy — on an actual mobile viewport, before considering this done. Fix whatever falls short rather than shipping it as a known gap.

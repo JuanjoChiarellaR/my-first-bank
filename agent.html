@@ -42,13 +42,139 @@
 <body data-page="agent" class="bg-bg text-ink font-sans antialiased">
   <div id="site-navbar"></div>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[50vh]">
-    <p class="text-ink-secondary">Ask the Agent — coming soon.</p>
+  <main x-data="askAgent()" class="max-w-3xl mx-auto px-4 sm:px-6 py-10 min-h-[60vh]">
+    <h1 class="font-display text-2xl sm:text-3xl font-semibold mb-2">Ask the Agent</h1>
+    <p class="text-ink-secondary mb-6">Ask in any language — answers are always in English, and come only from this site's dataset. Not financial advice.</p>
+
+    <div x-show="loading" class="text-ink-secondary text-sm">Loading&hellip;</div>
+
+    <template x-if="!loading">
+      <div>
+        <!-- Context banner -->
+        <div x-show="contextType !== 'none'" class="mb-5 text-sm bg-hover border border-border rounded-md px-4 py-2.5" x-text="contextBannerText()"></div>
+
+        <div x-show="!workerConfigured" class="mb-5 text-sm bg-hover border border-border rounded-md px-4 py-2.5">
+          The agent isn't connected in this deploy yet. Browse Banks and Compare work normally.
+        </div>
+
+        <!-- Session limit reached -->
+        <div x-show="sessionExhausted" x-cloak class="mb-5 text-sm bg-hover border border-border rounded-md px-4 py-3">
+          <span x-text="`You've used all ${sessionLimit} questions for this session.`"></span>
+          Refresh won't reset this &mdash; it's tied to your browser. Explore <a href="index.html" class="underline">Browse Banks</a> or <a href="compare.html" class="underline">Compare</a> in the meantime.
+        </div>
+
+        <!-- Chat messages -->
+        <div class="space-y-3 mb-6" aria-live="polite">
+          <template x-for="(m, i) in messages" :key="i">
+            <div :class="m.role === 'user' ? 'text-right' : 'text-left'">
+              <div class="inline-block max-w-[85%] rounded-lg px-4 py-2.5 text-sm text-left"
+                   :class="m.role === 'user' ? 'bg-ink text-white' : m.role === 'system' ? 'bg-hover text-ink-secondary border border-border' : 'bg-surface border border-border'">
+                <span x-text="m.text" style="white-space: pre-wrap;"></span>
+              </div>
+            </div>
+          </template>
+          <div x-show="sending" class="text-sm text-ink-secondary">Thinking&hellip;</div>
+          <div x-show="sendError" x-text="sendError" class="text-sm text-ink-secondary"></div>
+        </div>
+
+        <!-- Mode toggle -->
+        <div class="flex gap-1 mb-4 border border-border rounded-md p-1 w-fit" role="tablist" aria-label="Question mode">
+          <button type="button" role="tab" :aria-selected="mode === 'open'" @click="mode = 'open'"
+                  class="text-sm font-medium px-3 py-1.5 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  :class="mode === 'open' ? 'bg-ink text-white' : 'text-ink-secondary hover:bg-hover'">Open question</button>
+          <button type="button" role="tab" :aria-selected="mode === 'filtered'" @click="mode = 'filtered'"
+                  class="text-sm font-medium px-3 py-1.5 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                  :class="mode === 'filtered' ? 'bg-ink text-white' : 'text-ink-secondary hover:bg-hover'">Filtered search</button>
+        </div>
+
+        <!-- Open question -->
+        <form x-show="mode === 'open'" @submit.prevent="sendOpenQuestion()" class="flex gap-2">
+          <label for="open-question" class="sr-only">Your question</label>
+          <textarea id="open-question" x-model="openQuestion" rows="2" :disabled="sessionExhausted"
+                    placeholder="Ask anything about US banking products…"
+                    class="flex-1 border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                    @keydown.enter.exact.prevent="sendOpenQuestion()"></textarea>
+          <button type="submit" :disabled="!openQuestion.trim() || sending || sessionExhausted"
+                  class="bg-ink text-white text-sm font-medium rounded-md px-4 py-2 hover:bg-[#3A3A36] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+            Ask
+          </button>
+        </form>
+
+        <!-- Filtered search -->
+        <form x-show="mode === 'filtered'" @submit.prevent="sendFilteredSearch()" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1">
+            <label for="ff-product-type" class="text-xs font-medium text-ink-secondary">Product type <span aria-hidden="true">*</span></label>
+            <select id="ff-product-type" x-model="filters.productType" required :disabled="sessionExhausted"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50">
+              <option value="" disabled>Select one</option>
+              <option value="checking">Checking</option>
+              <option value="savings">Savings</option>
+              <option value="credit_card">Credit card</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="ff-doc-status" class="text-xs font-medium text-ink-secondary">Documentation status <span aria-hidden="true">*</span></label>
+            <select id="ff-doc-status" x-model="filters.docStatus" required :disabled="sessionExhausted"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50">
+              <option value="" disabled>Select one</option>
+              <option value="has_ssn">Has SSN</option>
+              <option value="has_itin">Has ITIN</option>
+              <option value="has_neither_yet">Has neither yet</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="ff-credit-history" class="text-xs font-medium text-ink-secondary">US credit history <span aria-hidden="true">*</span></label>
+            <select id="ff-credit-history" x-model="filters.creditHistory" required :disabled="sessionExhausted"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50">
+              <option value="" disabled>Select one</option>
+              <option value="has_us_history">Has US credit history</option>
+              <option value="no_us_history">No US credit history</option>
+              <option value="international_only">Has international history only</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="ff-state" class="text-xs font-medium text-ink-secondary">State <span aria-hidden="true">*</span></label>
+            <select id="ff-state" x-model="filters.state" required :disabled="sessionExhausted"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50">
+              <option value="" disabled>Select one</option>
+              <template x-for="[code, name] in usStates" :key="code">
+                <option :value="code" x-text="name"></option>
+              </template>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1 sm:col-span-2">
+            <label for="ff-priority" class="text-xs font-medium text-ink-secondary">Priority <span aria-hidden="true">*</span></label>
+            <select id="ff-priority" x-model="filters.priority" required :disabled="sessionExhausted"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50">
+              <option value="" disabled>Select one</option>
+              <option value="lowest_fees">Lowest fees</option>
+              <option value="branches_nearby">Branches nearby</option>
+              <option value="building_credit">Building US credit history</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1 sm:col-span-2">
+            <label for="ff-clarification" class="text-xs font-medium text-ink-secondary">Anything else? (optional)</label>
+            <input id="ff-clarification" type="text" x-model="filters.clarification" :disabled="sessionExhausted"
+                   class="border border-border rounded-md px-3 py-2 text-sm bg-surface disabled:opacity-50" placeholder="Optional clarification">
+          </div>
+          <div class="sm:col-span-2">
+            <button type="submit" :disabled="!filteredSearchReady || sending || sessionExhausted"
+                    class="bg-ink text-white text-sm font-medium rounded-md px-4 py-2.5 hover:bg-[#3A3A36] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              Ask
+            </button>
+            <p class="text-xs text-ink-placeholder mt-2" x-show="!filteredSearchReady">All five fields are required before this sends anything.</p>
+          </div>
+        </form>
+
+        <p class="text-xs text-ink-placeholder mt-6" x-show="!sessionExhausted" x-text="`${remainingQuestions} question${remainingQuestions === 1 ? '' : 's'} left this session.`"></p>
+      </div>
+    </template>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="js/data-loader.js"></script>
+  <script src="js/semantic-layer.js"></script>
   <script src="js/shell.js"></script>
   <script src="js/agent.js"></script>
 </body>

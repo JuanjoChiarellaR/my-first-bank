@@ -8,7 +8,11 @@
     "apr_regular_min": 18.24,
     "apr_regular_max": 29.99,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["SSN and government-issued ID", "no prior US credit history required", "at least $250 in a Chase checking/savings account recommended to improve approval odds"],
+    "eligibility_requirements": [
+      "SSN and government-issued ID",
+      "no prior US credit history required",
+      "at least $250 in a Chase checking/savings account recommended to improve approval odds"
+    ],
     "requires_ssn": true,
     "accepts_itin": false,
     "accepts_no_us_credit_history": true,
@@ -18,9 +22,23 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "1.5% cash back on all purchases; 3% cash back on dining (restaurants, takeout, eligible delivery) up to $6,000 spent in first 6 months; 2% cash back on qualifying Lyft purchases through 9/30/2027",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "direct deposit", "gift cards", "travel"],
+    "redemption_options": [
+      "statement credit",
+      "direct deposit",
+      "gift cards",
+      "travel"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no annual fee", "no security deposit required", "6 months complimentary DashPass membership", "Zero Liability Protection", "Purchase Protection", "Extended Warranty Protection", "Trip Cancellation/Interruption Insurance", "potential upgrade path to Chase Freedom Unlimited"],
+    "card_benefits": [
+      "no annual fee",
+      "no security deposit required",
+      "6 months complimentary DashPass membership",
+      "Zero Liability Protection",
+      "Purchase Protection",
+      "Extended Warranty Protection",
+      "Trip Cancellation/Interruption Insurance",
+      "potential upgrade path to Chase Freedom Unlimited"
+    ],
     "welcome_bonus_description": "$25 statement credit for enrolling in automatic payments within first 3 months",
     "product_url": "creditcards.chase.com/cash-back-credit-cards/freedom/rise",
     "last_verified_date": "2026-08"
@@ -34,7 +52,12 @@
     "apr_regular_min": 17.49,
     "apr_regular_max": 27.49,
     "foreign_transaction_fee_pct": 3,
-    "eligibility_requirements": ["SSN or ITIN", "valid US address", "18 years or older", "refundable security deposit $200-$5,000"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "valid US address",
+      "18 years or older",
+      "refundable security deposit $200-$5,000"
+    ],
     "requires_ssn": false,
     "accepts_itin": true,
     "accepts_no_us_credit_history": true,
@@ -44,9 +67,18 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "1-6% cash back depending on purchase category (choose your 3% category); 1% on all other purchases",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "deposit to Bank of America account", "gift cards"],
+    "redemption_options": [
+      "statement credit",
+      "deposit to Bank of America account",
+      "gift cards"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no annual fee", "security deposit becomes credit limit", "free FICO score access", "path to graduate to unsecured card"],
+    "card_benefits": [
+      "no annual fee",
+      "security deposit becomes credit limit",
+      "free FICO score access",
+      "path to graduate to unsecured card"
+    ],
     "welcome_bonus_description": null,
     "product_url": "bankofamerica.com/credit-cards/products/secured-credit-card/",
     "last_verified_date": "2026-08"
@@ -60,7 +92,11 @@
     "apr_regular_min": 18.49,
     "apr_regular_max": 28.49,
     "foreign_transaction_fee_pct": 3,
-    "eligibility_requirements": ["SSN or ITIN", "established US credit history typically required", "good to excellent credit recommended"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "established US credit history typically required",
+      "good to excellent credit recommended"
+    ],
     "requires_ssn": false,
     "accepts_itin": true,
     "accepts_no_us_credit_history": false,
@@ -70,9 +106,19 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "Unlimited 2% cash back on all purchases",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "direct deposit", "gift cards", "travel"],
+    "redemption_options": [
+      "statement credit",
+      "direct deposit",
+      "gift cards",
+      "travel"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no annual fee", "0% intro APR for 12 months on purchases and balance transfers", "cell phone protection", "3% foreign transaction fee applies (no FTF waiver on this card)"],
+    "card_benefits": [
+      "no annual fee",
+      "0% intro APR for 12 months on purchases and balance transfers",
+      "cell phone protection",
+      "3% foreign transaction fee applies (no FTF waiver on this card)"
+    ],
     "welcome_bonus_description": "$200 cash rewards bonus after spending $500 in first 3 months (offer terms vary; verify current amount)",
     "product_url": "wellsfargo.com/credit-cards/active-cash/",
     "last_verified_date": "2026-08"
@@ -86,7 +132,12 @@
     "apr_regular_min": null,
     "apr_regular_max": null,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["valid SSN on file", "no recent/pending bankruptcy within 2 years", "income and debt review", "refundable security deposit $200-$2,500 in $100 increments"],
+    "eligibility_requirements": [
+      "valid SSN on file",
+      "no recent/pending bankruptcy within 2 years",
+      "income and debt review",
+      "refundable security deposit $200-$2,500 in $100 increments"
+    ],
     "requires_ssn": true,
     "accepts_itin": false,
     "accepts_no_us_credit_history": true,
@@ -98,7 +149,12 @@
     "points_or_miles_per_dollar": null,
     "redemption_options": [],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no annual fee", "security deposit sets credit limit", "monthly reporting to major credit bureaus", "refundable deposit when account closed in good standing"],
+    "card_benefits": [
+      "no annual fee",
+      "security deposit sets credit limit",
+      "monthly reporting to major credit bureaus",
+      "refundable deposit when account closed in good standing"
+    ],
     "welcome_bonus_description": null,
     "product_url": "citi.com/credit-cards/citi-secured-credit-card",
     "last_verified_date": "2026-08"
@@ -112,7 +168,12 @@
     "apr_regular_min": 18.49,
     "apr_regular_max": 28.49,
     "foreign_transaction_fee_pct": 0,
-    "eligibility_requirements": ["SSN or ITIN", "good to excellent credit", "18+ years old", "proof of income"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old",
+      "proof of income"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": false,
@@ -122,9 +183,19 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "Unlimited 1.5% cash back on every purchase; 5% cash back on hotels, vacation rentals and rental cars booked through Capital One Travel",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "check", "gift cards", "Amazon.com checkout", "travel"],
+    "redemption_options": [
+      "statement credit",
+      "check",
+      "gift cards",
+      "Amazon.com checkout",
+      "travel"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no foreign transaction fee", "0% intro APR on purchases for 15 months", "free credit score access"],
+    "card_benefits": [
+      "no foreign transaction fee",
+      "0% intro APR on purchases for 15 months",
+      "free credit score access"
+    ],
     "welcome_bonus_description": null,
     "product_url": "capitalone.com/credit-cards/quicksilver/",
     "last_verified_date": "2026-08"
@@ -138,7 +209,12 @@
     "apr_regular_min": 28.99,
     "apr_regular_max": 28.99,
     "foreign_transaction_fee_pct": 0,
-    "eligibility_requirements": ["SSN or ITIN", "18+ years old", "refundable security deposit from $200", "no minimum credit score / limited or no credit history accepted"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "18+ years old",
+      "refundable security deposit from $200",
+      "no minimum credit score / limited or no credit history accepted"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": true,
@@ -148,9 +224,18 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "Unlimited 1.5% cash back on every purchase",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "check", "gift cards", "Amazon.com checkout"],
+    "redemption_options": [
+      "statement credit",
+      "check",
+      "gift cards",
+      "Amazon.com checkout"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no foreign transaction fee", "refundable security deposit sets credit line", "path to graduate to unsecured card"],
+    "card_benefits": [
+      "no foreign transaction fee",
+      "refundable security deposit sets credit line",
+      "path to graduate to unsecured card"
+    ],
     "welcome_bonus_description": null,
     "product_url": "capitalone.com/credit-cards/quicksilver-secured/",
     "last_verified_date": "2026-08"
@@ -164,7 +249,12 @@
     "apr_regular_min": 17.49,
     "apr_regular_max": 27.49,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["SSN or ITIN", "good credit", "18+ years old", "proof of income"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good credit",
+      "18+ years old",
+      "proof of income"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": false,
@@ -174,9 +264,17 @@
     "rewards_type": "points",
     "rewards_rate_description": "4X points on dining/takeout/restaurant delivery (up to $2,000/quarter), 2X points on grocery stores and gas/EV charging, 1X points on everything else",
     "points_or_miles_per_dollar": 4,
-    "redemption_options": ["statement credit", "gift cards", "travel", "merchandise"],
+    "redemption_options": [
+      "statement credit",
+      "gift cards",
+      "travel",
+      "merchandise"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["$15 annual streaming credit after 11 months of streaming purchases", "0% intro APR on purchases and balance transfers for 15 billing cycles"],
+    "card_benefits": [
+      "$15 annual streaming credit after 11 months of streaming purchases",
+      "0% intro APR on purchases and balance transfers for 15 billing cycles"
+    ],
     "welcome_bonus_description": "20,000 bonus points after spending $1,000 in first 90 days",
     "product_url": "usbank.com/credit-cards/altitude-go-visa-signature-credit-card.html",
     "last_verified_date": "2026-08"
@@ -190,7 +288,12 @@
     "apr_regular_min": 27.49,
     "apr_regular_max": 27.49,
     "foreign_transaction_fee_pct": 3,
-    "eligibility_requirements": ["SSN or ITIN", "18+ years old", "refundable security deposit $300-$5,000", "no minimum credit score required"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "18+ years old",
+      "refundable security deposit $300-$5,000",
+      "no minimum credit score required"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": true,
@@ -202,7 +305,10 @@
     "points_or_miles_per_dollar": null,
     "redemption_options": [],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["credit limit equal to security deposit", "reports monthly to all 3 bureaus to help build credit"],
+    "card_benefits": [
+      "credit limit equal to security deposit",
+      "reports monthly to all 3 bureaus to help build credit"
+    ],
     "welcome_bonus_description": null,
     "product_url": "usbank.com/credit-cards/secured-visa-credit-card.html",
     "last_verified_date": "2026-08"
@@ -216,7 +322,11 @@
     "apr_regular_min": 18.24,
     "apr_regular_max": 30.24,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["SSN or ITIN", "18+ years old", "proof of income"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "18+ years old",
+      "proof of income"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": false,
@@ -228,7 +338,9 @@
     "points_or_miles_per_dollar": null,
     "redemption_options": [],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["0% intro APR on purchases and balance transfers for 15 billing cycles"],
+    "card_benefits": [
+      "0% intro APR on purchases and balance transfers for 15 billing cycles"
+    ],
     "welcome_bonus_description": null,
     "product_url": "pnc.com/en/personal-banking/banking/credit-cards.html",
     "last_verified_date": "2026-08"
@@ -242,7 +354,12 @@
     "apr_regular_min": null,
     "apr_regular_max": null,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["SSN or ITIN (ITIN applicants must apply in-person at a branch)", "18+ years old", "refundable security deposit $300-$2,500", "no minimum credit score required"],
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in-person at a branch)",
+      "18+ years old",
+      "refundable security deposit $300-$2,500",
+      "no minimum credit score required"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": true,
@@ -254,7 +371,10 @@
     "points_or_miles_per_dollar": null,
     "redemption_options": [],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["credit limit equal to security deposit", "does not graduate to unsecured card"],
+    "card_benefits": [
+      "credit limit equal to security deposit",
+      "does not graduate to unsecured card"
+    ],
     "welcome_bonus_description": null,
     "product_url": "pnc.com/en/personal-banking/banking/credit-cards/pnc-secured-credit-card.html",
     "last_verified_date": "2026-08"
@@ -268,7 +388,12 @@
     "apr_regular_min": 17.74,
     "apr_regular_max": 26.74,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["SSN or ITIN", "good credit", "18+ years old", "proof of income"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good credit",
+      "18+ years old",
+      "proof of income"
+    ],
     "requires_ssn": true,
     "accepts_itin": null,
     "accepts_no_us_credit_history": false,
@@ -278,9 +403,16 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "Unlimited 1.5% cash back on all purchases, or optional 3% on gas, 2% on utilities and groceries (up to $1,000/month combined), 1% on other purchases",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "deposit to Truist checking/savings (10% loyalty bonus)"],
+    "redemption_options": [
+      "statement credit",
+      "deposit to Truist checking/savings (10% loyalty bonus)"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["0% intro APR on purchases for 12 months", "0% intro APR on balance transfers for 12 months", "10% loyalty bonus when redeeming into a Truist deposit account"],
+    "card_benefits": [
+      "0% intro APR on purchases for 12 months",
+      "0% intro APR on balance transfers for 12 months",
+      "10% loyalty bonus when redeeming into a Truist deposit account"
+    ],
     "welcome_bonus_description": null,
     "product_url": "truist.com/credit-cards/enjoy-cash",
     "last_verified_date": "2026-08"
@@ -294,7 +426,13 @@
     "apr_regular_min": 26.74,
     "apr_regular_max": 26.74,
     "foreign_transaction_fee_pct": 0,
-    "eligibility_requirements": ["SSN or ITIN", "18+ years old", "legal US residency with proof of residence", "refundable security deposit from approximately $300-$400", "active US bank account to fund deposit"],
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "18+ years old",
+      "legal US residency with proof of residence",
+      "refundable security deposit from approximately $300-$400",
+      "active US bank account to fund deposit"
+    ],
     "requires_ssn": true,
     "accepts_itin": true,
     "accepts_no_us_credit_history": true,
@@ -304,9 +442,16 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "Unlimited cash back on everyday purchases (same structure as unsecured Enjoy Cash)",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "deposit to Truist checking/savings (10%-50% loyalty bonus)"],
+    "redemption_options": [
+      "statement credit",
+      "deposit to Truist checking/savings (10%-50% loyalty bonus)"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no foreign transaction fee", "credit limit equal to security deposit", "monthly reporting to 3 major credit bureaus"],
+    "card_benefits": [
+      "no foreign transaction fee",
+      "credit limit equal to security deposit",
+      "monthly reporting to 3 major credit bureaus"
+    ],
     "welcome_bonus_description": null,
     "product_url": "truist.com/credit-cards/enjoy-cash-secured",
     "last_verified_date": "2026-08"
@@ -320,7 +465,11 @@
     "apr_regular_min": 18.74,
     "apr_regular_max": 25.74,
     "foreign_transaction_fee_pct": null,
-    "eligibility_requirements": ["SSN", "refundable security deposit of $250-$5,000 minimum $250", "M&T checking or savings relationship typically required to apply in person"],
+    "eligibility_requirements": [
+      "SSN",
+      "refundable security deposit of $250-$5,000 minimum $250",
+      "M&T checking or savings relationship typically required to apply in person"
+    ],
     "requires_ssn": true,
     "accepts_itin": false,
     "accepts_no_us_credit_history": true,
@@ -332,7 +481,13 @@
     "points_or_miles_per_dollar": null,
     "redemption_options": [],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["free FICO credit score access", "path to graduate to unsecured card", "card locking feature", "M&T Assurance fraud protection", "chip and contactless payments"],
+    "card_benefits": [
+      "free FICO credit score access",
+      "path to graduate to unsecured card",
+      "card locking feature",
+      "M&T Assurance fraud protection",
+      "chip and contactless payments"
+    ],
     "welcome_bonus_description": null,
     "product_url": "https://www.mtb.com/personal/credit-cards/secured-credit-card",
     "last_verified_date": "2026-08"
@@ -346,7 +501,11 @@
     "apr_regular_min": 18.49,
     "apr_regular_max": 28.49,
     "foreign_transaction_fee_pct": 3,
-    "eligibility_requirements": ["SSN", "US credit history reviewed for approval", "proof of income"],
+    "eligibility_requirements": [
+      "SSN",
+      "US credit history reviewed for approval",
+      "proof of income"
+    ],
     "requires_ssn": true,
     "accepts_itin": false,
     "accepts_no_us_credit_history": false,
@@ -356,9 +515,16 @@
     "rewards_type": "cashback",
     "rewards_rate_description": "Unlimited 3% and 2% cash back on two chosen spend categories (dining, entertainment, gas, grocery, travel), 1% on all other purchases",
     "points_or_miles_per_dollar": null,
-    "redemption_options": ["statement credit", "direct deposit"],
+    "redemption_options": [
+      "statement credit",
+      "direct deposit"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["Visa Zero Liability protection", "cell phone protection when paying monthly bill with card", "digital wallet compatibility"],
+    "card_benefits": [
+      "Visa Zero Liability protection",
+      "cell phone protection when paying monthly bill with card",
+      "digital wallet compatibility"
+    ],
     "welcome_bonus_description": "$200 cash back after spending $1,000 within the first 90 days",
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/cash-card",
     "last_verified_date": "2026-08"
@@ -372,7 +538,10 @@
     "apr_regular_min": 19.99,
     "apr_regular_max": 24.99,
     "foreign_transaction_fee_pct": 0,
-    "eligibility_requirements": ["existing HSBC Premier checking account relationship", "18 or older"],
+    "eligibility_requirements": [
+      "existing HSBC Premier checking account relationship",
+      "18 or older"
+    ],
     "requires_ssn": false,
     "accepts_itin": true,
     "accepts_no_us_credit_history": false,
@@ -382,9 +551,21 @@
     "rewards_type": "points",
     "rewards_rate_description": "3x points on gas and groceries, 2x points on travel, 1x points on all other purchases",
     "points_or_miles_per_dollar": 1,
-    "redemption_options": ["cash back (statement credit or direct deposit)", "travel via HSBC Travel", "transfer to 11 airline and 2 hotel loyalty partners"],
+    "redemption_options": [
+      "cash back (statement credit or direct deposit)",
+      "travel via HSBC Travel",
+      "transfer to 11 airline and 2 hotel loyalty partners"
+    ],
     "annual_rewards_cap_usd": null,
-    "card_benefits": ["no foreign transaction fees", "up to $60 annual streaming credit", "up to $140 annual Instacart+ credit", "up to $85 Global Entry/TSA PreCheck credit every 4.5 years", "cell phone protection", "identity theft protection", "purchase assurance"],
+    "card_benefits": [
+      "no foreign transaction fees",
+      "up to $60 annual streaming credit",
+      "up to $140 annual Instacart+ credit",
+      "up to $85 Global Entry/TSA PreCheck credit every 4.5 years",
+      "cell phone protection",
+      "identity theft protection",
+      "purchase assurance"
+    ],
     "welcome_bonus_description": "50,000 welcome bonus points (worth up to $625 in travel via HSBC Travel) after spending $4,000 in the first 3 months",
     "product_url": "https://www.us.hsbc.com/credit-cards/products/premier/",
     "last_verified_date": "2026-08"
@@ -399,7 +580,7 @@
     "apr_regular_max": null,
     "foreign_transaction_fee_pct": null,
     "eligibility_requirements": [
-      "No SSN required — passport, ITIN, or alternative documentation (offer letter, pay slips) accepted",
+      "No SSN required \u2014 passport, ITIN, or alternative documentation (offer letter, pay slips) accepted",
       "No US credit history required",
       "No credit check / credit score requirement to qualify",
       "Approval based on verified income and other eligibility criteria"
@@ -439,7 +620,7 @@
     "eligibility_requirements": [
       "At least 18 years old",
       "US resident",
-      "Government-issued ID — SSN not required; ITIN or passport accepted",
+      "Government-issued ID \u2014 SSN not required; ITIN or passport accepted",
       "No credit history or credit check required",
       "Security deposit sets the credit limit (no stated minimum deposit)"
     ],
@@ -465,6 +646,1951 @@
     "welcome_bonus_description": null,
     "product_url": "https://www.firstcard.app",
     "last_verified_date": "2026-08",
-    "notes": "Secured/charge-card style product — described as 0% APR with no revolving interest. Base foreign transaction fee is 3.0% on the free/Standard tier; discounted on Plus, waived on Premium subscription tier."
+    "notes": "Secured/charge-card style product \u2014 described as 0% APR with no revolving interest. Base foreign transaction fee is 3.0% on the free/Standard tier; discounted on Plus, waived on Premium subscription tier."
+  },
+  {
+    "product_id": "chase_freedom_unlimited",
+    "bank_id": "chase",
+    "name": "Chase Freedom Unlimited",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.24,
+    "apr_regular_max": 29.99,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash_back",
+    "rewards_rate_description": "5% cash back on travel through Chase Travel, 3% on dining and drugstores, 1.5% on all other purchases",
+    "points_or_miles_per_dollar": 1.5,
+    "redemption_options": [
+      "statement credit",
+      "direct deposit",
+      "gift cards",
+      "travel",
+      "Amazon Shop with Points"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "Zero Liability Protection",
+      "purchase protection",
+      "extended warranty protection",
+      "trip cancellation/interruption insurance",
+      "auto rental collision damage waiver",
+      "6 months complimentary DashPass"
+    ],
+    "welcome_bonus_description": "$200 bonus after spending $500 on purchases in the first 3 months from account opening",
+    "product_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "chase_freedom_flex",
+    "bank_id": "chase",
+    "name": "Chase Freedom Flex",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.24,
+    "apr_regular_max": 29.99,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash_back",
+    "rewards_rate_description": "5% cash back on rotating quarterly categories (up to $1,500 combined per quarter, activation required) and travel through Chase Travel, 3% on dining and drugstores, 1% on everything else",
+    "points_or_miles_per_dollar": 1,
+    "redemption_options": [
+      "statement credit",
+      "direct deposit",
+      "gift cards",
+      "travel",
+      "Amazon Shop with Points"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "Zero Liability Protection",
+      "purchase protection",
+      "extended warranty protection",
+      "trip cancellation/interruption insurance",
+      "auto rental collision damage waiver",
+      "24/7 fraud monitoring"
+    ],
+    "welcome_bonus_description": "$200 bonus after spending $500 on purchases in the first 3 months from account opening",
+    "product_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/flex",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "chase_sapphire_preferred",
+    "bank_id": "chase",
+    "name": "Chase Sapphire Preferred Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 95,
+    "apr_regular_min": 19.24,
+    "apr_regular_max": 29.99,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "5x points on Chase Travel, 3x on dining, gas stations/EV charging/vacation homes, streaming and online groceries, 2x on other travel, 1x on everything else",
+    "points_or_miles_per_dollar": 5,
+    "redemption_options": [
+      "travel",
+      "cash",
+      "gift cards",
+      "statement credit",
+      "transfer to partners"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "$100 annual Chase Travel hotel credit",
+      "Global Entry/TSA PreCheck/NEXUS credit",
+      "12 months complimentary Apple TV+ and Apple Music",
+      "12 months complimentary DashPass",
+      "trip cancellation/interruption insurance up to $10,000",
+      "baggage delay and lost luggage reimbursement",
+      "auto rental coverage"
+    ],
+    "welcome_bonus_description": "75,000 bonus points after spending $5,000 on purchases in the first 3 months from account opening",
+    "product_url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "chase_sapphire_reserve",
+    "bank_id": "chase",
+    "name": "Chase Sapphire Reserve",
+    "product_type": "credit_card",
+    "annual_fee_usd": 795,
+    "apr_regular_min": 19.49,
+    "apr_regular_max": 29.99,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "8x points on Chase Travel purchases including The Edit, 4x on flights and hotels booked direct, 3x on dining worldwide, 1x on everything else",
+    "points_or_miles_per_dollar": 8,
+    "redemption_options": [
+      "travel",
+      "cash",
+      "gift cards",
+      "statement credit",
+      "transfer to partners"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "$300 annual travel credit",
+      "$500 annual credit for The Edit hotel stays",
+      "$300 annual dining credit",
+      "Priority Pass lounge access (1,300+ lounges)",
+      "trip cancellation/interruption insurance",
+      "auto rental coverage",
+      "purchase protection"
+    ],
+    "welcome_bonus_description": "100,000 bonus points after spending $6,000 on purchases in the first 3 months from account opening",
+    "product_url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "chase_slate_edge",
+    "bank_id": "chase",
+    "name": "Chase Slate Edge",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 28.99,
+    "apr_regular_max": 29.99,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "fair to good credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No cash back or points rewards program; designed for building/rebuilding credit with potential APR reduction and credit line increase eligibility",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "Zero Liability Protection",
+      "purchase protection",
+      "extended warranty protection",
+      "auto rental collision coverage",
+      "roadside assistance",
+      "6 months complimentary DashPass"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://creditcards.chase.com/credit-building-credit-cards/edge",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "bofa_travel_rewards",
+    "bank_id": "bank_of_america",
+    "name": "Bank of America Travel Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in branch)",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "Unlimited 1.5 points per dollar on every purchase, with no rotating categories",
+    "points_or_miles_per_dollar": 1.5,
+    "redemption_options": [
+      "statement credit toward travel purchases",
+      "cash"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 15 billing cycles on purchases and balance transfers",
+      "no foreign transaction fees",
+      "Preferred Rewards bonus of 25%-75% more points for eligible members"
+    ],
+    "welcome_bonus_description": "25,000 online bonus points after making at least $1,000 in purchases in the first 90 days of account opening",
+    "product_url": "https://www.bankofamerica.com/credit-cards/products/travel-rewards-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "bofa_unlimited_cash_rewards",
+    "bank_id": "bank_of_america",
+    "name": "Bank of America Unlimited Cash Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in branch)",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash_back",
+    "rewards_rate_description": "Unlimited 2% cash back in year one, then unlimited 1.5% cash back on all purchases thereafter; Preferred Rewards members earn 25%-75% more",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "cash",
+      "direct deposit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 15 billing cycles on purchases",
+      "no categories to track"
+    ],
+    "welcome_bonus_description": "$250 online cash rewards bonus after making at least $1,000 in purchases in the first 90 days of account opening",
+    "product_url": "https://www.bankofamerica.com/credit-cards/products/unlimited-cash-back-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "bofa_customized_cash_rewards",
+    "bank_id": "bank_of_america",
+    "name": "Bank of America Customized Cash Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in branch)",
+      "average to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash_back",
+    "rewards_rate_description": "6% cash back in choice category for the first year (then 3%), 2% at grocery stores and wholesale clubs, 1% on everything else; 6%/2% tiers apply to the first $2,500 in combined quarterly spend",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "cash",
+      "direct deposit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 15 billing cycles on purchases and balance transfers",
+      "choose your own 3%/6% category",
+      "Preferred Rewards bonus for eligible members"
+    ],
+    "welcome_bonus_description": "6% cash back in choice category for the first year plus a $200 online cash rewards bonus after making at least $1,000 in purchases in the first 90 days of account opening",
+    "product_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "bofa_premium_rewards",
+    "bank_id": "bank_of_america",
+    "name": "Bank of America Premium Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 95,
+    "apr_regular_min": 19.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in branch)",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "2 points per dollar on travel and dining, 1.5 points per dollar on everything else; Preferred Rewards members earn 25%-75% more",
+    "points_or_miles_per_dollar": 2,
+    "redemption_options": [
+      "travel",
+      "cash",
+      "statement credit",
+      "gift cards"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "up to $100 annual airline incidental statement credits",
+      "Global Entry/TSA PreCheck credit up to $100 every 4 years",
+      "no foreign transaction fees"
+    ],
+    "welcome_bonus_description": "60,000 online bonus points after making at least $4,000 in purchases in the first 90 days of account opening",
+    "product_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "bofa_premium_rewards_elite",
+    "bank_id": "bank_of_america",
+    "name": "Bank of America Premium Rewards Elite Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 550,
+    "apr_regular_min": 20.74,
+    "apr_regular_max": 28.74,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in branch)",
+      "excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "2 points per dollar on travel and dining, 1.5 points per dollar on everything else; Preferred Rewards members earn 25%-75% more",
+    "points_or_miles_per_dollar": 2,
+    "redemption_options": [
+      "travel",
+      "cash",
+      "statement credit",
+      "gift cards"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "Priority Pass airport lounge access",
+      "$150 annual lifestyle statement credit",
+      "up to $300 annual airline incidental statement credits",
+      "Global Entry/TSA PreCheck credit up to $120 every 4 years",
+      "no foreign transaction fees"
+    ],
+    "welcome_bonus_description": "75,000 online bonus points after making at least $5,000 in purchases in the first 90 days of account opening",
+    "product_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-elite-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "bofa_bankamericard",
+    "bank_id": "bank_of_america",
+    "name": "BankAmericard Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 14.99,
+    "apr_regular_max": 25.99,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN (ITIN applicants must apply in branch)",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No rewards program; card is designed around a long 0% intro APR period rather than earning",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 21 billing cycles on purchases and balance transfers made in first 60 days",
+      "no annual fee"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.bankofamerica.com/credit-cards/products/zero-interest-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "wells_fargo_reflect",
+    "bank_id": "wells_fargo",
+    "name": "Wells Fargo Reflect Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 28.24,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good credit (recommended 670+)",
+      "18+ years old",
+      "U.S. physical address"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No traditional points/cash back program; access to My Wells Fargo Deals for personalized merchant cash back as account credit",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "merchant deal statement credits via My Wells Fargo Deals"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 21 months on purchases and qualifying balance transfers (within 120 days)",
+      "cellular telephone protection up to $600",
+      "roadside dispatch",
+      "Zero Liability Protection",
+      "Credit Close-Up FICO Score tracking"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://creditcards.wellsfargo.com/reflect-visa-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "wells_fargo_autograph",
+    "bank_id": "wells_fargo",
+    "name": "Wells Fargo Autograph Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good credit (recommended 700+)",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "3x points on restaurants, travel, gas stations, transit, popular streaming services, and phone plans; 1x on everything else",
+    "points_or_miles_per_dollar": 3,
+    "redemption_options": [
+      "pay with rewards via PayPal",
+      "statement credit",
+      "gift cards (250+ merchants)",
+      "transfer to travel loyalty partners",
+      "past purchase reimbursement"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 12 months on purchases",
+      "$600 cellular telephone protection",
+      "auto rental collision damage waiver",
+      "Visa Signature Concierge",
+      "roadside dispatch",
+      "Credit Close-Up FICO Score tracking"
+    ],
+    "welcome_bonus_description": "20,000 bonus points after spending $1,000 in purchases in the first 3 months (approx. $200 value)",
+    "product_url": "https://creditcards.wellsfargo.com/autograph-visa-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "wells_fargo_autograph_journey",
+    "bank_id": "wells_fargo",
+    "name": "Wells Fargo Autograph Journey Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 95,
+    "apr_regular_min": 19.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "Unlimited 5x points on hotels, 4x on airlines, 3x on restaurants and other travel, 1x on everything else",
+    "points_or_miles_per_dollar": 5,
+    "redemption_options": [
+      "travel",
+      "transfer to airline/hotel partners",
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "$50 annual airline statement credit (min. $50 airline purchase)",
+      "travel accident insurance",
+      "lost baggage reimbursement",
+      "trip cancellation/interruption protection",
+      "auto rental collision damage waiver",
+      "up to $1,000 cell phone protection",
+      "24/7 Visa Signature Concierge"
+    ],
+    "welcome_bonus_description": "60,000 bonus points after spending $4,000 in purchases in the first 3 months (worth $600 toward travel)",
+    "product_url": "https://creditcards.wellsfargo.com/autograph-journey-visa-credit-card/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_double_cash",
+    "bank_id": "citibank",
+    "name": "Citi Double Cash Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.24,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "2% cash back on all purchases (1% when you buy, 1% as you pay); 3% cash back on travel booked through Citi Travel through 2027",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "direct deposit",
+      "check",
+      "gift cards",
+      "travel"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "FICO score access",
+      "Citi Entertainment access",
+      "Mastercard ID theft protection"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.citi.com/credit-cards/citi-double-cash-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_strata_card",
+    "bank_id": "citibank",
+    "name": "Citi Strata Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "5X points on hotels/car rentals/attractions via cititravel.com; 3X at supermarkets, gas/EV charging, and a self-select category; 2X at restaurants; 1X on all other purchases",
+    "points_or_miles_per_dollar": 1,
+    "redemption_options": [
+      "travel",
+      "gift cards",
+      "cash back",
+      "transfer to airline/hotel partners"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "0% intro APR for 15 months on purchases and balance transfers",
+      "flexible payment due date",
+      "Citi Entertainment access"
+    ],
+    "welcome_bonus_description": "Bonus ThankYou Points after meeting a minimum spend in the first months (successor product to the discontinued Citi Rewards+ Card)",
+    "product_url": "https://www.citi.com/credit-cards/citi-strata-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_strata_premier",
+    "bank_id": "citibank",
+    "name": "Citi Strata Premier Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 95,
+    "apr_regular_min": 20.24,
+    "apr_regular_max": 28.24,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "10X points on hotels/car rentals/attractions via cititravel.com; 3X on air travel, other hotel purchases, restaurants, supermarkets, and gas/EV charging; 1X on all other purchases",
+    "points_or_miles_per_dollar": 1,
+    "redemption_options": [
+      "travel",
+      "transfer to airline/hotel partners",
+      "gift cards",
+      "cash back"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no foreign transaction fees",
+      "$100 annual hotel benefit via Citi Travel",
+      "travel protections",
+      "no authorized user fees",
+      "Citi Entertainment access"
+    ],
+    "welcome_bonus_description": "Bonus ThankYou Points after meeting a minimum spend in the first months",
+    "product_url": "https://www.citi.com/credit-cards/citi-strata-premier-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_strata_elite",
+    "bank_id": "citibank",
+    "name": "Citi Strata Elite Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 595,
+    "apr_regular_min": 20.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "12X points on hotels/car rentals/attractions via cititravel.com; 6X on air travel via cititravel.com and on restaurants during CitiNights (Fri/Sat 6PM-6AM ET); 1.5X on all other purchases",
+    "points_or_miles_per_dollar": 1.5,
+    "redemption_options": [
+      "travel",
+      "transfer to airline/hotel partners",
+      "gift cards",
+      "cash back"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "up to $300 annual hotel benefit via Citi Travel",
+      "Priority Pass lounge access",
+      "American Airlines Admirals Club access",
+      "no foreign transaction fees"
+    ],
+    "welcome_bonus_description": "75,000 bonus points after spending $6,000 in the first 3 months",
+    "product_url": "https://www.citi.com/credit-cards/citi-strata-elite-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_simplicity",
+    "bank_id": "citibank",
+    "name": "Citi Simplicity Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 28.24,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "This card does not earn rewards",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no late fees ever",
+      "no penalty APR",
+      "0% intro APR for 21 months on balance transfers and 12 months on purchases",
+      "FICO score access",
+      "Citi Flex Pay"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.citi.com/credit-cards/citi-simplicity-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_diamond_preferred",
+    "bank_id": "citibank",
+    "name": "Citi Diamond Preferred Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 16.49,
+    "apr_regular_max": 27.24,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "This card does not earn rewards",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR for 21 months on balance transfers and 12 months on purchases",
+      "no authorized user fees",
+      "FICO score access",
+      "Citi Quick Lock"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.citi.com/credit-cards/citi-diamond-preferred-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_venture_rewards",
+    "bank_id": "capital_one",
+    "name": "Capital One Venture Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 95,
+    "apr_regular_min": 19.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "miles",
+    "rewards_rate_description": "2X miles on every purchase; 5X miles on hotels, vacation rentals, and rental cars booked through Capital One Travel",
+    "points_or_miles_per_dollar": 2,
+    "redemption_options": [
+      "travel",
+      "statement credit",
+      "transfer to partners",
+      "gift cards",
+      "Amazon/PayPal purchases"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no foreign transaction fees",
+      "up to $120 Global Entry/TSA PreCheck credit",
+      "Hertz Five Star status",
+      "miles never expire"
+    ],
+    "welcome_bonus_description": "75,000 bonus miles after spending $4,000 in the first 3 months",
+    "product_url": "https://www.capitalone.com/credit-cards/venture/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_ventureone_rewards",
+    "bank_id": "capital_one",
+    "name": "Capital One VentureOne Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "miles",
+    "rewards_rate_description": "1.25X miles on every purchase; 5X miles on hotels, vacation rentals, and rental cars booked through Capital One Travel",
+    "points_or_miles_per_dollar": 1.25,
+    "redemption_options": [
+      "travel",
+      "statement credit",
+      "transfer to partners"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "no foreign transaction fees",
+      "0% intro APR for 15 months on purchases and balance transfers",
+      "miles never expire"
+    ],
+    "welcome_bonus_description": "20,000 bonus miles after spending $500 in the first 3 months",
+    "product_url": "https://www.capitalone.com/credit-cards/ventureone/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_venture_x_rewards",
+    "bank_id": "capital_one",
+    "name": "Capital One Venture X Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 395,
+    "apr_regular_min": 19.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "miles",
+    "rewards_rate_description": "10X miles on hotels/rental cars via Capital One Travel; 5X miles on flights/vacation rentals via Capital One Travel; 2X miles on all other purchases",
+    "points_or_miles_per_dollar": 2,
+    "redemption_options": [
+      "travel",
+      "transfer to partners",
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "Capital One Lounge and Priority Pass access (1,300+ lounges)",
+      "$300 annual Capital One Travel credit",
+      "10,000-mile anniversary bonus",
+      "$800 cell phone protection",
+      "no foreign transaction fees"
+    ],
+    "welcome_bonus_description": "75,000 bonus miles after spending $4,000 in the first 3 months",
+    "product_url": "https://www.capitalone.com/credit-cards/venture-x/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_savor_rewards",
+    "bank_id": "capital_one",
+    "name": "Capital One Savor Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "5% cash back on hotels/vacation rentals/rental cars via Capital One Travel; 3% at grocery stores, dining, entertainment, and streaming; 1% on all other purchases",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "check",
+      "cash back any amount"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "no foreign transaction fees",
+      "0% intro APR for 12 months on purchases and balance transfers",
+      "rewards don't expire"
+    ],
+    "welcome_bonus_description": "$200 cash bonus after spending $500 in the first 3 months",
+    "product_url": "https://www.capitalone.com/credit-cards/savor/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_savorone_rewards",
+    "bank_id": "capital_one",
+    "name": "Capital One SavorOne Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 39,
+    "apr_regular_min": null,
+    "apr_regular_max": 28.99,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "Unlimited 3% cash back at grocery stores, on dining, entertainment, and popular streaming services; 1% on all other purchases",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "check",
+      "gift cards",
+      "cover a recent purchase"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no foreign transaction fees",
+      "automatic credit line reviews after 6 months",
+      "CreditWise monitoring",
+      "$0 fraud liability",
+      "rewards don't expire"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.capitalone.com/credit-cards/savorone/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_quicksilverone_rewards",
+    "bank_id": "capital_one",
+    "name": "Capital One QuicksilverOne Cash Rewards Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 39,
+    "apr_regular_min": null,
+    "apr_regular_max": 28.99,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "fair credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "Unlimited 1.5% cash back on every purchase; 5% cash back on hotels, car rentals and vacation rentals booked through Capital One Travel",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "check",
+      "gift cards"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "designed for fair credit applicants",
+      "automatic credit line reviews after 6 months",
+      "CreditWise monitoring",
+      "no foreign transaction fees"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.capitalone.com/credit-cards/quicksilver-one/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_platinum",
+    "bank_id": "capital_one",
+    "name": "Capital One Platinum Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": 28.99,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "fair credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "This card does not offer a rewards program",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "automatic credit line reviews after 6 months",
+      "CreditWise monitoring",
+      "$0 fraud liability",
+      "contactless tap to pay"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.capitalone.com/credit-cards/platinum/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "capital_one_platinum_secured",
+    "bank_id": "capital_one",
+    "name": "Capital One Platinum Secured Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": 28.99,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "no minimum credit score, subject to income/debt qualification",
+      "refundable security deposit of $49, $99, or $200",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": true,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "This card does not offer a rewards program",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "refundable security deposit as low as $49",
+      "potential upgrade to unsecured card",
+      "no foreign transaction fees",
+      "CreditWise monitoring",
+      "no hidden fees"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.capitalone.com/credit-cards/platinum-secured/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_cash_plus_visa_signature",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Cash+ Visa Signature Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 15.24,
+    "apr_regular_max": 24.24,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "5% cash back on first $2,000 combined quarterly spend in two chosen categories; 2% on one everyday category (gas, groceries, or restaurants); 1% on all other purchases; 5% on prepaid travel bookings",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "rewards card",
+      "direct deposit",
+      "Real-Time Rewards via text"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "0% intro APR for 15 billing cycles",
+      "ExtendPay installment plans",
+      "choose your own bonus categories quarterly"
+    ],
+    "welcome_bonus_description": "$200 rewards bonus after spending $1,000 in eligible purchases within the first 90 days",
+    "product_url": "https://www.usbank.com/credit-cards/cash-plus-visa-signature-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_shield_visa",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Shield Visa Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 16.99,
+    "apr_regular_max": 27.99,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "4% cash back on prepaid air, hotel, and car reservations booked through the U.S. Bank Travel Center",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "direct deposit",
+      "statement credit",
+      "rewards card",
+      "Real-Time Rewards via text"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "0% intro APR for 21 billing cycles on purchases and balance transfers",
+      "$20 annual statement credit for 11 consecutive months of purchases",
+      "cell phone protection up to $600",
+      "ExtendPay plans"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.usbank.com/credit-cards/shield-visa-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_smartly_visa_signature",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Smartly Visa Signature Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.24,
+    "apr_regular_max": 28.24,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "Unlimited 2% cash back on every purchase; up to an additional 2% (4% total, on first $10,000/cycle) for holders of qualifying U.S. Bank Smartly deposit accounts",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "direct deposit",
+      "statement credit",
+      "rewards card",
+      "merchant gift cards"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "0% intro APR for 12 billing cycles",
+      "bonus cash back tied to U.S. Bank Smartly banking relationship",
+      "Visa Signature protections"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.usbank.com/credit-cards/bank-smartly-visa-signature-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_altitude_connect_visa_signature",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Altitude Connect Visa Signature Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "5X points on prepaid hotels/car rentals via Travel Center; 4X on travel and gas/EV charging (first $1,000/quarter); 2X on dining, streaming, and groceries; 1X on all other purchases",
+    "points_or_miles_per_dollar": 1,
+    "redemption_options": [
+      "account deposit",
+      "travel",
+      "merchandise",
+      "charitable donations",
+      "gift cards"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "no foreign transaction fees",
+      "Priority Pass Select lounge access",
+      "TSA PreCheck/Global Entry credit",
+      "trip cancellation/delay protection",
+      "GigSky global data access"
+    ],
+    "welcome_bonus_description": "20,000 bonus points after spending $1,000 in net purchases within 90 days",
+    "product_url": "https://www.usbank.com/credit-cards/altitude-connect-visa-signature-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_split_world_mastercard",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Split World Mastercard",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No traditional points/cash back program; card automatically splits purchases of $100+ into interest-free installment payments",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "purchases $100+ auto-split into 3 interest-free monthly payments",
+      "optional 6- or 12-month extended plans for a fixed fee",
+      "no traditional APR financing on split purchases"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.usbank.com/credit-cards/split-card-world-mastercard-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_altitude_go_secured_visa",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Altitude Go Secured Visa Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "refundable security deposit of $300 to $5,000",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": true,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "4X points on dining, takeout and restaurant delivery (first $2,000/quarter); 2X at gas stations/EV charging, grocery stores, and streaming services; 1X on all other purchases",
+    "points_or_miles_per_dollar": 1,
+    "redemption_options": [
+      "account deposit",
+      "travel",
+      "merchandise",
+      "gift cards"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "security deposit earns interest in an FDIC-insured savings account",
+      "$15 annual streaming credit after 11 months of eligible charges",
+      "potential graduation to unsecured Altitude Go Visa Signature Card with deposit return",
+      "no annual fee"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.usbank.com/credit-cards/altitude-go-secured-visa-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_cash_plus_secured_visa",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Cash+ Secured Visa Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "refundable security deposit of $300 to $5,000",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": true,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cash back",
+    "rewards_rate_description": "Up to 5% cash back on two chosen categories each quarter; 2% on one everyday category; 1% on all other purchases",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "direct deposit",
+      "rewards card"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no annual fee",
+      "zero fraud liability",
+      "potential graduation to unsecured Cash+ Visa Signature Card",
+      "choose payment due date"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.usbank.com/credit-cards/cash-plus-secured-visa-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "td_double_up_credit_card",
+    "bank_id": "td_bank",
+    "name": "TD Double Up Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN",
+      "good credit"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": false,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cashback",
+    "rewards_rate_description": "Unlimited 2% cash back on all eligible purchases, no rotating categories to track",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "Visa Zero Liability protection",
+      "cell phone protection when paying mobile bill with card",
+      "digital wallet",
+      "contactless payment",
+      "emergency card replacement",
+      "roadside assistance"
+    ],
+    "welcome_bonus_description": "$200 cash back after spending $1,500 in first 90 days",
+    "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/double-up",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "td_cash_secured_credit_card",
+    "bank_id": "td_bank",
+    "name": "TD Cash Secured Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 29,
+    "apr_regular_min": 26.49,
+    "apr_regular_max": 26.49,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "refundable security deposit of $300-$5,000 (sets credit limit)",
+      "credit check"
+    ],
+    "requires_ssn": false,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": true,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cashback",
+    "rewards_rate_description": "3% and 2% cash back in two selectable quarterly categories (Dining, Entertainment, Gas Stations, Grocery Stores, Travel), 1% on all other eligible purchases",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "security deposit held in TD Simple Savings sets credit line",
+      "path to graduate to an unsecured TD credit card with responsible use",
+      "reports to all three credit bureaus",
+      "Visa Signature benefits",
+      "emergency card replacement",
+      "roadside assistance"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/secured-credit-card",
+    "last_verified_date": "2026-08",
+    "notes": "TD Bank's own secured card is the one TD product confirmed to accept an ITIN in place of an SSN (branch application)."
+  },
+  {
+    "product_id": "td_first_class_visa_signature_credit_card",
+    "bank_id": "td_bank",
+    "name": "TD First Class Visa Signature Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 89,
+    "apr_regular_min": 16.74,
+    "apr_regular_max": 16.74,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN",
+      "good/excellent credit"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": false,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "miles",
+    "rewards_rate_description": "3X First Class miles on travel and dining purchases, 1X miles on all other purchases",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "travel",
+      "cash",
+      "entertainment",
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no foreign transaction fees",
+      "digital wallet",
+      "contactless payment",
+      "Visa Zero Liability protection",
+      "emergency card replacement",
+      "roadside assistance"
+    ],
+    "welcome_bonus_description": "25,000 bonus miles (approx. $250 value) after spending $3,000 within first 6 billing cycles",
+    "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/first-class-card",
+    "last_verified_date": "2026-08",
+    "notes": "Annual fee $89, waived the first year."
+  },
+  {
+    "product_id": "td_flexpay_credit_card",
+    "bank_id": "td_bank",
+    "name": "TD FlexPay Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 17.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN",
+      "good credit",
+      "resident of CT, DC, DE, FL, MA, MD, ME, NC, NH, NJ, NY, PA, RI, SC, VA, or VT"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": false,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No rewards program; card is built around a long 0% intro APR balance transfer offer and automatic late-fee forgiveness",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on balance transfers for first 18 billing cycles (transfers made within 90 days)",
+      "automatic refund of first late fee each year",
+      "Visa Zero Liability protection",
+      "cell phone protection when paying mobile bill with card",
+      "digital wallet",
+      "contactless payment"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/flex-pay",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "td_clear_visa_platinum_credit_card",
+    "bank_id": "td_bank",
+    "name": "TD Clear Visa Platinum Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN",
+      "credit check"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": false,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No rewards; card charges no interest at all, instead billing a flat monthly membership fee ($10/month for a $1,000 credit limit, or $20/month for a $2,000 credit limit) whether or not the card is used",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "no interest charges ever, flat monthly fee instead",
+      "$0 late fees",
+      "$0 balance transfer fees",
+      "$0 cash advance fees",
+      "$0 returned payment fees",
+      "Visa Zero Liability protection",
+      "cell phone protection"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/td-clear-credit-cards",
+    "last_verified_date": "2026-08",
+    "notes": "apr_regular_min/max left null because this card structurally has no purchase APR/interest charges - it uses a flat monthly membership fee model instead. Do not treat null here as 'unknown'."
+  },
+  {
+    "product_id": "hsbc_elite_credit_card",
+    "bank_id": "hsbc",
+    "name": "HSBC Elite Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 495,
+    "apr_regular_min": 19.99,
+    "apr_regular_max": 24.99,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "must have an active HSBC Premier checking account",
+      "SSN or ITIN",
+      "good/excellent credit",
+      "US resident"
+    ],
+    "requires_ssn": false,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "5x points on select travel purchases (flights, hotels, car rentals), 2x points on dining and other travel purchases, 1x point on all other purchases",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "travel via HSBC Travel",
+      "transfer to airline/hotel partners",
+      "cash back via direct deposit",
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "up to $400 annual travel credits",
+      "up to $120 toward Global Entry/TSA PreCheck/NEXUS",
+      "unlimited complimentary Priority Pass lounge access for cardholder plus 2 guests",
+      "up to $120 monthly rideshare/taxi credits",
+      "up to $140/year Instacart+ credit",
+      "24/7 concierge service",
+      "purchase assurance up to $1,000",
+      "cellular wireless telephone protection up to $800"
+    ],
+    "welcome_bonus_description": "60,000 welcome bonus points (worth up to $900 in travel) after spending $4,000 in first 3 months",
+    "product_url": "https://www.us.hsbc.com/credit-cards/products/elite/",
+    "last_verified_date": "2026-08",
+    "notes": "Requires an existing HSBC Premier checking relationship to apply, same as the existing hsbc_premier_world_mastercard entry - this is a separate, higher-tier travel card ($495 annual fee vs. Premier World's lower fee), not a duplicate."
+  },
+  {
+    "product_id": "pnc_cash_rewards_visa",
+    "bank_id": "pnc_bank",
+    "name": "PNC Cash Rewards Visa Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good credit",
+      "18+ years old"
+    ],
+    "requires_ssn": false,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cashback",
+    "rewards_rate_description": "4% cash back on gas, 3% on dining, 2% on groceries (combined up to $8,000 in purchases per year across bonus categories), 1% on everything else",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "statement credit",
+      "deposit to PNC account"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on purchases and balance transfers for 15 billing cycles"
+    ],
+    "welcome_bonus_description": "$200 cash back after spending $1,000 in first 3 months",
+    "product_url": "https://www.pnc.com/en/personal-banking/banking/credit-cards/pnc-cash-rewards-visa-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "pnc_cash_unlimited_visa_signature",
+    "bank_id": "pnc_bank",
+    "name": "PNC Cash Unlimited Visa Signature Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.49,
+    "apr_regular_max": 28.49,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "good credit",
+      "18+ years old",
+      "minimum $5,000 credit line to qualify"
+    ],
+    "requires_ssn": false,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cashback",
+    "rewards_rate_description": "Unlimited 2% cash back (2 points per $1) on every purchase, no categories or caps",
+    "points_or_miles_per_dollar": 2,
+    "redemption_options": [
+      "statement credit",
+      "gift cards",
+      "travel"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on balance transfers for 15 months"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.pnc.com/en/personal-banking/banking/credit-cards/pnc-cash-unlimited-visa-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "pnc_spend_wise_visa",
+    "bank_id": "pnc_bank",
+    "name": "PNC Spend Wise Visa Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 19.49,
+    "apr_regular_max": 27.49,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN or ITIN",
+      "18+ years old",
+      "minimum $500 credit line to qualify"
+    ],
+    "requires_ssn": false,
+    "accepts_itin": true,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No rewards program",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on purchases for 18 months",
+      "Purchase APR Reduction Program",
+      "price protection up to $1,000",
+      "theft protection up to $10,000 per claim",
+      "cell phone protection up to $800",
+      "up to $25/year digital subscription credits"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.pnc.com/en/personal-banking/banking/credit-cards/pnc-spend-wise-visa-credit-card.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "truist_enjoy_travel",
+    "bank_id": "truist",
+    "name": "Truist Enjoy Travel Visa Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 18.74,
+    "apr_regular_max": 27.74,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN",
+      "good to excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": null,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "miles",
+    "rewards_rate_description": "2 miles per $1 on airfare, car rentals and hotels; 1 mile per $1 on all other eligible purchases",
+    "points_or_miles_per_dollar": 2,
+    "redemption_options": [
+      "cash back",
+      "gift cards",
+      "hotel stays",
+      "airline tickets",
+      "merchandise"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "up to $85 statement credit toward TSA PreCheck or Global Entry every 4 years",
+      "10%-50% loyalty travel redemption bonus for qualifying Truist deposit clients"
+    ],
+    "welcome_bonus_description": "20,000 bonus miles after spending $1,500 within 90 days",
+    "product_url": "https://www.truist.com/credit-cards/enjoy-travel",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "truist_enjoy_beyond",
+    "bank_id": "truist",
+    "name": "Truist Enjoy Beyond Premium Rewards Visa Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 95,
+    "apr_regular_min": 18.74,
+    "apr_regular_max": 27.74,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN",
+      "excellent credit",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": null,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "3 points per $1 on airfare, hotels and car rentals; 2 points per $1 on dining; 1 point per $1 on everything else, no earning caps",
+    "points_or_miles_per_dollar": 3,
+    "redemption_options": [
+      "deposit to Truist account with 10%-50% Loyalty Cash Bonus",
+      "travel",
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "up to $100 annual travel/streaming statement credit",
+      "up to $120 statement credit for TSA PreCheck or Global Entry every 4 years",
+      "annual fee waived for Truist Wealth clients"
+    ],
+    "welcome_bonus_description": "30,000 bonus points after spending $1,500 within 90 days",
+    "product_url": "https://www.truist.com/credit-cards/enjoy-beyond",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "truist_future_visa",
+    "bank_id": "truist",
+    "name": "Truist Future Visa Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": 15.74,
+    "apr_regular_max": 24.74,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN",
+      "18+ years old"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": null,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No rewards program",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on purchases and balance transfers for 15 months",
+      "no penalty APR"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.truist.com/credit-cards/future",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "mt_bank_visa_credit_card",
+    "bank_id": "mt_bank",
+    "name": "M&T Visa Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": 3,
+    "eligibility_requirements": [
+      "SSN",
+      "18+ years old",
+      "U.S. citizen"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": null,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "none",
+    "rewards_rate_description": "No rewards program",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on purchases and balance transfers for 12 billing cycles (4% balance transfer fee applies)"
+    ],
+    "welcome_bonus_description": null,
+    "product_url": "https://www.mtb.com/personal/credit-cards/visa-credit-card",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "mt_bank_visa_with_rewards",
+    "bank_id": "mt_bank",
+    "name": "M&T Visa Credit Card with Rewards",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": null,
+    "eligibility_requirements": [
+      "SSN",
+      "18+ years old",
+      "U.S. citizen"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": null,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "points",
+    "rewards_rate_description": "1 point per $1 spent on every purchase, no earning limits; redeemable for cash back or statement credit",
+    "points_or_miles_per_dollar": 1,
+    "redemption_options": [
+      "cash back",
+      "statement credit"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on purchases and balance transfers for 12 billing cycles (4% balance transfer fee applies)"
+    ],
+    "welcome_bonus_description": "10,000 bonus points ($100 value) after $500 in purchases within first 90 days",
+    "product_url": "https://www.mtb.com/personal/credit-cards/card-with-rewards",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "mt_bank_visa_signature",
+    "bank_id": "mt_bank",
+    "name": "M&T Visa Signature Credit Card",
+    "product_type": "credit_card",
+    "annual_fee_usd": 0,
+    "apr_regular_min": null,
+    "apr_regular_max": null,
+    "foreign_transaction_fee_pct": 0,
+    "eligibility_requirements": [
+      "SSN",
+      "18+ years old",
+      "U.S. citizen",
+      "good to excellent credit"
+    ],
+    "requires_ssn": true,
+    "accepts_itin": null,
+    "accepts_no_us_credit_history": false,
+    "reports_to_equifax": true,
+    "reports_to_experian": true,
+    "reports_to_transunion": true,
+    "rewards_type": "cashback",
+    "rewards_rate_description": "Unlimited 1.5% cash back on all purchases, no earning limits or rotating categories",
+    "points_or_miles_per_dollar": null,
+    "redemption_options": [
+      "cash back",
+      "gift cards",
+      "travel"
+    ],
+    "annual_rewards_cap_usd": null,
+    "card_benefits": [
+      "0% intro APR on purchases and balance transfers for 12 billing cycles (4% balance transfer fee applies)",
+      "no foreign transaction fees"
+    ],
+    "welcome_bonus_description": "10,000 bonus points ($100 value) after $500 in purchases within first 90 days",
+    "product_url": "https://www.mtb.com/personal/credit-cards/signature-card",
+    "last_verified_date": "2026-08"
   }
 ]

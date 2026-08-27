@@ -2,18 +2,47 @@
 
 Knowledge management for the dataset in this folder — what was used to build it, what's known to be missing, and what to check first the next time the data gets refreshed. Start here before re-researching from scratch.
 
-**Last full research pass:** 2026-08 (all `last_verified_date` / `logo_last_verified` fields reflect this).
+**Last full research pass:** 2026-08 (all `last_verified_date` / `logo_last_verified` fields reflect this). Two passes happened this month: an initial pass (flagship-only products, top-10-states-per-bank locations) and a **completeness backfill pass** triggered by a user audit that caught both the thin product coverage and the truncated state coverage as real accuracy gaps, not just breadth gaps. Everything below reflects the backfill pass as current state.
 
 ## Method used
 
-Research was split into 4 parallel passes, each covering a subset of the 15 institutions, using live web search/fetch against official sources rather than relying on model training knowledge (rates and fees change too often to trust from memory). Grouping used:
-
+### Initial pass — 4 parallel research groups
 - Group A: Chase, Bank of America, Wells Fargo, Citibank
 - Group B: Capital One, US Bank, PNC Bank, Truist
 - Group C: M&T Bank, TD Bank, HSBC, Ally Bank
 - Group D: Zolve, Firstcard, Nova Credit (the fintechs — handled separately since they don't have branch networks and Nova Credit isn't a bank at all)
 
-This grouping is a reasonable split for next time too (each group stayed under ~600 tool calls / ~130K tokens), but it's not required — regroup however makes sense for what's being refreshed.
+### Backfill pass — split into two independent tracks
+- **State coverage**: handled directly (not via subagents) — see "Exhaustive state coverage method" below. Mechanical/scriptable, so done with a Python script calling the FDIC API directly rather than delegated research.
+- **Product catalog depth**: 4 new parallel research groups, regrouped smaller (3 banks each instead of 4) to give real depth budget for full personal-banking catalogs: `{chase, bank_of_america, wells_fargo}`, `{citibank, capital_one, us_bank}`, `{pnc_bank, truist, mt_bank}`, `{td_bank, hsbc, ally}`. Each group was given the existing product_ids for its banks up front and told to add what's missing, not duplicate. `zolve`, `firstcard`, `nova_credit` were not re-researched — their narrow catalogs are already their real, complete offering.
+
+This grouping is a reasonable split for next time too, but it's not required — regroup however makes sense for what's being refreshed.
+
+## Exhaustive state coverage method (`state_coverage_completeness: "exhaustive_fdic"`)
+
+For the 11 branch-based traditional banks, every one of the 50 states + DC (51 total) was queried **individually** against the FDIC BankFind API, not aggregated from a single pull or inferred from a top-N result — every state has a real, confirmed answer (including confirmed `0`), per the three-value model below.
+
+- **Find the CERT first**: `https://api.fdic.gov/banks/institutions?search=NAME:<bank name>&fields=NAME,CERT,STALP,ACTIVE,OFFICES&limit=10` — match on `ACTIVE:1` and a plausible `OFFICES` count (bank holding companies often have several inactive/shell CERTs with the same or similar name; the real retail bank is usually the one with `OFFICES` in the hundreds/thousands).
+- **Per-state confirmed count**: `https://api.fdic.gov/banks/locations?filters=CERT:<cert>%20AND%20STALP:<state>&fields=STALP&limit=0` — read `totals.count` (a `limit=0` query still returns an accurate count without fetching individual records, much faster for 561 queries total: 11 banks × 51 states).
+- **API quirk — always quote the state code**: `STALP:OR` (Oregon, unquoted) is parsed as the boolean operator `OR` by the FDIC API's query syntax and returns a 400 error, not an empty result — it does NOT fail silently as "Oregon has 0 branches." Must be `STALP:"OR"` (quoted). This bit every single bank in the first run and would have silently produced wrong data (an error response with no `totals` key, which a naive script could misread) if not caught. Watch for any other state code that happens to collide with a query-syntax keyword.
+- **`api.fdic.gov` vs `banks.data.fdic.gov`**: the latter 301-redirects to the former — hit `api.fdic.gov` directly if a tool doesn't follow redirects.
+- **`OFFICES` vs `OFFDOM` on the institution record**: `OFFICES` is the bank's total office count (can include non-domestic/foreign offices and territories like Puerto Rico); `OFFDOM` is domestic offices across the 50 states + DC only. The sum of the 51 per-state queries should match `OFFDOM`, not `OFFICES` — for 6 of the 11 banks it matched exactly, for the other 5 it was off by a handful (≤15, ~0.3% or less), most plausibly a snapshot-timing difference between the FDIC's `institutions` and `locations` indices, not a methodology error. `num_branches_total` in `banks.json` is set to the sum of the verified per-state counts (not `OFFICES` or `OFFDOM` copied from the institution record) — this keeps `banks.json` and `locations.json` internally consistent by construction, which was the whole point of this exercise.
+- Local environment note: `curl` worked reliably against `api.fdic.gov`; Python's `urllib` failed with `CERTIFICATE_VERIFY_FAILED` on this machine (local cert store issue, not an FDIC problem) — shelling out to `curl` from Python via `subprocess` sidestepped it.
+
+## Three-value state model (`data/locations.json`)
+
+Every state/bank pair for an `exhaustive_fdic` bank has an **explicit** entry — `{"branches": 0, "atms": null}` for confirmed-absent, never an omission. This is deliberate: an omitted state is ambiguous ("not present" vs. "not checked"), an explicit `0` is not. Only banks tagged `state_coverage_completeness: "not_applicable_no_branches"` (`ally`, `zolve`, `firstcard`) or a future `"partial"`-tagged bank should have states legitimately missing from their `states` object — for any `"exhaustive_fdic"` bank, a missing state is a bug, not a valid "unverified" signal. `nova_credit` has no `locations.json` entry at all (not a depository institution).
+
+## Representative fee rule (canonical — used by Browse Banks, Phase 5)
+
+With full product catalogs, a bank's "the fee" shown on its Browse Banks card is: **the lowest `monthly_fee_usd` among that bank's `checking_accounts.json` products**, displayed as "Checking from $X/mo." Apply identically across all 15 institutions — never pick a different representative product ad hoc. If a bank has zero checking products with a non-null `monthly_fee_usd` (shouldn't happen given current data, but future-proofing), fall back to the same rule applied to savings products instead, labeled "Savings from $X/mo."
+
+## Product catalog scope (backfill pass)
+
+"Full personal-banking catalog" was scoped deliberately, not literally "every product a bank has ever offered":
+- **In scope**: all personal checking tiers, all personal savings/high-yield deposit products, all general-purpose personal credit cards issued directly by the bank under its own brand.
+- **Out of scope, on purpose**: business/commercial banking products; purely co-branded airline/hotel/retail partner cards (United, Southwest, Marriott, IHG, Disney, Amazon, Costco, Home Depot, etc. — a different product category from "which bank should I choose," not part of this project's comparison surface); CDs/certificates of deposit (not part of the checking/savings/credit_card schema); accounts explicitly restricted to minors.
+- Products confirmed discontinued or closed to new applicants were explicitly excluded, not included with a caveat — e.g. Chase Sapphire Checking/College Checking, Wells Fargo Platinum card, Wells Fargo Attune card, Citi Custom Cash, Citi Rewards+ (all confirmed closed to new customers as of 2026-08). If a refresh finds one of these reopened, that's worth a note here, not a silent re-add.
 
 ## Sources used, by data type
 
@@ -32,6 +61,8 @@ This grouping is a reasonable split for next time too (each group stayed under ~
 - `mobile_app_rating_android` for US Bank, TD Bank, Zolve, Firstcard — see Google Play note above.
 - `mobile_app_rating_ios`/`android` both null for Firstcard — App Store page 404'd, third-party sources had too few reviews (<20) to trust.
 - `total_assets_billion_usd`, `num_atms_total`, `num_states_present` null for Zolve/Firstcard — not applicable/not disclosed for these fintechs.
+- **From the backfill pass**: several premium/relationship-tier products' APY/APR fields (Chase Private Client, BofA Relationship Banking, Wells Fargo Prime/Premier Checking, PNC Performance Select, M&T Premium Savings/Preferred Money Market, HSBC Premier Relationship Savings) — these tiers frequently don't publish a flat national rate, requiring account-level or ZIP-personalized login to see. `foreign_transaction_fee_pct` null across most PNC and several M&T cards — not disclosed on reachable pages. All three M&T unsecured Visa cards have null APR — mtb.com's live rate tables returned corrupted/truncated figures on fetch (e.g. `"14.799%–.99%"`) and third-party aggregators gave 3 mutually inconsistent ranges, so nulled rather than guessed.
+- **PNC's own domain (pnc.com) was unreliable to fetch directly** during the backfill pass (~80% of direct WebFetch attempts timed out or returned garbled text) — most PNC figures were cross-verified via 2+ independent secondary sources (Bankrate, WalletHub, NerdWallet, U.S. News) instead. Same issue hit Bank of America's domain in the initial pass (HTTP 405 to direct fetch) — BofA figures came from BofA's own published Clarity Statements/PDFs plus reputable aggregators. Worth trying direct fetch first on a refresh, but don't be surprised if these two domains still need the secondary-source workaround.
 
 ## Business changes worth re-checking on every refresh (these shift over time)
 
@@ -58,12 +89,18 @@ has_product_with_itin        = any checking/savings/credit_card product has acce
 has_product_no_us_credit_history_required = any credit card has accepts_no_us_credit_history == true
 ```
 
-During the 2026-08 reconciliation, this logic caught two real contradictions the per-group research had missed: Bank of America's and Wells Fargo's secured/flagship cards both have `requires_ssn: false`, but their bank-level `has_product_without_ssn` had been left `false`. Both were corrected. **Re-run this recomputation (or the equivalent check) after any product-level edit** — never hand-edit these three flags directly.
+During the 2026-08 initial pass, this logic caught two real contradictions: Bank of America's and Wells Fargo's secured/flagship cards both have `requires_ssn: false`, but their bank-level `has_product_without_ssn` had been left `false`. During the same month's backfill pass — after the product catalog roughly tripled in size (36 checking + 24 savings + 67 credit cards, 127 records total, up from ~50) — it caught **two more**: `pnc_bank` and `td_bank` both had `has_product_without_ssn` wrong (PNC and TD have cards/accounts with `requires_ssn: false` that weren't reflected at the bank level), and `td_bank`'s `has_product_no_us_credit_history_required` was also wrong. Four real contradictions caught across two passes, zero of them caught by the original per-bank research — this recomputation step is not optional. **Re-run it after any product-level edit.**
+
+**QA lesson from the backfill merge**: one research agent wrote `"bank_id": "ally_bank"` on a new savings product instead of the correct `"ally"` — a silent typo that would have made that product invisible to every bank-scoped query (Bank Detail page, Compare, the agent's per-institution view) despite passing basic JSON validation. Caught by an orphan-reference check (every product's `bank_id` must match a real `banks.json` entry) run as part of the standard post-merge validation — **always run that check after merging any research output**, not just the rollup recomputation.
 
 ## Recommended refresh process
 
 1. Re-read this file first.
-2. Re-run the same 4 research groups (or regroup as needed), reusing the source list above — prioritize re-checking the "business changes worth re-checking" section, since those are the fields most likely to have actually changed.
-3. For fields currently `null`: don't assume they're still unfindable — official pages sometimes start publishing figures they didn't before. Worth a real re-check, not a copy-paste of `null`.
-4. After merging new data, re-run the rollup recomputation logic above before writing the final `banks.json` — do this programmatically (see the Python snippet used in the 2026-08 pass, not reproduced here, but any script that loads all 5 JSON files and applies the three formulas above works).
-5. Update every touched product's `last_verified_date` and, if a logo changed, `logo_last_verified`.
+2. **State coverage** (11 `exhaustive_fdic` banks): re-run the per-state FDIC method above — 51 individually-queried states per bank, quoting every state code, summing to get `num_branches_total`. This is mechanical/scriptable, not research-agent work.
+3. **Product catalogs**: re-run research groups (regroup as needed — 3 banks/group gave good depth), reusing the source list above and the in-scope/out-of-scope boundaries from "Product catalog scope" — prioritize re-checking the "business changes worth re-checking" section, since those fields are most likely to have actually changed.
+4. For fields currently `null`: don't assume they're still unfindable — official pages sometimes start publishing figures they didn't before. Worth a real re-check, not a copy-paste of `null`.
+5. After merging new data:
+   - Run an **orphan-reference check**: every product's `bank_id` must match a real `banks.json` `bank_id` — catches typos like the `ally_bank`/`ally` one above before they silently break bank-scoped views.
+   - Re-run the **rollup recomputation logic** above before writing the final `banks.json` — do this programmatically (a script that loads all 5 JSON files and applies the three formulas). Four real contradictions have been caught this way across two passes so far; expect more each time the product set changes materially.
+   - For any bank whose state coverage changed: confirm `num_states_present` in `banks.json` still equals the count of non-zero states in `locations.json`.
+6. Update every touched product's `last_verified_date` and, if a logo changed, `logo_last_verified`.

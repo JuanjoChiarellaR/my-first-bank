@@ -1,149 +1,2290 @@
 {
   "chase": {
     "states": {
-      "CA": { "branches": 858, "atms": null },
-      "NY": { "branches": 580, "atms": null },
-      "TX": { "branches": 490, "atms": null },
-      "FL": { "branches": 434, "atms": null },
-      "IL": { "branches": 265, "atms": null },
-      "OH": { "branches": 233, "atms": null },
-      "AZ": { "branches": 189, "atms": null },
-      "NJ": { "branches": 189, "atms": null },
-      "MI": { "branches": 171, "atms": null },
-      "WA": { "branches": 149, "atms": null }
+      "CA": {
+        "branches": 858,
+        "atms": null
+      },
+      "NY": {
+        "branches": 580,
+        "atms": null
+      },
+      "TX": {
+        "branches": 490,
+        "atms": null
+      },
+      "FL": {
+        "branches": 434,
+        "atms": null
+      },
+      "IL": {
+        "branches": 265,
+        "atms": null
+      },
+      "OH": {
+        "branches": 233,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 189,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 189,
+        "atms": null
+      },
+      "MI": {
+        "branches": 171,
+        "atms": null
+      },
+      "WA": {
+        "branches": 149,
+        "atms": null
+      },
+      "IN": {
+        "branches": 124,
+        "atms": null
+      },
+      "GA": {
+        "branches": 118,
+        "atms": null
+      },
+      "PA": {
+        "branches": 109,
+        "atms": null
+      },
+      "CO": {
+        "branches": 107,
+        "atms": null
+      },
+      "LA": {
+        "branches": 104,
+        "atms": null
+      },
+      "MA": {
+        "branches": 98,
+        "atms": null
+      },
+      "OR": {
+        "branches": 84,
+        "atms": null
+      },
+      "VA": {
+        "branches": 77,
+        "atms": null
+      },
+      "WI": {
+        "branches": 65,
+        "atms": null
+      },
+      "CT": {
+        "branches": 64,
+        "atms": null
+      },
+      "NC": {
+        "branches": 62,
+        "atms": null
+      },
+      "MD": {
+        "branches": 56,
+        "atms": null
+      },
+      "NV": {
+        "branches": 53,
+        "atms": null
+      },
+      "TN": {
+        "branches": 48,
+        "atms": null
+      },
+      "KY": {
+        "branches": 46,
+        "atms": null
+      },
+      "UT": {
+        "branches": 46,
+        "atms": null
+      },
+      "MN": {
+        "branches": 45,
+        "atms": null
+      },
+      "MO": {
+        "branches": 44,
+        "atms": null
+      },
+      "SC": {
+        "branches": 43,
+        "atms": null
+      },
+      "OK": {
+        "branches": 29,
+        "atms": null
+      },
+      "DC": {
+        "branches": 23,
+        "atms": null
+      },
+      "ID": {
+        "branches": 17,
+        "atms": null
+      },
+      "WV": {
+        "branches": 17,
+        "atms": null
+      },
+      "AL": {
+        "branches": 16,
+        "atms": null
+      },
+      "DE": {
+        "branches": 16,
+        "atms": null
+      },
+      "RI": {
+        "branches": 16,
+        "atms": null
+      },
+      "KS": {
+        "branches": 15,
+        "atms": null
+      },
+      "NE": {
+        "branches": 15,
+        "atms": null
+      },
+      "NH": {
+        "branches": 13,
+        "atms": null
+      },
+      "AR": {
+        "branches": 12,
+        "atms": null
+      },
+      "IA": {
+        "branches": 12,
+        "atms": null
+      },
+      "NM": {
+        "branches": 8,
+        "atms": null
+      },
+      "ME": {
+        "branches": 7,
+        "atms": null
+      },
+      "MS": {
+        "branches": 7,
+        "atms": null
+      },
+      "MT": {
+        "branches": 4,
+        "atms": null
+      },
+      "SD": {
+        "branches": 4,
+        "atms": null
+      },
+      "ND": {
+        "branches": 3,
+        "atms": null
+      },
+      "VT": {
+        "branches": 3,
+        "atms": null
+      },
+      "WY": {
+        "branches": 3,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "bank_of_america": {
     "states": {
-      "CA": { "branches": 684, "atms": null },
-      "FL": { "branches": 414, "atms": null },
-      "TX": { "branches": 313, "atms": null },
-      "NY": { "branches": 251, "atms": null },
-      "NJ": { "branches": 179, "atms": null },
-      "MA": { "branches": 146, "atms": null },
-      "GA": { "branches": 130, "atms": null },
-      "IL": { "branches": 121, "atms": null },
-      "WA": { "branches": 119, "atms": null },
-      "MD": { "branches": 114, "atms": null }
+      "CA": {
+        "branches": 684,
+        "atms": null
+      },
+      "FL": {
+        "branches": 414,
+        "atms": null
+      },
+      "TX": {
+        "branches": 313,
+        "atms": null
+      },
+      "NY": {
+        "branches": 251,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 179,
+        "atms": null
+      },
+      "MA": {
+        "branches": 146,
+        "atms": null
+      },
+      "GA": {
+        "branches": 130,
+        "atms": null
+      },
+      "IL": {
+        "branches": 121,
+        "atms": null
+      },
+      "WA": {
+        "branches": 119,
+        "atms": null
+      },
+      "MD": {
+        "branches": 114,
+        "atms": null
+      },
+      "NC": {
+        "branches": 109,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 104,
+        "atms": null
+      },
+      "VA": {
+        "branches": 98,
+        "atms": null
+      },
+      "CT": {
+        "branches": 82,
+        "atms": null
+      },
+      "MI": {
+        "branches": 72,
+        "atms": null
+      },
+      "PA": {
+        "branches": 72,
+        "atms": null
+      },
+      "SC": {
+        "branches": 61,
+        "atms": null
+      },
+      "TN": {
+        "branches": 53,
+        "atms": null
+      },
+      "NV": {
+        "branches": 52,
+        "atms": null
+      },
+      "OH": {
+        "branches": 52,
+        "atms": null
+      },
+      "MO": {
+        "branches": 50,
+        "atms": null
+      },
+      "CO": {
+        "branches": 36,
+        "atms": null
+      },
+      "OR": {
+        "branches": 35,
+        "atms": null
+      },
+      "UT": {
+        "branches": 29,
+        "atms": null
+      },
+      "KS": {
+        "branches": 24,
+        "atms": null
+      },
+      "RI": {
+        "branches": 24,
+        "atms": null
+      },
+      "MN": {
+        "branches": 23,
+        "atms": null
+      },
+      "DC": {
+        "branches": 22,
+        "atms": null
+      },
+      "OK": {
+        "branches": 18,
+        "atms": null
+      },
+      "AR": {
+        "branches": 16,
+        "atms": null
+      },
+      "IN": {
+        "branches": 16,
+        "atms": null
+      },
+      "NM": {
+        "branches": 16,
+        "atms": null
+      },
+      "NH": {
+        "branches": 15,
+        "atms": null
+      },
+      "ME": {
+        "branches": 12,
+        "atms": null
+      },
+      "DE": {
+        "branches": 10,
+        "atms": null
+      },
+      "KY": {
+        "branches": 8,
+        "atms": null
+      },
+      "ID": {
+        "branches": 6,
+        "atms": null
+      },
+      "IA": {
+        "branches": 4,
+        "atms": null
+      },
+      "NE": {
+        "branches": 4,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "wells_fargo": {
     "states": {
-      "CA": { "branches": 769, "atms": null },
-      "TX": { "branches": 457, "atms": null },
-      "FL": { "branches": 458, "atms": null },
-      "NC": { "branches": 219, "atms": null },
-      "NJ": { "branches": 196, "atms": null },
-      "GA": { "branches": 179, "atms": null },
-      "VA": { "branches": 179, "atms": null },
-      "PA": { "branches": 168, "atms": null },
-      "AZ": { "branches": 153, "atms": null },
-      "MN": { "branches": 121, "atms": null }
+      "CA": {
+        "branches": 769,
+        "atms": null
+      },
+      "FL": {
+        "branches": 458,
+        "atms": null
+      },
+      "TX": {
+        "branches": 457,
+        "atms": null
+      },
+      "NC": {
+        "branches": 219,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 196,
+        "atms": null
+      },
+      "GA": {
+        "branches": 179,
+        "atms": null
+      },
+      "VA": {
+        "branches": 179,
+        "atms": null
+      },
+      "PA": {
+        "branches": 168,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 153,
+        "atms": null
+      },
+      "MN": {
+        "branches": 121,
+        "atms": null
+      },
+      "CO": {
+        "branches": 117,
+        "atms": null
+      },
+      "WA": {
+        "branches": 112,
+        "atms": null
+      },
+      "SC": {
+        "branches": 103,
+        "atms": null
+      },
+      "NV": {
+        "branches": 87,
+        "atms": null
+      },
+      "NY": {
+        "branches": 87,
+        "atms": null
+      },
+      "MD": {
+        "branches": 73,
+        "atms": null
+      },
+      "OR": {
+        "branches": 73,
+        "atms": null
+      },
+      "AL": {
+        "branches": 72,
+        "atms": null
+      },
+      "UT": {
+        "branches": 71,
+        "atms": null
+      },
+      "NM": {
+        "branches": 54,
+        "atms": null
+      },
+      "CT": {
+        "branches": 47,
+        "atms": null
+      },
+      "ID": {
+        "branches": 44,
+        "atms": null
+      },
+      "IA": {
+        "branches": 39,
+        "atms": null
+      },
+      "AK": {
+        "branches": 35,
+        "atms": null
+      },
+      "NE": {
+        "branches": 32,
+        "atms": null
+      },
+      "SD": {
+        "branches": 30,
+        "atms": null
+      },
+      "WI": {
+        "branches": 30,
+        "atms": null
+      },
+      "IL": {
+        "branches": 24,
+        "atms": null
+      },
+      "TN": {
+        "branches": 23,
+        "atms": null
+      },
+      "DC": {
+        "branches": 23,
+        "atms": null
+      },
+      "MT": {
+        "branches": 21,
+        "atms": null
+      },
+      "WY": {
+        "branches": 16,
+        "atms": null
+      },
+      "DE": {
+        "branches": 14,
+        "atms": null
+      },
+      "ND": {
+        "branches": 12,
+        "atms": null
+      },
+      "MS": {
+        "branches": 9,
+        "atms": null
+      },
+      "KS": {
+        "branches": 7,
+        "atms": null
+      },
+      "AR": {
+        "branches": 1,
+        "atms": null
+      },
+      "MA": {
+        "branches": 1,
+        "atms": null
+      },
+      "MI": {
+        "branches": 1,
+        "atms": null
+      },
+      "MO": {
+        "branches": 1,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "IN": {
+        "branches": 0,
+        "atms": null
+      },
+      "KY": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "citibank": {
     "states": {
-      "CA": { "branches": 271, "atms": null },
-      "NY": { "branches": 216, "atms": null },
-      "IL": { "branches": 57, "atms": null },
-      "FL": { "branches": 56, "atms": null },
-      "DC": { "branches": 15, "atms": null },
-      "CT": { "branches": 12, "atms": null },
-      "MD": { "branches": 11, "atms": null },
-      "NJ": { "branches": 8, "atms": null },
-      "NV": { "branches": 8, "atms": null },
-      "VA": { "branches": 8, "atms": null }
+      "CA": {
+        "branches": 271,
+        "atms": null
+      },
+      "NY": {
+        "branches": 216,
+        "atms": null
+      },
+      "IL": {
+        "branches": 57,
+        "atms": null
+      },
+      "FL": {
+        "branches": 56,
+        "atms": null
+      },
+      "DC": {
+        "branches": 15,
+        "atms": null
+      },
+      "CT": {
+        "branches": 12,
+        "atms": null
+      },
+      "MD": {
+        "branches": 11,
+        "atms": null
+      },
+      "NV": {
+        "branches": 8,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 8,
+        "atms": null
+      },
+      "VA": {
+        "branches": 8,
+        "atms": null
+      },
+      "SD": {
+        "branches": 2,
+        "atms": null
+      },
+      "TX": {
+        "branches": 2,
+        "atms": null
+      },
+      "DE": {
+        "branches": 1,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 0,
+        "atms": null
+      },
+      "AR": {
+        "branches": 0,
+        "atms": null
+      },
+      "CO": {
+        "branches": 0,
+        "atms": null
+      },
+      "GA": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IN": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "KS": {
+        "branches": 0,
+        "atms": null
+      },
+      "KY": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "MA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MO": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "NM": {
+        "branches": 0,
+        "atms": null
+      },
+      "NC": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "PA": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SC": {
+        "branches": 0,
+        "atms": null
+      },
+      "TN": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "capital_one": {
     "states": {
-      "NY": { "branches": 77, "atms": null },
-      "LA": { "branches": 64, "atms": null },
-      "MD": { "branches": 41, "atms": null },
-      "TX": { "branches": 21, "atms": null },
-      "VA": { "branches": 21, "atms": null },
-      "NJ": { "branches": 16, "atms": null },
-      "DC": { "branches": 5, "atms": null },
-      "DE": { "branches": 3, "atms": null },
-      "CT": { "branches": 1, "atms": null }
+      "NY": {
+        "branches": 77,
+        "atms": null
+      },
+      "LA": {
+        "branches": 64,
+        "atms": null
+      },
+      "MD": {
+        "branches": 41,
+        "atms": null
+      },
+      "TX": {
+        "branches": 21,
+        "atms": null
+      },
+      "VA": {
+        "branches": 21,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 16,
+        "atms": null
+      },
+      "DC": {
+        "branches": 5,
+        "atms": null
+      },
+      "DE": {
+        "branches": 3,
+        "atms": null
+      },
+      "CT": {
+        "branches": 1,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 0,
+        "atms": null
+      },
+      "AR": {
+        "branches": 0,
+        "atms": null
+      },
+      "CA": {
+        "branches": 0,
+        "atms": null
+      },
+      "CO": {
+        "branches": 0,
+        "atms": null
+      },
+      "FL": {
+        "branches": 0,
+        "atms": null
+      },
+      "GA": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IL": {
+        "branches": 0,
+        "atms": null
+      },
+      "IN": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "KS": {
+        "branches": 0,
+        "atms": null
+      },
+      "KY": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "MA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MO": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NV": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "NM": {
+        "branches": 0,
+        "atms": null
+      },
+      "NC": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "PA": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SC": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "TN": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "us_bank": {
     "states": {
-      "CA": { "branches": 563, "atms": null },
-      "OH": { "branches": 161, "atms": null },
-      "IL": { "branches": 153, "atms": null },
-      "WA": { "branches": 136, "atms": null },
-      "MO": { "branches": 129, "atms": null },
-      "OR": { "branches": 114, "atms": null },
-      "MN": { "branches": 105, "atms": null },
-      "CO": { "branches": 102, "atms": null },
-      "WI": { "branches": 90, "atms": null }
+      "CA": {
+        "branches": 563,
+        "atms": null
+      },
+      "OH": {
+        "branches": 161,
+        "atms": null
+      },
+      "IL": {
+        "branches": 153,
+        "atms": null
+      },
+      "WA": {
+        "branches": 136,
+        "atms": null
+      },
+      "MO": {
+        "branches": 129,
+        "atms": null
+      },
+      "OR": {
+        "branches": 114,
+        "atms": null
+      },
+      "MN": {
+        "branches": 105,
+        "atms": null
+      },
+      "CO": {
+        "branches": 102,
+        "atms": null
+      },
+      "WI": {
+        "branches": 90,
+        "atms": null
+      },
+      "KY": {
+        "branches": 69,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 56,
+        "atms": null
+      },
+      "IA": {
+        "branches": 55,
+        "atms": null
+      },
+      "TN": {
+        "branches": 55,
+        "atms": null
+      },
+      "ID": {
+        "branches": 51,
+        "atms": null
+      },
+      "NV": {
+        "branches": 50,
+        "atms": null
+      },
+      "UT": {
+        "branches": 39,
+        "atms": null
+      },
+      "NE": {
+        "branches": 34,
+        "atms": null
+      },
+      "KS": {
+        "branches": 23,
+        "atms": null
+      },
+      "NM": {
+        "branches": 21,
+        "atms": null
+      },
+      "AR": {
+        "branches": 18,
+        "atms": null
+      },
+      "MT": {
+        "branches": 17,
+        "atms": null
+      },
+      "ND": {
+        "branches": 15,
+        "atms": null
+      },
+      "SD": {
+        "branches": 10,
+        "atms": null
+      },
+      "WY": {
+        "branches": 9,
+        "atms": null
+      },
+      "IN": {
+        "branches": 8,
+        "atms": null
+      },
+      "NC": {
+        "branches": 7,
+        "atms": null
+      },
+      "FL": {
+        "branches": 3,
+        "atms": null
+      },
+      "TX": {
+        "branches": 3,
+        "atms": null
+      },
+      "GA": {
+        "branches": 1,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "CT": {
+        "branches": 0,
+        "atms": null
+      },
+      "DE": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "MD": {
+        "branches": 0,
+        "atms": null
+      },
+      "MA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 0,
+        "atms": null
+      },
+      "NY": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "PA": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SC": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "VA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      },
+      "DC": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "pnc_bank": {
     "states": {
-      "TX": { "branches": 322, "atms": null },
-      "PA": { "branches": 262, "atms": null },
-      "OH": { "branches": 219, "atms": null },
-      "FL": { "branches": 200, "atms": null },
-      "NJ": { "branches": 174, "atms": null },
-      "IL": { "branches": 148, "atms": null },
-      "MI": { "branches": 124, "atms": null },
-      "CO": { "branches": 122, "atms": null },
-      "MD": { "branches": 115, "atms": null }
+      "TX": {
+        "branches": 322,
+        "atms": null
+      },
+      "PA": {
+        "branches": 262,
+        "atms": null
+      },
+      "OH": {
+        "branches": 219,
+        "atms": null
+      },
+      "FL": {
+        "branches": 200,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 174,
+        "atms": null
+      },
+      "IL": {
+        "branches": 148,
+        "atms": null
+      },
+      "MI": {
+        "branches": 124,
+        "atms": null
+      },
+      "CO": {
+        "branches": 122,
+        "atms": null
+      },
+      "MD": {
+        "branches": 115,
+        "atms": null
+      },
+      "NC": {
+        "branches": 101,
+        "atms": null
+      },
+      "AL": {
+        "branches": 93,
+        "atms": null
+      },
+      "IN": {
+        "branches": 80,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 75,
+        "atms": null
+      },
+      "KY": {
+        "branches": 67,
+        "atms": null
+      },
+      "GA": {
+        "branches": 60,
+        "atms": null
+      },
+      "CA": {
+        "branches": 56,
+        "atms": null
+      },
+      "VA": {
+        "branches": 53,
+        "atms": null
+      },
+      "DE": {
+        "branches": 34,
+        "atms": null
+      },
+      "MO": {
+        "branches": 27,
+        "atms": null
+      },
+      "WI": {
+        "branches": 24,
+        "atms": null
+      },
+      "DC": {
+        "branches": 19,
+        "atms": null
+      },
+      "NM": {
+        "branches": 12,
+        "atms": null
+      },
+      "MA": {
+        "branches": 10,
+        "atms": null
+      },
+      "SC": {
+        "branches": 8,
+        "atms": null
+      },
+      "TN": {
+        "branches": 6,
+        "atms": null
+      },
+      "NY": {
+        "branches": 5,
+        "atms": null
+      },
+      "KS": {
+        "branches": 1,
+        "atms": null
+      },
+      "WV": {
+        "branches": 1,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AR": {
+        "branches": 0,
+        "atms": null
+      },
+      "CT": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NV": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "truist": {
     "states": {
-      "FL": { "branches": 441, "atms": null },
-      "NC": { "branches": 277, "atms": null },
-      "VA": { "branches": 259, "atms": null },
-      "GA": { "branches": 203, "atms": null },
-      "MD": { "branches": 138, "atms": null },
-      "PA": { "branches": 138, "atms": null },
-      "TN": { "branches": 98, "atms": null },
-      "TX": { "branches": 96, "atms": null },
-      "SC": { "branches": 95, "atms": null }
+      "FL": {
+        "branches": 441,
+        "atms": null
+      },
+      "NC": {
+        "branches": 277,
+        "atms": null
+      },
+      "VA": {
+        "branches": 259,
+        "atms": null
+      },
+      "GA": {
+        "branches": 203,
+        "atms": null
+      },
+      "MD": {
+        "branches": 138,
+        "atms": null
+      },
+      "PA": {
+        "branches": 138,
+        "atms": null
+      },
+      "TN": {
+        "branches": 98,
+        "atms": null
+      },
+      "TX": {
+        "branches": 96,
+        "atms": null
+      },
+      "SC": {
+        "branches": 95,
+        "atms": null
+      },
+      "KY": {
+        "branches": 53,
+        "atms": null
+      },
+      "AL": {
+        "branches": 49,
+        "atms": null
+      },
+      "WV": {
+        "branches": 42,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 20,
+        "atms": null
+      },
+      "DC": {
+        "branches": 18,
+        "atms": null
+      },
+      "AR": {
+        "branches": 1,
+        "atms": null
+      },
+      "IN": {
+        "branches": 1,
+        "atms": null
+      },
+      "MS": {
+        "branches": 1,
+        "atms": null
+      },
+      "OH": {
+        "branches": 1,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 0,
+        "atms": null
+      },
+      "CA": {
+        "branches": 0,
+        "atms": null
+      },
+      "CO": {
+        "branches": 0,
+        "atms": null
+      },
+      "CT": {
+        "branches": 0,
+        "atms": null
+      },
+      "DE": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IL": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "KS": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "MA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MO": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NV": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "NM": {
+        "branches": 0,
+        "atms": null
+      },
+      "NY": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "mt_bank": {
     "states": {
-      "NY": { "branches": 275, "atms": null },
-      "MD": { "branches": 152, "atms": null },
-      "PA": { "branches": 151, "atms": null },
-      "CT": { "branches": 109, "atms": null },
-      "NJ": { "branches": 65, "atms": null },
-      "MA": { "branches": 62, "atms": null },
-      "DE": { "branches": 36, "atms": null },
-      "VT": { "branches": 33, "atms": null },
-      "VA": { "branches": 25, "atms": null },
-      "NH": { "branches": 23, "atms": null }
+      "NY": {
+        "branches": 275,
+        "atms": null
+      },
+      "MD": {
+        "branches": 152,
+        "atms": null
+      },
+      "PA": {
+        "branches": 151,
+        "atms": null
+      },
+      "CT": {
+        "branches": 109,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 65,
+        "atms": null
+      },
+      "MA": {
+        "branches": 62,
+        "atms": null
+      },
+      "DE": {
+        "branches": 36,
+        "atms": null
+      },
+      "VT": {
+        "branches": 33,
+        "atms": null
+      },
+      "VA": {
+        "branches": 25,
+        "atms": null
+      },
+      "NH": {
+        "branches": 23,
+        "atms": null
+      },
+      "ME": {
+        "branches": 15,
+        "atms": null
+      },
+      "DC": {
+        "branches": 8,
+        "atms": null
+      },
+      "FL": {
+        "branches": 3,
+        "atms": null
+      },
+      "WV": {
+        "branches": 2,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 0,
+        "atms": null
+      },
+      "AR": {
+        "branches": 0,
+        "atms": null
+      },
+      "CA": {
+        "branches": 0,
+        "atms": null
+      },
+      "CO": {
+        "branches": 0,
+        "atms": null
+      },
+      "GA": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IL": {
+        "branches": 0,
+        "atms": null
+      },
+      "IN": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "KS": {
+        "branches": 0,
+        "atms": null
+      },
+      "KY": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MO": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NV": {
+        "branches": 0,
+        "atms": null
+      },
+      "NM": {
+        "branches": 0,
+        "atms": null
+      },
+      "NC": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SC": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "TN": {
+        "branches": 0,
+        "atms": null
+      },
+      "TX": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "td_bank": {
     "states": {
-      "NY": { "branches": 231, "atms": null },
-      "NJ": { "branches": 208, "atms": null },
-      "FL": { "branches": 159, "atms": null },
-      "MA": { "branches": 114, "atms": null },
-      "PA": { "branches": 71, "atms": null },
-      "CT": { "branches": 50, "atms": null },
-      "SC": { "branches": 50, "atms": null },
-      "NH": { "branches": 43, "atms": null },
-      "ME": { "branches": 28, "atms": null },
-      "VA": { "branches": 18, "atms": null }
+      "NY": {
+        "branches": 231,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 208,
+        "atms": null
+      },
+      "FL": {
+        "branches": 159,
+        "atms": null
+      },
+      "MA": {
+        "branches": 114,
+        "atms": null
+      },
+      "PA": {
+        "branches": 71,
+        "atms": null
+      },
+      "CT": {
+        "branches": 50,
+        "atms": null
+      },
+      "SC": {
+        "branches": 50,
+        "atms": null
+      },
+      "NH": {
+        "branches": 43,
+        "atms": null
+      },
+      "ME": {
+        "branches": 28,
+        "atms": null
+      },
+      "VT": {
+        "branches": 18,
+        "atms": null
+      },
+      "VA": {
+        "branches": 18,
+        "atms": null
+      },
+      "MD": {
+        "branches": 17,
+        "atms": null
+      },
+      "NC": {
+        "branches": 16,
+        "atms": null
+      },
+      "DE": {
+        "branches": 12,
+        "atms": null
+      },
+      "RI": {
+        "branches": 9,
+        "atms": null
+      },
+      "DC": {
+        "branches": 7,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 0,
+        "atms": null
+      },
+      "AR": {
+        "branches": 0,
+        "atms": null
+      },
+      "CA": {
+        "branches": 0,
+        "atms": null
+      },
+      "CO": {
+        "branches": 0,
+        "atms": null
+      },
+      "GA": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IL": {
+        "branches": 0,
+        "atms": null
+      },
+      "IN": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "KS": {
+        "branches": 0,
+        "atms": null
+      },
+      "KY": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MO": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NV": {
+        "branches": 0,
+        "atms": null
+      },
+      "NM": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "TN": {
+        "branches": 0,
+        "atms": null
+      },
+      "TX": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WA": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   },
   "hsbc": {
     "states": {
-      "NY": { "branches": 8, "atms": null },
-      "CA": { "branches": 6, "atms": null },
-      "FL": { "branches": 2, "atms": null },
-      "WA": { "branches": 2, "atms": null },
-      "VA": { "branches": 2, "atms": null },
-      "DC": { "branches": 1, "atms": null },
-      "NJ": { "branches": 1, "atms": null }
+      "NY": {
+        "branches": 8,
+        "atms": null
+      },
+      "CA": {
+        "branches": 6,
+        "atms": null
+      },
+      "FL": {
+        "branches": 2,
+        "atms": null
+      },
+      "VA": {
+        "branches": 2,
+        "atms": null
+      },
+      "WA": {
+        "branches": 2,
+        "atms": null
+      },
+      "NJ": {
+        "branches": 1,
+        "atms": null
+      },
+      "DC": {
+        "branches": 1,
+        "atms": null
+      },
+      "AL": {
+        "branches": 0,
+        "atms": null
+      },
+      "AK": {
+        "branches": 0,
+        "atms": null
+      },
+      "AZ": {
+        "branches": 0,
+        "atms": null
+      },
+      "AR": {
+        "branches": 0,
+        "atms": null
+      },
+      "CO": {
+        "branches": 0,
+        "atms": null
+      },
+      "CT": {
+        "branches": 0,
+        "atms": null
+      },
+      "DE": {
+        "branches": 0,
+        "atms": null
+      },
+      "GA": {
+        "branches": 0,
+        "atms": null
+      },
+      "HI": {
+        "branches": 0,
+        "atms": null
+      },
+      "ID": {
+        "branches": 0,
+        "atms": null
+      },
+      "IL": {
+        "branches": 0,
+        "atms": null
+      },
+      "IN": {
+        "branches": 0,
+        "atms": null
+      },
+      "IA": {
+        "branches": 0,
+        "atms": null
+      },
+      "KS": {
+        "branches": 0,
+        "atms": null
+      },
+      "KY": {
+        "branches": 0,
+        "atms": null
+      },
+      "LA": {
+        "branches": 0,
+        "atms": null
+      },
+      "ME": {
+        "branches": 0,
+        "atms": null
+      },
+      "MD": {
+        "branches": 0,
+        "atms": null
+      },
+      "MA": {
+        "branches": 0,
+        "atms": null
+      },
+      "MI": {
+        "branches": 0,
+        "atms": null
+      },
+      "MN": {
+        "branches": 0,
+        "atms": null
+      },
+      "MS": {
+        "branches": 0,
+        "atms": null
+      },
+      "MO": {
+        "branches": 0,
+        "atms": null
+      },
+      "MT": {
+        "branches": 0,
+        "atms": null
+      },
+      "NE": {
+        "branches": 0,
+        "atms": null
+      },
+      "NV": {
+        "branches": 0,
+        "atms": null
+      },
+      "NH": {
+        "branches": 0,
+        "atms": null
+      },
+      "NM": {
+        "branches": 0,
+        "atms": null
+      },
+      "NC": {
+        "branches": 0,
+        "atms": null
+      },
+      "ND": {
+        "branches": 0,
+        "atms": null
+      },
+      "OH": {
+        "branches": 0,
+        "atms": null
+      },
+      "OK": {
+        "branches": 0,
+        "atms": null
+      },
+      "OR": {
+        "branches": 0,
+        "atms": null
+      },
+      "PA": {
+        "branches": 0,
+        "atms": null
+      },
+      "RI": {
+        "branches": 0,
+        "atms": null
+      },
+      "SC": {
+        "branches": 0,
+        "atms": null
+      },
+      "SD": {
+        "branches": 0,
+        "atms": null
+      },
+      "TN": {
+        "branches": 0,
+        "atms": null
+      },
+      "TX": {
+        "branches": 0,
+        "atms": null
+      },
+      "UT": {
+        "branches": 0,
+        "atms": null
+      },
+      "VT": {
+        "branches": 0,
+        "atms": null
+      },
+      "WV": {
+        "branches": 0,
+        "atms": null
+      },
+      "WI": {
+        "branches": 0,
+        "atms": null
+      },
+      "WY": {
+        "branches": 0,
+        "atms": null
+      }
     }
   }
 }

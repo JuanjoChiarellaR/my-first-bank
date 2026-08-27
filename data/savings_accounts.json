@@ -13,7 +13,12 @@
     "min_opening_deposit_usd": 0,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 5,
-    "monthly_fee_waiver_conditions": ["balance_300_daily", "auto_transfer_25_plus_monthly", "under_18", "linked_premium_checking"],
+    "monthly_fee_waiver_conditions": [
+      "balance_300_daily",
+      "auto_transfer_25_plus_monthly",
+      "under_18",
+      "linked_premium_checking"
+    ],
     "product_url": "chase.com/personal/savings/chase-savings",
     "last_verified_date": "2026-08"
   },
@@ -31,7 +36,12 @@
     "min_opening_deposit_usd": 25,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 8,
-    "monthly_fee_waiver_conditions": ["balance_500_daily", "preferred_rewards_enrollment", "student_under_25", "first_6_months_new_customers"],
+    "monthly_fee_waiver_conditions": [
+      "balance_500_daily",
+      "preferred_rewards_enrollment",
+      "student_under_25",
+      "first_6_months_new_customers"
+    ],
     "product_url": "bankofamerica.com/deposits/savings/personal-savings-account/",
     "last_verified_date": "2026-08"
   },
@@ -49,7 +59,12 @@
     "min_opening_deposit_usd": 25,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 5,
-    "monthly_fee_waiver_conditions": ["balance_300_daily", "auto_transfer_25_monthly_or_1_daily", "save_as_you_go", "age_24_or_under"],
+    "monthly_fee_waiver_conditions": [
+      "balance_300_daily",
+      "auto_transfer_25_monthly_or_1_daily",
+      "save_as_you_go",
+      "age_24_or_under"
+    ],
     "product_url": "wellsfargo.com/savings-cds/way2save/",
     "last_verified_date": "2026-08"
   },
@@ -67,7 +82,12 @@
     "min_opening_deposit_usd": 0,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 4.5,
-    "monthly_fee_waiver_conditions": ["link_citibank_checking", "balance_500_average_monthly", "relationship_tier_qualification", "first_3_months_new_customers"],
+    "monthly_fee_waiver_conditions": [
+      "link_citibank_checking",
+      "balance_500_average_monthly",
+      "relationship_tier_qualification",
+      "first_3_months_new_customers"
+    ],
     "product_url": "citi.com/banking/personal-banking-guide/savings",
     "last_verified_date": "2026-08"
   },
@@ -103,7 +123,10 @@
     "min_opening_deposit_usd": 25,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 5,
-    "monthly_fee_waiver_conditions": ["linked_smartly_checking_or_safe_debit_or_smartly_visa_signature_card", "age_under_18"],
+    "monthly_fee_waiver_conditions": [
+      "linked_smartly_checking_or_safe_debit_or_smartly_visa_signature_card",
+      "age_under_18"
+    ],
     "product_url": "usbank.com/bank-accounts/savings-accounts/bank-smartly-savings.html",
     "last_verified_date": "2026-08"
   },
@@ -121,7 +144,10 @@
     "min_opening_deposit_usd": 0,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 5,
-    "monthly_fee_waiver_conditions": ["balance_300", "auto_savings_transfer_25_plus_monthly"],
+    "monthly_fee_waiver_conditions": [
+      "balance_300",
+      "auto_savings_transfer_25_plus_monthly"
+    ],
     "product_url": "pnc.com/en/personal-banking/banking/savings.html",
     "last_verified_date": "2026-08"
   },
@@ -139,7 +165,12 @@
     "min_opening_deposit_usd": 50,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 5,
-    "monthly_fee_waiver_conditions": ["balance_300_daily_ledger", "recurring_transfer_25_plus_monthly", "age_under_18", "linked_truist_checking"],
+    "monthly_fee_waiver_conditions": [
+      "balance_300_daily_ledger",
+      "recurring_transfer_25_plus_monthly",
+      "age_under_18",
+      "linked_truist_checking"
+    ],
     "product_url": "truist.com/savings/truist-one-savings",
     "last_verified_date": "2026-08"
   },
@@ -157,7 +188,11 @@
     "min_opening_deposit_usd": 0,
     "min_balance_required_usd": 1,
     "monthly_fee_usd": 7.5,
-    "monthly_fee_waiver_conditions": ["min_daily_balance_500", "linked_mt_checking_account", "one_deposit_per_cycle"],
+    "monthly_fee_waiver_conditions": [
+      "min_daily_balance_500",
+      "linked_mt_checking_account",
+      "one_deposit_per_cycle"
+    ],
     "product_url": "https://www.mtb.com/personal/savings-and-cds/relationship-savings",
     "last_verified_date": "2026-08"
   },
@@ -175,7 +210,12 @@
     "min_opening_deposit_usd": 0,
     "min_balance_required_usd": 0,
     "monthly_fee_usd": 5,
-    "monthly_fee_waiver_conditions": ["min_daily_balance_300", "linked_td_checking_recurring_transfer_25_first_12_months", "primary_holder_18_or_under", "primary_holder_62_or_older"],
+    "monthly_fee_waiver_conditions": [
+      "min_daily_balance_300",
+      "linked_td_checking_recurring_transfer_25_first_12_months",
+      "primary_holder_18_or_under",
+      "primary_holder_62_or_older"
+    ],
     "product_url": "https://www.td.com/us/en/personal-banking/savings-accounts/simple",
     "last_verified_date": "2026-08"
   },
@@ -213,6 +253,245 @@
     "monthly_fee_usd": 0,
     "monthly_fee_waiver_conditions": [],
     "product_url": "https://www.ally.com/bank/online-savings-account/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "chase_premier_savings",
+    "bank_id": "chase",
+    "name": "Chase Premier Savings",
+    "product_type": "savings",
+    "monthly_fee_usd": 25,
+    "monthly_fee_waiver_conditions": [
+      "beginning_day_balance_15000_plus",
+      "linked_chase_premier_plus_sapphire_or_private_client_checking"
+    ],
+    "min_opening_deposit_usd": null,
+    "min_balance_required_usd": 15000,
+    "apy_current": 0.01,
+    "fdic_insured": true,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.chase.com/personal/savings/interest-savings",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "wells_fargo_platinum_savings",
+    "bank_id": "wells_fargo",
+    "name": "Wells Fargo Platinum Savings",
+    "product_type": "savings",
+    "monthly_fee_usd": 12,
+    "monthly_fee_waiver_conditions": [
+      "minimum_daily_balance_3500",
+      "linked_eligible_wells_fargo_checking_account"
+    ],
+    "min_opening_deposit_usd": 25,
+    "min_balance_required_usd": 3500,
+    "apy_current": 0.05,
+    "fdic_insured": true,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.wellsfargo.com/savings-cds/platinum/",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "citi_accelerate_savings",
+    "bank_id": "citibank",
+    "name": "Citi Accelerate Savings",
+    "product_type": "savings",
+    "monthly_fee_usd": null,
+    "monthly_fee_waiver_conditions": [],
+    "min_opening_deposit_usd": null,
+    "min_balance_required_usd": null,
+    "apy_current": 3.15,
+    "fdic_insured": true,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.citi.com/banking/savings-account",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "us_bank_elite_money_market",
+    "bank_id": "us_bank",
+    "name": "U.S. Bank Elite Money Market Account",
+    "product_type": "savings",
+    "monthly_fee_usd": 10,
+    "monthly_fee_waiver_conditions": [
+      "smartly_checking_gold_tier_or_higher",
+      "minimum_daily_balance_10000_plus"
+    ],
+    "min_opening_deposit_usd": 100,
+    "min_balance_required_usd": 25000,
+    "apy_current": 0.05,
+    "fdic_insured": true,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.usbank.com/bank-accounts/savings-accounts/elite-money-market.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "td_signature_savings",
+    "bank_id": "td_bank",
+    "name": "TD Signature Savings",
+    "product_type": "savings",
+    "apy_current": null,
+    "fdic_insured": true,
+    "monthly_fee_usd": 15,
+    "monthly_fee_waiver_conditions": [
+      "min_daily_balance_10000",
+      "linked_eligible_td_checking_account"
+    ],
+    "min_opening_deposit_usd": 0,
+    "min_balance_required_usd": null,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.td.com/us/en/personal-banking/savings-accounts/signature",
+    "last_verified_date": "2026-08",
+    "notes": "Tiered/relationship interest rate structure (reported by third parties as roughly 0.01%-2.75% APY depending on balance tier, up to $250,000 for top tier, plus a linked-account rate bump) but TD's own product page does not disclose a single current numeric APY without entering a ZIP code, and third-party figures were inconsistent, so apy_current is left null rather than guessed. $2,500 minimum daily balance is required for non-TD ATM fee reimbursement."
+  },
+  {
+    "product_id": "hsbc_premier_relationship_savings",
+    "bank_id": "hsbc",
+    "name": "HSBC Premier Relationship Savings",
+    "product_type": "savings",
+    "apy_current": null,
+    "fdic_insured": true,
+    "monthly_fee_usd": null,
+    "monthly_fee_waiver_conditions": [],
+    "min_opening_deposit_usd": null,
+    "min_balance_required_usd": null,
+    "accepts_no_ssn": false,
+    "accepts_itin": null,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.us.hsbc.com/savings-accounts/products/relationship-savings/",
+    "last_verified_date": "2026-08",
+    "notes": "Distinct product from the existing hsbc_premier_savings entry - requires an active HSBC Premier checking account. Pays a Standard APY plus a higher 'Relationship APY' when at least one monthly qualifying behavior is met (e.g. $500+ debit card spend, $5,000+ direct deposits, HSBC-serviced mortgage, or Premier Elite status). Different official/third-party sources returned inconsistent current rate figures (values seen: 0.05% standard / 3.00%, 3.10%, and 4.40% relationship rate depending on source and possible page-template rendering issues), so apy_current is left null rather than reporting an unverified number. Monthly fee and minimum deposit not disclosed on the product page."
+  },
+  {
+    "product_id": "ally_money_market_account",
+    "bank_id": "ally",
+    "name": "Ally Money Market Account",
+    "product_type": "savings",
+    "apy_current": 3.0,
+    "fdic_insured": true,
+    "monthly_fee_usd": 0,
+    "monthly_fee_waiver_conditions": [],
+    "min_opening_deposit_usd": 0,
+    "min_balance_required_usd": 0,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.ally.com/bank/money-market-account/",
+    "last_verified_date": "2026-08",
+    "notes": "Tiered APY: <$5,000, $5,000-$24,999.99, and $25,000+ balance tiers; 3.00% APY confirmed on the product page as of 08/24/26 (Ally states rates are variable and subject to change). Includes debit card and check-writing; ATM fees reimbursed up to $10/statement cycle; limited to 10 withdrawals per statement cycle. Ally requires SSN or ITIN and is limited to US citizens/legal residents."
+  },
+  {
+    "product_id": "pnc_high_yield_savings",
+    "bank_id": "pnc_bank",
+    "name": "PNC High Yield Savings",
+    "product_type": "savings",
+    "apy_current": 3.15,
+    "fdic_insured": true,
+    "monthly_fee_usd": 0,
+    "monthly_fee_waiver_conditions": [],
+    "min_opening_deposit_usd": 0,
+    "min_balance_required_usd": 0,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "truist_confidence_savings",
+    "bank_id": "truist",
+    "name": "Truist Confidence Savings",
+    "product_type": "savings",
+    "apy_current": 0.01,
+    "fdic_insured": true,
+    "monthly_fee_usd": 0,
+    "monthly_fee_waiver_conditions": [],
+    "min_opening_deposit_usd": 25,
+    "min_balance_required_usd": 0,
+    "accepts_no_ssn": false,
+    "accepts_itin": null,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.truist.com/savings/truist-confidence-savings",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "truist_one_money_market",
+    "bank_id": "truist",
+    "name": "Truist One Money Market Account",
+    "product_type": "savings",
+    "apy_current": 0.01,
+    "fdic_insured": true,
+    "monthly_fee_usd": 12,
+    "monthly_fee_waiver_conditions": [
+      "balance_15000_plus"
+    ],
+    "min_opening_deposit_usd": 50,
+    "min_balance_required_usd": 0,
+    "accepts_no_ssn": false,
+    "accepts_itin": null,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.truist.com/savings/truist-one-money-market",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "mt_bank_premium_savings",
+    "bank_id": "mt_bank",
+    "name": "M&T Premium Savings",
+    "product_type": "savings",
+    "apy_current": null,
+    "fdic_insured": true,
+    "monthly_fee_usd": 20,
+    "monthly_fee_waiver_conditions": [
+      "average_daily_balance_10000_plus",
+      "qualifying_mt_checking_account"
+    ],
+    "min_opening_deposit_usd": 0,
+    "min_balance_required_usd": 0,
+    "accepts_no_ssn": false,
+    "accepts_itin": null,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.mtb.com/personal/savings-and-cds/premium-savings",
+    "last_verified_date": "2026-08"
+  },
+  {
+    "product_id": "mt_bank_preferred_money_market",
+    "bank_id": "mt_bank",
+    "name": "M&T Preferred Money Market (MyChoice Money Market)",
+    "product_type": "savings",
+    "apy_current": null,
+    "fdic_insured": true,
+    "monthly_fee_usd": 20,
+    "monthly_fee_waiver_conditions": [
+      "average_daily_balance_10000_plus",
+      "qualifying_mt_checking_account"
+    ],
+    "min_opening_deposit_usd": null,
+    "min_balance_required_usd": 0,
+    "accepts_no_ssn": false,
+    "accepts_itin": null,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.mtb.com/personal/savings-and-cds/preferred-money-market",
     "last_verified_date": "2026-08"
   }
 ]

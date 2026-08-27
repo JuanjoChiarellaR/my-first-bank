@@ -63,7 +63,8 @@ Per institution:
   "has_product_no_us_credit_history_required": true,
   "logo_path": "assets/logos/chase.svg",
   "logo_source": "chase.com/brand-assets",
-  "logo_last_verified": "2026-08"
+  "logo_last_verified": "2026-08",
+  "state_coverage_completeness": "exhaustive_fdic"
 }
 ```
 
@@ -71,6 +72,7 @@ Notes:
 - `mobile_app_rating_*` fields are a manual monthly snapshot — not real-time. Track `mobile_app_rating_last_updated`.
 - `has_product_*` flags are **rollups derived from the product level** (level 3) — at least one product of this bank satisfies the condition. Never hardcode these independently of the product data; recompute them from the actual product records to avoid contradictions.
 - `logo_source` is a **required field** for every institution — record where the logo asset actually came from (official brand page, Wikimedia Commons, etc.), alongside `logo_last_verified`.
+- `state_coverage_completeness`: `"exhaustive_fdic"` (every one of the 50 states + DC individually verified against the FDIC API — see Level 2), `"not_applicable_no_branches"` (digital-only/no physical branches, e.g. Ally, Zolve, Firstcard), or `"partial"` (reserved for any future institution researched to a lesser depth — flags that its `locations.json` entry is a sample, not exhaustive). Omitted entirely for Nova Credit (no branch concept applies).
 - **Nova Credit** uses `"type": "credit_history_bridge"` and omits product-related and branch-related fields that don't apply.
 
 ### Level 2 — `data/locations.json`
@@ -80,15 +82,19 @@ Notes:
   "chase": {
     "states": {
       "CA": { "branches": 1200, "atms": null },
-      "NY": { "branches": 980, "atms": null }
+      "WY": { "branches": 0, "atms": null }
     }
   }
 }
 ```
 
-- `branches` per state: sourced from the FDIC public API (`banks.data.fdic.gov/api/locations`) — reliable, regulatory data.
-- `atms` per state: **not guaranteed to have a reliable public source.** Investigate case by case per institution. If no reliable source exists for a given bank, set to `null` rather than estimating or guessing — never present an estimate as if it were a real figure. This null-over-guess discipline applies to every field in the dataset, not just ATMs.
+**Three-value state model — not binary.** Every bank/state pair is one of: **confirmed present** (`branches` > 0), **confirmed absent** (`branches: 0` — an explicit, individually-verified zero), or **not yet verified** (the state key is simply absent from the object). These must never collapse into each other. For a bank tagged `state_coverage_completeness: "exhaustive_fdic"` in `banks.json`, all 51 states appear explicitly — a missing key would be a bug. For a `"partial"`-tagged bank, a missing key legitimately means "not verified," never "not present."
+
+- `branches` per state: sourced from the FDIC BankFind API, queried **individually per state** (all 50 + DC), not aggregated from a single top-N pull — see `data/RESEARCH_NOTES.md` for the exact method and a query-syntax gotcha (state code `OR` must be quoted or the API misparses it as a boolean operator).
+- `atms` per state: **not guaranteed to have a reliable public source.** If no reliable source exists, set to `null` — never estimate and present it as real. This null-over-guess discipline applies to every field in the dataset, not just ATMs.
 - Granularity is state-level, not city-level — do not imply city-level precision the data doesn't support.
+- **Copy rule (applies to the UI and the agent, not just the data):** a state with no confirmed-present data — whether confirmed-absent or not-yet-verified — must never be displayed or spoken as "not available here." Use: *"No confirmed branches found for [Bank] in [State] as of [date] — verify directly with the bank."* Same phrasing on Browse Banks/Bank Detail's state filter (Phase 5-7) and in the agent's responses (Phase 8).
+- **Representative fee rule** (Browse Banks cards, Phase 5): the lowest `monthly_fee_usd` among a bank's checking products, shown as "Checking from $X/mo" — full rule and rationale in `data/RESEARCH_NOTES.md`.
 
 ### Level 3 — Products
 
@@ -339,7 +345,7 @@ GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks:
 ## Build order
 
 1. Scaffold the repo structure and empty data files. *(done)*
-2. Research and populate the full dataset (all 15 institutions, all 3 levels) — flag any field where no reliable source was found rather than guessing. *(done — see [`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md) for sources and known gaps)*
+2. Research and populate the full dataset (all 15 institutions, all 3 levels) — flag any field where no reliable source was found rather than guessing. *(done, then backfilled to full personal-product catalogs and exhaustive 51-state coverage after a completeness audit — see [`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md) for sources, method, and known gaps)*
 3. Download/source the 15 official logos, normalize them into the neutral card-token treatment.
 4. Build Browse Banks (hero + filters + grid) first, since every other page depends on this data being correctly loaded and rendered.
 5. Build Bank Detail pages with the flip-card product sections.

@@ -31,13 +31,8 @@ async function checkRateLimit(env, ip) {
   return true;
 }
 
-function buildUserContent(mode, question, layers) {
-  return [
-    `Mode: ${mode}`,
-    `Question: ${question}`,
-    `Dataset context (JSON):`,
-    JSON.stringify(layers),
-  ].join("\n\n");
+function buildUserContent(mode, question) {
+  return `Mode: ${mode}\n\nQuestion: ${question}`;
 }
 
 export default {
@@ -85,11 +80,20 @@ export default {
         body: JSON.stringify({
           model: MODEL,
           max_tokens: 400,
+          // Two cacheable system blocks: the instructions (identical on every
+          // call) and the dataset layers (identical across consecutive calls
+          // that share the same context/mode, e.g. several no-context open
+          // questions in a row). Splitting them means a context switch — say,
+          // opening a bank-context chat after a no-context one — only busts
+          // the smaller, cheaper block, not the shared instructions too. The
+          // actual per-call question goes in the user message, which is never
+          // cached (it's different every time by definition).
           system: [
             { type: "text", text: system, cache_control: { type: "ephemeral" } },
+            { type: "text", text: `Dataset context (JSON):\n${JSON.stringify(layers)}`, cache_control: { type: "ephemeral" } },
           ],
           messages: [
-            { role: "user", content: buildUserContent(mode, question, layers) },
+            { role: "user", content: buildUserContent(mode, question) },
           ],
         }),
       });

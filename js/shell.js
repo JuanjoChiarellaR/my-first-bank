@@ -4,11 +4,12 @@
 
 (function () {
   const page = document.body.dataset.page || "";
+  const base = (window.MFB && MFB.basePath) || (location.pathname.includes("/banks/") ? "../" : "");
 
   const navItems = [
-    { href: "index.html", label: "Browse Banks", match: ["home", "bank-detail"] },
-    { href: "compare.html", label: "Compare", match: ["compare"] },
-    { href: "agent.html", label: "Ask the Agent", match: ["agent"] },
+    { href: `${base}index.html`, label: "Browse Banks", match: ["home", "bank-detail"] },
+    { href: `${base}compare.html`, label: "Compare", match: ["compare"] },
+    { href: `${base}agent.html`, label: "Ask the Agent", match: ["agent"] },
   ];
 
   const navLinksHtml = navItems
@@ -26,8 +27,8 @@
   const navbarHtml = `
     <nav class="fixed top-0 left-0 right-0 z-50 bg-bg/95 backdrop-blur border-b border-border" aria-label="Primary">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <a href="index.html" class="flex items-center gap-2 font-semibold text-ink font-display focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm" aria-label="MyFirstBank home">
-          <img src="assets/logos/_mark.svg" alt="" class="h-7 w-7" onerror="this.style.display='none'">
+        <a href="${base}index.html" class="flex items-center gap-2 font-semibold text-ink font-display focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm" aria-label="MyFirstBank home">
+          <img src="${base}assets/logos/_mark.svg" alt="" class="h-7 w-7" onerror="this.style.display='none'">
           <span>MyFirstBank</span>
         </a>
         <div class="hidden sm:flex items-center gap-1">${navLinksHtml}</div>
@@ -50,7 +51,7 @@
         <p>This is not financial advice &mdash; informational only.</p>
         <p>MyFirstBank is an independent, unaffiliated resource. All bank names, logos, and trademarks are the property of their respective owners.</p>
         <p class="pt-2">
-          <a href="privacy.html" class="underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Privacy Policy</a>
+          <a href="${base}privacy.html" class="underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Privacy Policy</a>
         </p>
       </div>
     </footer>

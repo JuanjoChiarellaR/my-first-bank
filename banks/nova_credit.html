@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank — MyFirstBank</title>
+  <meta name="description" content="Compare checking, savings, and credit card details for this institution on MyFirstBank." />
+  <link rel="icon" href="../assets/logos/_mark.svg" type="image/svg+xml" />
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FAFAF9',
+            surface: '#FFFFFF',
+            border: '#E4E3DD',
+            ink: '#1F1F1D',
+            'ink-secondary': '#6B6B65',
+            'ink-placeholder': '#A3A29B',
+            hover: '#F2F1EC',
+            green: {
+              fill: '#3FA76B',
+              'fill-hover': '#2E9563',
+              tint: '#E7F3EC',
+              text: '#1F6B42',
+            },
+          },
+          fontFamily: {
+            display: ['Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body data-page="bank-detail" class="bg-bg text-ink font-sans antialiased">
+  <div id="site-navbar"></div>
+
+  <main x-data="bankDetail()" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[60vh]">
+
+    <div x-show="loading" class="text-ink-secondary text-sm">Loading&hellip;</div>
+
+    <div x-show="!loading && notFound" class="text-center py-20">
+      <p class="text-ink-secondary mb-4">We couldn't find that institution.</p>
+      <a href="../index.html" class="text-sm underline text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Back to Browse Banks</a>
+    </div>
+
+    <template x-if="!loading && bank">
+      <div>
+        <a href="../index.html" class="text-sm text-ink-secondary hover:text-ink underline inline-block mb-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">&larr; Browse Banks</a>
+
+        <!-- Bank header -->
+        <section class="flex flex-col sm:flex-row sm:items-start gap-5 mb-6">
+          <div class="h-16 sm:w-56 rounded-md border border-border bg-white flex items-center px-4 flex-shrink-0">
+            <img :src="`../assets/logos/${bank.bank_id}.svg`" :alt="`${bank.name} logo`"
+                 class="max-w-full max-h-10 object-contain"
+                 onerror="this.src='../assets/logos/_fallback.svg'; this.classList.add('max-h-8')">
+          </div>
+          <div class="min-w-0">
+            <h1 class="font-display text-2xl sm:text-3xl font-semibold" x-text="bank.name"></h1>
+            <p class="text-ink-secondary text-sm mt-1" x-text="typeLabel(bank.type)"></p>
+            <div class="flex flex-wrap gap-1.5 mt-3" x-show="eligibilityBadges().length">
+              <template x-for="badge in eligibilityBadges()" :key="badge">
+                <span class="inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-green-tint text-green-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span x-text="badge"></span>
+                </span>
+              </template>
+            </div>
+          </div>
+          <div class="sm:ml-auto flex-shrink-0">
+            <a :href="`../agent.html?bank=${bank.bank_id}`"
+               class="inline-block bg-ink text-white text-sm font-medium rounded-md px-4 py-2.5 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              Ask about this bank
+            </a>
+          </div>
+        </section>
+
+        <!-- Nova Credit special-case info panel (no products/branches) -->
+        <template x-if="bank.type === 'credit_history_bridge'">
+          <section class="border border-border bg-surface rounded-lg p-5 mb-8">
+            <p class="text-sm font-medium text-ink-secondary mb-2">Not a bank &mdash; this is a credit history translation service.</p>
+            <p class="text-sm text-ink mb-4" x-text="bank.description"></p>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p class="text-xs font-medium text-ink-secondary mb-1">Source countries covered</p>
+                <p x-text="fmtList(bank.supported_source_countries)"></p>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-ink-secondary mb-1">Destination markets</p>
+                <p x-text="fmtList(bank.destination_markets)"></p>
+              </div>
+              <div class="sm:col-span-2">
+                <p class="text-xs font-medium text-ink-secondary mb-1">US lenders known to accept this report</p>
+                <p x-text="fmtList(bank.known_us_partners_accepting_report)"></p>
+              </div>
+            </div>
+            <p class="text-xs text-ink-placeholder mt-4" x-text="`As of ${bank.logo_last_verified}. ` + (bank.notes || '')"></p>
+          </section>
+        </template>
+
+        <!-- Bank stats -->
+        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 text-sm">
+          <div class="border border-border bg-surface rounded-lg p-4">
+            <p class="text-xs text-ink-secondary mb-1">Headquarters</p>
+            <p class="font-medium" x-text="bank.headquarters || 'Not published'"></p>
+          </div>
+          <div class="border border-border bg-surface rounded-lg p-4">
+            <p class="text-xs text-ink-secondary mb-1">Founded</p>
+            <p class="font-medium font-mono" x-text="bank.founded || 'Not published'"></p>
+          </div>
+          <div class="border border-border bg-surface rounded-lg p-4" x-show="bank.state_coverage_completeness !== 'not_applicable_no_branches' && bank.type !== 'credit_history_bridge'">
+            <p class="text-xs text-ink-secondary mb-1">Branches (50 states + DC)</p>
+            <p class="font-medium font-mono" x-text="bank.num_branches_total ?? 'Not published'"></p>
+          </div>
+          <div class="border border-border bg-surface rounded-lg p-4" x-show="bank.state_coverage_completeness === 'not_applicable_no_branches'">
+            <p class="text-xs text-ink-secondary mb-1">Branches</p>
+            <p class="font-medium">None &mdash; online only</p>
+          </div>
+          <div class="border border-border bg-surface rounded-lg p-4">
+            <p class="text-xs text-ink-secondary mb-1">Official site</p>
+            <p class="font-medium truncate" x-text="bank.official_url || 'Not published'"></p>
+          </div>
+        </section>
+
+        <!-- Support features -->
+        <section class="flex flex-wrap gap-3 mb-8 text-xs text-ink-secondary" x-show="bank.type !== 'credit_history_bridge'">
+          <span x-show="bank.can_open_account_online">&#10003; Open account online</span>
+          <span x-show="bank.live_chat">&#10003; Live chat support</span>
+          <span x-show="bank.phone_support_24_7">&#10003; 24/7 phone support</span>
+          <span x-show="bank.spanish_language_support">&#10003; Spanish-language support</span>
+          <span x-show="bank.mobile_app_rating_ios" x-text="`iOS app: ${bank.mobile_app_rating_ios}★`"></span>
+          <span x-show="bank.mobile_app_rating_android" x-text="`Android app: ${bank.mobile_app_rating_android}★`"></span>
+        </section>
+
+        <!-- Top states -->
+        <section class="mb-10" x-show="topStates().length > 0">
+          <h2 class="font-display text-lg font-semibold mb-3">Where this bank has branches</h2>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <template x-for="[code, entry] in topStates()" :key="code">
+              <span class="border border-border bg-surface rounded-md px-3 py-1.5">
+                <span class="font-medium" x-text="code"></span>
+                <span class="text-ink-secondary font-mono ml-1" x-text="entry.branches"></span>
+              </span>
+            </template>
+          </div>
+          <p class="text-xs text-ink-placeholder mt-2">
+            Branch counts verified individually per state via the FDIC. A state not listed here means no confirmed branches were found &mdash; verify directly with the bank.
+          </p>
+        </section>
+
+        <!-- Product sections -->
+        <template x-for="type in ['checking', 'savings', 'credit_card']" :key="type">
+          <section class="mb-12" x-show="products[type] && products[type].length > 0">
+            <h2 class="font-display text-lg font-semibold mb-4" x-text="productTypeLabel(type)"></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <template x-for="p in products[type]" :key="p.product_id">
+                <div class="flip-card" :class="{ 'is-flipped': isFlipped(p.product_id) }" :style="type === 'credit_card' ? 'height:420px' : 'height:280px'">
+                  <div class="flip-card-inner">
+
+                    <!-- FRONT -->
+                    <button type="button"
+                            class="flip-card-front w-full h-full text-left border border-border bg-surface rounded-lg p-5 flex flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                            @click="toggleFlip(p.product_id)"
+                            :aria-expanded="isFlipped(p.product_id)"
+                            :aria-controls="`back-${p.product_id}`"
+                            :aria-hidden="isFlipped(p.product_id)"
+                            :tabindex="isFlipped(p.product_id) ? -1 : 0"
+                            :aria-label="`${p.name}. Tap for details.`">
+                      <h3 class="font-display font-semibold text-ink mb-2" x-text="p.name"></h3>
+
+                      <template x-if="type === 'checking'">
+                        <p class="font-mono text-lg" x-text="fmtMoney(p.monthly_fee_usd) + '/mo'"></p>
+                      </template>
+                      <template x-if="type === 'savings'">
+                        <p class="font-mono text-lg" x-text="(p.apy_current ?? 'Not published') + (p.apy_current !== null ? '% APY' : '')"></p>
+                      </template>
+                      <template x-if="type === 'credit_card'">
+                        <p class="font-mono text-lg" x-text="fmtMoney(p.annual_fee_usd) + ' annual fee'"></p>
+                      </template>
+
+                      <div class="flex flex-wrap gap-1.5 mt-3">
+                        <span x-show="p.accepts_no_ssn" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
+                        <span x-show="p.requires_ssn === false" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
+                        <span x-show="p.accepts_itin" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">ITIN accepted</span>
+                        <span x-show="p.accepts_no_us_credit_history" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No US credit history OK</span>
+                      </div>
+
+                      <div class="mt-auto pt-3 text-xs text-ink-placeholder">
+                        <p x-text="`As of ${p.last_verified_date}`"></p>
+                        <p class="mt-1 text-ink-secondary">Tap for details &rarr;</p>
+                      </div>
+                    </button>
+
+                    <!-- BACK -->
+                    <div :id="`back-${p.product_id}`"
+                         class="flip-card-back w-full h-full border border-border bg-surface rounded-lg p-5 flex flex-col overflow-y-auto"
+                         :aria-hidden="!isFlipped(p.product_id)">
+                      <div class="flex items-start justify-between gap-2 mb-3">
+                        <h3 class="font-display font-semibold text-ink text-sm" x-text="p.name"></h3>
+                        <button type="button" @click="toggleFlip(p.product_id)"
+                                class="flex-shrink-0 w-11 h-11 -mt-2 -mr-2 flex items-center justify-center rounded-md hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                                :tabindex="isFlipped(p.product_id) ? 0 : -1"
+                                aria-label="Close details">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                        </button>
+                      </div>
+
+                      <dl class="text-xs space-y-2 flex-1">
+                        <!-- Checking fields -->
+                        <template x-if="type === 'checking'">
+                          <div class="space-y-2">
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Monthly fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.monthly_fee_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Waived if</dt><dd class="text-right" x-text="fmtList(p.monthly_fee_waiver_conditions)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Interest-bearing</dt><dd class="text-right" x-text="fmtBool(p.interest_bearing)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Overdraft fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.overdraft_fee_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Out-of-network ATM fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.atm_fee_out_of_network_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">ATM fee reimbursed</dt><dd class="text-right" x-text="fmtBool(p.atm_fee_reimbursement)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Zelle available</dt><dd class="text-right" x-text="fmtBool(p.zelle_available)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts no SSN</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Can open online</dt><dd class="text-right" x-text="fmtBool(p.can_open_online)"></dd></div>
+                          </div>
+                        </template>
+
+                        <!-- Savings fields -->
+                        <template x-if="type === 'savings'">
+                          <div class="space-y-2">
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">APY</dt><dd class="font-mono text-right" x-text="p.apy_current !== null ? p.apy_current + '%' : 'Not published'"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">FDIC insured</dt><dd class="text-right" x-text="fmtBool(p.fdic_insured)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Monthly fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.monthly_fee_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Waived if</dt><dd class="text-right" x-text="fmtList(p.monthly_fee_waiver_conditions)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts no SSN</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Can open online</dt><dd class="text-right" x-text="fmtBool(p.can_open_online)"></dd></div>
+                          </div>
+                        </template>
+
+                        <!-- Credit card fields -->
+                        <template x-if="type === 'credit_card'">
+                          <div class="space-y-2">
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Annual fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.annual_fee_usd)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">APR range</dt><dd class="font-mono text-right" x-text="(p.apr_regular_min ?? '?') + '–' + (p.apr_regular_max ?? '?') + '%'"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Foreign transaction fee</dt><dd class="font-mono text-right" x-text="fmtPct(p.foreign_transaction_fee_pct)"></dd></div>
+                            <div><dt class="text-ink-secondary mb-1">Eligibility</dt><dd x-text="fmtList(p.eligibility_requirements)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Requires SSN</dt><dd class="text-right" x-text="fmtBool(p.requires_ssn)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">No US credit history OK</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_us_credit_history)"></dd></div>
+                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Reports to bureaus</dt><dd class="text-right" x-text="[p.reports_to_equifax && 'Equifax', p.reports_to_experian && 'Experian', p.reports_to_transunion && 'TransUnion'].filter(Boolean).join(', ') || 'Not published'"></dd></div>
+                            <div><dt class="text-ink-secondary mb-1">Rewards</dt><dd x-text="p.rewards_rate_description || 'None'"></dd></div>
+                            <div><dt class="text-ink-secondary mb-1">Benefits</dt><dd x-text="fmtList(p.card_benefits)"></dd></div>
+                            <div x-show="p.welcome_bonus_description"><dt class="text-ink-secondary mb-1">Welcome bonus</dt><dd x-text="p.welcome_bonus_description"></dd></div>
+                          </div>
+                        </template>
+                      </dl>
+
+                      <div class="mt-3 pt-3 border-t border-border">
+                        <a :href="p.product_url && p.product_url.startsWith('http') ? p.product_url : `https://${p.product_url}`"
+                           target="_blank" rel="noopener noreferrer"
+                           class="text-xs underline text-ink hover:text-ink-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm"
+                           :tabindex="isFlipped(p.product_id) ? 0 : -1">
+                          View on official site &rarr;
+                        </a>
+                        <p class="text-xs text-ink-placeholder mt-1" x-text="`As of ${p.last_verified_date}. Verify current terms with the bank.`"></p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </template>
+            </div>
+          </section>
+        </template>
+
+      </div>
+    </template>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../js/data-loader.js"></script>
+  <script src="../js/shell.js"></script>
+  <script src="../js/bank-detail.js"></script>
+</body>
+</html>

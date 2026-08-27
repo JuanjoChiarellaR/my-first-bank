@@ -3,12 +3,18 @@
 
 window.MFB = window.MFB || {};
 
+// Every page but the bank-detail pages (banks/{bank_id}.html) lives at the
+// site root, so root-relative asset paths like "data/banks.json" only work
+// one directory deep — not a hardcoded "/" prefix either, since a GitHub
+// Pages *project* site is served from a subpath, not the domain root.
+MFB.basePath = location.pathname.includes("/banks/") ? "../" : "";
+
 const DATA_FILES = {
-  banks: "data/banks.json",
-  locations: "data/locations.json",
-  checkingAccounts: "data/checking_accounts.json",
-  savingsAccounts: "data/savings_accounts.json",
-  creditCards: "data/credit_cards.json",
+  banks: `${MFB.basePath}data/banks.json`,
+  locations: `${MFB.basePath}data/locations.json`,
+  checkingAccounts: `${MFB.basePath}data/checking_accounts.json`,
+  savingsAccounts: `${MFB.basePath}data/savings_accounts.json`,
+  creditCards: `${MFB.basePath}data/credit_cards.json`,
 };
 
 MFB.data = {

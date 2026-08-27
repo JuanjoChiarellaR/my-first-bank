@@ -90,4 +90,76 @@ MFB.dataReady.then(() => {
 
   MFB.unconfirmedStateCopy = (bankName, stateCode, asOfDate) =>
     `No confirmed branches found for ${bankName} in ${stateCode} as of ${asOfDate} — verify directly with the bank.`;
+
+  MFB.findProduct = (productId) =>
+    MFB.data.checkingAccounts.find((p) => p.product_id === productId) ||
+    MFB.data.savingsAccounts.find((p) => p.product_id === productId) ||
+    MFB.data.creditCards.find((p) => p.product_id === productId) ||
+    null;
 });
+
+// Compare selection — persisted to localStorage so an accidental reload
+// doesn't lose it. Comparisons only ever hold one product type at a time and
+// max 4 products, per the Compare page spec.
+(function () {
+  const STORAGE_KEY = "mfb_compare_v1";
+  const MAX_ITEMS = 4;
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { productType: null, productIds: [] };
+      const parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.productIds)) return { productType: null, productIds: [] };
+      return parsed;
+    } catch {
+      return { productType: null, productIds: [] };
+    }
+  }
+
+  function save(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  let state = load();
+  const listeners = new Set();
+  const notify = () => listeners.forEach((fn) => fn(state));
+
+  MFB.compare = {
+    get: () => state,
+    count: () => state.productIds.length,
+    isSelected: (productId) => state.productIds.includes(productId),
+    onChange: (fn) => listeners.add(fn),
+
+    // Returns { ok: true } or { ok: false, reason } — callers should surface
+    // `reason` to the user rather than failing silently.
+    add(productType, productId) {
+      if (state.productIds.length >= MAX_ITEMS) {
+        return { ok: false, reason: `You can compare up to ${MAX_ITEMS} products at a time.` };
+      }
+      if (state.productType && state.productType !== productType && state.productIds.length > 0) {
+        return { ok: false, reason: "Comparisons only work within one product type at a time. Clear your current comparison first." };
+      }
+      if (state.productIds.includes(productId)) {
+        return { ok: true };
+      }
+      state = { productType, productIds: [...state.productIds, productId] };
+      save(state);
+      notify();
+      return { ok: true };
+    },
+
+    remove(productId) {
+      const productIds = state.productIds.filter((id) => id !== productId);
+      state = { productType: productIds.length ? state.productType : null, productIds };
+      save(state);
+      notify();
+    },
+
+    clear() {
+      state = { productType: null, productIds: [] };
+      save(state);
+      notify();
+    },
+  };
+})();

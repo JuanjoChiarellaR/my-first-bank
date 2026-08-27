@@ -349,7 +349,7 @@ GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks:
 3. Download/source the 15 official logos, normalize them into the neutral card-token treatment. *(done — 12 sourced from Wikimedia Commons, 3 fintechs with no public logo asset got a neutral text wordmark fallback; see [`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md) for exact sources)*
 4. Build Browse Banks (hero + filters + grid) first, since every other page depends on this data being correctly loaded and rendered.
 5. Build Bank Detail pages with the flip-card product sections. *(done — all 15 pages generated from `banks/_template.html` via `scripts/generate-bank-pages.py`, re-run it after editing the template or the institution list)*
-6. Build Compare.
+6. Build Compare. *(done)*
 7. Build Ask the Agent (system prompt, semantic layer generation, the three context entry points, the two question modes, rate limiting) and the Cloudflare Worker proxy (CORS, secret key, worker-level rate limit).
 8. Add the footer, Privacy Policy page, and og:image.
 9. Wire up GoatCounter.

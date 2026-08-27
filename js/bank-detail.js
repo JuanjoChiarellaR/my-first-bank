@@ -51,6 +51,20 @@ document.addEventListener("alpine:init", () => {
       return !!this.flipped[productId];
     },
 
+    compareError: "",
+    isInCompare(productId) {
+      return MFB.compare.isSelected(productId);
+    },
+    toggleCompare(productType, productId) {
+      this.compareError = "";
+      if (MFB.compare.isSelected(productId)) {
+        MFB.compare.remove(productId);
+        return;
+      }
+      const result = MFB.compare.add(productType, productId);
+      if (!result.ok) this.compareError = result.reason;
+    },
+
     // Top states by confirmed branch count, respecting the three-value model —
     // only ever lists confirmed-present entries, never a confirmed-absent or
     // not-yet-verified one.

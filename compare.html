@@ -42,14 +42,113 @@
 <body data-page="compare" class="bg-bg text-ink font-sans antialiased">
   <div id="site-navbar"></div>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[50vh]">
-    <p class="text-ink-secondary">Compare — coming soon.</p>
+  <main x-data="comparePage()" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[60vh]">
+    <h1 class="font-display text-2xl sm:text-3xl font-semibold mb-2">Compare</h1>
+    <p class="text-ink-secondary mb-8">Add up to 4 products of the same type from Browse Banks or a bank's page, then choose which fields to see side by side.</p>
+
+    <div x-show="loading" class="text-ink-secondary text-sm">Loading&hellip;</div>
+
+    <!-- Empty state -->
+    <div x-show="!loading && products.length === 0" class="text-center py-16 border border-border rounded-lg bg-surface">
+      <p class="text-ink-secondary mb-4">Nothing to compare yet.</p>
+      <p class="text-sm text-ink-placeholder mb-5">Find a checking, savings, or credit card product on Browse Banks or a bank's page, then tap &ldquo;+ Compare.&rdquo;</p>
+      <a href="index.html" class="inline-block bg-ink text-white text-sm font-medium rounded-md px-4 py-2.5 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        Browse Banks
+      </a>
+    </div>
+
+    <template x-if="!loading && products.length > 0">
+      <div>
+        <!-- Selected products -->
+        <section class="mb-6">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="font-display text-lg font-semibold" x-text="productTypeLabel()"></h2>
+            <button type="button" @click="clearAll()" class="text-sm text-ink-secondary underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Clear all</button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <template x-for="p in products" :key="p.product_id">
+              <span class="inline-flex items-center gap-2 border border-border bg-surface rounded-full pl-3 pr-1.5 py-1.5 text-sm">
+                <span x-text="`${p.bank.name} — ${p.name}`"></span>
+                <button type="button" @click="removeProduct(p.product_id)"
+                        class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                        :aria-label="`Remove ${p.name} from comparison`">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                </button>
+              </span>
+            </template>
+          </div>
+        </section>
+
+        <!-- Field selector -->
+        <section class="mb-8 p-4 border border-border bg-surface rounded-lg">
+          <h2 class="font-display text-sm font-semibold mb-3">Fields to show</h2>
+          <template x-for="group in fieldDef().groups" :key="group.label || 'ungrouped'">
+            <div class="mb-3 last:mb-0">
+              <p x-show="group.label" class="text-xs font-medium text-ink-secondary mb-1.5" x-text="group.label"></p>
+              <div class="flex flex-wrap gap-2">
+                <template x-for="field in group.fields" :key="field.key">
+                  <label class="inline-flex items-center gap-1.5 text-xs border border-border rounded-full px-2.5 py-1 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
+                    <input type="checkbox" class="accent-ink" :checked="isFieldSelected(field.key)" @change="toggleField(field.key)">
+                    <span x-text="field.label"></span>
+                  </label>
+                </template>
+              </div>
+            </div>
+          </template>
+        </section>
+
+        <!-- Table -->
+        <section class="overflow-x-auto border border-border rounded-lg bg-surface mb-8">
+          <table class="min-w-full text-sm">
+            <thead>
+              <tr class="border-b border-border">
+                <th scope="col" class="text-left font-medium text-ink-secondary text-xs px-4 py-3 sticky left-0 bg-surface">Field</th>
+                <template x-for="p in products" :key="p.product_id">
+                  <th scope="col" class="text-left font-medium px-4 py-3 min-w-[180px]">
+                    <div x-text="p.bank.name" class="text-ink-secondary text-xs"></div>
+                    <div x-text="p.name" class="font-display"></div>
+                  </th>
+                </template>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="group in visibleFields()" :key="group.label || 'ungrouped'">
+                <template x-for="field in group.fields" :key="field.key">
+                  <tr class="border-b border-border last:border-b-0 hover:bg-hover">
+                    <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-surface" x-text="field.label"></th>
+                    <template x-for="p in products" :key="p.product_id">
+                      <td class="px-4 py-3 font-mono text-xs" x-text="cellValue(field, p)"></td>
+                    </template>
+                  </tr>
+                </template>
+              </template>
+              <!-- last_verified_date always rendered, never optional -->
+              <tr class="bg-hover/50">
+                <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-hover/50">Last verified</th>
+                <template x-for="p in products" :key="p.product_id">
+                  <td class="px-4 py-3 font-mono text-xs text-ink-placeholder" x-text="p.last_verified_date"></td>
+                </template>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <p class="text-xs text-ink-placeholder mb-8">This table is generated directly from our dataset — no AI is involved. Always verify current terms with the bank before applying.</p>
+
+        <div class="text-center">
+          <a :href="askAgentHref()"
+             class="inline-block bg-ink text-white text-sm font-medium rounded-md px-5 py-3 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+            Ask the Agent about these
+          </a>
+        </div>
+      </div>
+    </template>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="js/data-loader.js"></script>
   <script src="js/shell.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/compare.js"></script>
 </body>
 </html>

@@ -82,6 +82,12 @@
           </div>
         </section>
 
+        <!-- Compare error banner (neutral treatment — green stays reserved for eligibility signals only) -->
+        <div x-show="compareError" x-cloak class="mb-6 text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 flex items-center justify-between gap-3">
+          <span x-text="compareError"></span>
+          <button type="button" @click="compareError = ''" class="flex-shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm" aria-label="Dismiss">&times;</button>
+        </div>
+
         <!-- Nova Credit special-case info panel (no products/branches) -->
         <template x-if="bank.type === 'credit_history_bridge'">
           <section class="border border-border bg-surface rounded-lg p-5 mb-8">
@@ -165,38 +171,51 @@
                   <div class="flip-card-inner">
 
                     <!-- FRONT -->
-                    <button type="button"
-                            class="flip-card-front w-full h-full text-left border border-border bg-surface rounded-lg p-5 flex flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                            @click="toggleFlip(p.product_id)"
-                            :aria-expanded="isFlipped(p.product_id)"
-                            :aria-controls="`back-${p.product_id}`"
-                            :aria-hidden="isFlipped(p.product_id)"
-                            :tabindex="isFlipped(p.product_id) ? -1 : 0"
-                            :aria-label="`${p.name}. Tap for details.`">
-                      <h3 class="font-display font-semibold text-ink mb-2" x-text="p.name"></h3>
+                    <div class="flip-card-front w-full h-full relative border border-border bg-surface rounded-lg"
+                         :aria-hidden="isFlipped(p.product_id)">
+                      <button type="button"
+                              class="absolute inset-0 w-full h-full text-left rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                              @click="toggleFlip(p.product_id)"
+                              :aria-expanded="isFlipped(p.product_id)"
+                              :aria-controls="`back-${p.product_id}`"
+                              :tabindex="isFlipped(p.product_id) ? -1 : 0"
+                              :aria-label="`${p.name}. Tap for details.`">
+                      </button>
 
-                      <template x-if="type === 'checking'">
-                        <p class="font-mono text-lg" x-text="fmtMoney(p.monthly_fee_usd) + '/mo'"></p>
-                      </template>
-                      <template x-if="type === 'savings'">
-                        <p class="font-mono text-lg" x-text="(p.apy_current ?? 'Not published') + (p.apy_current !== null ? '% APY' : '')"></p>
-                      </template>
-                      <template x-if="type === 'credit_card'">
-                        <p class="font-mono text-lg" x-text="fmtMoney(p.annual_fee_usd) + ' annual fee'"></p>
-                      </template>
+                      <div class="p-5 h-full flex flex-col pointer-events-none">
+                        <h3 class="font-display font-semibold text-ink mb-2 pr-16" x-text="p.name"></h3>
 
-                      <div class="flex flex-wrap gap-1.5 mt-3">
-                        <span x-show="p.accepts_no_ssn" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
-                        <span x-show="p.requires_ssn === false" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
-                        <span x-show="p.accepts_itin" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">ITIN accepted</span>
-                        <span x-show="p.accepts_no_us_credit_history" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No US credit history OK</span>
+                        <template x-if="type === 'checking'">
+                          <p class="font-mono text-lg" x-text="fmtMoney(p.monthly_fee_usd) + '/mo'"></p>
+                        </template>
+                        <template x-if="type === 'savings'">
+                          <p class="font-mono text-lg" x-text="(p.apy_current ?? 'Not published') + (p.apy_current !== null ? '% APY' : '')"></p>
+                        </template>
+                        <template x-if="type === 'credit_card'">
+                          <p class="font-mono text-lg" x-text="fmtMoney(p.annual_fee_usd) + ' annual fee'"></p>
+                        </template>
+
+                        <div class="flex flex-wrap gap-1.5 mt-3">
+                          <span x-show="p.accepts_no_ssn" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
+                          <span x-show="p.requires_ssn === false" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
+                          <span x-show="p.accepts_itin" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">ITIN accepted</span>
+                          <span x-show="p.accepts_no_us_credit_history" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No US credit history OK</span>
+                        </div>
+
+                        <div class="mt-auto pt-3 text-xs text-ink-placeholder">
+                          <p x-text="`As of ${p.last_verified_date}`"></p>
+                          <p class="mt-1 text-ink-secondary">Tap for details &rarr;</p>
+                        </div>
                       </div>
 
-                      <div class="mt-auto pt-3 text-xs text-ink-placeholder">
-                        <p x-text="`As of ${p.last_verified_date}`"></p>
-                        <p class="mt-1 text-ink-secondary">Tap for details &rarr;</p>
-                      </div>
-                    </button>
+                      <button type="button"
+                              class="absolute top-3 right-3 pointer-events-auto text-xs font-medium border border-border rounded-md px-2 py-1.5 hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                              :class="isInCompare(p.product_id) ? 'bg-ink text-white border-ink' : 'bg-surface text-ink'"
+                              @click.stop="toggleCompare(type, p.product_id)"
+                              :aria-label="isInCompare(p.product_id) ? `Remove ${p.name} from comparison` : `Add ${p.name} to comparison`">
+                        <span x-text="isInCompare(p.product_id) ? '✓' : '+'"></span>
+                      </button>
+                    </div>
 
                     <!-- BACK -->
                     <div :id="`back-${p.product_id}`"

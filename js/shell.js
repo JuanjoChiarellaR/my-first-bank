@@ -57,11 +57,34 @@
     </footer>
   `;
 
+  function renderComparePill() {
+    let pill = document.getElementById("mfb-compare-pill");
+    const count = window.MFB && MFB.compare ? MFB.compare.count() : 0;
+    if (page === "compare" || count === 0) {
+      if (pill) pill.remove();
+      return;
+    }
+    if (!pill) {
+      pill = document.createElement("a");
+      pill.id = "mfb-compare-pill";
+      pill.className =
+        "fixed bottom-5 right-5 z-40 bg-ink text-white text-sm font-medium rounded-full px-4 py-3 shadow-lg hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
+      document.body.appendChild(pill);
+    }
+    pill.href = `${base}compare.html`;
+    pill.textContent = `Compare (${count}) →`;
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const navMount = document.getElementById("site-navbar");
     const footerMount = document.getElementById("site-footer");
     if (navMount) navMount.outerHTML = navbarHtml;
     if (footerMount) footerMount.outerHTML = footerHtml;
+
+    MFB.dataReady?.finally(() => {
+      renderComparePill();
+      MFB.compare?.onChange(renderComparePill);
+    });
 
     const toggle = document.getElementById("mobile-nav-toggle");
     const panel = document.getElementById("mobile-nav-panel");

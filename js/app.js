@@ -60,6 +60,22 @@ document.addEventListener("alpine:init", () => {
       return MFB.representativeFee(bankId);
     },
 
+    compareError: "",
+
+    isInCompare(productId) {
+      return MFB.compare.isSelected(productId);
+    },
+
+    toggleCompare(productType, productId) {
+      this.compareError = "";
+      if (MFB.compare.isSelected(productId)) {
+        MFB.compare.remove(productId);
+        return;
+      }
+      const result = MFB.compare.add(productType, productId);
+      if (!result.ok) this.compareError = result.reason;
+    },
+
     matchesFilters(bank) {
       if (bank.type === "credit_history_bridge") {
         // Nova Credit has no products/branches — only ever shown when filters are untouched.

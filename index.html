@@ -158,6 +158,12 @@
     <!-- Results count -->
     <p x-show="!loading" class="text-sm text-ink-secondary mb-4" x-text="`${filteredBanks.length} institution${filteredBanks.length === 1 ? '' : 's'}`"></p>
 
+    <!-- Compare error banner (neutral treatment — green stays reserved for eligibility signals only) -->
+    <div x-show="compareError" x-cloak class="mb-4 text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 flex items-center justify-between gap-3">
+      <span x-text="compareError"></span>
+      <button type="button" @click="compareError = ''" class="flex-shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm" aria-label="Dismiss">&times;</button>
+    </div>
+
     <!-- No results -->
     <div x-show="!loading && filteredBanks.length === 0" class="text-center py-16 text-ink-secondary">
       <p class="mb-3">No institutions match those filters.</p>
@@ -189,9 +195,17 @@
                   </span>
                 </template>
               </div>
-              <div class="text-sm" x-show="representativeFee(bank.bank_id)">
-                <span class="font-mono font-medium" x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).label} from $${representativeFee(bank.bank_id).amount}/mo` : ''"></span>
-                <span class="block text-xs text-ink-placeholder mt-0.5" x-text="representativeFee(bank.bank_id) ? `As of ${representativeFee(bank.bank_id).last_verified_date}` : ''"></span>
+              <div class="text-sm flex items-end justify-between gap-2" x-show="representativeFee(bank.bank_id)">
+                <div>
+                  <span class="font-mono font-medium" x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).label} from $${representativeFee(bank.bank_id).amount}/mo` : ''"></span>
+                  <span class="block text-xs text-ink-placeholder mt-0.5" x-text="representativeFee(bank.bank_id) ? `As of ${representativeFee(bank.bank_id).last_verified_date}` : ''"></span>
+                </div>
+                <button type="button"
+                        @click.prevent.stop="toggleCompare(representativeFee(bank.bank_id).label === 'Checking' ? 'checking' : 'savings', representativeFee(bank.bank_id).product_id)"
+                        class="flex-shrink-0 text-xs font-medium border border-border rounded-md px-2 py-1.5 hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                        :class="isInCompare(representativeFee(bank.bank_id)?.product_id) ? 'bg-ink text-white border-ink' : 'bg-surface text-ink'"
+                        x-text="isInCompare(representativeFee(bank.bank_id)?.product_id) ? '✓ Comparing' : '+ Compare'">
+                </button>
               </div>
             </div>
           </template>

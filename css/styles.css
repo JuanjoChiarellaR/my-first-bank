@@ -18,6 +18,10 @@ html {
   scroll-behavior: smooth;
 }
 
+[x-cloak] {
+  display: none !important;
+}
+
 body {
   background-color: var(--mfb-bg);
   color: var(--mfb-text);

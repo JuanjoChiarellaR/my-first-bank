@@ -42,8 +42,169 @@
 <body data-page="home" class="bg-bg text-ink font-sans antialiased">
   <div id="site-navbar"></div>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[50vh]">
-    <p class="text-ink-secondary">Browse Banks — coming soon.</p>
+  <main x-data="browseBanks()" class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+    <!-- Hero -->
+    <section class="max-w-2xl mb-8">
+      <h1 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight mb-3">Comparing US banks as a newcomer, made simple.</h1>
+      <p class="text-ink-secondary text-base sm:text-lg">Whether you're arriving with no SSN yet or already have one, filter by what applies to you and see real checking, savings, and credit card details from 15 banks and fintechs — side by side.</p>
+    </section>
+
+    <!-- Filter bar (desktop) -->
+    <section class="hidden sm:flex flex-wrap items-end gap-4 mb-8 p-4 bg-surface border border-border rounded-lg" aria-label="Filters">
+      <div class="flex flex-col gap-1">
+        <label for="f-product-type" class="text-xs font-medium text-ink-secondary">Product type</label>
+        <select id="f-product-type" x-model="filters.productType"
+                class="border border-border rounded-md px-3 py-2 text-sm bg-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+          <option value="any">Any</option>
+          <option value="checking">Checking</option>
+          <option value="savings">Savings</option>
+          <option value="credit_card">Credit card</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="f-doc-status" class="text-xs font-medium text-ink-secondary">Documentation status</label>
+        <select id="f-doc-status" x-model="filters.docStatus"
+                class="border border-border rounded-md px-3 py-2 text-sm bg-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+          <option value="any">Any</option>
+          <option value="no_ssn">No SSN yet</option>
+          <option value="itin">Have an ITIN</option>
+          <option value="no_credit_history">No US credit history</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="f-state" class="text-xs font-medium text-ink-secondary">State</label>
+        <select id="f-state" x-model="filters.state"
+                class="border border-border rounded-md px-3 py-2 text-sm bg-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+          <option value="any">Any state</option>
+          <template x-for="[code, name] in usStates" :key="code">
+            <option :value="code" x-text="name"></option>
+          </template>
+        </select>
+      </div>
+
+      <button type="button" @click="resetFilters()"
+              class="text-sm text-ink-secondary underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm px-1">
+        Reset filters
+      </button>
+    </section>
+
+    <!-- Filter bar (mobile: button + drawer) -->
+    <section class="sm:hidden mb-6">
+      <button type="button" id="mobile-filters-toggle" @click="mobileFiltersOpen = true"
+              class="w-full flex items-center justify-center gap-2 border border-border rounded-md px-4 py-2.5 text-sm font-medium bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        Filters
+      </button>
+
+      <div x-show="mobileFiltersOpen" x-cloak
+           class="fixed inset-0 z-50 bg-black/30"
+           @click.self="mobileFiltersOpen = false">
+        <div class="absolute bottom-0 left-0 right-0 bg-surface rounded-t-xl p-5 max-h-[80vh] overflow-y-auto"
+             role="dialog" aria-modal="true" aria-label="Filters" @keydown.escape.window="mobileFiltersOpen = false">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-display text-lg font-semibold">Filters</h2>
+            <button type="button" @click="mobileFiltersOpen = false" aria-label="Close filters"
+                    class="w-9 h-9 flex items-center justify-center rounded-md border border-border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+            </button>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-1">
+              <label for="fm-product-type" class="text-xs font-medium text-ink-secondary">Product type</label>
+              <select id="fm-product-type" x-model="filters.productType" class="border border-border rounded-md px-3 py-2 text-sm bg-bg">
+                <option value="any">Any</option>
+                <option value="checking">Checking</option>
+                <option value="savings">Savings</option>
+                <option value="credit_card">Credit card</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label for="fm-doc-status" class="text-xs font-medium text-ink-secondary">Documentation status</label>
+              <select id="fm-doc-status" x-model="filters.docStatus" class="border border-border rounded-md px-3 py-2 text-sm bg-bg">
+                <option value="any">Any</option>
+                <option value="no_ssn">No SSN yet</option>
+                <option value="itin">Have an ITIN</option>
+                <option value="no_credit_history">No US credit history</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label for="fm-state" class="text-xs font-medium text-ink-secondary">State</label>
+              <select id="fm-state" x-model="filters.state" class="border border-border rounded-md px-3 py-2 text-sm bg-bg">
+                <option value="any">Any state</option>
+                <template x-for="[code, name] in usStates" :key="code">
+                  <option :value="code" x-text="name"></option>
+                </template>
+              </select>
+            </div>
+
+            <div class="flex gap-3 pt-2">
+              <button type="button" @click="resetFilters()" class="flex-1 text-sm text-ink-secondary underline px-1 py-2">Reset</button>
+              <button type="button" @click="mobileFiltersOpen = false"
+                      class="flex-1 bg-ink text-white text-sm font-medium rounded-md py-2.5 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                Show results
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading state -->
+    <div x-show="loading" class="text-ink-secondary text-sm">Loading institutions&hellip;</div>
+
+    <!-- Results count -->
+    <p x-show="!loading" class="text-sm text-ink-secondary mb-4" x-text="`${filteredBanks.length} institution${filteredBanks.length === 1 ? '' : 's'}`"></p>
+
+    <!-- No results -->
+    <div x-show="!loading && filteredBanks.length === 0" class="text-center py-16 text-ink-secondary">
+      <p class="mb-3">No institutions match those filters.</p>
+      <button type="button" @click="resetFilters()" class="text-sm underline text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Reset filters</button>
+    </div>
+
+    <!-- Grid -->
+    <div x-show="!loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <template x-for="bank in filteredBanks" :key="bank.bank_id">
+        <a :href="`banks/${bank.bank_id}.html`"
+           class="group block border border-border bg-surface rounded-lg p-5 hover:bg-hover transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+          <div class="mb-4">
+            <div class="h-12 rounded-md border border-border bg-white flex items-center px-3 mb-3">
+              <img :src="`assets/logos/${bank.bank_id}.svg`" :alt="`${bank.name} logo`"
+                   class="max-w-full max-h-8 object-contain"
+                   onerror="this.src='assets/logos/_fallback.svg'; this.classList.add('max-h-6')">
+            </div>
+            <h2 class="font-display font-semibold text-ink leading-tight" x-text="bank.name"></h2>
+            <p class="text-xs text-ink-secondary mt-0.5" x-text="typeLabel(bank.type)"></p>
+          </div>
+
+          <template x-if="bank.type !== 'credit_history_bridge'">
+            <div>
+              <div class="flex flex-wrap gap-1.5 mb-4 min-h-[1.5rem]">
+                <template x-for="badge in badgesFor(bank)" :key="badge">
+                  <span class="inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-green-tint text-green-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span x-text="badge"></span>
+                  </span>
+                </template>
+              </div>
+              <div class="text-sm" x-show="representativeFee(bank.bank_id)">
+                <span class="font-mono font-medium" x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).label} from $${representativeFee(bank.bank_id).amount}/mo` : ''"></span>
+                <span class="block text-xs text-ink-placeholder mt-0.5" x-text="representativeFee(bank.bank_id) ? `As of ${representativeFee(bank.bank_id).last_verified_date}` : ''"></span>
+              </div>
+            </div>
+          </template>
+
+          <template x-if="bank.type === 'credit_history_bridge'">
+            <div>
+              <span class="inline-block text-xs font-medium px-2 py-1 rounded-full bg-hover text-ink-secondary mb-3">Not a bank &mdash; credit history service</span>
+              <p class="text-sm text-ink-secondary" x-text="bank.description ? bank.description.slice(0, 90) + '…' : ''"></p>
+            </div>
+          </template>
+        </a>
+      </template>
+    </div>
   </main>
 
   <div id="site-footer"></div>

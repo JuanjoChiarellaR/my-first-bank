@@ -24,7 +24,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/chase.svg",
-    "logo_source": "media.chase.com (JPMorgan Chase Media Center) / Wikimedia Commons",
+    "logo_source": "Wikimedia Commons: File:Chase logo 2007.svg (upload.wikimedia.org/wikipedia/commons/e/ed/Chase_logo_2007.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -53,7 +53,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/bank_of_america.svg",
-    "logo_source": "newsroom.bankofamerica.com (Fast Facts / press page) / Wikimedia Commons",
+    "logo_source": "Wikimedia Commons: File:Bank of America 2018 logo.svg (upload.wikimedia.org/wikipedia/commons/3/34/Bank_of_America_2018_logo.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -82,7 +82,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": false,
     "logo_path": "assets/logos/wells_fargo.svg",
-    "logo_source": "Wikimedia Commons (Wells Fargo logo SVG); no distinct brand-assets press page found",
+    "logo_source": "Wikimedia Commons: File:Wells Fargo Logo (2020).svg (upload.wikimedia.org/wikipedia/commons/e/e2/Wells_Fargo_Logo_(2020).svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -111,7 +111,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/citibank.svg",
-    "logo_source": "Wikimedia Commons (Citibank/Citi logo SVG); citigroup.com newsroom for press-quality assets",
+    "logo_source": "Wikimedia Commons: File:Citi logo March 2023.svg (upload.wikimedia.org/wikipedia/commons/7/73/Citi_logo_March_2023.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -140,7 +140,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/capital_one.svg",
-    "logo_source": "Capital One official Brandfolder (brandfolder.com/capital-one); Wikimedia Commons as fallback",
+    "logo_source": "Wikimedia Commons: File:Capital One logo.svg (upload.wikimedia.org/wikipedia/commons/9/98/Capital_One_logo.svg)",
     "logo_last_verified": "2026-08",
     "notes": "Capital One completed its $35.3B acquisition of Discover Financial Services on 2025-05-18. As of Aug 2026, Discover credit card products continue to be marketed under the separate Discover brand (not renamed to Capital One); account migrations from Discover to Capital One systems began 2026-07-27 and are expected to continue through 2027. Discover-branded products were not included in this research since they remain a distinct product line.",
     "state_coverage_completeness": "exhaustive_fdic"
@@ -170,7 +170,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/us_bank.svg",
-    "logo_source": "usbank.com press/media resources; Wikimedia Commons as fallback",
+    "logo_source": "Wikimedia Commons: File:US Bank logo 2023 color.svg (upload.wikimedia.org/wikipedia/commons/f/ff/US_Bank_logo_2023_color.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -199,7 +199,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/pnc_bank.svg",
-    "logo_source": "PNC Media Room (pnc.mediaroom.com); Wikimedia Commons as fallback",
+    "logo_source": "Wikimedia Commons: File:PNClogo.svg (upload.wikimedia.org/wikipedia/commons/1/1b/PNClogo.svg)",
     "logo_last_verified": "2026-08",
     "notes": "Phone support confirmed as M-F 8am-9pm ET, Sat-Sun 8am-5pm ET (not 24/7).",
     "state_coverage_completeness": "exhaustive_fdic"
@@ -229,7 +229,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/truist.svg",
-    "logo_source": "Truist Newsroom media.truist.com; Wikimedia Commons as fallback",
+    "logo_source": "Wikimedia Commons: File:Truist Financial logo.svg (upload.wikimedia.org/wikipedia/commons/8/8b/Truist_Financial_logo.svg)",
     "logo_last_verified": "2026-08",
     "notes": "Truist Financial Corporation formed 2019-12-06 via merger of BB&T (founded 1872) and SunTrust (founded 1891); 'founded' reflects the Truist entity formation date. General phone support is M-F 8am-8pm ET, Sat 8am-5pm ET; 24/7 support exists only for fraud reporting and tech/app issues, not general customer service. Operates in 17 states plus Washington DC (18 counted here).",
     "state_coverage_completeness": "exhaustive_fdic"
@@ -259,7 +259,7 @@
     "has_product_with_itin": false,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/mt_bank.svg",
-    "logo_source": "newsroom.mtb.com/photos-logos",
+    "logo_source": "Wikimedia Commons: File:M&T Bank wordmark.svg (upload.wikimedia.org/wikipedia/commons/d/d6/M%26T_Bank_wordmark.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -288,7 +288,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/td_bank.svg",
-    "logo_source": "brandcorner.td.com (TD official brand portal); stories.td.com for press assets",
+    "logo_source": "Wikimedia Commons: File:TD Bank.svg (upload.wikimedia.org/wikipedia/commons/1/10/TD_Bank.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -317,7 +317,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": false,
     "logo_path": "assets/logos/hsbc.svg",
-    "logo_source": "hsbc.com/news-and-views/image-and-video-library",
+    "logo_source": "Wikimedia Commons: File:HSBC logo (2018).svg (upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_(2018).svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic"
   },
@@ -346,7 +346,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": false,
     "logo_path": "assets/logos/ally.svg",
-    "logo_source": "media.ally.com (Ally Media Center image library)",
+    "logo_source": "Wikimedia Commons: File:Ally Financial.svg (upload.wikimedia.org/wikipedia/commons/0/00/Ally_Financial.svg)",
     "logo_last_verified": "2026-08",
     "notes": "Ally exited the credit card business (sold to CardWorks/Merrick Bank, rebranded 'Ollo', Jan 2025) \u2014 no longer offers new credit cards, so has no credit_cards.json entry.",
     "state_coverage_completeness": "not_applicable_no_branches"
@@ -376,7 +376,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/zolve.svg",
-    "logo_source": "zolve.com (site header/footer logo; no dedicated public press kit found)",
+    "logo_source": "No public logo asset found on official site or Wikimedia Commons (private fintech, no press kit) \u2014 replaced with a neutral text wordmark matching the site's typography (Inter Tight 600).",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "not_applicable_no_branches"
   },
@@ -405,7 +405,7 @@
     "has_product_with_itin": true,
     "has_product_no_us_credit_history_required": true,
     "logo_path": "assets/logos/firstcard.svg",
-    "logo_source": "firstcard.app (site logo; no dedicated public press kit found)",
+    "logo_source": "No public logo asset found on official site or Wikimedia Commons (private fintech, no press kit) \u2014 replaced with a neutral text wordmark matching the site's typography (Inter Tight 600).",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "not_applicable_no_branches"
   },
@@ -458,7 +458,7 @@
     ],
     "notes": "American Express's partnership with Nova Credit ended in 2025; not all US lenders accept a Nova Credit report.",
     "logo_path": "assets/logos/nova_credit.svg",
-    "logo_source": "novacredit.com/company (site logo; no dedicated public press kit found)",
+    "logo_source": "No public logo asset found on official site or Wikimedia Commons (no press kit) \u2014 replaced with a neutral text wordmark matching the site's typography (Inter Tight 600).",
     "logo_last_verified": "2026-08"
   }
 ]

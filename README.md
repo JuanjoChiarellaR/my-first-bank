@@ -346,7 +346,7 @@ GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks:
 
 1. Scaffold the repo structure and empty data files. *(done)*
 2. Research and populate the full dataset (all 15 institutions, all 3 levels) — flag any field where no reliable source was found rather than guessing. *(done, then backfilled to full personal-product catalogs and exhaustive 51-state coverage after a completeness audit — see [`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md) for sources, method, and known gaps)*
-3. Download/source the 15 official logos, normalize them into the neutral card-token treatment.
+3. Download/source the 15 official logos, normalize them into the neutral card-token treatment. *(done — 12 sourced from Wikimedia Commons, 3 fintechs with no public logo asset got a neutral text wordmark fallback; see [`data/RESEARCH_NOTES.md`](data/RESEARCH_NOTES.md) for exact sources)*
 4. Build Browse Banks (hero + filters + grid) first, since every other page depends on this data being correctly loaded and rendered.
 5. Build Bank Detail pages with the flip-card product sections.
 6. Build Compare.

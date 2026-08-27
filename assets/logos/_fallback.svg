@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60" role="img" aria-label="Institution logo unavailable">
+  <!-- Generic neutral bank glyph used only if a real logo fails to load -->
+  <g fill="none" stroke="#A3A29B" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M8 24 L30 10 L52 24" />
+    <line x1="6" y1="24" x2="54" y2="24" />
+    <line x1="10" y1="24" x2="10" y2="46" />
+    <line x1="20" y1="24" x2="20" y2="46" />
+    <line x1="30" y1="24" x2="30" y2="46" />
+    <line x1="40" y1="24" x2="40" y2="46" />
+    <line x1="50" y1="24" x2="50" y2="46" />
+    <line x1="6" y1="46" x2="54" y2="46" />
+    <line x1="4" y1="50" x2="56" y2="50" />
+  </g>
+</svg>

@@ -120,7 +120,8 @@ Notes:
   "atm_fee_reimbursement": false,
   "debit_card_included": true,
   "zelle_available": true,
-  "accepts_no_ssn": false,
+  "accepts_no_ssn": true,
+  "no_ssn_requirements": ["passport", "F-1 or J-1 visa", "I-20 or DS-2019", "in_person_application_required"],
   "accepts_itin": false,
   "can_open_online": true,
   "requires_branch_visit": false,
@@ -129,7 +130,9 @@ Notes:
 }
 ```
 
-**Savings account fields**: same pattern as checking (`apy_current`, `fdic_insured`, `accepts_no_ssn`, `accepts_itin`, `can_open_online`, `requires_branch_visit`, `last_verified_date`, etc.).
+`no_ssn_requirements` (array of strings, checking/savings only) is populated **only when `accepts_no_ssn` is true** and there's a specific pathway worth describing beyond the boolean — most often a real, narrower pathway than the product's general/standard flow (e.g. international students opening in person with a passport + visa + I-20, distinct from the online flow that requires an SSN). **This never overrides `can_open_online` or `requires_branch_visit`**, which describe the general product — a product can be genuinely online-capable in general while still requiring an in-person visit specifically for the no-SSN pathway; both facts coexist on the same record. See `data/RESEARCH_NOTES.md` → "International-student / visa-holder no-SSN pathway" for the research method and per-institution findings.
+
+**Savings account fields**: same pattern as checking (`apy_current`, `fdic_insured`, `accepts_no_ssn`, `no_ssn_requirements`, `accepts_itin`, `can_open_online`, `requires_branch_visit`, `last_verified_date`, etc.).
 
 **Credit card fields** — include both **eligibility** and **benefits/rewards** as distinct groups (needed for the Compare field selector):
 

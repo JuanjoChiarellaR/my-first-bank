@@ -21,12 +21,18 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "chase.com/personal/checking/total-checking",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "F-1 or J-1 visa",
+      "I-20 or DS-2019",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "bofa_advantage_plus_banking",
@@ -50,12 +56,18 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "bankofamerica.com/deposits/checking/checking-account-advantage-plus-banking/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "F-1 or J-1 visa",
+      "I-20 or DS-2019",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "wells_fargo_everyday_checking",
@@ -80,12 +92,18 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "wellsfargo.com/checking/everyday/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "F-1 or J-1 visa",
+      "I-20 or DS-2019",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "citi_priority_account",
@@ -188,12 +206,17 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "usbank.com/bank-accounts/checking-accounts/bank-smartly-checking.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "I-20",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "pnc_virtual_wallet_spend",
@@ -244,12 +267,16 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": null,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "truist.com/checking/truist-one-checking",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "mt_bank_ezchoice_checking",
@@ -429,12 +456,18 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.chase.com/personal/secure-banking",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "F-1 or J-1 visa",
+      "I-20 or DS-2019",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "chase_private_client_checking",
@@ -511,12 +544,18 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.bankofamerica.com/deposits/checking/safebalance-banking/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "F-1 or J-1 visa",
+      "I-20 or DS-2019",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "wells_fargo_clear_access_banking",
@@ -539,12 +578,18 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.wellsfargo.com/checking/clear-access-banking/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "F-1 or J-1 visa",
+      "I-20 or DS-2019",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "wells_fargo_prime_checking",
@@ -859,12 +904,17 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/content/dam/pnc-com/pdf/personal/Checking/service-charges-standard-checking-A.pdf",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "visa",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "pnc_simple_checking",
@@ -887,12 +937,17 @@
     "atm_fee_reimbursement": false,
     "debit_card_included": true,
     "zelle_available": true,
-    "accepts_no_ssn": false,
+    "accepts_no_ssn": true,
     "accepts_itin": true,
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/checking/simple-checking.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08",
+    "no_ssn_requirements": [
+      "passport",
+      "visa",
+      "in_person_application_required"
+    ]
   },
   {
     "product_id": "truist_confidence_checking",

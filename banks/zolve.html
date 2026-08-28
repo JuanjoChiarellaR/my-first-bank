@@ -245,6 +245,10 @@
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">ATM fee reimbursed</dt><dd class="text-right" x-text="fmtBool(p.atm_fee_reimbursement)"></dd></div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Zelle available</dt><dd class="text-right" x-text="fmtBool(p.zelle_available)"></dd></div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts no SSN</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
+                            <div class="flex justify-between gap-2" x-show="p.no_ssn_requirements && p.no_ssn_requirements.length">
+                              <dt class="text-ink-secondary">Requirements to open without an SSN</dt>
+                              <dd class="text-right" x-text="fmtList(p.no_ssn_requirements)"></dd>
+                            </div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Can open online</dt><dd class="text-right" x-text="fmtBool(p.can_open_online)"></dd></div>
                           </div>
@@ -260,6 +264,10 @@
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts no SSN</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
+                            <div class="flex justify-between gap-2" x-show="p.no_ssn_requirements && p.no_ssn_requirements.length">
+                              <dt class="text-ink-secondary">Requirements to open without an SSN</dt>
+                              <dd class="text-right" x-text="fmtList(p.no_ssn_requirements)"></dd>
+                            </div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
                             <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Can open online</dt><dd class="text-right" x-text="fmtBool(p.can_open_online)"></dd></div>
                           </div>

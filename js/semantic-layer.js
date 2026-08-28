@@ -62,6 +62,7 @@ MFB.dataReady.then(() => {
       monthly_fee_usd: p.monthly_fee_usd,
       apy: p.apy_current ?? p.apy ?? null,
       accepts_no_ssn: p.accepts_no_ssn ?? null,
+      no_ssn_requirements: p.no_ssn_requirements ?? null,
       accepts_itin: p.accepts_itin ?? null,
       can_open_online: p.can_open_online,
       last_verified_date: p.last_verified_date,

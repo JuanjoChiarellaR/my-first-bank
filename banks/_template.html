@@ -183,24 +183,28 @@
                       </button>
 
                       <div class="relative p-5 h-full flex flex-col pointer-events-none">
-                        <h3 class="font-display font-semibold text-ink mb-2" x-text="p.name"></h3>
+                        <h3 class="font-display font-semibold text-ink mb-2 line-clamp-2" x-text="p.name"></h3>
 
-                        <template x-if="type === 'checking'">
-                          <p class="font-mono text-lg" x-text="fmtMoney(p.monthly_fee_usd) + '/mo'"></p>
-                        </template>
-                        <template x-if="type === 'savings'">
-                          <p class="font-mono text-lg" x-text="(p.apy_current ?? 'Not published') + (p.apy_current !== null ? '% APY' : '')"></p>
-                        </template>
-                        <template x-if="type === 'credit_card'">
-                          <p class="font-mono text-lg" x-text="fmtMoney(p.annual_fee_usd) + ' annual fee'"></p>
-                        </template>
+                        <div class="mb-1">
+                          <p class="text-xs text-ink-secondary" x-text="feeLabel(type)"></p>
+                          <p class="font-mono text-lg" x-text="feeValue(type, p)"></p>
+                        </div>
 
-                        <div class="flex flex-wrap gap-1.5 mt-3">
+                        <div class="flex flex-wrap gap-1.5 mt-2">
                           <span x-show="p.accepts_no_ssn" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
                           <span x-show="p.requires_ssn === false" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No SSN needed</span>
                           <span x-show="p.accepts_itin" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">ITIN accepted</span>
                           <span x-show="p.accepts_no_us_credit_history" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No US credit history OK</span>
                         </div>
+
+                        <ul class="mt-2 space-y-1 text-xs text-ink-secondary" x-show="cardHighlights(type, p).length">
+                          <template x-for="line in cardHighlights(type, p)" :key="line">
+                            <li class="flex items-start gap-1.5">
+                              <span class="text-ink-placeholder leading-4">&bull;</span>
+                              <span class="line-clamp-2" x-text="line"></span>
+                            </li>
+                          </template>
+                        </ul>
 
                         <div class="mt-auto pt-3 flex items-end justify-between gap-2">
                           <div class="text-xs text-ink-placeholder">

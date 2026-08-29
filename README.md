@@ -61,6 +61,9 @@ Per institution:
   "has_product_without_ssn": false,
   "has_product_with_itin": true,
   "has_product_no_us_credit_history_required": true,
+  "num_checking_products": 4,
+  "num_savings_products": 2,
+  "num_credit_card_products": 6,
   "logo_path": "assets/logos/chase.svg",
   "logo_source": "chase.com/brand-assets",
   "logo_last_verified": "2026-08",
@@ -70,7 +73,7 @@ Per institution:
 
 Notes:
 - `mobile_app_rating_*` fields are a manual monthly snapshot — not real-time. Track `mobile_app_rating_last_updated`.
-- `has_product_*` flags are **rollups derived from the product level** (level 3) — at least one product of this bank satisfies the condition. Never hardcode these independently of the product data; recompute them from the actual product records to avoid contradictions.
+- `has_product_*` flags and `num_checking_products`/`num_savings_products`/`num_credit_card_products` are **rollups derived from the product level** (level 3) — the `has_product_*` flags mean at least one product of this bank satisfies the condition (checking/savings check `accepts_no_ssn`; credit cards check `requires_ssn === false`, so both must be considered), and the `num_*_products` fields are a straight count of that bank's records in the corresponding product file. Never hand-type these independently of the product data — run `scripts/recompute_rollups.py` after any change to `checking_accounts.json`, `savings_accounts.json`, or `credit_cards.json` to keep them from silently drifting out of sync.
 - `logo_source` is a **required field** for every institution — record where the logo asset actually came from (official brand page, Wikimedia Commons, etc.), alongside `logo_last_verified`.
 - `state_coverage_completeness`: `"exhaustive_fdic"` (every one of the 50 states + DC individually verified against the FDIC API — see Level 2), `"not_applicable_no_branches"` (digital-only/no physical branches, e.g. Ally, Zolve, Firstcard), or `"partial"` (reserved for any future institution researched to a lesser depth — flags that its `locations.json` entry is a sample, not exhaustive). Omitted entirely for Nova Credit (no branch concept applies).
 - **Nova Credit** uses `"type": "credit_history_bridge"` and omits product-related and branch-related fields that don't apply.

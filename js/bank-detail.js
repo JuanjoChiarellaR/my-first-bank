@@ -92,6 +92,59 @@ document.addEventListener("alpine:init", () => {
       return badges;
     },
 
+    // Front-face fee label + value — every real bank product page labels its
+    // headline number (see Phase 8c UX audit); a bare "$5/mo" with no caption
+    // assumes the reader already knows what that number means.
+    feeLabel(type) {
+      if (type === "checking") return "Monthly maintenance fee";
+      if (type === "savings") return "APY";
+      if (type === "credit_card") return "Annual fee";
+      return "";
+    },
+    feeValue(type, p) {
+      if (type === "checking") {
+        const base = this.fmtMoney(p.monthly_fee_usd);
+        if (typeof p.monthly_fee_usd === "number" && p.monthly_fee_usd > 0 &&
+            p.monthly_fee_waiver_conditions && p.monthly_fee_waiver_conditions.length) {
+          return `${base} or $0`;
+        }
+        return p.monthly_fee_usd === 0 ? base : `${base}/mo`;
+      }
+      if (type === "savings") {
+        return p.apy_current !== null && p.apy_current !== undefined ? `${p.apy_current}%` : "Not published";
+      }
+      if (type === "credit_card") {
+        return this.fmtMoney(p.annual_fee_usd);
+      }
+      return "";
+    },
+    // 1-2 short, real highlight lines per product — pulled from data that
+    // already exists (no new research needed), surfaced on the card front so
+    // a user doesn't have to flip every card to see anything beyond the fee.
+    cardHighlights(type, p) {
+      const lines = [];
+      if (type === "checking") {
+        if (typeof p.monthly_fee_usd === "number" && p.monthly_fee_usd > 0 &&
+            p.monthly_fee_waiver_conditions && p.monthly_fee_waiver_conditions.length) {
+          lines.push(`Fee waived: ${MFB.humanizeTag(p.monthly_fee_waiver_conditions[0])}`);
+        }
+        if (p.overdraft_fee_usd === 0) lines.push("No overdraft fee");
+        if (p.zelle_available) lines.push("Zelle included");
+      } else if (type === "savings") {
+        if (typeof p.monthly_fee_usd === "number" && p.monthly_fee_usd > 0 &&
+            p.monthly_fee_waiver_conditions && p.monthly_fee_waiver_conditions.length) {
+          lines.push(`Fee waived: ${MFB.humanizeTag(p.monthly_fee_waiver_conditions[0])}`);
+        }
+        if (p.monthly_fee_usd === 0) lines.push("No monthly fee");
+        if (p.min_balance_required_usd === 0) lines.push("No minimum balance");
+      } else if (type === "credit_card") {
+        if (p.welcome_bonus_description) lines.push(p.welcome_bonus_description);
+        if (p.rewards_rate_description) lines.push(p.rewards_rate_description);
+        if (lines.length < 2 && p.card_benefits && p.card_benefits.length) lines.push(p.card_benefits[0]);
+      }
+      return lines.slice(0, 2);
+    },
+
     fmtMoney(n) {
       if (n === null || n === undefined) return "Not published";
       return n === 0 ? "$0" : `$${n}`;

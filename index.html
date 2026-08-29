@@ -158,12 +158,6 @@
     <!-- Results count -->
     <p x-show="!loading" class="text-sm text-ink-secondary mb-4" x-text="`${filteredBanks.length} institution${filteredBanks.length === 1 ? '' : 's'}`"></p>
 
-    <!-- Compare error banner (neutral treatment — green stays reserved for eligibility signals only) -->
-    <div x-show="compareError" x-cloak class="mb-4 text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 flex items-center justify-between gap-3">
-      <span x-text="compareError"></span>
-      <button type="button" @click="compareError = ''" class="flex-shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm" aria-label="Dismiss">&times;</button>
-    </div>
-
     <!-- No results -->
     <div x-show="!loading && filteredBanks.length === 0" class="text-center py-16 text-ink-secondary">
       <p class="mb-3">No institutions match those filters.</p>
@@ -174,47 +168,53 @@
     <div x-show="!loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <template x-for="bank in filteredBanks" :key="bank.bank_id">
         <a :href="`banks/${bank.bank_id}.html`"
-           class="group block border border-border bg-surface rounded-lg p-5 hover:bg-hover transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+           class="group flex flex-col h-full border border-border bg-surface rounded-lg p-5 hover:bg-hover transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
           <div class="mb-4">
             <div class="h-12 rounded-md border border-border bg-white flex items-center px-3 mb-3">
               <img :src="`assets/logos/${bank.bank_id}.svg`" :alt="`${bank.name} logo`"
                    class="max-w-full max-h-8 object-contain"
                    onerror="this.src='assets/logos/_fallback.svg'; this.classList.add('max-h-6')">
             </div>
-            <h2 class="font-display font-semibold text-ink leading-tight" x-text="bank.name"></h2>
+            <h2 class="font-display font-semibold text-ink leading-tight line-clamp-2 min-h-[2.5rem]" x-text="bank.name"></h2>
             <p class="text-xs text-ink-secondary mt-0.5" x-text="typeLabel(bank.type)"></p>
           </div>
 
           <template x-if="bank.type !== 'credit_history_bridge'">
-            <div>
-              <div class="flex flex-wrap gap-1.5 mb-4 min-h-[1.5rem]">
+            <div class="flex flex-col flex-1">
+              <!-- Reserved 2-line height so 0, 1, 2, or 3 eligibility badges never
+                   shift the footer below it — see Phase 8c card-alignment fix. -->
+              <div class="flex flex-wrap gap-1.5 mb-4 min-h-[3.75rem] content-start">
                 <template x-for="badge in badgesFor(bank)" :key="badge">
-                  <span class="inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-green-tint text-green-text">
+                  <span class="inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full bg-green-tint text-green-text h-fit">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     <span x-text="badge"></span>
                   </span>
                 </template>
               </div>
-              <div class="text-sm flex items-end justify-between gap-2" x-show="representativeFee(bank.bank_id)">
-                <div class="min-w-0">
-                  <span class="font-mono font-medium" x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).label} from $${representativeFee(bank.bank_id).amount}/mo` : ''"></span>
-                  <span class="block text-xs text-ink-placeholder mt-0.5 truncate" x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).name} · As of ${representativeFee(bank.bank_id).last_verified_date}` : ''"></span>
+
+              <!-- Always rendered (never x-show-gated) so every card's footer lands
+                   at the same height regardless of whether a representative fee
+                   was found — see Phase 8c card-alignment fix. -->
+              <div class="mt-auto pt-3 border-t border-border">
+                <div class="flex items-center gap-x-3 gap-y-1 flex-wrap text-xs font-mono text-ink-secondary mb-2">
+                  <span x-text="`Checking · ${bank.num_checking_products ?? 0}`"></span>
+                  <span x-text="`Savings · ${bank.num_savings_products ?? 0}`"></span>
+                  <span x-text="`Credit cards · ${bank.num_credit_card_products ?? 0}`"></span>
                 </div>
-                <button type="button"
-                        @click.prevent.stop="toggleCompare(representativeFee(bank.bank_id).type, representativeFee(bank.bank_id).product_id)"
-                        class="flex-shrink-0 text-xs font-medium border border-border rounded-md px-2 py-1.5 hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                        :class="isInCompare(representativeFee(bank.bank_id)?.product_id) ? 'bg-ink text-white border-ink' : 'bg-surface text-ink'"
-                        :aria-label="representativeFee(bank.bank_id) ? (isInCompare(representativeFee(bank.bank_id).product_id) ? `Remove ${representativeFee(bank.bank_id).name} from comparison` : `Add ${representativeFee(bank.bank_id).name} to comparison`) : ''"
-                        x-text="isInCompare(representativeFee(bank.bank_id)?.product_id) ? '✓ Added' : `+ Compare ${representativeFee(bank.bank_id) ? representativeFee(bank.bank_id).label : ''}`">
-                </button>
+                <div class="text-sm min-w-0">
+                  <span class="font-mono font-medium block"
+                        x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).label} from $${representativeFee(bank.bank_id).amount}/mo` : 'Contact bank for current pricing'"></span>
+                  <span class="block text-xs text-ink-placeholder mt-0.5 truncate"
+                        x-text="representativeFee(bank.bank_id) ? `${representativeFee(bank.bank_id).name} · As of ${representativeFee(bank.bank_id).last_verified_date}` : ''"></span>
+                </div>
               </div>
             </div>
           </template>
 
           <template x-if="bank.type === 'credit_history_bridge'">
-            <div>
-              <span class="inline-block text-xs font-medium px-2 py-1 rounded-full bg-hover text-ink-secondary mb-3">Not a bank &mdash; credit history service</span>
-              <p class="text-sm text-ink-secondary" x-text="bank.description ? bank.description.slice(0, 90) + '…' : ''"></p>
+            <div class="flex flex-col flex-1">
+              <span class="inline-block text-xs font-medium px-2 py-1 rounded-full bg-hover text-ink-secondary mb-3 w-fit">Not a bank &mdash; credit history service</span>
+              <p class="text-sm text-ink-secondary mt-auto" x-text="bank.description ? bank.description.slice(0, 90) + '…' : ''"></p>
             </div>
           </template>
         </a>

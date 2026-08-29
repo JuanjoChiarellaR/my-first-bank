@@ -31,6 +31,13 @@ document.addEventListener("alpine:init", () => {
     banks: [],
     usStates: US_STATES,
     mobileFiltersOpen: false,
+    // MFB.compare lives outside Alpine's reactivity (it's a plain module-level
+    // object in data-loader.js, not part of any x-data), so mutating it never
+    // triggers a re-render on its own — bumping this reactive counter inside
+    // isInCompare()'s dependency read is what makes the "+ Compare" button's
+    // own text actually flip to "✓ Added" in place, instead of only being
+    // correct after a fresh page load. See js/bank-detail.js for the same fix.
+    compareVersion: 0,
 
     filters: {
       productType: "any", // any | checking | savings | credit_card
@@ -42,6 +49,7 @@ document.addEventListener("alpine:init", () => {
       await MFB.dataReady;
       this.banks = MFB.data.banks;
       this.loading = false;
+      MFB.compare.onChange(() => { this.compareVersion++; });
     },
 
     typeLabel(type) {
@@ -63,6 +71,7 @@ document.addEventListener("alpine:init", () => {
     compareError: "",
 
     isInCompare(productId) {
+      void this.compareVersion; // establish an Alpine-tracked dependency — see the comment on compareVersion above
       return MFB.compare.isSelected(productId);
     },
 

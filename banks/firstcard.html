@@ -167,7 +167,7 @@
             <h2 class="font-display text-lg font-semibold mb-4" x-text="productTypeLabel(type)"></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <template x-for="p in products[type]" :key="p.product_id">
-                <div class="flip-card" :class="{ 'is-flipped': isFlipped(p.product_id) }" :style="type === 'credit_card' ? 'height:420px' : 'height:280px'">
+                <div class="flip-card" :class="{ 'is-flipped': isFlipped(p.product_id) }" :style="type === 'credit_card' ? 'height:460px' : 'height:340px'">
                   <div class="flip-card-inner">
 
                     <!-- FRONT -->
@@ -182,8 +182,8 @@
                               :aria-label="`${p.name}. Tap for details.`">
                       </button>
 
-                      <div class="p-5 h-full flex flex-col pointer-events-none">
-                        <h3 class="font-display font-semibold text-ink mb-2 pr-16" x-text="p.name"></h3>
+                      <div class="relative p-5 h-full flex flex-col pointer-events-none">
+                        <h3 class="font-display font-semibold text-ink mb-2" x-text="p.name"></h3>
 
                         <template x-if="type === 'checking'">
                           <p class="font-mono text-lg" x-text="fmtMoney(p.monthly_fee_usd) + '/mo'"></p>
@@ -202,19 +202,20 @@
                           <span x-show="p.accepts_no_us_credit_history" class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-tint text-green-text">No US credit history OK</span>
                         </div>
 
-                        <div class="mt-auto pt-3 text-xs text-ink-placeholder">
-                          <p x-text="`As of ${p.last_verified_date}`"></p>
-                          <p class="mt-1 text-ink-secondary">Tap for details &rarr;</p>
+                        <div class="mt-auto pt-3 flex items-end justify-between gap-2">
+                          <div class="text-xs text-ink-placeholder">
+                            <p x-text="`As of ${p.last_verified_date}`"></p>
+                            <p class="mt-1 text-ink-secondary">Tap for details &rarr;</p>
+                          </div>
+                          <button type="button"
+                                  class="pointer-events-auto flex-shrink-0 text-xs font-medium border border-border rounded-md px-2.5 py-1.5 hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                                  :class="isInCompare(p.product_id) ? 'bg-ink text-white border-ink' : 'bg-surface text-ink'"
+                                  @click.stop="toggleCompare(type, p.product_id)"
+                                  :aria-label="isInCompare(p.product_id) ? `Remove ${p.name} from comparison` : `Add ${p.name} to comparison`">
+                            <span x-text="isInCompare(p.product_id) ? '✓ Comparing' : '+ Compare'"></span>
+                          </button>
                         </div>
                       </div>
-
-                      <button type="button"
-                              class="absolute top-3 right-3 pointer-events-auto text-xs font-medium border border-border rounded-md px-2 py-1.5 hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                              :class="isInCompare(p.product_id) ? 'bg-ink text-white border-ink' : 'bg-surface text-ink'"
-                              @click.stop="toggleCompare(type, p.product_id)"
-                              :aria-label="isInCompare(p.product_id) ? `Remove ${p.name} from comparison` : `Add ${p.name} to comparison`">
-                        <span x-text="isInCompare(p.product_id) ? '✓' : '+'"></span>
-                      </button>
                     </div>
 
                     <!-- BACK -->
@@ -231,62 +232,112 @@
                         </button>
                       </div>
 
-                      <dl class="text-xs space-y-2 flex-1">
+                      <dl class="text-xs flex-1">
                         <!-- Checking fields -->
                         <template x-if="type === 'checking'">
-                          <div class="space-y-2">
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Monthly fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.monthly_fee_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Waived if</dt><dd class="text-right" x-text="fmtList(p.monthly_fee_waiver_conditions)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Interest-bearing</dt><dd class="text-right" x-text="fmtBool(p.interest_bearing)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Overdraft fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.overdraft_fee_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Out-of-network ATM fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.atm_fee_out_of_network_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">ATM fee reimbursed</dt><dd class="text-right" x-text="fmtBool(p.atm_fee_reimbursement)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Zelle available</dt><dd class="text-right" x-text="fmtBool(p.zelle_available)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts no SSN</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
-                            <div class="flex justify-between gap-2" x-show="p.no_ssn_requirements && p.no_ssn_requirements.length">
-                              <dt class="text-ink-secondary">Requirements to open without an SSN</dt>
-                              <dd class="text-right" x-text="fmtList(p.no_ssn_requirements)"></dd>
+                          <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-x-3 gap-y-2">
+                              <div><dt class="text-ink-secondary">Monthly fee</dt><dd class="font-mono" x-text="fmtMoney(p.monthly_fee_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Interest-bearing</dt><dd x-text="fmtBool(p.interest_bearing)"></dd></div>
+                              <div><dt class="text-ink-secondary">Overdraft fee</dt><dd class="font-mono" x-text="fmtMoney(p.overdraft_fee_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Out-of-network ATM fee</dt><dd class="font-mono" x-text="fmtMoney(p.atm_fee_out_of_network_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">ATM fee reimbursed</dt><dd x-text="fmtBool(p.atm_fee_reimbursement)"></dd></div>
+                              <div><dt class="text-ink-secondary">Zelle available</dt><dd x-text="fmtBool(p.zelle_available)"></dd></div>
+                              <div><dt class="text-ink-secondary">Accepts no SSN</dt><dd x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
+                              <div><dt class="text-ink-secondary">Accepts ITIN</dt><dd x-text="fmtBool(p.accepts_itin)"></dd></div>
+                              <div><dt class="text-ink-secondary">Can open online</dt><dd x-text="fmtBool(p.can_open_online)"></dd></div>
                             </div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Can open online</dt><dd class="text-right" x-text="fmtBool(p.can_open_online)"></dd></div>
+                            <div>
+                              <dt class="text-ink-secondary mb-1.5">Fee waived if</dt>
+                              <dd class="flex flex-wrap gap-1.5">
+                                <template x-for="item in fmtList(p.monthly_fee_waiver_conditions)" :key="item">
+                                  <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
+                                </template>
+                                <span x-show="!fmtList(p.monthly_fee_waiver_conditions).length" class="text-ink-placeholder">None listed</span>
+                              </dd>
+                            </div>
+                            <div x-show="p.no_ssn_requirements && p.no_ssn_requirements.length">
+                              <dt class="text-ink-secondary mb-1.5">Requirements to open without an SSN</dt>
+                              <dd class="flex flex-wrap gap-1.5">
+                                <template x-for="item in fmtList(p.no_ssn_requirements)" :key="item">
+                                  <span class="inline-block bg-green-tint text-green-text rounded-full px-2 py-0.5" x-text="item"></span>
+                                </template>
+                              </dd>
+                            </div>
                           </div>
                         </template>
 
                         <!-- Savings fields -->
                         <template x-if="type === 'savings'">
-                          <div class="space-y-2">
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">APY</dt><dd class="font-mono text-right" x-text="p.apy_current !== null ? p.apy_current + '%' : 'Not published'"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">FDIC insured</dt><dd class="text-right" x-text="fmtBool(p.fdic_insured)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Monthly fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.monthly_fee_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Waived if</dt><dd class="text-right" x-text="fmtList(p.monthly_fee_waiver_conditions)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono text-right" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts no SSN</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
-                            <div class="flex justify-between gap-2" x-show="p.no_ssn_requirements && p.no_ssn_requirements.length">
-                              <dt class="text-ink-secondary">Requirements to open without an SSN</dt>
-                              <dd class="text-right" x-text="fmtList(p.no_ssn_requirements)"></dd>
+                          <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-x-3 gap-y-2">
+                              <div><dt class="text-ink-secondary">APY</dt><dd class="font-mono" x-text="p.apy_current !== null ? p.apy_current + '%' : 'Not published'"></dd></div>
+                              <div><dt class="text-ink-secondary">FDIC insured</dt><dd x-text="fmtBool(p.fdic_insured)"></dd></div>
+                              <div><dt class="text-ink-secondary">Monthly fee</dt><dd class="font-mono" x-text="fmtMoney(p.monthly_fee_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Min. opening deposit</dt><dd class="font-mono" x-text="fmtMoney(p.min_opening_deposit_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Min. balance required</dt><dd class="font-mono" x-text="fmtMoney(p.min_balance_required_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">Accepts no SSN</dt><dd x-text="fmtBool(p.accepts_no_ssn)"></dd></div>
+                              <div><dt class="text-ink-secondary">Accepts ITIN</dt><dd x-text="fmtBool(p.accepts_itin)"></dd></div>
+                              <div><dt class="text-ink-secondary">Can open online</dt><dd x-text="fmtBool(p.can_open_online)"></dd></div>
                             </div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Can open online</dt><dd class="text-right" x-text="fmtBool(p.can_open_online)"></dd></div>
+                            <div>
+                              <dt class="text-ink-secondary mb-1.5">Fee waived if</dt>
+                              <dd class="flex flex-wrap gap-1.5">
+                                <template x-for="item in fmtList(p.monthly_fee_waiver_conditions)" :key="item">
+                                  <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
+                                </template>
+                                <span x-show="!fmtList(p.monthly_fee_waiver_conditions).length" class="text-ink-placeholder">None listed</span>
+                              </dd>
+                            </div>
+                            <div x-show="p.no_ssn_requirements && p.no_ssn_requirements.length">
+                              <dt class="text-ink-secondary mb-1.5">Requirements to open without an SSN</dt>
+                              <dd class="flex flex-wrap gap-1.5">
+                                <template x-for="item in fmtList(p.no_ssn_requirements)" :key="item">
+                                  <span class="inline-block bg-green-tint text-green-text rounded-full px-2 py-0.5" x-text="item"></span>
+                                </template>
+                              </dd>
+                            </div>
                           </div>
                         </template>
 
                         <!-- Credit card fields -->
                         <template x-if="type === 'credit_card'">
-                          <div class="space-y-2">
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Annual fee</dt><dd class="font-mono text-right" x-text="fmtMoney(p.annual_fee_usd)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">APR range</dt><dd class="font-mono text-right" x-text="(p.apr_regular_min ?? '?') + '–' + (p.apr_regular_max ?? '?') + '%'"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Foreign transaction fee</dt><dd class="font-mono text-right" x-text="fmtPct(p.foreign_transaction_fee_pct)"></dd></div>
-                            <div><dt class="text-ink-secondary mb-1">Eligibility</dt><dd x-text="fmtList(p.eligibility_requirements)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Requires SSN</dt><dd class="text-right" x-text="fmtBool(p.requires_ssn)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Accepts ITIN</dt><dd class="text-right" x-text="fmtBool(p.accepts_itin)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">No US credit history OK</dt><dd class="text-right" x-text="fmtBool(p.accepts_no_us_credit_history)"></dd></div>
-                            <div class="flex justify-between gap-2"><dt class="text-ink-secondary">Reports to bureaus</dt><dd class="text-right" x-text="[p.reports_to_equifax && 'Equifax', p.reports_to_experian && 'Experian', p.reports_to_transunion && 'TransUnion'].filter(Boolean).join(', ') || 'Not published'"></dd></div>
-                            <div><dt class="text-ink-secondary mb-1">Rewards</dt><dd x-text="p.rewards_rate_description || 'None'"></dd></div>
-                            <div><dt class="text-ink-secondary mb-1">Benefits</dt><dd x-text="fmtList(p.card_benefits)"></dd></div>
-                            <div x-show="p.welcome_bonus_description"><dt class="text-ink-secondary mb-1">Welcome bonus</dt><dd x-text="p.welcome_bonus_description"></dd></div>
+                          <div class="space-y-3">
+                            <div class="grid grid-cols-2 gap-x-3 gap-y-2">
+                              <div><dt class="text-ink-secondary">Annual fee</dt><dd class="font-mono" x-text="fmtMoney(p.annual_fee_usd)"></dd></div>
+                              <div><dt class="text-ink-secondary">APR range</dt><dd class="font-mono" x-text="(p.apr_regular_min ?? '?') + '–' + (p.apr_regular_max ?? '?') + '%'"></dd></div>
+                              <div><dt class="text-ink-secondary">Foreign transaction fee</dt><dd class="font-mono" x-text="fmtPct(p.foreign_transaction_fee_pct)"></dd></div>
+                              <div><dt class="text-ink-secondary">Requires SSN</dt><dd x-text="fmtBool(p.requires_ssn)"></dd></div>
+                              <div><dt class="text-ink-secondary">Accepts ITIN</dt><dd x-text="fmtBool(p.accepts_itin)"></dd></div>
+                              <div><dt class="text-ink-secondary">No US credit history OK</dt><dd x-text="fmtBool(p.accepts_no_us_credit_history)"></dd></div>
+                              <div class="col-span-2"><dt class="text-ink-secondary">Reports to bureaus</dt><dd x-text="[p.reports_to_equifax && 'Equifax', p.reports_to_experian && 'Experian', p.reports_to_transunion && 'TransUnion'].filter(Boolean).join(', ') || 'Not published'"></dd></div>
+                            </div>
+                            <div>
+                              <dt class="text-ink-secondary mb-1.5">Eligibility</dt>
+                              <dd class="flex flex-wrap gap-1.5">
+                                <template x-for="item in fmtList(p.eligibility_requirements)" :key="item">
+                                  <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
+                                </template>
+                              </dd>
+                            </div>
+                            <div>
+                              <dt class="text-ink-secondary mb-1">Rewards</dt>
+                              <dd x-text="p.rewards_rate_description || 'None'"></dd>
+                            </div>
+                            <div>
+                              <dt class="text-ink-secondary mb-1.5">Benefits</dt>
+                              <dd class="flex flex-wrap gap-1.5">
+                                <template x-for="item in fmtList(p.card_benefits)" :key="item">
+                                  <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
+                                </template>
+                              </dd>
+                            </div>
+                            <div x-show="p.welcome_bonus_description">
+                              <dt class="text-ink-secondary mb-1">Welcome bonus</dt>
+                              <dd x-text="p.welcome_bonus_description"></dd>
+                            </div>
                           </div>
                         </template>
                       </dl>

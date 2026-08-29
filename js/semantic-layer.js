@@ -60,9 +60,15 @@ MFB.dataReady.then(() => {
       product_id: p.product_id,
       name: p.name,
       monthly_fee_usd: p.monthly_fee_usd,
+      // monthly_fee_waiver_conditions / no_ssn_requirements are stored as
+      // machine-friendly snake_case tags in the source JSON — humanized here
+      // so the agent's context already reads as natural language, since
+      // nothing instructs the model to reformat tags itself. See
+      // data-loader.js's MFB.humanizeList (shared with the static pages).
+      monthly_fee_waiver_conditions: MFB.humanizeList(p.monthly_fee_waiver_conditions),
       apy: p.apy_current ?? p.apy ?? null,
       accepts_no_ssn: p.accepts_no_ssn ?? null,
-      no_ssn_requirements: p.no_ssn_requirements ?? null,
+      no_ssn_requirements: p.no_ssn_requirements ? MFB.humanizeList(p.no_ssn_requirements) : null,
       accepts_itin: p.accepts_itin ?? null,
       can_open_online: p.can_open_online,
       last_verified_date: p.last_verified_date,

@@ -60,6 +60,15 @@ body {
 }
 .flip-card-back {
   transform: rotateY(180deg);
+  /* Permanent bottom fade so a scrollable back face never looks like it just
+     hard-cuts off with no signal that there's more content below — the
+     alternative (JS-computed, only-when-overflowing) needs the exact
+     scrollHeight/clientHeight check the product-audit already relies on to
+     detect overflow; a static mask is simpler and never wrong in the
+     direction that matters (it can only ever suggest scrolling is possible
+     when the card is already full, never hide real content). */
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
+  mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
 }
 
 /* Respect the OS-level reduced-motion preference everywhere, not just page transitions. */

@@ -23,6 +23,11 @@ document.addEventListener("alpine:init", () => {
     products: { checking: [], savings: [], credit_card: [] },
     loading: true,
     flipped: {},
+    // See js/app.js's identical compareVersion comment — MFB.compare isn't
+    // Alpine-reactive, so this bridges its onChange callback into a tracked
+    // property that isInCompare() reads, making the "+ Compare" button's own
+    // text update in place instead of only being correct after a reload.
+    compareVersion: 0,
 
     async init() {
       this.bankId = location.pathname.split("/").pop().replace(".html", "");
@@ -35,6 +40,7 @@ document.addEventListener("alpine:init", () => {
         this.notFound = true;
       }
       this.loading = false;
+      MFB.compare.onChange(() => { this.compareVersion++; });
     },
 
     typeLabel(type) {
@@ -53,6 +59,7 @@ document.addEventListener("alpine:init", () => {
 
     compareError: "",
     isInCompare(productId) {
+      void this.compareVersion; // establish an Alpine-tracked dependency
       return MFB.compare.isSelected(productId);
     },
     toggleCompare(productType, productId) {
@@ -97,9 +104,16 @@ document.addEventListener("alpine:init", () => {
       if (b === null || b === undefined) return "Not published";
       return b ? "Yes" : "No";
     },
+    // Returns an array (not a joined string) so the template can render a
+    // proper wrapped chip/bullet list instead of squeezing a comma-string
+    // into a narrow right-aligned column. Values that are known tags
+    // (monthly_fee_waiver_conditions, no_ssn_requirements) are humanized;
+    // values that are already natural language (eligibility_requirements,
+    // card_benefits, country names, etc.) pass through unchanged since
+    // humanizeTag only rewrites known snake_case tags.
     fmtList(arr) {
-      if (!arr || arr.length === 0) return "None listed";
-      return arr.join(", ");
+      if (!arr || arr.length === 0) return [];
+      return MFB.humanizeList(arr);
     },
   }));
 });

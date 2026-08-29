@@ -85,7 +85,15 @@ function formatValue(fmt, value, product) {
     case "money": return value === 0 ? "$0" : `$${value}`;
     case "pct": return `${value}%`;
     case "bool": return value ? "Yes" : "No";
-    case "list": return Array.isArray(value) && value.length ? value.join(", ") : "None listed";
+    // Humanized (not raw .join) — same tag dictionary the static pages and
+    // the agent's semantic layer use, so "Fee waived if" never regresses to
+    // snake_case tags here even though the other list fields (eligibility
+    // requirements, benefits) are already natural language and pass through
+    // MFB.humanizeTag unchanged.
+    case "list": {
+      const list = MFB.humanizeList(value);
+      return list.length ? list.join(", ") : "None listed";
+    }
     case "text": return value || "Not published";
     default: return String(value);
   }
@@ -148,6 +156,13 @@ document.addEventListener("alpine:init", () => {
 
     cellValue(field, product) {
       return formatValue(field.fmt, product[field.key], product);
+    },
+
+    // For "list" fields, the table renders wrapped chips instead of a
+    // comma-joined string — same humanizer as Bank Detail, so a "Fee waived
+    // if" cell reads as real phrases, not tags.
+    cellList(field, product) {
+      return MFB.humanizeList(product[field.key]);
     },
 
     removeProduct(productId) {

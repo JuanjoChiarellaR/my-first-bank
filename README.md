@@ -67,7 +67,12 @@ Per institution:
   "logo_path": "assets/logos/chase.svg",
   "logo_source": "chase.com/brand-assets",
   "logo_last_verified": "2026-08",
-  "state_coverage_completeness": "exhaustive_fdic"
+  "state_coverage_completeness": "exhaustive_fdic",
+  "relationship_programs": [],
+  "referral_program": {
+    "terms": [{ "applies_to": ["checking"], "reward_description": "...", "official_url": "https://..." }],
+    "last_verified_date": "2026-08-29"
+  }
 }
 ```
 
@@ -77,6 +82,8 @@ Notes:
 - `logo_source` is a **required field** for every institution — record where the logo asset actually came from (official brand page, Wikimedia Commons, etc.), alongside `logo_last_verified`.
 - `state_coverage_completeness`: `"exhaustive_fdic"` (every one of the 50 states + DC individually verified against the FDIC API — see Level 2), `"not_applicable_no_branches"` (digital-only/no physical branches, e.g. Ally, Zolve, Firstcard), or `"partial"` (reserved for any future institution researched to a lesser depth — flags that its `locations.json` entry is a sample, not exhaustive). Omitted entirely for Nova Credit (no branch concept applies).
 - **Nova Credit** uses `"type": "credit_history_bridge"` and omits product-related and branch-related fields that don't apply.
+- `relationship_programs` is an **array**, not a nullable single object — a bank can have zero, one, or (in principle) several bank-wide relationship/rewards tier programs. `[]` means genuinely confirmed absent, not unresearched. See `data/RESEARCH_NOTES.md`'s "Relationship programs, referral programs, and welcome bonuses" section for the full field shape, which 6 of 15 institutions actually have one, and why Chase deliberately gets `[]` rather than a synthesized program name.
+- `referral_program` is normally a single nullable object with a `terms` array (multiple entries only when one program pays a different amount per product type). **Chase is an exception**: its `referral_program` is an array of two separate objects, because it genuinely runs two independently-administered referral programs (checking vs. credit card). Any code reading this field must check whether it's an array before treating it as one object — this is intentional, not a bug.
 
 ### Level 2 — `data/locations.json`
 
@@ -128,6 +135,7 @@ Notes:
   "accepts_itin": false,
   "can_open_online": true,
   "requires_branch_visit": false,
+  "welcome_bonus_description": "Earn a $400 bonus by opening a new Chase Total Checking account and completing $1,000+ in qualifying direct deposits within 90 days. Offer through 2026-10-14.",
   "product_url": "chase.com/checking/total-checking",
   "last_verified_date": "2026-08"
 }
@@ -135,7 +143,9 @@ Notes:
 
 `no_ssn_requirements` (array of strings, checking/savings only) is populated **only when `accepts_no_ssn` is true** and there's a specific pathway worth describing beyond the boolean — most often a real, narrower pathway than the product's general/standard flow (e.g. international students opening in person with a passport + visa + I-20, distinct from the online flow that requires an SSN). **This never overrides `can_open_online` or `requires_branch_visit`**, which describe the general product — a product can be genuinely online-capable in general while still requiring an in-person visit specifically for the no-SSN pathway; both facts coexist on the same record. See `data/RESEARCH_NOTES.md` → "International-student / visa-holder no-SSN pathway" for the research method and per-institution findings.
 
-**Savings account fields**: same pattern as checking (`apy_current`, `fdic_insured`, `accepts_no_ssn`, `no_ssn_requirements`, `accepts_itin`, `can_open_online`, `requires_branch_visit`, `last_verified_date`, etc.).
+`welcome_bonus_description` (string or `null`, checking/savings — mirrors the field that already existed on credit cards) is the **most time-sensitive field in the dataset**: these are promotional account-opening offers that rotate every few months, so the expiration date is written directly into the text rather than tracked as a separate field. Re-verify these first on any data refresh — see `data/RESEARCH_NOTES.md` → "Relationship programs, referral programs, and welcome bonuses."
+
+**Savings account fields**: same pattern as checking (`apy_current`, `fdic_insured`, `accepts_no_ssn`, `no_ssn_requirements`, `accepts_itin`, `can_open_online`, `requires_branch_visit`, `welcome_bonus_description`, `last_verified_date`, etc.).
 
 **Credit card fields** — include both **eligibility** and **benefits/rewards** as distinct groups (needed for the Compare field selector):
 

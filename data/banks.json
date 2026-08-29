@@ -29,7 +29,34 @@
     "logo_path": "assets/logos/chase.svg",
     "logo_source": "Wikimedia Commons: File:Chase logo 2007.svg (upload.wikimedia.org/wikipedia/commons/e/ed/Chase_logo_2007.svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [],
+    "referral_program": [
+      {
+        "terms": [
+          {
+            "applies_to": [
+              "checking"
+            ],
+            "reward_description": "Earn $50 for each friend who opens a qualifying Chase personal checking account using your referral link; capped at 10 referrals ($500) per calendar year. Bonus posts roughly 30 days after the referral opens the account and meets requirements.",
+            "official_url": "https://accounts.chase.com/raf/landing"
+          }
+        ],
+        "last_verified_date": "2026-08-29"
+      },
+      {
+        "terms": [
+          {
+            "applies_to": [
+              "credit_card"
+            ],
+            "reward_description": "Separate, card-specific referral bonuses for eligible Chase credit cards (e.g. cash back for Freedom-family cards, points/miles for Sapphire, Southwest, United, or Marriott Bonvoy cards) -- exact eligible bonuses vary by logged-in cardholder. Bonus posts up to 8 weeks after the referred applicant is approved.",
+            "official_url": "https://creditcards.chase.com/refer-a-friend"
+          }
+        ],
+        "last_verified_date": "2026-08-29"
+      }
+    ]
   },
   {
     "bank_id": "bank_of_america",
@@ -61,7 +88,70 @@
     "logo_path": "assets/logos/bank_of_america.svg",
     "logo_source": "Wikimedia Commons: File:Bank of America 2018 logo.svg (upload.wikimedia.org/wikipedia/commons/3/34/Bank_of_America_2018_logo.svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [
+      {
+        "name": "BofA Rewards",
+        "description": "Tiered benefits program based on 3-month average combined balance across linked Bank of America banking and Merrill investment accounts; open to anyone with a BofA personal checking account, no minimum balance required to join at the base tier. Replaced the previous \"Preferred Rewards\" branding in May 2026.",
+        "qualification_basis": "combined_balance_across_linked_accounts",
+        "tiers": [
+          {
+            "name": "Member",
+            "qualifying_balance_usd": 0,
+            "key_benefits": [
+              "10% credit card rewards boost",
+              "Cash back deals from 15,000+ brands",
+              "Auto/home loan discounts"
+            ]
+          },
+          {
+            "name": "Preferred Plus",
+            "qualifying_balance_usd": 30000,
+            "key_benefits": [
+              "25% credit card rewards boost",
+              "Waived fees on eligible accounts"
+            ]
+          },
+          {
+            "name": "Preferred Honors",
+            "qualifying_balance_usd": 100000,
+            "key_benefits": [
+              "50% credit card rewards boost",
+              "Up to $96/year subscription reimbursement"
+            ]
+          },
+          {
+            "name": "Premier",
+            "qualifying_balance_usd": 1000000,
+            "key_benefits": [
+              "75% credit card rewards boost",
+              "Up to $180/year subscription reimbursement",
+              "Premium travel/dining/lifestyle benefits"
+            ]
+          }
+        ],
+        "applies_to_product_ids": null,
+        "applies_to_product_types": [
+          "checking",
+          "savings",
+          "credit_card"
+        ],
+        "official_url": "https://info.bankofamerica.com/en/bofa-rewards",
+        "last_verified_date": "2026-08-29"
+      }
+    ],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "credit_card"
+          ],
+          "reward_description": "Earn $100 cash back for each friend approved for an eligible Bank of America credit card via your referral link, up to 5 referrals ($500) per calendar year. Currently limited to select cards (e.g. Unlimited Cash Rewards, Customized Cash Rewards); program is targeted and not available to all cardholders. No checking/savings referral program found. Bonus posts roughly 60 days after referral approval.",
+          "official_url": "https://www.bankofamerica.com"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "wells_fargo",
@@ -93,7 +183,9 @@
     "logo_path": "assets/logos/wells_fargo.svg",
     "logo_source": "Wikimedia Commons: File:Wells Fargo Logo (2020).svg (upload.wikimedia.org/wikipedia/commons/e/e2/Wells_Fargo_Logo_(2020).svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [],
+    "referral_program": null
   },
   {
     "bank_id": "citibank",
@@ -125,7 +217,66 @@
     "logo_path": "assets/logos/citibank.svg",
     "logo_source": "Wikimedia Commons: File:Citi logo March 2023.svg (upload.wikimedia.org/wikipedia/commons/7/73/Citi_logo_March_2023.svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [
+      {
+        "name": "Citi Relationship Tiers",
+        "description": "Tiered banking relationship program based on combined average monthly balance across linked checking, savings, and investment accounts; immediate family balances can combine to qualify faster.",
+        "qualification_basis": "combined_balance_across_linked_accounts",
+        "tiers": [
+          {
+            "name": "Citi Priority",
+            "qualifying_balance_usd": 30000,
+            "key_benefits": [
+              "Waived monthly fee",
+              "Preferred rates",
+              "No-fee wires (select)"
+            ]
+          },
+          {
+            "name": "Citigold",
+            "qualifying_balance_usd": 200000,
+            "key_benefits": [
+              "Waived online wire fees",
+              "Unlimited non-Citi ATM fee reimbursement worldwide",
+              "Priority service"
+            ]
+          },
+          {
+            "name": "Citigold Private Client",
+            "qualifying_balance_usd": 1000000,
+            "key_benefits": [
+              "Dedicated wealth relationship team",
+              "Top-tier concierge/travel benefits",
+              "All Citigold benefits"
+            ]
+          }
+        ],
+        "applies_to_product_ids": [
+          "citi_priority_account",
+          "citi_citigold_checking",
+          "citi_citigold_private_client_checking"
+        ],
+        "applies_to_product_types": [
+          "checking",
+          "savings"
+        ],
+        "official_url": "https://www.citi.com/banking/citigold",
+        "last_verified_date": "2026-08-29"
+      }
+    ],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "checking"
+          ],
+          "reward_description": "Refer new-to-Citi friends or family to open an eligible Citibank checking account; earn $200 per qualified referral (up to $500 per referral for Citigold Private Client members), capped at 20 referrals per customer. Reward scales with the referrer's own relationship tier, not with which product is referred. Bonus paid roughly 90 days after the referred account opens.",
+          "official_url": "https://www.citi.com/banking/special-offers"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "capital_one",
@@ -158,7 +309,20 @@
     "logo_source": "Wikimedia Commons: File:Capital One logo.svg (upload.wikimedia.org/wikipedia/commons/9/98/Capital_One_logo.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic",
-    "notes": "Capital One completed its $35.3B acquisition of Discover Financial Services on 2025-05-18. As of Aug 2026, Discover credit card products continue to be marketed under the separate Discover brand (not renamed to Capital One); account migrations from Discover to Capital One systems began 2026-07-27 and are expected to continue through 2027. Discover-branded products were not included in this research since they remain a distinct product line."
+    "notes": "Capital One completed its $35.3B acquisition of Discover Financial Services on 2025-05-18. As of Aug 2026, Discover credit card products continue to be marketed under the separate Discover brand (not renamed to Capital One); account migrations from Discover to Capital One systems began 2026-07-27 and are expected to continue through 2027. Discover-branded products were not included in this research since they remain a distinct product line.",
+    "relationship_programs": [],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "credit_card"
+          ],
+          "reward_description": "Refer a friend for an eligible Capital One credit card; reward amount varies by card (historically around $50 per successful referral), capped around $500/year. No current Capital One 360 checking/savings referral program was confirmed -- available evidence indicates that program ended around January 2023.",
+          "official_url": "https://www.capitalone.com"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "us_bank",
@@ -190,7 +354,70 @@
     "logo_path": "assets/logos/us_bank.svg",
     "logo_source": "Wikimedia Commons: File:US Bank logo 2023 color.svg (upload.wikimedia.org/wikipedia/commons/f/ff/US_Bank_logo_2023_color.svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [
+      {
+        "name": "U.S. Bank Smart Rewards",
+        "description": "Tiered benefits program auto-enrolling checking/savings customers based on Combined Qualifying Balance across eligible checking, savings, money market, CD, IRA, personal trust, and brokerage accounts.",
+        "qualification_basis": "combined_balance_across_linked_accounts",
+        "tiers": [
+          {
+            "name": "Bronze",
+            "qualifying_balance_usd": 0,
+            "key_benefits": [
+              "Monthly fee waived first 2 statement periods",
+              "2 non-U.S. Bank ATM fee waivers",
+              "Overdraft transfer fee waivers"
+            ]
+          },
+          {
+            "name": "Silver",
+            "qualifying_balance_usd": 5000,
+            "key_benefits": [
+              "All Bronze benefits",
+              "Enhanced savings rate"
+            ]
+          },
+          {
+            "name": "Gold",
+            "qualifying_balance_usd": 25000,
+            "key_benefits": [
+              "0.50% off home equity/personal loans",
+              "Commission-free trades via U.S. Bancorp Advisors"
+            ]
+          },
+          {
+            "name": "Platinum",
+            "qualifying_balance_usd": 50000,
+            "key_benefits": [
+              "Up to $750 mortgage closing-cost credit",
+              "Higher savings rate bonus"
+            ]
+          },
+          {
+            "name": "Platinum Plus",
+            "qualifying_balance_usd": 100000,
+            "key_benefits": [
+              "Top-tier savings rate bonus",
+              "Full loan/mortgage benefit suite"
+            ]
+          }
+        ],
+        "applies_to_product_ids": [
+          "us_bank_smartly_checking",
+          "us_bank_platinum_checking",
+          "us_bank_smartly_savings",
+          "us_bank_elite_money_market"
+        ],
+        "applies_to_product_types": [
+          "checking",
+          "savings"
+        ],
+        "official_url": "https://www.usbank.com/bank-accounts/checking-accounts/smart-rewards.html",
+        "last_verified_date": "2026-08-29"
+      }
+    ],
+    "referral_program": null
   },
   {
     "bank_id": "pnc_bank",
@@ -223,7 +450,52 @@
     "logo_source": "Wikimedia Commons: File:PNClogo.svg (upload.wikimedia.org/wikipedia/commons/1/1b/PNClogo.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic",
-    "notes": "Phone support confirmed as M-F 8am-9pm ET, Sat-Sun 8am-5pm ET (not 24/7)."
+    "notes": "Phone support confirmed as M-F 8am-9pm ET, Sat-Sun 8am-5pm ET (not 24/7).",
+    "relationship_programs": [
+      {
+        "name": "PNC TotalRewards",
+        "description": "Relationship rewards program launched April 7, 2026, unlocking boosted credit card cashback, lending cash rewards, and elevated savings rates based on 90-day Average Eligible Balance across deposit and investment accounts. No enrollment fee; tiers auto-advance as balances grow.",
+        "qualification_basis": "combined_balance_across_linked_accounts",
+        "tiers": [
+          {
+            "name": "Silver",
+            "qualifying_balance_usd": 25000,
+            "key_benefits": [
+              "5% credit card rewards boost",
+              "10% savings rate boost",
+              "Cash rewards on eligible lending products"
+            ]
+          },
+          {
+            "name": "Gold",
+            "qualifying_balance_usd": 100000,
+            "key_benefits": [
+              "25% credit card rewards boost",
+              "Priority Care Center access",
+              "Elevated savings rate boost"
+            ]
+          },
+          {
+            "name": "Platinum",
+            "qualifying_balance_usd": 500000,
+            "key_benefits": [
+              "35% credit card rewards boost",
+              "Concierge Care Center access",
+              "Top savings rate boost"
+            ]
+          }
+        ],
+        "applies_to_product_ids": null,
+        "applies_to_product_types": [
+          "checking",
+          "savings",
+          "credit_card"
+        ],
+        "official_url": "https://www.pnc.com/en/personal-banking/totalrewards/reward-details.html",
+        "last_verified_date": "2026-08-29"
+      }
+    ],
+    "referral_program": null
   },
   {
     "bank_id": "truist",
@@ -256,7 +528,69 @@
     "logo_source": "Wikimedia Commons: File:Truist Financial logo.svg (upload.wikimedia.org/wikipedia/commons/8/8b/Truist_Financial_logo.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "exhaustive_fdic",
-    "notes": "Truist Financial Corporation formed 2019-12-06 via merger of BB&T (founded 1872) and SunTrust (founded 1891); 'founded' reflects the Truist entity formation date. General phone support is M-F 8am-8pm ET, Sat 8am-5pm ET; 24/7 support exists only for fraud reporting and tech/app issues, not general customer service. Operates in 17 states plus Washington DC (18 counted here)."
+    "notes": "Truist Financial Corporation formed 2019-12-06 via merger of BB&T (founded 1872) and SunTrust (founded 1891); 'founded' reflects the Truist entity formation date. General phone support is M-F 8am-8pm ET, Sat 8am-5pm ET; 24/7 support exists only for fraud reporting and tech/app issues, not general customer service. Operates in 17 states plus Washington DC (18 counted here).",
+    "relationship_programs": [
+      {
+        "name": "Truist One Checking Rewards",
+        "description": "Balance-tiered benefits built directly into Truist One Checking (not separately branded), scaling ATM fee waivers and free linked accounts, plus a \"Loyalty Cash Bonus\" percentage on eligible credit card rewards redeemed into a Truist deposit account.",
+        "qualification_basis": "combined_balance_across_linked_accounts",
+        "tiers": [
+          {
+            "name": "Level 1",
+            "qualifying_balance_usd": 0,
+            "key_benefits": [
+              "10% Loyalty Cash Bonus on card rewards",
+              "1 no-fee Truist One Savings account"
+            ]
+          },
+          {
+            "name": "Level 2",
+            "qualifying_balance_usd": 10000,
+            "key_benefits": [
+              "20% Loyalty Cash Bonus",
+              "1 non-Truist ATM fee waiver/month",
+              "1 additional no-fee checking account"
+            ]
+          },
+          {
+            "name": "Level 3",
+            "qualifying_balance_usd": 25000,
+            "key_benefits": [
+              "30% Loyalty Cash Bonus",
+              "3 monthly ATM fee waivers",
+              "2 additional no-fee checking accounts"
+            ]
+          },
+          {
+            "name": "Level 4",
+            "qualifying_balance_usd": 50000,
+            "key_benefits": [
+              "40% Loyalty Cash Bonus",
+              "5 monthly ATM fee waivers",
+              "3 additional no-fee checking accounts"
+            ]
+          },
+          {
+            "name": "Premier",
+            "qualifying_balance_usd": 100000,
+            "key_benefits": [
+              "50% Loyalty Cash Bonus",
+              "Unlimited ATM fee waivers",
+              "Unlimited no-fee checking/savings accounts"
+            ]
+          }
+        ],
+        "applies_to_product_ids": [
+          "truist_one_checking"
+        ],
+        "applies_to_product_types": [
+          "checking"
+        ],
+        "official_url": "https://www.truist.com/checking/rewards-and-benefits",
+        "last_verified_date": "2026-08-29"
+      }
+    ],
+    "referral_program": null
   },
   {
     "bank_id": "mt_bank",
@@ -288,7 +622,20 @@
     "logo_path": "assets/logos/mt_bank.svg",
     "logo_source": "Wikimedia Commons: File:M&T Bank wordmark.svg (upload.wikimedia.org/wikipedia/commons/d/d6/M%26T_Bank_wordmark.svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "checking"
+          ],
+          "reward_description": "Refer a friend who opens an eligible M&T personal checking account (MyWay Banking, EZChoice, or MyChoice Plus) and completes $500+ in qualifying direct deposits within 90 days: both you and your friend receive a $50 Visa Reward Card. Referrer capped at $500/year (10 referrals). Savings accounts and credit cards do not qualify.",
+          "official_url": "https://www.mtb.com/referfriends"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "td_bank",
@@ -320,7 +667,20 @@
     "logo_path": "assets/logos/td_bank.svg",
     "logo_source": "Wikimedia Commons: File:TD Bank.svg (upload.wikimedia.org/wikipedia/commons/1/10/TD_Bank.svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "checking"
+          ],
+          "reward_description": "\"Share the Green\": refer a friend to open a TD personal checking account using your personal referral code. When your friend receives a $250+ qualifying direct deposit or makes 15 qualifying debit card purchases within 60 days, you both receive $100. Referrer capped at 10 referrals/calendar year ($1,000 total); paid within 95 days of account opening.",
+          "official_url": "https://www.td.com/us/en/personal-banking/share-the-green"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "hsbc",
@@ -352,7 +712,37 @@
     "logo_path": "assets/logos/hsbc.svg",
     "logo_source": "Wikimedia Commons: File:HSBC logo (2018).svg (upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_(2018).svg)",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "exhaustive_fdic"
+    "state_coverage_completeness": "exhaustive_fdic",
+    "relationship_programs": [
+      {
+        "name": "HSBC Premier",
+        "description": "HSBC's relationship banking tier, unlocked by maintaining $100,000+ in combined US deposit/investment balances (or $5,000+ monthly direct deposit, an HSBC US mortgage, or Private Banking status). Bundles a dedicated Wealth Relationship Manager, personalized financial planning, no foreign transaction fees, international account access/support, and extends benefits to up to 4 family members at the same address.",
+        "qualification_basis": "combined_balance_across_linked_accounts",
+        "tiers": [
+          {
+            "name": "Premier",
+            "qualifying_balance_usd": 100000,
+            "key_benefits": [
+              "Dedicated Wealth Relationship Manager",
+              "No foreign transaction fees on debit card",
+              "International HSBC account access/support",
+              "Extends to up to 4 family members at the same address",
+              "Preferential savings rate (Premier Relationship Savings)"
+            ]
+          }
+        ],
+        "applies_to_product_ids": [
+          "hsbc_premier_checking",
+          "hsbc_premier_savings",
+          "hsbc_premier_relationship_savings",
+          "hsbc_premier_world_mastercard"
+        ],
+        "applies_to_product_types": null,
+        "official_url": "https://www.us.hsbc.com/checking-accounts/products/premier/",
+        "last_verified_date": "2026-08-29"
+      }
+    ],
+    "referral_program": null
   },
   {
     "bank_id": "ally",
@@ -385,7 +775,21 @@
     "logo_source": "Wikimedia Commons: File:Ally Financial.svg (upload.wikimedia.org/wikipedia/commons/0/00/Ally_Financial.svg)",
     "logo_last_verified": "2026-08",
     "state_coverage_completeness": "not_applicable_no_branches",
-    "notes": "Ally exited the credit card business (sold to CardWorks/Merrick Bank, rebranded 'Ollo', Jan 2025) \u2014 no longer offers new credit cards, so has no credit_cards.json entry."
+    "notes": "Ally exited the credit card business (sold to CardWorks/Merrick Bank, rebranded 'Ollo', Jan 2025) \u2014 no longer offers new credit cards, so has no credit_cards.json entry.",
+    "relationship_programs": [],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "checking",
+            "savings"
+          ],
+          "reward_description": "Refer a friend via your personal Ally referral link. Your friend earns $100 upon opening an eligible Ally Savings or Spending account and completing the required funding activity. You earn $50 per successful referral, capped at 5 referrals/calendar year ($250 total).",
+          "official_url": "https://www.ally.com/content/dam/pdf/bank/customer-referral-terms-and-conditions-new-friends.pdf"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "zolve",
@@ -417,7 +821,20 @@
     "logo_path": "assets/logos/zolve.svg",
     "logo_source": "No public logo asset found on official site or Wikimedia Commons (private fintech, no press kit) \u2014 replaced with a neutral text wordmark matching the site's typography (Inter Tight 600).",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "not_applicable_no_branches"
+    "state_coverage_completeness": "not_applicable_no_branches",
+    "relationship_programs": [],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "credit_card"
+          ],
+          "reward_description": "Both referrer and referred friend receive $50 (as statement credit/cashback) after the referred friend signs up via referral link and makes their first successful transaction on a Zolve Credit Card; credited within up to 2 billing cycles.",
+          "official_url": "https://zolve.com/referral"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "firstcard",
@@ -449,7 +866,20 @@
     "logo_path": "assets/logos/firstcard.svg",
     "logo_source": "No public logo asset found on official site or Wikimedia Commons (private fintech, no press kit) \u2014 replaced with a neutral text wordmark matching the site's typography (Inter Tight 600).",
     "logo_last_verified": "2026-08",
-    "state_coverage_completeness": "not_applicable_no_branches"
+    "state_coverage_completeness": "not_applicable_no_branches",
+    "relationship_programs": [],
+    "referral_program": {
+      "terms": [
+        {
+          "applies_to": [
+            "credit_card"
+          ],
+          "reward_description": "Referrer and referred customer each receive $10 when the referred customer spends $30+ on their Firstcard within 30 days of account opening (excludes balance transfers, cash advances, ATM withdrawals, fees, and interest). Limit one reward per referred person; referrer lifetime cap of $500.",
+          "official_url": "https://firstcard.app/referral-program-policy"
+        }
+      ],
+      "last_verified_date": "2026-08-29"
+    }
   },
   {
     "bank_id": "nova_credit",
@@ -507,6 +937,8 @@
       "First Advantage",
       "UNFCU"
     ],
-    "notes": "American Express's partnership with Nova Credit ended in 2025; not all US lenders accept a Nova Credit report."
+    "notes": "American Express's partnership with Nova Credit ended in 2025; not all US lenders accept a Nova Credit report.",
+    "relationship_programs": [],
+    "referral_program": null
   }
 ]

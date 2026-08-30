@@ -47,6 +47,8 @@ MFB.dataReady.then(() => {
       },
       state_coverage_completeness: bank.state_coverage_completeness,
       state_presence: statePresence,
+      relationship_programs: bank.relationship_programs ?? [],
+      referral_program: bank.referral_program ?? null,
       products: {
         checking: products.checking.map(compactProduct),
         savings: products.savings.map(compactProduct),
@@ -71,6 +73,7 @@ MFB.dataReady.then(() => {
       no_ssn_requirements: p.no_ssn_requirements ? MFB.humanizeList(p.no_ssn_requirements) : null,
       accepts_itin: p.accepts_itin ?? null,
       can_open_online: p.can_open_online,
+      welcome_bonus_description: p.welcome_bonus_description ?? null,
       last_verified_date: p.last_verified_date,
     };
   }
@@ -86,25 +89,33 @@ MFB.dataReady.then(() => {
       accepts_itin: p.accepts_itin,
       accepts_no_us_credit_history: p.accepts_no_us_credit_history,
       rewards_rate_description: p.rewards_rate_description,
+      welcome_bonus_description: p.welcome_bonus_description ?? null,
       last_verified_date: p.last_verified_date,
     };
   }
 
   // --- (b) Cross-institution product-type index ---------------------------
+  // welcome_bonus_description is included here (not just layer a) so a
+  // no-context question like "which checking account has the best welcome
+  // bonus?" is answerable in one lookup — see worker/README.md's token-size
+  // sanity check for the measured cost of including it at this scale.
   const all_checking_accounts = checkingAccounts.map((p) => ({
     bank_id: p.bank_id, bank_name: bankName(p.bank_id), product_id: p.product_id, name: p.name,
     monthly_fee_usd: p.monthly_fee_usd, accepts_no_ssn: p.accepts_no_ssn, accepts_itin: p.accepts_itin,
-    can_open_online: p.can_open_online, last_verified_date: p.last_verified_date,
+    can_open_online: p.can_open_online, welcome_bonus_description: p.welcome_bonus_description ?? null,
+    last_verified_date: p.last_verified_date,
   }));
   const all_savings_accounts = savingsAccounts.map((p) => ({
     bank_id: p.bank_id, bank_name: bankName(p.bank_id), product_id: p.product_id, name: p.name,
     apy_current: p.apy_current, accepts_no_ssn: p.accepts_no_ssn, accepts_itin: p.accepts_itin,
-    can_open_online: p.can_open_online, last_verified_date: p.last_verified_date,
+    can_open_online: p.can_open_online, welcome_bonus_description: p.welcome_bonus_description ?? null,
+    last_verified_date: p.last_verified_date,
   }));
   const all_credit_cards = creditCards.map((p) => ({
     bank_id: p.bank_id, bank_name: bankName(p.bank_id), product_id: p.product_id, name: p.name,
     annual_fee_usd: p.annual_fee_usd, apr_regular_min: p.apr_regular_min, apr_regular_max: p.apr_regular_max,
     requires_ssn: p.requires_ssn, accepts_itin: p.accepts_itin, accepts_no_us_credit_history: p.accepts_no_us_credit_history,
+    welcome_bonus_description: p.welcome_bonus_description ?? null,
     last_verified_date: p.last_verified_date,
   }));
 

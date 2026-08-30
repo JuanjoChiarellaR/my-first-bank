@@ -30,11 +30,8 @@ document.addEventListener("alpine:init", () => {
     loading: true,
     banks: [],
     usStates: US_STATES,
-    mobileFiltersOpen: false,
 
     filters: {
-      productType: "any", // any | checking | savings | credit_card
-      docStatus: "any", // any | no_ssn | itin | no_credit_history
       state: "any",
     },
 
@@ -66,17 +63,8 @@ document.addEventListener("alpine:init", () => {
     matchesFilters(bank) {
       if (bank.type === "credit_history_bridge") {
         // Nova Credit has no products/branches — only ever shown when filters are untouched.
-        return this.filters.productType === "any" && this.filters.docStatus === "any" && this.filters.state === "any";
+        return this.filters.state === "any";
       }
-
-      if (this.filters.productType !== "any") {
-        const products = MFB.productsByBank(bank.bank_id)[this.filters.productType];
-        if (!products || products.length === 0) return false;
-      }
-
-      if (this.filters.docStatus === "no_ssn" && !bank.has_product_without_ssn) return false;
-      if (this.filters.docStatus === "itin" && !bank.has_product_with_itin) return false;
-      if (this.filters.docStatus === "no_credit_history" && !bank.has_product_no_us_credit_history_required) return false;
 
       if (this.filters.state !== "any") {
         const status = MFB.stateStatus(bank.bank_id, this.filters.state);
@@ -91,7 +79,7 @@ document.addEventListener("alpine:init", () => {
     },
 
     resetFilters() {
-      this.filters = { productType: "any", docStatus: "any", state: "any" };
+      this.filters = { state: "any" };
     },
   }));
 });

@@ -49,107 +49,29 @@
       <p class="text-ink-secondary text-base sm:text-lg">Whether you're arriving with no SSN yet or already have one, filter by what applies to you and see real checking, savings, and credit card details from 15 banks and fintechs — side by side.</p>
     </section>
 
-    <!-- Filter bar (desktop) -->
-    <section class="hidden sm:flex flex-wrap items-end gap-4 mb-8 p-4 bg-surface border border-border rounded-lg" aria-label="Filters">
-      <div class="flex flex-col gap-1">
-        <label for="f-product-type" class="text-xs font-medium text-ink-secondary">Product type</label>
-        <select id="f-product-type" x-model="filters.productType"
-                class="border border-border rounded-md px-3 py-2 text-sm bg-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-          <option value="any">Any</option>
-          <option value="checking">Checking</option>
-          <option value="savings">Savings</option>
-          <option value="credit_card">Credit card</option>
-        </select>
-      </div>
-
-      <div class="flex flex-col gap-1">
-        <label for="f-doc-status" class="text-xs font-medium text-ink-secondary">Documentation status</label>
-        <select id="f-doc-status" x-model="filters.docStatus"
-                class="border border-border rounded-md px-3 py-2 text-sm bg-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-          <option value="any">Any</option>
-          <option value="no_ssn">No SSN yet</option>
-          <option value="itin">Have an ITIN</option>
-          <option value="no_credit_history">No US credit history</option>
-        </select>
-      </div>
-
+    <!-- Filter: State is the only bank-level filter that's genuinely
+         meaningful here (branch presence isn't visible anywhere else on the
+         card). Product type / Documentation status were dropped — matching
+         one product doesn't tell a user much before they click in and see
+         the bank's full catalog anyway; both stay available in Ask the
+         Agent's filtered search, where the agent can reason about which
+         specific products match instead of a static list just gatekeeping
+         which banks appear. -->
+    <section class="flex items-end gap-3 mb-6 flex-wrap" aria-label="Filters">
       <div class="flex flex-col gap-1">
         <label for="f-state" class="text-xs font-medium text-ink-secondary">State</label>
         <select id="f-state" x-model="filters.state"
-                class="border border-border rounded-md px-3 py-2 text-sm bg-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                class="border border-border rounded-md px-3 py-2 text-sm bg-surface min-w-[180px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
           <option value="any">Any state</option>
           <template x-for="[code, name] in usStates" :key="code">
             <option :value="code" x-text="name"></option>
           </template>
         </select>
       </div>
-
-      <button type="button" @click="resetFilters()"
-              class="text-sm text-ink-secondary underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm px-1">
-        Reset filters
+      <button type="button" @click="resetFilters()" x-show="filters.state !== 'any'"
+              class="text-sm text-ink-secondary underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm px-1 py-2">
+        Reset
       </button>
-    </section>
-
-    <!-- Filter bar (mobile: button + drawer) -->
-    <section class="sm:hidden mb-6">
-      <button type="button" id="mobile-filters-toggle" @click="mobileFiltersOpen = true"
-              class="w-full flex items-center justify-center gap-2 border border-border rounded-md px-4 py-2.5 text-sm font-medium bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
-        Filters
-      </button>
-
-      <div x-show="mobileFiltersOpen" x-cloak
-           class="fixed inset-0 z-50 bg-black/30"
-           @click.self="mobileFiltersOpen = false">
-        <div class="absolute bottom-0 left-0 right-0 bg-surface rounded-t-xl p-5 max-h-[80vh] overflow-y-auto"
-             role="dialog" aria-modal="true" aria-label="Filters" @keydown.escape.window="mobileFiltersOpen = false">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="font-display text-lg font-semibold">Filters</h2>
-            <button type="button" @click="mobileFiltersOpen = false" aria-label="Close filters"
-                    class="w-9 h-9 flex items-center justify-center rounded-md border border-border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-            </button>
-          </div>
-
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-1">
-              <label for="fm-product-type" class="text-xs font-medium text-ink-secondary">Product type</label>
-              <select id="fm-product-type" x-model="filters.productType" class="border border-border rounded-md px-3 py-2 text-sm bg-bg">
-                <option value="any">Any</option>
-                <option value="checking">Checking</option>
-                <option value="savings">Savings</option>
-                <option value="credit_card">Credit card</option>
-              </select>
-            </div>
-            <div class="flex flex-col gap-1">
-              <label for="fm-doc-status" class="text-xs font-medium text-ink-secondary">Documentation status</label>
-              <select id="fm-doc-status" x-model="filters.docStatus" class="border border-border rounded-md px-3 py-2 text-sm bg-bg">
-                <option value="any">Any</option>
-                <option value="no_ssn">No SSN yet</option>
-                <option value="itin">Have an ITIN</option>
-                <option value="no_credit_history">No US credit history</option>
-              </select>
-            </div>
-            <div class="flex flex-col gap-1">
-              <label for="fm-state" class="text-xs font-medium text-ink-secondary">State</label>
-              <select id="fm-state" x-model="filters.state" class="border border-border rounded-md px-3 py-2 text-sm bg-bg">
-                <option value="any">Any state</option>
-                <template x-for="[code, name] in usStates" :key="code">
-                  <option :value="code" x-text="name"></option>
-                </template>
-              </select>
-            </div>
-
-            <div class="flex gap-3 pt-2">
-              <button type="button" @click="resetFilters()" class="flex-1 text-sm text-ink-secondary underline px-1 py-2">Reset</button>
-              <button type="button" @click="mobileFiltersOpen = false"
-                      class="flex-1 bg-ink text-white text-sm font-medium rounded-md py-2.5 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-                Show results
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Loading state -->

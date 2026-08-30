@@ -40,7 +40,10 @@ document.addEventListener("alpine:init", () => {
 
     async init() {
       await MFB.dataReady;
-      this.banks = MFB.data.banks;
+      // Alphabetical by display name, ascending — data/banks.json's own
+      // order is whatever order the Phase 2 research groups happened to
+      // cover institutions in (asset-size-ish), not alphabetical.
+      this.banks = [...MFB.data.banks].sort((a, b) => a.name.localeCompare(b.name));
       this.loading = false;
     },
 

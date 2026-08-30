@@ -1067,5 +1067,63 @@
     "product_url": "https://www.mtb.com/personal/checking-accounts/mychoice-plus-checking-account",
     "last_verified_date": "2026-08",
     "welcome_bonus_description": null
+  },
+  {
+    "product_id": "mt_bank_mychoice_premium_checking",
+    "bank_id": "mt_bank",
+    "name": "M&T MyChoice Premium Checking",
+    "product_type": "checking",
+    "monthly_fee_usd": 24.95,
+    "monthly_fee_waiver_conditions": [
+      "average_daily_balance_7500_plus",
+      "combined_balance_25000_plus"
+    ],
+    "min_opening_deposit_usd": 25,
+    "min_balance_required_usd": 0,
+    "interest_bearing": true,
+    "apy": 0.01,
+    "overdraft_fee_usd": null,
+    "overdraft_protection_available": true,
+    "atm_fee_out_of_network_usd": 0,
+    "atm_fee_reimbursement": true,
+    "debit_card_included": true,
+    "zelle_available": true,
+    "accepts_no_ssn": false,
+    "accepts_itin": false,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.mtb.com/personal/checking-accounts/mychoice-premium-checking-account",
+    "last_verified_date": "2026-08",
+    "welcome_bonus_description": "Earn a $450 bonus (promo code TM) with $1,000+ in qualifying recurring electronic deposits (payroll, pension, or Social Security only) within 90 days of account opening. Not eligible if you've received an M&T personal checking bonus within the past 12 months. Offer through 2026-08-31."
+  },
+  {
+    "product_id": "td_beyond_checking",
+    "bank_id": "td_bank",
+    "name": "TD Beyond Checking",
+    "product_type": "checking",
+    "monthly_fee_usd": 25,
+    "monthly_fee_waiver_conditions": [
+      "direct_deposit_5000_plus",
+      "min_daily_balance_2500",
+      "combined_balance_25000_plus"
+    ],
+    "min_opening_deposit_usd": 0,
+    "min_balance_required_usd": 0,
+    "interest_bearing": true,
+    "apy": 0.01,
+    "overdraft_fee_usd": null,
+    "overdraft_protection_available": true,
+    "atm_fee_out_of_network_usd": null,
+    "atm_fee_reimbursement": true,
+    "debit_card_included": true,
+    "zelle_available": true,
+    "accepts_no_ssn": false,
+    "accepts_itin": true,
+    "can_open_online": true,
+    "requires_branch_visit": false,
+    "product_url": "https://www.td.com/us/en/personal-banking/checking-accounts/beyond",
+    "last_verified_date": "2026-08",
+    "notes": "Non-TD ATM surcharges are reimbursed only while the $2,500 minimum daily balance is maintained -- not a universal reimbursement.",
+    "welcome_bonus_description": "Earn a $300 bonus with $2,500+ in qualifying direct deposits within 60 days of account opening. Not eligible for existing TD checking customers, accounts closed within the prior 12 months, or prior TD checking bonus recipients. Offer through 2026-09-30."
   }
 ]

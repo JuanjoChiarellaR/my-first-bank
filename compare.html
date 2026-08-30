@@ -44,115 +44,172 @@
 
   <main x-data="comparePage()" class="max-w-6xl mx-auto px-4 sm:px-6 py-10 min-h-[60vh]">
     <h1 class="font-display text-2xl sm:text-3xl font-semibold mb-2">Compare</h1>
-    <p class="text-ink-secondary mb-8">Add up to 4 products of the same type from Browse Banks or a bank's page, then choose which fields to see side by side.</p>
+    <p class="text-ink-secondary mb-8">Pick a product type, then fill in up to 4 columns — by picking a bank and product below, or with &ldquo;+ Compare&rdquo; from Browse Banks or a bank&rsquo;s page.</p>
 
     <div x-show="loading" class="text-ink-secondary text-sm">Loading&hellip;</div>
 
-    <!-- Empty state -->
-    <div x-show="!loading && products.length === 0" class="text-center py-16 border border-border rounded-lg bg-surface">
-      <p class="text-ink-secondary mb-4">Nothing to compare yet.</p>
-      <p class="text-sm text-ink-placeholder mb-5">Find a checking, savings, or credit card product on Browse Banks or a bank's page, then tap &ldquo;+ Compare.&rdquo;</p>
-      <a href="index.html" class="inline-block bg-ink text-white text-sm font-medium rounded-md px-4 py-2.5 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-        Browse Banks
-      </a>
-    </div>
-
-    <template x-if="!loading && products.length > 0">
+    <template x-if="!loading">
       <div>
-        <!-- Selected products -->
-        <section class="mb-6">
-          <div class="flex items-center justify-between mb-3">
-            <h2 class="font-display text-lg font-semibold" x-text="productTypeLabel()"></h2>
-            <button type="button" @click="clearAll()" class="text-sm text-ink-secondary underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Clear all</button>
+        <!-- Type selector -->
+        <section class="mb-6 flex items-end gap-3 flex-wrap">
+          <div class="flex flex-col gap-1">
+            <label for="cmp-type" class="text-xs font-medium text-ink-secondary">Product type to compare</label>
+            <select id="cmp-type" x-model="selectedType"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface min-w-[200px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <option value="" disabled>Choose a type&hellip;</option>
+              <option value="checking">Checking</option>
+              <option value="savings">Savings</option>
+              <option value="credit_card">Credit card</option>
+            </select>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <template x-for="p in products" :key="p.product_id">
-              <span class="inline-flex items-center gap-2 border border-border bg-surface rounded-full pl-3 pr-1.5 py-1.5 text-sm">
-                <span x-text="`${p.bank.name} — ${p.name}`"></span>
-                <button type="button" @click="removeProduct(p.product_id)"
-                        class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                        :aria-label="`Remove ${p.name} from comparison`">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-                </button>
-              </span>
-            </template>
-          </div>
+          <button type="button" @click="clearAll()" x-show="anyFilled()"
+                  class="text-sm text-ink-secondary underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm px-1 py-2">
+            Clear all
+          </button>
         </section>
 
-        <!-- Field selector -->
-        <section class="mb-8 p-4 border border-border bg-surface rounded-lg">
-          <h2 class="font-display text-sm font-semibold mb-3">Fields to show</h2>
-          <template x-for="group in fieldDef().groups" :key="group.label || 'ungrouped'">
-            <div class="mb-3 last:mb-0">
-              <p x-show="group.label" class="text-xs font-medium text-ink-secondary mb-1.5" x-text="group.label"></p>
-              <div class="flex flex-wrap gap-2">
-                <template x-for="field in group.fields" :key="field.key">
-                  <label class="inline-flex items-center gap-1.5 text-xs border border-border rounded-full px-2.5 py-1 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
-                    <input type="checkbox" class="accent-ink" :checked="isFieldSelected(field.key)" @change="toggleField(field.key)">
-                    <span x-text="field.label"></span>
-                  </label>
-                </template>
-              </div>
-            </div>
-          </template>
-        </section>
+        <!-- No type chosen yet -->
+        <div x-show="!selectedType" class="text-center py-16 border border-border rounded-lg bg-surface">
+          <p class="text-ink-secondary">Choose a product type above to start comparing.</p>
+        </div>
 
-        <!-- Table -->
-        <section class="overflow-x-auto border border-border rounded-lg bg-surface mb-8">
-          <table class="min-w-full text-sm">
-            <thead>
-              <tr class="border-b border-border">
-                <th scope="col" class="text-left font-medium text-ink-secondary text-xs px-4 py-3 sticky left-0 bg-surface">Field</th>
-                <template x-for="p in products" :key="p.product_id">
-                  <th scope="col" class="text-left font-medium px-4 py-3 min-w-[180px]">
-                    <div x-text="p.bank.name" class="text-ink-secondary text-xs"></div>
-                    <div x-text="p.name" class="font-display"></div>
-                  </th>
-                </template>
-              </tr>
-            </thead>
-            <tbody>
-              <template x-for="group in visibleFields()" :key="group.label || 'ungrouped'">
-                <template x-for="field in group.fields" :key="field.key">
-                  <tr class="border-b border-border last:border-b-0 hover:bg-hover">
-                    <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-surface" x-text="field.label"></th>
-                    <template x-for="p in products" :key="p.product_id">
-                      <td class="px-4 py-3 text-xs" :class="(field.fmt !== 'list' && field.fmt !== 'programs') ? 'font-mono' : ''">
-                        <template x-if="field.fmt === 'list' || field.fmt === 'programs'">
-                          <div class="flex flex-wrap gap-1.5">
-                            <template x-for="item in cellList(field, p)" :key="item">
-                              <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
-                            </template>
-                            <span x-show="!cellList(field, p).length" class="text-ink-placeholder">None listed</span>
+        <template x-if="selectedType">
+          <div>
+            <!-- Field selector -->
+            <section class="mb-6 p-4 border border-border bg-surface rounded-lg">
+              <h2 class="font-display text-sm font-semibold mb-3">Fields to show</h2>
+              <template x-for="group in fieldDef().groups" :key="group.label || 'ungrouped'">
+                <div class="mb-3 last:mb-0">
+                  <p x-show="group.label" class="text-xs font-medium text-ink-secondary mb-1.5" x-text="group.label"></p>
+                  <div class="flex flex-wrap gap-2">
+                    <template x-for="field in group.fields" :key="field.key">
+                      <label class="inline-flex items-center gap-1.5 text-xs border border-border rounded-full px-2.5 py-1 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
+                        <input type="checkbox" class="accent-ink" :checked="isFieldSelected(field.key)" @change="toggleField(field.key)">
+                        <span x-text="field.label"></span>
+                      </label>
+                    </template>
+                  </div>
+                </div>
+              </template>
+            </section>
+
+            <p x-show="pickError" x-cloak class="mb-4 text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5" x-text="pickError"></p>
+
+            <!-- Table: 4 fixed columns, always rendered. Each header cell is
+                 either a filled product, the active picker (first empty
+                 slot), or an inert future slot — see js/compare.js. -->
+            <section class="overflow-x-auto border border-border rounded-lg bg-surface mb-8">
+              <table class="min-w-full text-sm">
+                <thead>
+                  <tr class="border-b border-border">
+                    <th scope="col" class="text-left font-medium text-ink-secondary text-xs px-4 py-3 sticky left-0 bg-surface">Field</th>
+                    <template x-for="i in slotIndices" :key="i">
+                      <th scope="col" class="text-left font-medium px-4 py-3 min-w-[210px] align-top">
+
+                        <!-- Filled slot -->
+                        <template x-if="slotAt(i).filled">
+                          <div>
+                            <div class="flex items-start justify-between gap-2">
+                              <div class="min-w-0">
+                                <div class="text-ink-secondary text-xs truncate" x-text="slotAt(i).product.bank.name"></div>
+                                <div class="font-display truncate" x-text="slotAt(i).product.name"></div>
+                              </div>
+                              <button type="button" @click="removeProduct(slotAt(i).product.product_id)"
+                                      class="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                                      :aria-label="`Remove ${slotAt(i).product.name} from comparison`">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                              </button>
+                            </div>
+                            <p x-show="slotAt(i).mismatched" class="text-xs font-normal text-ink-secondary bg-hover rounded px-2 py-1 mt-2">
+                              Doesn&rsquo;t match the selected type
+                            </p>
                           </div>
                         </template>
-                        <template x-if="field.fmt !== 'list' && field.fmt !== 'programs'">
-                          <span x-text="cellValue(field, p)"></span>
+
+                        <!-- Active picker: only the first empty slot -->
+                        <template x-if="!slotAt(i).filled && i === firstEmptySlotIndex">
+                          <div class="flex flex-col gap-1.5 font-normal border border-border rounded-md p-2.5 bg-bg">
+                            <select :aria-label="`Bank for comparison slot ${i + 1}`" x-model="pickerBankId"
+                                    class="border border-border rounded-md px-2 py-1.5 text-xs bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                              <option value="">Choose a bank&hellip;</option>
+                              <template x-for="b in bankOptionsForPicker()" :key="b.bank_id">
+                                <option :value="b.bank_id" x-text="b.name"></option>
+                              </template>
+                            </select>
+                            <select :aria-label="`Product for comparison slot ${i + 1}`" :disabled="!pickerBankId"
+                                    @change="pickProduct($event.target.value); $event.target.value = ''"
+                                    class="border border-border rounded-md px-2 py-1.5 text-xs bg-surface disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                              <option value="">Choose a product&hellip;</option>
+                              <template x-for="p in productOptionsForPicker()" :key="p.product_id">
+                                <option :value="p.product_id" x-text="p.name"></option>
+                              </template>
+                            </select>
+                          </div>
                         </template>
-                      </td>
+
+                        <!-- Inert future slot -->
+                        <template x-if="!slotAt(i).filled && i !== firstEmptySlotIndex">
+                          <div class="border border-dashed border-border rounded-md p-2.5 text-xs font-normal text-ink-placeholder text-center">
+                            Fill the previous slot first
+                          </div>
+                        </template>
+
+                      </th>
                     </template>
                   </tr>
-                </template>
-              </template>
-              <!-- last_verified_date always rendered, never optional -->
-              <tr class="bg-hover/50">
-                <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-hover/50">Last verified</th>
-                <template x-for="p in products" :key="p.product_id">
-                  <td class="px-4 py-3 font-mono text-xs text-ink-placeholder" x-text="p.last_verified_date"></td>
-                </template>
-              </tr>
-            </tbody>
-          </table>
-        </section>
+                </thead>
+                <tbody>
+                  <template x-for="group in visibleFields()" :key="group.label || 'ungrouped'">
+                    <template x-for="field in group.fields" :key="field.key">
+                      <tr class="border-b border-border last:border-b-0 hover:bg-hover">
+                        <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-surface" x-text="field.label"></th>
+                        <template x-for="i in slotIndices" :key="i">
+                          <td class="px-4 py-3 text-xs" :class="(field.fmt !== 'list' && field.fmt !== 'programs') ? 'font-mono' : ''">
+                            <template x-if="slotAt(i).filled && !slotAt(i).mismatched">
+                              <div>
+                                <template x-if="field.fmt === 'list' || field.fmt === 'programs'">
+                                  <div class="flex flex-wrap gap-1.5">
+                                    <template x-for="item in cellList(field, slotAt(i).product)" :key="item">
+                                      <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
+                                    </template>
+                                    <span x-show="!cellList(field, slotAt(i).product).length" class="text-ink-placeholder">None listed</span>
+                                  </div>
+                                </template>
+                                <template x-if="field.fmt !== 'list' && field.fmt !== 'programs'">
+                                  <span x-text="cellValue(field, slotAt(i).product)"></span>
+                                </template>
+                              </div>
+                            </template>
+                            <template x-if="!slotAt(i).filled || slotAt(i).mismatched">
+                              <span class="text-ink-placeholder">&mdash;</span>
+                            </template>
+                          </td>
+                        </template>
+                      </tr>
+                    </template>
+                  </template>
+                  <!-- last_verified_date always rendered, never optional -->
+                  <tr class="bg-hover/50">
+                    <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-hover/50">Last verified</th>
+                    <template x-for="i in slotIndices" :key="i">
+                      <td class="px-4 py-3 font-mono text-xs text-ink-placeholder"
+                          x-text="slotAt(i).filled && !slotAt(i).mismatched ? slotAt(i).product.last_verified_date : ''"></td>
+                    </template>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
 
-        <p class="text-xs text-ink-placeholder mb-8">This table is generated directly from our dataset — no AI is involved. Always verify current terms with the bank before applying.</p>
+            <p class="text-xs text-ink-placeholder mb-8">This table is generated directly from our dataset — no AI is involved. Always verify current terms with the bank before applying.</p>
 
-        <div class="text-center">
-          <a :href="askAgentHref()"
-             class="inline-block bg-ink text-white text-sm font-medium rounded-md px-5 py-3 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-            Ask the Agent about these
-          </a>
-        </div>
+            <div class="text-center" x-show="anyFilled()">
+              <a :href="askAgentHref()"
+                 class="inline-block bg-ink text-white text-sm font-medium rounded-md px-5 py-3 hover:bg-[#3A3A36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                Ask the Agent about these
+              </a>
+            </div>
+          </div>
+        </template>
       </div>
     </template>
   </main>

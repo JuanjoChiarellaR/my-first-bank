@@ -1,6 +1,14 @@
 // Compare page. Entirely static/deterministic — no agent call happens here,
 // per README.md. Field defs below define what CAN be shown; last_verified_date
 // is always rendered and is not part of the optional selector.
+//
+// Structure: 4 fixed column slots, always rendered, filled strictly left to
+// right. MFB.compare (data-loader.js) stays the single persisted source of
+// truth — {productType, productIds}, an ordered append-only array — and is
+// untouched by this page's manual bank/product pickers, which only ever call
+// its existing add()/remove()/clear(). The "which bank/product am I picking
+// for this still-empty slot" state is page-local and ephemeral on purpose:
+// it never needs to survive a navigation away from this page.
 
 const FIELD_DEFS = {
   checking: {
@@ -71,6 +79,8 @@ const FIELD_DEFS = {
   },
 };
 
+const TYPE_LABELS = { checking: "Checking accounts", savings: "Savings accounts", credit_card: "Credit cards" };
+
 function formatValue(fmt, value, product) {
   if (fmt === "apr_range") {
     const min = product.apr_regular_min, max = product.apr_regular_max;
@@ -107,39 +117,91 @@ function formatValue(fmt, value, product) {
 document.addEventListener("alpine:init", () => {
   Alpine.data("comparePage", () => ({
     loading: true,
-    productType: null,
-    products: [],
+    selectedType: "", // "" | checking | savings | credit_card — page-local, hydrated once from storage then never overwritten by it
+    productIds: [], // reactive mirror of MFB.compare.get().productIds — MFB.compare itself lives outside Alpine's reactivity, so templates must read this copy, not the store directly (see js/app.js / js/bank-detail.js for the same pattern)
+    pickerBankId: "", // ephemeral: bank chosen for whichever slot is currently the first empty one
+    pickError: "",
     selectedFieldKeys: [],
+    slotIndices: [0, 1, 2, 3],
 
     async init() {
       await MFB.dataReady;
       this.syncFromStorage();
       MFB.compare.onChange(() => this.syncFromStorage());
+      this.$watch("selectedType", (value, oldValue) => {
+        if (!value) return;
+        if (oldValue) this.selectedFieldKeys = this.defaultFieldKeys(); // real type switch — old field keys don't apply
+        else if (this.selectedFieldKeys.length === 0) this.selectedFieldKeys = this.defaultFieldKeys(); // first-ever selection
+      });
       this.loading = false;
     },
 
     syncFromStorage() {
       const state = MFB.compare.get();
-      this.productType = state.productType;
-      this.products = state.productIds
-        .map((id) => MFB.findProduct(id))
-        .filter(Boolean)
-        .map((p) => ({ ...p, bank: MFB.bankById[p.bank_id] }));
-      if (this.productType && this.selectedFieldKeys.length === 0) {
-        this.selectedFieldKeys = this.defaultFieldKeys();
+      this.productIds = state.productIds;
+      if (!this.selectedType) this.selectedType = state.productType || "";
+    },
+
+    // --- 4-slot model ---------------------------------------------------
+    get firstEmptySlotIndex() {
+      for (let i = 0; i < 4; i++) if (!this.productIds[i]) return i;
+      return -1;
+    },
+    slotAt(index) {
+      const id = this.productIds[index];
+      if (!id) return { filled: false, product: null, mismatched: false };
+      const raw = MFB.findProduct(id);
+      if (!raw) return { filled: false, product: null, mismatched: false };
+      const product = { ...raw, bank: MFB.bankById[raw.bank_id] };
+      return { filled: true, product, mismatched: !!this.selectedType && product.product_type !== this.selectedType };
+    },
+    anyFilled() {
+      return this.productIds.length > 0;
+    },
+
+    // --- Manual picker (always targets the current first-empty slot) ----
+    bankOptionsForPicker() {
+      if (!this.selectedType) return [];
+      return MFB.data.banks
+        .filter((b) => (MFB.productsByBank(b.bank_id)[this.selectedType] || []).length > 0)
+        .sort((a, b) => a.name.localeCompare(b.name));
+    },
+    productOptionsForPicker() {
+      if (!this.selectedType || !this.pickerBankId) return [];
+      return MFB.productsByBank(this.pickerBankId)[this.selectedType] || [];
+    },
+    pickProduct(productId) {
+      this.pickError = "";
+      if (!productId) return;
+      const result = MFB.compare.add(this.selectedType, productId);
+      if (result.ok) {
+        this.pickerBankId = "";
+      } else {
+        // Shouldn't normally happen — the dropdowns are pre-scoped to
+        // selectedType — but MFB.compare.add() is the real source of truth
+        // for the max-4 rule, so surface its reason rather than assuming.
+        this.pickError = result.reason;
       }
     },
-
-    fieldDef() {
-      return this.productType ? FIELD_DEFS[this.productType] : null;
+    removeProduct(productId) {
+      MFB.compare.remove(productId);
+      this.pickerBankId = "";
+    },
+    clearAll() {
+      MFB.compare.clear();
+      this.pickerBankId = "";
+      this.selectedFieldKeys = [];
     },
 
+    // --- Field selector (unchanged logic, keyed by selectedType) --------
+    fieldDef() {
+      return this.selectedType ? FIELD_DEFS[this.selectedType] : null;
+    },
     defaultFieldKeys() {
       const def = this.fieldDef();
       if (!def) return [];
       return def.groups.flatMap((g) => g.fields.filter((f) => f.default).map((f) => f.key));
     },
-
     isFieldSelected(key) {
       return this.selectedFieldKeys.includes(key);
     },
@@ -150,7 +212,6 @@ document.addEventListener("alpine:init", () => {
         this.selectedFieldKeys = [...this.selectedFieldKeys, key];
       }
     },
-
     visibleFields() {
       const def = this.fieldDef();
       if (!def) return [];
@@ -162,19 +223,16 @@ document.addEventListener("alpine:init", () => {
     cellValue(field, product) {
       return formatValue(field.fmt, product[field.key], product);
     },
-
-    // For "list" fields, the table renders wrapped chips instead of a
-    // comma-joined string — same humanizer as Bank Detail, so a "Fee waived
-    // if" cell reads as real phrases, not tags.
+    // For "list"/"programs" fields, the table renders wrapped chips instead
+    // of a comma-joined string — same humanizer as Bank Detail, so a "Fee
+    // waived if" cell reads as real phrases, not tags.
     cellList(field, product) {
       if (field.fmt === "programs") return this.programsForProduct(product);
       return MFB.humanizeList(product[field.key]);
     },
-
     // Same relationship_programs/referral_program matching logic as
-    // js/bank-detail.js's programBadgesFor — this field is bank-level data
-    // (product.bank), not a plain product[field.key] lookup like every other
-    // Compare field, since a program can apply to several products at once.
+    // js/bank-detail.js's programBadgesFor — bank-level data (product.bank),
+    // not a plain product[field.key] lookup like every other Compare field.
     programsForProduct(product) {
       const bank = product.bank;
       if (!bank) return [];
@@ -191,22 +249,16 @@ document.addEventListener("alpine:init", () => {
       return badges;
     },
 
-    removeProduct(productId) {
-      MFB.compare.remove(productId);
-    },
-
-    clearAll() {
-      MFB.compare.clear();
-      this.selectedFieldKeys = [];
-    },
-
     productTypeLabel() {
-      return { checking: "Checking accounts", savings: "Savings accounts", credit_card: "Credit cards" }[this.productType] || "";
+      return TYPE_LABELS[this.selectedType] || "";
     },
 
     askAgentHref() {
-      const ids = this.products.map((p) => p.product_id).join(",");
-      return `agent.html?compare=${encodeURIComponent(ids)}`;
+      const ids = this.slotIndices
+        .map((i) => this.slotAt(i))
+        .filter((s) => s.filled && !s.mismatched)
+        .map((s) => s.product.product_id);
+      return `agent.html?compare=${encodeURIComponent(ids.join(","))}`;
     },
   }));
 });

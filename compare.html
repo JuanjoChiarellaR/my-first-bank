@@ -75,12 +75,12 @@
 
         <template x-if="selectedType">
           <div>
-            <!-- Field selector -->
+            <!-- Field selector, grouped into labeled sections -->
             <section class="mb-6 p-4 border border-border bg-surface rounded-lg">
               <h2 class="font-display text-sm font-semibold mb-3">Fields to show</h2>
-              <template x-for="group in fieldDef().groups" :key="group.label || 'ungrouped'">
-                <div class="mb-3 last:mb-0">
-                  <p x-show="group.label" class="text-xs font-medium text-ink-secondary mb-1.5" x-text="group.label"></p>
+              <template x-for="group in fieldDef().groups" :key="group.label">
+                <div class="mb-4 last:mb-0">
+                  <p class="text-xs font-medium text-ink-secondary mb-1.5" x-text="group.label"></p>
                   <div class="flex flex-wrap gap-2">
                     <template x-for="field in group.fields" :key="field.key">
                       <label class="inline-flex items-center gap-1.5 text-xs border border-border rounded-full px-2.5 py-1 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
@@ -95,60 +95,86 @@
 
             <p x-show="pickError" x-cloak class="mb-4 text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5" x-text="pickError"></p>
 
-            <!-- Table: 4 fixed columns, always rendered. Each header cell is
-                 either a filled product, the active picker (first empty
-                 slot), or an inert future slot — see js/compare.js. -->
+            <!-- Table: 4 fixed-width columns, always rendered. Each header
+                 cell is filled / bank-pending / fully-empty (active slot
+                 only) / inert — see js/compare.js. table-fixed + explicit
+                 widths keep columns a constant size regardless of content,
+                 so picking products never visibly resizes the table. -->
             <section class="overflow-x-auto border border-border rounded-lg bg-surface mb-8">
-              <table class="min-w-full text-sm">
+              <table class="w-full text-sm table-fixed">
+                <colgroup>
+                  <col class="w-32">
+                  <col class="w-52"><col class="w-52"><col class="w-52"><col class="w-52">
+                </colgroup>
                 <thead>
                   <tr class="border-b border-border">
                     <th scope="col" class="text-left font-medium text-ink-secondary text-xs px-4 py-3 sticky left-0 bg-surface">Field</th>
                     <template x-for="i in slotIndices" :key="i">
-                      <th scope="col" class="text-left font-medium px-4 py-3 min-w-[210px] align-top">
+                      <th scope="col" class="text-left font-medium px-3 py-3 align-top">
 
                         <!-- Filled slot -->
                         <template x-if="slotAt(i).filled">
-                          <div>
-                            <div class="flex items-start justify-between gap-2">
-                              <div class="min-w-0">
-                                <div class="text-ink-secondary text-xs truncate" x-text="slotAt(i).product.bank.name"></div>
-                                <div class="font-display truncate" x-text="slotAt(i).product.name"></div>
-                              </div>
-                              <button type="button" @click="removeProduct(slotAt(i).product.product_id)"
-                                      class="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                                      :aria-label="`Remove ${slotAt(i).product.name} from comparison`">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                          <div class="relative px-5">
+                            <button type="button" @click="removeSlotEntirely(i)"
+                                    class="absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center rounded-full hover:bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                                    :aria-label="`Remove ${slotAt(i).product.name} and its bank from comparison`">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                            </button>
+                            <div class="text-center">
+                              <div class="text-ink-secondary text-xs truncate" x-text="slotAt(i).product.bank.name"></div>
+                              <div class="font-display truncate" x-text="slotAt(i).product.name"></div>
+                              <button type="button" @click="removeProductOnly(i)"
+                                      class="text-[11px] text-ink-secondary underline hover:text-ink mt-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">
+                                Change product
                               </button>
                             </div>
-                            <p x-show="slotAt(i).mismatched" class="text-xs font-normal text-ink-secondary bg-hover rounded px-2 py-1 mt-2">
+                            <p x-show="slotAt(i).mismatched" class="text-xs font-normal text-center text-ink-secondary bg-hover rounded px-2 py-1 mt-2">
                               Doesn&rsquo;t match the selected type
                             </p>
                           </div>
                         </template>
 
-                        <!-- Active picker: only the first empty slot -->
-                        <template x-if="!slotAt(i).filled && i === firstEmptySlotIndex">
+                        <!-- Active slot, bank already chosen, product pending -->
+                        <template x-if="!slotAt(i).filled && i === activeSlotIndex && slotBankPending[i]">
                           <div class="flex flex-col gap-1.5 font-normal border border-border rounded-md p-2.5 bg-bg">
-                            <select :aria-label="`Bank for comparison slot ${i + 1}`" x-model="pickerBankId"
+                            <div class="flex items-center justify-between gap-2">
+                              <span class="text-xs text-ink-secondary truncate" x-text="pendingBankName(i)"></span>
+                              <button type="button" @click="clearPendingBank(i)"
+                                      class="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded-full hover:bg-hover text-ink-placeholder hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                                      :aria-label="`Change bank for comparison slot ${i + 1}`">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                              </button>
+                            </div>
+                            <select :aria-label="`Product for comparison slot ${i + 1}`"
+                                    @change="pickProduct(i, $event.target.value); $event.target.value = ''"
                                     class="border border-border rounded-md px-2 py-1.5 text-xs bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
-                              <option value="">Choose a bank&hellip;</option>
-                              <template x-for="b in bankOptionsForPicker()" :key="b.bank_id">
-                                <option :value="b.bank_id" x-text="b.name"></option>
-                              </template>
-                            </select>
-                            <select :aria-label="`Product for comparison slot ${i + 1}`" :disabled="!pickerBankId"
-                                    @change="pickProduct($event.target.value); $event.target.value = ''"
-                                    class="border border-border rounded-md px-2 py-1.5 text-xs bg-surface disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
                               <option value="">Choose a product&hellip;</option>
-                              <template x-for="p in productOptionsForPicker()" :key="p.product_id">
+                              <template x-for="p in productOptionsForSlot(i)" :key="p.product_id">
                                 <option :value="p.product_id" x-text="p.name"></option>
                               </template>
                             </select>
                           </div>
                         </template>
 
+                        <!-- Active slot, nothing chosen yet -->
+                        <template x-if="!slotAt(i).filled && i === activeSlotIndex && !slotBankPending[i]">
+                          <div class="flex flex-col gap-1.5 font-normal border border-border rounded-md p-2.5 bg-bg">
+                            <select :aria-label="`Bank for comparison slot ${i + 1}`" x-model="slotBankPending[i]"
+                                    class="border border-border rounded-md px-2 py-1.5 text-xs bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                              <option value="">Choose a bank&hellip;</option>
+                              <template x-for="b in bankOptionsForPicker()" :key="b.bank_id">
+                                <option :value="b.bank_id" x-text="b.name"></option>
+                              </template>
+                            </select>
+                            <select disabled
+                                    class="border border-border rounded-md px-2 py-1.5 text-xs bg-surface opacity-50 cursor-not-allowed">
+                              <option value="">Choose a product&hellip;</option>
+                            </select>
+                          </div>
+                        </template>
+
                         <!-- Inert future slot -->
-                        <template x-if="!slotAt(i).filled && i !== firstEmptySlotIndex">
+                        <template x-if="!slotAt(i).filled && i !== activeSlotIndex">
                           <div class="border border-dashed border-border rounded-md p-2.5 text-xs font-normal text-ink-placeholder text-center">
                             Fill the previous slot first
                           </div>
@@ -159,12 +185,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <template x-for="group in visibleFields()" :key="group.label || 'ungrouped'">
-                    <template x-for="field in group.fields" :key="field.key">
+                  <template x-for="group in visibleFields()" :key="group.label">
+                    <template x-for="(field, fIdx) in group.fields" :key="field.key">
                       <tr class="border-b border-border last:border-b-0 hover:bg-hover">
-                        <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-surface" x-text="field.label"></th>
+                        <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-surface align-top">
+                          <span x-show="fIdx === 0" class="block text-[10px] uppercase tracking-wide text-ink-placeholder mb-0.5" x-text="group.label"></span>
+                          <span x-text="field.label"></span>
+                        </th>
                         <template x-for="i in slotIndices" :key="i">
-                          <td class="px-4 py-3 text-xs" :class="(field.fmt !== 'list' && field.fmt !== 'programs') ? 'font-mono' : ''">
+                          <td class="px-3 py-3 text-xs align-top" :class="(field.fmt !== 'list' && field.fmt !== 'programs') ? 'font-mono' : ''">
                             <template x-if="slotAt(i).filled && !slotAt(i).mismatched">
                               <div>
                                 <template x-if="field.fmt === 'list' || field.fmt === 'programs'">
@@ -192,7 +221,7 @@
                   <tr class="bg-hover/50">
                     <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-hover/50">Last verified</th>
                     <template x-for="i in slotIndices" :key="i">
-                      <td class="px-4 py-3 font-mono text-xs text-ink-placeholder"
+                      <td class="px-3 py-3 font-mono text-xs text-ink-placeholder"
                           x-text="slotAt(i).filled && !slotAt(i).mismatched ? slotAt(i).product.last_verified_date : ''"></td>
                     </template>
                   </tr>

@@ -82,12 +82,6 @@
           </div>
         </section>
 
-        <!-- Compare error banner (neutral treatment — green stays reserved for eligibility signals only) -->
-        <div x-show="compareError" x-cloak class="mb-6 text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 flex items-center justify-between gap-3">
-          <span x-text="compareError"></span>
-          <button type="button" @click="compareError = ''" class="flex-shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm" aria-label="Dismiss">&times;</button>
-        </div>
-
         <!-- Nova Credit special-case info panel (no products/branches) -->
         <template x-if="bank.type === 'credit_history_bridge'">
           <section class="border border-border bg-surface rounded-lg p-5 mb-8">
@@ -426,6 +420,21 @@
 
       </div>
     </template>
+
+    <!-- Compare toast: fixed to the viewport (not the page banner it
+         replaced) so it's visible at the point of the click regardless of
+         how far down a long product list the user has scrolled. Opposite
+         corner from js/shell.js's floating Compare pill so they never
+         overlap. Neutral dark treatment matching that pill and the site's
+         primary-button color — not a red/color alert, consistent with the
+         green-reserved-for-eligibility rule. -->
+    <div x-show="compareError" x-cloak x-transition
+         class="fixed bottom-5 left-5 z-40 max-w-sm bg-ink text-white text-sm rounded-lg px-4 py-3 shadow-lg flex items-start gap-3">
+      <span x-text="compareError"></span>
+      <button type="button" @click="compareError = ''"
+              class="flex-shrink-0 -mr-1 w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              aria-label="Dismiss">&times;</button>
+    </div>
   </main>
 
   <div id="site-footer"></div>

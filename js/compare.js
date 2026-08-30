@@ -6,30 +6,45 @@
 // right. MFB.compare (data-loader.js) stays the single persisted source of
 // truth — {productType, productIds}, an ordered append-only array — and is
 // untouched by this page's manual bank/product pickers, which only ever call
-// its existing add()/remove()/clear(). The "which bank/product am I picking
-// for this still-empty slot" state is page-local and ephemeral on purpose:
-// it never needs to survive a navigation away from this page.
+// its existing add()/remove()/clear().
+//
+// This page keeps its own `displayOrder` array (index -> product_id | null)
+// as the thing that actually drives which visual column a product sits in.
+// It's reconciled by VALUE against MFB.compare's stored productIds on every
+// change (see syncFromStorage), not treated as index-identical to it — that
+// split is what makes "remove just this column's product, keep its bank
+// selected, don't disturb the other columns" possible: MFB.compare.remove()
+// always compacts its own array, but a compaction there no longer forces a
+// visual shift here unless this page explicitly performs one (see
+// removeSlotEntirely, which does shift, vs. removeProductOnly, which
+// deliberately doesn't).
 
 const FIELD_DEFS = {
   checking: {
     groups: [
-      { label: null, fields: [
+      { label: "Fees & Costs", fields: [
         { key: "monthly_fee_usd", label: "Monthly fee", fmt: "money", default: true },
         { key: "monthly_fee_waiver_conditions", label: "Fee waived if", fmt: "list", default: false },
         { key: "min_opening_deposit_usd", label: "Min. opening deposit", fmt: "money", default: false },
         { key: "min_balance_required_usd", label: "Min. balance required", fmt: "money", default: false },
-        { key: "interest_bearing", label: "Interest-bearing", fmt: "bool", default: false },
-        { key: "apy", label: "APY", fmt: "pct", default: false },
         { key: "overdraft_fee_usd", label: "Overdraft fee", fmt: "money", default: true },
         { key: "overdraft_protection_available", label: "Overdraft protection", fmt: "bool", default: false },
         { key: "atm_fee_out_of_network_usd", label: "Out-of-network ATM fee", fmt: "money", default: false },
         { key: "atm_fee_reimbursement", label: "ATM fee reimbursed", fmt: "bool", default: false },
+      ]},
+      { label: "Account Features", fields: [
+        { key: "interest_bearing", label: "Interest-bearing", fmt: "bool", default: false },
+        { key: "apy", label: "APY", fmt: "pct", default: false },
         { key: "debit_card_included", label: "Debit card included", fmt: "bool", default: false },
         { key: "zelle_available", label: "Zelle available", fmt: "bool", default: false },
-        { key: "accepts_no_ssn", label: "Accepts no SSN", fmt: "bool", default: true },
-        { key: "accepts_itin", label: "Accepts ITIN", fmt: "bool", default: true },
         { key: "can_open_online", label: "Can open online", fmt: "bool", default: true },
         { key: "requires_branch_visit", label: "Requires branch visit", fmt: "bool", default: false },
+      ]},
+      { label: "Eligibility", fields: [
+        { key: "accepts_no_ssn", label: "Accepts no SSN", fmt: "bool", default: true },
+        { key: "accepts_itin", label: "Accepts ITIN", fmt: "bool", default: true },
+      ]},
+      { label: "Benefits", fields: [
         { key: "welcome_bonus_description", label: "Welcome bonus", fmt: "text", default: false },
         { key: "programs", label: "Relationship / referral programs", fmt: "programs", default: false },
       ]},
@@ -37,17 +52,23 @@ const FIELD_DEFS = {
   },
   savings: {
     groups: [
-      { label: null, fields: [
-        { key: "apy_current", label: "APY", fmt: "pct", default: true },
-        { key: "fdic_insured", label: "FDIC insured", fmt: "bool", default: false },
+      { label: "Fees & Costs", fields: [
         { key: "monthly_fee_usd", label: "Monthly fee", fmt: "money", default: true },
         { key: "monthly_fee_waiver_conditions", label: "Fee waived if", fmt: "list", default: false },
         { key: "min_opening_deposit_usd", label: "Min. opening deposit", fmt: "money", default: false },
         { key: "min_balance_required_usd", label: "Min. balance required", fmt: "money", default: false },
-        { key: "accepts_no_ssn", label: "Accepts no SSN", fmt: "bool", default: true },
-        { key: "accepts_itin", label: "Accepts ITIN", fmt: "bool", default: true },
+      ]},
+      { label: "Account Features", fields: [
+        { key: "apy_current", label: "APY", fmt: "pct", default: true },
+        { key: "fdic_insured", label: "FDIC insured", fmt: "bool", default: false },
         { key: "can_open_online", label: "Can open online", fmt: "bool", default: true },
         { key: "requires_branch_visit", label: "Requires branch visit", fmt: "bool", default: false },
+      ]},
+      { label: "Eligibility", fields: [
+        { key: "accepts_no_ssn", label: "Accepts no SSN", fmt: "bool", default: true },
+        { key: "accepts_itin", label: "Accepts ITIN", fmt: "bool", default: true },
+      ]},
+      { label: "Benefits", fields: [
         { key: "welcome_bonus_description", label: "Welcome bonus", fmt: "text", default: false },
         { key: "programs", label: "Relationship / referral programs", fmt: "programs", default: false },
       ]},
@@ -100,11 +121,6 @@ function formatValue(fmt, value, product) {
     case "money": return value === 0 ? "$0" : `$${value}`;
     case "pct": return `${value}%`;
     case "bool": return value ? "Yes" : "No";
-    // Humanized (not raw .join) — same tag dictionary the static pages and
-    // the agent's semantic layer use, so "Fee waived if" never regresses to
-    // snake_case tags here even though the other list fields (eligibility
-    // requirements, benefits) are already natural language and pass through
-    // MFB.humanizeTag unchanged.
     case "list": {
       const list = MFB.humanizeList(value);
       return list.length ? list.join(", ") : "None listed";
@@ -118,8 +134,8 @@ document.addEventListener("alpine:init", () => {
   Alpine.data("comparePage", () => ({
     loading: true,
     selectedType: "", // "" | checking | savings | credit_card — page-local, hydrated once from storage then never overwritten by it
-    productIds: [], // reactive mirror of MFB.compare.get().productIds — MFB.compare itself lives outside Alpine's reactivity, so templates must read this copy, not the store directly (see js/app.js / js/bank-detail.js for the same pattern)
-    pickerBankId: "", // ephemeral: bank chosen for whichever slot is currently the first empty one
+    displayOrder: [null, null, null, null], // index -> product_id | null; see file-level comment
+    slotBankPending: [null, null, null, null], // index -> bank_id | null, only meaningful when displayOrder[index] is null
     pickError: "",
     selectedFieldKeys: [],
     slotIndices: [0, 1, 2, 3],
@@ -138,17 +154,31 @@ document.addEventListener("alpine:init", () => {
 
     syncFromStorage() {
       const state = MFB.compare.get();
-      this.productIds = state.productIds;
+      const stillPresent = new Set(state.productIds);
+      // Drop any displayOrder entry whose product no longer exists in storage.
+      this.displayOrder = this.displayOrder.map((id) => (id && stillPresent.has(id) ? id : null));
+      // Add any stored product not yet represented, into the first free slot —
+      // this is what makes Bank Detail's "+ Compare" button fill "the next
+      // open slot" regardless of which slot the user was manually mid-picking.
+      for (const id of state.productIds) {
+        if (!this.displayOrder.includes(id)) {
+          const emptyIndex = this.displayOrder.indexOf(null);
+          if (emptyIndex !== -1) {
+            this.displayOrder[emptyIndex] = id;
+            this.slotBankPending[emptyIndex] = null;
+          }
+        }
+      }
       if (!this.selectedType) this.selectedType = state.productType || "";
     },
 
     // --- 4-slot model ---------------------------------------------------
-    get firstEmptySlotIndex() {
-      for (let i = 0; i < 4; i++) if (!this.productIds[i]) return i;
+    get activeSlotIndex() {
+      for (let i = 0; i < 4; i++) if (!this.displayOrder[i]) return i;
       return -1;
     },
     slotAt(index) {
-      const id = this.productIds[index];
+      const id = this.displayOrder[index];
       if (!id) return { filled: false, product: null, mismatched: false };
       const raw = MFB.findProduct(id);
       if (!raw) return { filled: false, product: null, mismatched: false };
@@ -156,44 +186,74 @@ document.addEventListener("alpine:init", () => {
       return { filled: true, product, mismatched: !!this.selectedType && product.product_type !== this.selectedType };
     },
     anyFilled() {
-      return this.productIds.length > 0;
+      return this.displayOrder.some(Boolean);
+    },
+    pendingBankName(index) {
+      const bankId = this.slotBankPending[index];
+      return bankId ? (MFB.bankById[bankId]?.name || bankId) : "";
     },
 
-    // --- Manual picker (always targets the current first-empty slot) ----
+    // --- Manual picker (always targets the current active slot) ---------
     bankOptionsForPicker() {
       if (!this.selectedType) return [];
       return MFB.data.banks
         .filter((b) => (MFB.productsByBank(b.bank_id)[this.selectedType] || []).length > 0)
         .sort((a, b) => a.name.localeCompare(b.name));
     },
-    productOptionsForPicker() {
-      if (!this.selectedType || !this.pickerBankId) return [];
-      return MFB.productsByBank(this.pickerBankId)[this.selectedType] || [];
+    productOptionsForSlot(index) {
+      const bankId = this.slotBankPending[index];
+      if (!this.selectedType || !bankId) return [];
+      return MFB.productsByBank(bankId)[this.selectedType] || [];
     },
-    pickProduct(productId) {
+    pickProduct(index, productId) {
       this.pickError = "";
       if (!productId) return;
       const result = MFB.compare.add(this.selectedType, productId);
       if (result.ok) {
-        this.pickerBankId = "";
+        this.slotBankPending[index] = null; // slot is filled now — no longer "pending"
       } else {
-        // Shouldn't normally happen — the dropdowns are pre-scoped to
-        // selectedType — but MFB.compare.add() is the real source of truth
-        // for the max-4 rule, so surface its reason rather than assuming.
         this.pickError = result.reason;
       }
     },
-    removeProduct(productId) {
-      MFB.compare.remove(productId);
-      this.pickerBankId = "";
+    // Clears the bank choice on a not-yet-filled slot, before any product
+    // has been picked for it — reverts the active slot to the fully-empty
+    // "choose a bank" state.
+    clearPendingBank(index) {
+      this.slotBankPending[index] = null;
+    },
+    // Clears just this slot's product, keeping its bank — the slot reverts
+    // to "bank chosen, product picker open" rather than emptying entirely.
+    // Deliberately does NOT shift other columns (contrast removeSlotEntirely).
+    removeProductOnly(index) {
+      const id = this.displayOrder[index];
+      if (!id) return;
+      const raw = MFB.findProduct(id);
+      const bankId = raw ? raw.bank_id : null;
+      MFB.compare.remove(id); // synchronously nulls displayOrder[index] via syncFromStorage
+      this.slotBankPending[index] = bankId;
+    },
+    // Clears both bank and product for this slot, then shifts every later
+    // filled slot left to close the gap — matches the site's existing
+    // "column 3 shifts into column 2" removal behavior.
+    removeSlotEntirely(index) {
+      const id = this.displayOrder[index];
+      if (id) MFB.compare.remove(id);
+      this.slotBankPending[index] = null;
+      for (let i = index; i < 3; i++) {
+        this.displayOrder[i] = this.displayOrder[i + 1];
+        this.slotBankPending[i] = this.slotBankPending[i + 1];
+      }
+      this.displayOrder[3] = null;
+      this.slotBankPending[3] = null;
     },
     clearAll() {
       MFB.compare.clear();
-      this.pickerBankId = "";
+      this.displayOrder = [null, null, null, null];
+      this.slotBankPending = [null, null, null, null];
       this.selectedFieldKeys = [];
     },
 
-    // --- Field selector (unchanged logic, keyed by selectedType) --------
+    // --- Field selector (grouped, keyed by selectedType) -----------------
     fieldDef() {
       return this.selectedType ? FIELD_DEFS[this.selectedType] : null;
     },
@@ -212,6 +272,10 @@ document.addEventListener("alpine:init", () => {
         this.selectedFieldKeys = [...this.selectedFieldKeys, key];
       }
     },
+    // Table rows stay in FIELD_DEFS' fixed order (never insertion order),
+    // grouped under the same labeled sections as the field selector — this
+    // is what lets someone browse what categories of data exist, not just
+    // find a field they already knew to look for.
     visibleFields() {
       const def = this.fieldDef();
       if (!def) return [];
@@ -223,9 +287,6 @@ document.addEventListener("alpine:init", () => {
     cellValue(field, product) {
       return formatValue(field.fmt, product[field.key], product);
     },
-    // For "list"/"programs" fields, the table renders wrapped chips instead
-    // of a comma-joined string — same humanizer as Bank Detail, so a "Fee
-    // waived if" cell reads as real phrases, not tags.
     cellList(field, product) {
       if (field.fmt === "programs") return this.programsForProduct(product);
       return MFB.humanizeList(product[field.key]);

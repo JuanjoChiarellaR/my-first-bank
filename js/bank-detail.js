@@ -57,6 +57,10 @@ document.addEventListener("alpine:init", () => {
       return !!this.flipped[productId];
     },
 
+    // Shown as a fixed-position toast (not a page-top banner) specifically
+    // because product cards can be far down a long page — a banner at the
+    // top of the page would be out of view at the moment of the click and
+    // read as "nothing happened," which is exactly the bug this fixes.
     compareError: "",
     isInCompare(productId) {
       void this.compareVersion; // establish an Alpine-tracked dependency
@@ -69,7 +73,11 @@ document.addEventListener("alpine:init", () => {
         return;
       }
       const result = MFB.compare.add(productType, productId);
-      if (!result.ok) this.compareError = result.reason;
+      if (!result.ok) {
+        this.compareError = result.reason;
+        clearTimeout(this._compareErrorTimeout);
+        this._compareErrorTimeout = setTimeout(() => { this.compareError = ""; }, 5000);
+      }
     },
 
     // Top states by confirmed branch count, respecting the three-value model —

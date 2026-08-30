@@ -139,13 +139,17 @@ MFB.dataReady.then(() => {
     onChange: (fn) => listeners.add(fn),
 
     // Returns { ok: true } or { ok: false, reason } — callers should surface
-    // `reason` to the user rather than failing silently.
+    // `reason` to the user rather than failing silently. The reason text is
+    // written to stand on its own in a toast/inline banner at the point of
+    // the click — it needs to explain both what happened and what to do,
+    // since a caller has no other context to add.
     add(productType, productId) {
       if (state.productIds.length >= MAX_ITEMS) {
-        return { ok: false, reason: `You can compare up to ${MAX_ITEMS} products at a time.` };
+        return { ok: false, reason: `Not added — you can compare up to ${MAX_ITEMS} products at a time. Remove one first.` };
       }
       if (state.productType && state.productType !== productType && state.productIds.length > 0) {
-        return { ok: false, reason: "Comparisons only work within one product type at a time. Clear your current comparison first." };
+        const typeLabel = { checking: "checking accounts", savings: "savings accounts", credit_card: "credit cards" }[state.productType] || "products";
+        return { ok: false, reason: `Not added — you're already comparing ${typeLabel}. Clear Compare first to switch types.` };
       }
       if (state.productIds.includes(productId)) {
         return { ok: true };

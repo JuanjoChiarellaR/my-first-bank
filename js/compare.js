@@ -22,6 +22,8 @@ const FIELD_DEFS = {
         { key: "accepts_itin", label: "Accepts ITIN", fmt: "bool", default: true },
         { key: "can_open_online", label: "Can open online", fmt: "bool", default: true },
         { key: "requires_branch_visit", label: "Requires branch visit", fmt: "bool", default: false },
+        { key: "welcome_bonus_description", label: "Welcome bonus", fmt: "text", default: false },
+        { key: "programs", label: "Relationship / referral programs", fmt: "programs", default: false },
       ]},
     ],
   },
@@ -38,6 +40,8 @@ const FIELD_DEFS = {
         { key: "accepts_itin", label: "Accepts ITIN", fmt: "bool", default: true },
         { key: "can_open_online", label: "Can open online", fmt: "bool", default: true },
         { key: "requires_branch_visit", label: "Requires branch visit", fmt: "bool", default: false },
+        { key: "welcome_bonus_description", label: "Welcome bonus", fmt: "text", default: false },
+        { key: "programs", label: "Relationship / referral programs", fmt: "programs", default: false },
       ]},
     ],
   },
@@ -61,6 +65,7 @@ const FIELD_DEFS = {
         { key: "annual_rewards_cap_usd", label: "Annual rewards cap", fmt: "money", default: false },
         { key: "card_benefits", label: "Card benefits", fmt: "list", default: false },
         { key: "welcome_bonus_description", label: "Welcome bonus", fmt: "text", default: false },
+        { key: "programs", label: "Relationship / referral programs", fmt: "programs", default: false },
       ]},
     ],
   },
@@ -162,7 +167,28 @@ document.addEventListener("alpine:init", () => {
     // comma-joined string — same humanizer as Bank Detail, so a "Fee waived
     // if" cell reads as real phrases, not tags.
     cellList(field, product) {
+      if (field.fmt === "programs") return this.programsForProduct(product);
       return MFB.humanizeList(product[field.key]);
+    },
+
+    // Same relationship_programs/referral_program matching logic as
+    // js/bank-detail.js's programBadgesFor — this field is bank-level data
+    // (product.bank), not a plain product[field.key] lookup like every other
+    // Compare field, since a program can apply to several products at once.
+    programsForProduct(product) {
+      const bank = product.bank;
+      if (!bank) return [];
+      const badges = [];
+      (bank.relationship_programs || []).forEach((rp) => {
+        const matches = rp.applies_to_product_ids
+          ? rp.applies_to_product_ids.includes(product.product_id)
+          : (rp.applies_to_product_types || []).includes(product.product_type);
+        if (matches) badges.push(`Part of: ${rp.name}`);
+      });
+      const referralPrograms = Array.isArray(bank.referral_program) ? bank.referral_program : (bank.referral_program ? [bank.referral_program] : []);
+      const hasReferral = referralPrograms.some((rp) => (rp.terms || []).some((t) => (t.applies_to || []).includes(product.product_type)));
+      if (hasReferral) badges.push("Referral bonus available");
+      return badges;
     },
 
     removeProduct(productId) {

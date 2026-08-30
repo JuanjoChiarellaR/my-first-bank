@@ -83,6 +83,58 @@ document.addEventListener("alpine:init", () => {
         .slice(0, limit);
     },
 
+    // Relationship/referral program badges shown directly on a product's own
+    // card, so a user sees "this specific product qualifies" without having
+    // to separately discover the bank-level programs section. Covers both
+    // relationship_programs (matched by product_id when the source names
+    // specific products, else by product_type) and referral_program (which
+    // may be a single object or, for a bank like Chase that runs two
+    // genuinely separate programs, an array — see data/RESEARCH_NOTES.md).
+    programBadgesFor(p, type) {
+      if (!this.bank) return [];
+      const badges = [];
+      (this.bank.relationship_programs || []).forEach((rp) => {
+        const matches = rp.applies_to_product_ids
+          ? rp.applies_to_product_ids.includes(p.product_id)
+          : (rp.applies_to_product_types || []).includes(type);
+        if (matches) badges.push(`Part of: ${rp.name}`);
+      });
+      const referralPrograms = this.referralProgramsList();
+      const hasReferral = referralPrograms.some((rp) => (rp.terms || []).some((t) => (t.applies_to || []).includes(type)));
+      if (hasReferral) badges.push("Referral bonus available");
+      return badges;
+    },
+
+    // referral_program is normally one object but an array for the rare bank
+    // (Chase) that runs two independently-administered programs — this
+    // always returns an array so template code never has to branch on shape.
+    referralProgramsList() {
+      if (!this.bank || !this.bank.referral_program) return [];
+      return Array.isArray(this.bank.referral_program) ? this.bank.referral_program : [this.bank.referral_program];
+    },
+
+    // The bank-level "Relationship & Referral Programs" section renders when
+    // there's a real relationship_programs entry, a real referral_program, OR
+    // (see showTierPointer) the bank has no named program but enough checking
+    // tiers that its absence could otherwise be misread as "nothing offered."
+    hasProgramsSection() {
+      if (!this.bank) return false;
+      const hasRel = (this.bank.relationship_programs || []).length > 0;
+      const hasRef = this.referralProgramsList().length > 0;
+      return hasRel || hasRef || this.showTierPointer();
+    },
+    // True for a bank like Chase: no named relationship_programs entry, but
+    // its checking-tier ladder (Total -> Premier Plus -> ... ) is itself the
+    // balance-based-benefit mechanism, just structured as separate products
+    // instead of a named program. Without this pointer, an empty
+    // relationship_programs array next to another bank's rich rendered
+    // section could read as "this bank offers nothing like that," which
+    // isn't true -- see data/RESEARCH_NOTES.md's Phase 2d section.
+    showTierPointer() {
+      return !!this.bank && (this.bank.relationship_programs || []).length === 0 &&
+        !!this.products.checking && this.products.checking.length > 1;
+    },
+
     eligibilityBadges() {
       if (!this.bank) return [];
       const badges = [];

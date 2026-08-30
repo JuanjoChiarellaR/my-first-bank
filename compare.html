@@ -117,8 +117,8 @@
                   <tr class="border-b border-border last:border-b-0 hover:bg-hover">
                     <th scope="row" class="text-left text-ink-secondary text-xs font-normal px-4 py-3 sticky left-0 bg-surface" x-text="field.label"></th>
                     <template x-for="p in products" :key="p.product_id">
-                      <td class="px-4 py-3 text-xs" :class="field.fmt !== 'list' ? 'font-mono' : ''">
-                        <template x-if="field.fmt === 'list'">
+                      <td class="px-4 py-3 text-xs" :class="(field.fmt !== 'list' && field.fmt !== 'programs') ? 'font-mono' : ''">
+                        <template x-if="field.fmt === 'list' || field.fmt === 'programs'">
                           <div class="flex flex-wrap gap-1.5">
                             <template x-for="item in cellList(field, p)" :key="item">
                               <span class="inline-block bg-hover rounded-full px-2 py-0.5" x-text="item"></span>
@@ -126,7 +126,7 @@
                             <span x-show="!cellList(field, p).length" class="text-ink-placeholder">None listed</span>
                           </div>
                         </template>
-                        <template x-if="field.fmt !== 'list'">
+                        <template x-if="field.fmt !== 'list' && field.fmt !== 'programs'">
                           <span x-text="cellValue(field, p)"></span>
                         </template>
                       </td>

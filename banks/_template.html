@@ -161,6 +161,60 @@
           </p>
         </section>
 
+        <!-- Relationship & Referral Programs -->
+        <section class="mb-10" x-show="hasProgramsSection()" x-cloak>
+          <h2 class="font-display text-lg font-semibold mb-3">Relationship &amp; Referral Programs</h2>
+
+          <template x-if="showTierPointer()">
+            <p class="text-sm text-ink-secondary mb-4">
+              This bank doesn&rsquo;t run a separately named relationship program &mdash; instead, balance-based benefits scale directly through its checking account tiers below.
+            </p>
+          </template>
+
+          <div class="grid sm:grid-cols-2 gap-4 mb-4" x-show="bank.relationship_programs && bank.relationship_programs.length">
+            <template x-for="rp in (bank.relationship_programs || [])" :key="rp.name">
+              <div class="border border-border bg-surface rounded-lg p-4 text-sm">
+                <h3 class="font-display font-semibold mb-1" x-text="rp.name"></h3>
+                <p class="text-ink-secondary text-xs mb-3" x-text="rp.description"></p>
+                <div class="space-y-2 mb-3" x-show="rp.tiers && rp.tiers.length">
+                  <template x-for="tier in (rp.tiers || [])" :key="tier.name">
+                    <div class="text-xs">
+                      <span class="font-medium" x-text="tier.name"></span>
+                      <span class="text-ink-placeholder font-mono ml-1"
+                            x-text="tier.qualifying_balance_usd != null ? `$${tier.qualifying_balance_usd.toLocaleString()}+` : ''"></span>
+                      <ul class="mt-1 space-y-0.5 text-ink-secondary">
+                        <template x-for="b in (tier.key_benefits || [])" :key="b">
+                          <li x-text="'• ' + b"></li>
+                        </template>
+                      </ul>
+                    </div>
+                  </template>
+                </div>
+                <a :href="rp.official_url && rp.official_url.startsWith('http') ? rp.official_url : `https://${rp.official_url}`"
+                   target="_blank" rel="noopener noreferrer"
+                   class="text-xs underline text-ink hover:text-ink-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">
+                  Learn more &rarr;
+                </a>
+                <p class="text-xs text-ink-placeholder mt-1" x-text="`As of ${rp.last_verified_date}`"></p>
+              </div>
+            </template>
+          </div>
+
+          <div class="space-y-3" x-show="referralProgramsList().length">
+            <template x-for="(ref, idx) in referralProgramsList()" :key="idx">
+              <div class="border border-border bg-surface rounded-lg p-4 text-sm">
+                <h3 class="font-display font-semibold text-sm mb-2">
+                  Referral bonus <span class="text-ink-placeholder text-xs font-normal">(once you&rsquo;re a customer)</span>
+                </h3>
+                <template x-for="term in (ref.terms || [])" :key="term.reward_description">
+                  <p class="text-xs text-ink-secondary mb-2" x-text="term.reward_description"></p>
+                </template>
+                <p class="text-xs text-ink-placeholder mt-1" x-text="`As of ${ref.last_verified_date}`"></p>
+              </div>
+            </template>
+          </div>
+        </section>
+
         <!-- Product sections -->
         <template x-for="type in ['checking', 'savings', 'credit_card']" :key="type">
           <section class="mb-12" x-show="products[type] && products[type].length > 0">
@@ -205,6 +259,12 @@
                             </li>
                           </template>
                         </ul>
+
+                        <div class="flex flex-wrap gap-1.5 mt-2" x-show="programBadgesFor(p, type).length">
+                          <template x-for="badge in programBadgesFor(p, type)" :key="badge">
+                            <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-hover text-ink-secondary" x-text="badge"></span>
+                          </template>
+                        </div>
 
                         <div class="mt-auto pt-3 flex items-end justify-between gap-2">
                           <div class="text-xs text-ink-placeholder">

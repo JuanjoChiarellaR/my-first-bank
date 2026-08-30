@@ -102,6 +102,27 @@ const FIELD_DEFS = {
 
 const TYPE_LABELS = { checking: "Checking accounts", savings: "Savings accounts", credit_card: "Credit cards" };
 
+// Field-selection persistence — keyed by product type, since checking's
+// field vocabulary doesn't apply to savings/credit_card and vice versa.
+// Without the per-type key, restoring a flat list after switching types
+// would silently match nothing (filtered out in visibleFields()) and the
+// table would look empty for no visible reason.
+const FIELD_KEYS_STORAGE_KEY = "mfb_compare_fields_v1";
+function loadFieldKeysByType() {
+  try {
+    const raw = localStorage.getItem(FIELD_KEYS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : null;
+    return (parsed && typeof parsed === "object" && !Array.isArray(parsed)) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+function saveFieldKeysForType(type, keys) {
+  const all = loadFieldKeysByType();
+  all[type] = keys;
+  localStorage.setItem(FIELD_KEYS_STORAGE_KEY, JSON.stringify(all));
+}
+
 function formatValue(fmt, value, product) {
   if (fmt === "apr_range") {
     const min = product.apr_regular_min, max = product.apr_regular_max;
@@ -143,13 +164,29 @@ document.addEventListener("alpine:init", () => {
     async init() {
       await MFB.dataReady;
       this.syncFromStorage();
+      // Applied explicitly here (not left to $watch) because syncFromStorage()
+      // above may have just hydrated selectedType from MFB.compare's own
+      // stored productType — a change that happens BEFORE $watch is
+      // registered below, so $watch alone would never fire for it and a
+      // returning user would see zero fields checked instead of their saved
+      // ones (or defaults).
+      this.applyFieldKeysForType();
       MFB.compare.onChange(() => this.syncFromStorage());
-      this.$watch("selectedType", (value, oldValue) => {
-        if (!value) return;
-        if (oldValue) this.selectedFieldKeys = this.defaultFieldKeys(); // real type switch — old field keys don't apply
-        else if (this.selectedFieldKeys.length === 0) this.selectedFieldKeys = this.defaultFieldKeys(); // first-ever selection
+      this.$watch("selectedType", () => this.applyFieldKeysForType());
+      // Persists on every toggle, keyed by the type active at the time —
+      // this is the actual fix for selection not surviving navigation.
+      this.$watch("selectedFieldKeys", (keys) => {
+        if (this.selectedType) saveFieldKeysForType(this.selectedType, keys);
       });
       this.loading = false;
+    },
+
+    // Restores this type's saved field selection, or falls back to its
+    // defaults if nothing was ever saved for it.
+    applyFieldKeysForType() {
+      if (!this.selectedType) { this.selectedFieldKeys = []; return; }
+      const saved = loadFieldKeysByType()[this.selectedType];
+      this.selectedFieldKeys = (saved && saved.length) ? saved : this.defaultFieldKeys();
     },
 
     syncFromStorage() {
@@ -250,7 +287,9 @@ document.addEventListener("alpine:init", () => {
       MFB.compare.clear();
       this.displayOrder = [null, null, null, null];
       this.slotBankPending = [null, null, null, null];
-      this.selectedFieldKeys = [];
+      // selectedFieldKeys is deliberately left as-is — clearing the product
+      // selection isn't a reason to also forget the user's field
+      // preferences for this type, which are persisted independently.
     },
 
     // --- Field selector (grouped, keyed by selectedType) -----------------

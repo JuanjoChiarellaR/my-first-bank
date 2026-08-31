@@ -4,9 +4,7 @@
 // through the Cloudflare Worker in /worker (see worker/README.md); the
 // Anthropic key never touches this file or the browser.
 
-// TODO(deploy): set this to the deployed Worker's URL (Phase 11).
-// e.g. "https://mfb-agent.<your-subdomain>.workers.dev"
-const WORKER_URL = "";
+const WORKER_URL = "https://myfirstbank-agent.juanjo-chiarella.workers.dev";
 
 const SESSION_LIMIT = 10;
 const SESSION_KEY = "mfb_agent_session_v1";

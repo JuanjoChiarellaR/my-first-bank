@@ -7,12 +7,9 @@ compatibility_date = "2026-01-01"
 # Can also be set as a secret instead if you'd rather not commit it —
 # `wrangler secret put ALLOWED_ORIGIN` — just remove the [vars] block below.
 [vars]
-ALLOWED_ORIGIN = "http://localhost:8765"
+ALLOWED_ORIGIN = "https://juanjochiarellar.github.io"
 
-# Create with: wrangler kv:namespace create RATE_LIMIT_KV
-# then paste the returned id below. Rate limiting fails open (allows
-# requests) if this binding is missing, so the agent doesn't break if you
-# skip this step — but do add it before sharing the site publicly.
-# [[kv_namespaces]]
-# binding = "RATE_LIMIT_KV"
-# id = "REPLACE_WITH_KV_NAMESPACE_ID"
+# Created via: wrangler kv namespace create RATE_LIMIT_KV
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "edd92865c31b437c800fcbd8fae4283f"

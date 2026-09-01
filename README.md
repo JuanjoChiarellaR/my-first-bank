@@ -278,23 +278,22 @@ The agent participates in **exactly one section of the site: Ask the Agent.** No
 - Max ~4 lines per response. Always include a short reminder to verify current terms directly with the bank before applying, and that the data has a `last_verified_date`.
 
 ### Semantic layer — do not send the raw source JSONs directly to the model
-A flattened, per-institution view is built in JavaScript before any API call, rather than making the model cross-reference `bank_id` across separate files at question time:
+9 layers, all derived client-side from `data/*.json` at load time (`js/semantic-layer.js`, exposed on `MFB.semantic`) — pre-resolved facts, not raw records the model has to cross-reference itself:
 
-```json
-{
-  "chase": {
-    "name": "JPMorgan Chase",
-    "type": "traditional_bank",
-    "eligibility_summary": { "no_ssn_available": false, "itin_accepted": true, "no_us_credit_history_ok": false },
-    "state_presence": { "CA": 1200, "NY": 980 },
-    "products": [ { "name": "Chase Total Checking", "type": "checking", "monthly_fee": 12, "requires_ssn": false, "accepts_itin": true } ]
-  }
-}
-```
+- **(a) Per-institution view** (`perInstitution(bankId)`) — flattened per-bank profile: eligibility summary, confirmed state presence, `relationship_programs`/`referral_program`, full product catalog.
+- **(b) Cross-institution product-type index** (`all_checking_accounts`/`all_savings_accounts`/`all_credit_cards`) — all 15 institutions side by side on comparable fields.
+- **(c) Precomputed eligibility index** (`eligibilityIndex`) — no-SSN/ITIN/no-credit-history product IDs, resolved once.
+- **(d) Inverted geographic index** (`geographicIndex`) — `{"TX": {"chase": 650, ...}}`, confirmed-present branch counts only.
+- **(e) Credit card rewards/benefits index** (`rewardsIndex`).
+- **(f) Precomputed rankings** (`rankings`) — checking by fee ascending, savings by APY descending, etc.
+- **(g) "Alternative path" index** (`alternativePaths`) — Zolve/Firstcard/Nova Credit/HSBC pre-grouped for someone with no US SSN/ITIN/credit history.
+- **(h) Static glossary** (`glossary`) — the one hand-written, non-derived layer.
+- **(i) Bank-level relationship/referral program index** (`bankProgramsIndex`) — compact `{bank_id, name, relationship_programs, referral_program}` for all 15 institutions (added after live testing found that a no-context question naming a bank by name — "does Chase have a referral program?" — had nowhere to look this up, since it otherwise only lives inside layer (a)).
+
+**Layer selection is unconditional for the cross-institution layers (b, c, g, i) — every call gets them, regardless of context.** Bank-context and compare-context calls *add* layer (a) for the specific institution(s) on top; they never replace the baseline with it. (An earlier version of `js/agent.js` got this backwards — bank/compare context fully replaced the baseline instead of adding to it, so a question naming a different institution while one was in context had nothing to answer from. Fixed; see `data/RESEARCH_NOTES.md`-style history in the plan/commit log if relevant.) Filtered-search maps its 5 fields onto the relevant layers directly instead of sending the baseline — e.g. priority=lowest-fees → (f), priority=branches-nearby → (d) sliced to the requested state, priority=building-credit → (g)/(c).
 
 - Include a short field glossary in the system prompt so the model interprets fields exactly as defined (e.g. clarify that `no_us_credit_history_ok` means at least one product doesn't require it, and the agent should still check the specific product before stating details).
-- Two versions of this view: a **compact** one (all 15 institutions, key fields only) for open questions with no prior context, and a **full** one (only the 1-4 institutions/products already in scope) for bank-context, compare-context, and filtered-search calls — this keeps token usage proportional to how narrow the question already is.
-- Use prompt caching for the system prompt + compact dataset view, since it's identical across most calls and changes only when the underlying data is manually refreshed.
+- The Worker sends the layers in separate `cache_control` blocks — the cross-institution baseline (stable across every call) and the context-specific addition (only present for bank/compare context) — in that prefix order, so a context switch only busts the smaller block, not the shared baseline. See `worker/README.md` for the measured token/cost numbers.
 
 ### Costs and rate limiting
 - Model: Claude Haiku 4.5.

@@ -86,6 +86,24 @@ body {
   }
 }
 
+/* Ask the Agent: typing indicator + streaming cursor. Both are plain CSS
+   animations, so the existing prefers-reduced-motion block below (which
+   already zeroes out animation-duration/iteration-count globally via a `*`
+   selector) neutralizes them automatically — no separate override needed. */
+.mfb-typing-dot {
+  animation: mfb-typing-pulse 1.2s ease-in-out infinite;
+}
+.mfb-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.mfb-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes mfb-typing-pulse {
+  0%, 60%, 100% { opacity: 0.3; transform: scale(0.85); }
+  30% { opacity: 1; transform: scale(1); }
+}
+@keyframes mfb-cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
 /* Page transition helpers (Browse Banks <-> Bank Detail), applied via Alpine x-transition in app.js */
 .mfb-page-enter {
   animation: mfb-slide-fade-in 300ms ease-in-out;

@@ -10,6 +10,11 @@ compatibility_date = "2026-01-01"
 ALLOWED_ORIGIN = "https://juanjochiarellar.github.io"
 
 # Created via: wrangler kv namespace create RATE_LIMIT_KV
+# KNOWN LIMITATION: this counter is not atomic under rapid concurrent
+# requests from the same IP -- see the comment in src/index.js and
+# worker/README.md's "Rate limiting" section. Cloudflare's native Rate
+# Limiting binding was tried as a fix and also failed to enforce in live
+# testing; reverted to this original KV design pending a real fix.
 [[kv_namespaces]]
 binding = "RATE_LIMIT_KV"
 id = "edd92865c31b437c800fcbd8fae4283f"

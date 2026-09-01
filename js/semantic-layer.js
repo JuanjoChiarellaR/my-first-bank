@@ -189,6 +189,26 @@ MFB.dataReady.then(() => {
     { bank_id: "hsbc", why: "Premier program allows opening a US account remotely with a passport, before arriving, for existing HSBC customers abroad." },
   ].map((entry) => ({ ...entry, name: bankName(entry.bank_id) }));
 
+  // --- (i) Bank-level relationship/referral program index -----------------
+  // Lightweight and bank-level (not product-level like layer b) so a
+  // no-context question that simply NAMES a bank ("does Chase have a
+  // referral program?") can be answered without bank-context ever being
+  // loaded — relationship_programs/referral_program otherwise only exist
+  // inside perInstitution()'s output (layer a). Covers all 15 institutions,
+  // not just the 13 with something real: the 2 with neither
+  // (wells_fargo, nova_credit) are included with their actual confirmed-
+  // none shape (relationship_programs: [], referral_program: null) rather
+  // than omitted — an omission here would read exactly like the "not yet
+  // verified" case the three-value state model exists to distinguish from
+  // "confirmed absent," for a fact that's actually confirmed.
+  const bankProgramsIndex = banks
+    .map((b) => ({
+      bank_id: b.bank_id,
+      name: b.name,
+      relationship_programs: b.relationship_programs ?? [],
+      referral_program: b.referral_program ?? null,
+    }));
+
   // --- (h) Static glossary (hand-written, not derived from the JSONs) ------
   const glossary = {
     SSN: "Social Security Number — the primary US tax/identity number, usually only available to those authorized to work in the US.",
@@ -211,6 +231,7 @@ MFB.dataReady.then(() => {
     rewardsIndex,
     rankings,
     alternativePaths,
+    bankProgramsIndex,
     glossary,
   };
 });

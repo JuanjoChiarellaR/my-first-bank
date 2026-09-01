@@ -63,18 +63,45 @@
           Refresh won't reset this &mdash; it's tied to your browser. Explore <a href="index.html" class="underline">Browse Banks</a> or <a href="compare.html" class="underline">Compare</a> in the meantime.
         </div>
 
+        <!-- Empty state: example starter questions, shown before the first message -->
+        <div x-show="messages.length === 0" class="mb-6 border border-border bg-surface rounded-lg p-5">
+          <p class="text-sm text-ink-secondary mb-3">Not sure where to start? Try one of these:</p>
+          <div class="flex flex-col gap-2 items-start">
+            <template x-for="example in exampleQuestions" :key="example">
+              <button type="button" @click="askExample(example)" :disabled="sessionExhausted"
+                      class="text-sm text-left border border-border rounded-full px-3 py-1.5 hover:bg-hover disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                      x-text="example"></button>
+            </template>
+          </div>
+        </div>
+
         <!-- Chat messages -->
-        <div class="space-y-3 mb-6" aria-live="polite">
+        <div class="space-y-3 mb-6" aria-live="polite" x-ref="chatLog">
           <template x-for="(m, i) in messages" :key="i">
-            <div :class="m.role === 'user' ? 'text-right' : 'text-left'">
+            <div class="flex items-end gap-2" :class="m.role === 'user' ? 'justify-end' : 'justify-start'"
+                 x-transition:enter="transition ease-in-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-1"
+                 x-transition:enter-end="opacity-100 translate-y-0">
+              <img x-show="m.role !== 'user'" src="assets/logos/_mark.svg" alt="" class="w-6 h-6 flex-shrink-0 mb-0.5" onerror="this.style.display='none'">
               <div class="inline-block max-w-[85%] rounded-lg px-4 py-2.5 text-sm text-left"
                    :class="m.role === 'user' ? 'bg-ink text-white' : m.role === 'system' ? 'bg-hover text-ink-secondary border border-border' : 'bg-surface border border-border'">
                 <span x-text="m.text" style="white-space: pre-wrap;"></span>
+                <span x-show="i === streamingIndex && m.text" class="inline-block w-1.5 h-3.5 bg-ink-secondary ml-0.5 align-middle" style="animation: mfb-cursor-blink 1s step-end infinite;"></span>
               </div>
             </div>
           </template>
-          <div x-show="sending" class="text-sm text-ink-secondary">Thinking&hellip;</div>
-          <div x-show="sendError" x-text="sendError" class="text-sm text-ink-secondary"></div>
+
+          <!-- Typing indicator: shown while waiting for the first streamed token -->
+          <div x-show="showTypingIndicator()" class="flex items-end gap-2 justify-start">
+            <img src="assets/logos/_mark.svg" alt="" class="w-6 h-6 flex-shrink-0 mb-0.5" onerror="this.style.display='none'">
+            <div class="inline-flex items-center gap-1 rounded-lg px-4 py-3 bg-surface border border-border">
+              <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+            </div>
+          </div>
+
+          <div x-show="sendError" x-cloak class="text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5" x-text="sendError"></div>
         </div>
 
         <!-- Mode toggle -->

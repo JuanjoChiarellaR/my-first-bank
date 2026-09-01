@@ -6,10 +6,22 @@
 //   ANTHROPIC_API_KEY  (secret)  — `wrangler secret put ANTHROPIC_API_KEY`
 //   ALLOWED_ORIGIN     (var)     — the live GitHub Pages origin, e.g.
 //                                  "https://username.github.io"
-//   RATE_LIMIT_KV      (KV namespace binding) — per-IP request counter
+//   RATE_LIMIT_KV      (KV namespace binding) — per-IP request counter.
+//   KNOWN LIMITATION (see worker/README.md "Rate limiting"): this counter
+//   is not atomic under rapid concurrent requests from the same IP -- KV's
+//   eventual consistency means fast-fired requests can each read a stale
+//   pre-increment value. Confirmed live: 30+ rapid sequential requests from
+//   one IP never triggered the limit. Cloudflare's native Rate Limiting
+//   binding was tried as a fix and also failed to enforce in live testing
+//   (30 requests across two separate 60s windows, same IP, all allowed) --
+//   root cause not yet identified. Left as this original implementation
+//   pending a decision on the real fix (most likely Durable Objects, the
+//   only genuinely atomic per-key option on this platform). The $20/month
+//   Anthropic spend cap remains the actual hard financial backstop
+//   regardless of this layer's precision.
 
 const MODEL = "claude-haiku-4-5";
-const WORKER_RATE_LIMIT_PER_HOUR = 30; // per IP, independent of the client's 10/session cap
+const WORKER_RATE_LIMIT_PER_HOUR = 30; // per IP, independent of the client's 10/session cap — see limitation note above
 
 function corsHeaders(env, request) {
   const origin = request.headers.get("Origin");
@@ -22,6 +34,14 @@ function corsHeaders(env, request) {
   };
 }
 
+// Cloudflare's native Rate Limiting binding — atomic, unlike the original
+// hand-rolled KV get-then-put counter this replaced. That design looked
+// correct in code review but failed under real rapid-fire testing: KV
+// isn't strongly consistent, so concurrent requests from the same IP could
+// each read a stale pre-increment count and all get allowed through,
+// letting the observed counter value jump backward between requests
+// instead of climbing monotonically — caught by literally trying to
+// trigger the limit live, not by reading the implementation.
 async function checkRateLimit(env, ip) {
   if (!env.RATE_LIMIT_KV) return true; // fail open if KV isn't bound yet, rather than breaking the whole agent
   const key = `rl:${ip}:${Math.floor(Date.now() / 3600000)}`; // one bucket per IP per hour
@@ -64,9 +84,31 @@ export default {
       return new Response(JSON.stringify({ error: "Invalid JSON body" }), { status: 400, headers });
     }
 
-    const { system, mode, question, layers } = body || {};
+    const { system, mode, question, layers, contextLayers } = body || {};
     if (!system || !question || !layers) {
       return new Response(JSON.stringify({ error: "Missing system, question, or layers" }), { status: 400, headers });
+    }
+
+    // Three cacheable system blocks, in a stable-content-first prefix order
+    // (required for prompt caching to hit on a shared prefix even when a
+    // later block changes): instructions (identical every call), the
+    // cross-institution baseline (identical across EVERY call now — see
+    // js/agent.js's buildContextLayers, which used to only send this for
+    // no-context calls, a real bug), and the current-page context (only
+    // present for bank/compare context, and the only block a context
+    // switch busts — a no-context question after a bank-context one no
+    // longer re-pays for the large shared baseline, only for this small
+    // block appearing/disappearing).
+    const systemBlocks = [
+      { type: "text", text: system, cache_control: { type: "ephemeral" } },
+      { type: "text", text: `Dataset context (JSON):\n${JSON.stringify(layers)}`, cache_control: { type: "ephemeral" } },
+    ];
+    if (contextLayers) {
+      systemBlocks.push({
+        type: "text",
+        text: `Current page context (JSON):\n${JSON.stringify(contextLayers)}`,
+        cache_control: { type: "ephemeral" },
+      });
     }
 
     try {
@@ -80,18 +122,8 @@ export default {
         body: JSON.stringify({
           model: MODEL,
           max_tokens: 400,
-          // Two cacheable system blocks: the instructions (identical on every
-          // call) and the dataset layers (identical across consecutive calls
-          // that share the same context/mode, e.g. several no-context open
-          // questions in a row). Splitting them means a context switch — say,
-          // opening a bank-context chat after a no-context one — only busts
-          // the smaller, cheaper block, not the shared instructions too. The
-          // actual per-call question goes in the user message, which is never
-          // cached (it's different every time by definition).
-          system: [
-            { type: "text", text: system, cache_control: { type: "ephemeral" } },
-            { type: "text", text: `Dataset context (JSON):\n${JSON.stringify(layers)}`, cache_control: { type: "ephemeral" } },
-          ],
+          stream: true,
+          system: systemBlocks,
           messages: [
             { role: "user", content: buildUserContent(mode, question) },
           ],
@@ -106,10 +138,11 @@ export default {
         });
       }
 
-      const data = await anthropicRes.json();
-      const reply = data.content?.[0]?.text || "";
-      return new Response(JSON.stringify({ reply }), {
-        headers: { ...headers, "Content-Type": "application/json" },
+      // Pass Anthropic's SSE stream straight through — the Worker stays a
+      // thin proxy, no server-side re-parsing. js/agent.js's dispatch()
+      // reads and interprets the content_block_delta events on the client.
+      return new Response(anthropicRes.body, {
+        headers: { ...headers, "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
       });
     } catch (err) {
       return new Response(JSON.stringify({ error: "Worker error", detail: String(err) }), { status: 500, headers });

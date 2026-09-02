@@ -310,7 +310,7 @@ The agent participates in **exactly one section of the site: Ask the Agent.** No
 
 ## Analytics
 
-GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks: page views, which filters get used most, how many users reach Ask the Agent. Purely aggregate — no user-level tracking. Shipped with a placeholder site code until a GoatCounter account exists; see the comment in the snippet for where to swap it in.
+GoatCounter (free indefinitely, no cookies, no consent banner required). Tracks: page views, which filters get used most, how many users reach Ask the Agent. Purely aggregate — no user-level tracking. Live site code: `myfirstbank` (`myfirstbank.goatcounter.com`). The tracking snippet is injected once from `js/shell.js` (same shared-component pattern as the navbar/footer) rather than duplicated across all 20 pages.
 
 ## Stack
 

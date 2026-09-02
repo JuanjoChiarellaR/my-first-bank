@@ -57,6 +57,18 @@
     </footer>
   `;
 
+  // GoatCounter: privacy-friendly, cookie-free page-view analytics. One
+  // injection point here instead of a <script> tag duplicated across all 20
+  // pages — see README.md's "Analytics" section for what it does and doesn't
+  // track. Site: https://myfirstbank.goatcounter.com
+  function injectAnalytics() {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "//gc.zgo.at/count.js";
+    s.dataset.goatcounter = "https://myfirstbank.goatcounter.com/count";
+    document.head.appendChild(s);
+  }
+
   function renderComparePill() {
     let pill = document.getElementById("mfb-compare-pill");
     const count = window.MFB && MFB.compare ? MFB.compare.count() : 0;
@@ -80,6 +92,7 @@
     const footerMount = document.getElementById("site-footer");
     if (navMount) navMount.outerHTML = navbarHtml;
     if (footerMount) footerMount.outerHTML = footerHtml;
+    injectAnalytics();
 
     MFB.dataReady?.finally(() => {
       renderComparePill();

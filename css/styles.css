@@ -96,10 +96,16 @@ body {
   }
 }
 
-/* Ask the Agent: typing indicator + streaming cursor. Both are plain CSS
-   animations, so the existing prefers-reduced-motion block below (which
-   already zeroes out animation-duration/iteration-count globally via a `*`
-   selector) neutralizes them automatically — no separate override needed. */
+/* Ask the Agent: typing indicator + the reveal cursor (blinks while a
+   message is mid-reveal — see revealText() in js/agent.js; not a real
+   network stream, the Worker returns one buffered, compliance-checked
+   reply and this animates it client-side). Both are plain CSS animations,
+   so the existing prefers-reduced-motion block below (which already
+   zeroes out animation-duration/iteration-count globally via a `*`
+   selector) neutralizes them automatically — no separate override needed.
+   revealText() itself has its own separate prefers-reduced-motion check
+   (a JS matchMedia call, since it's not a CSS animation) that skips the
+   reveal timer entirely and shows the full text immediately. */
 .mfb-typing-dot {
   animation: mfb-typing-pulse 1.2s ease-in-out infinite;
 }

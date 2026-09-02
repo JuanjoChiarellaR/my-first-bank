@@ -92,26 +92,33 @@
                    :class="[m.role === 'user' ? 'max-w-[85%] bg-ink text-white' : 'max-w-full',
                             m.role === 'system' ? 'bg-hover text-ink-secondary border border-border' : m.role !== 'user' ? 'bg-surface border border-border' : '']">
                 <!-- Assistant messages render as sanitized markdown (tables, bold,
-                     lists) once streaming finishes; user text and in-progress
-                     streams stay plain text — see isMarkdownRenderable() in agent.js. -->
+                     lists) once their reveal animation finishes; user text and
+                     mid-reveal messages stay plain text — see isMarkdownRenderable()
+                     in agent.js. -->
                 <template x-if="isMarkdownRenderable(i)">
                   <div class="mfb-agent-md" x-html="renderMarkdown(m.text)"></div>
                 </template>
                 <template x-if="!isMarkdownRenderable(i)">
                   <span x-text="m.text" style="white-space: pre-wrap;"></span>
                 </template>
-                <span x-show="i === streamingIndex && m.text" class="inline-block w-1.5 h-3.5 bg-ink-secondary ml-0.5 align-middle" style="animation: mfb-cursor-blink 1s step-end infinite;"></span>
+                <span x-show="i === revealIndex && m.text" class="inline-block w-1.5 h-3.5 bg-ink-secondary ml-0.5 align-middle" style="animation: mfb-cursor-blink 1s step-end infinite;"></span>
               </div>
             </div>
           </template>
 
-          <!-- Typing indicator: shown while waiting for the first streamed token -->
+          <!-- Typing indicator: shown for the Worker's full round trip (draft,
+               then compliance-check — see worker/src/index.js). Copy cycles
+               through startTypingPhaseCycle()'s tuned elapsed-time thresholds
+               so the wait reads as intentional care, not a stall. -->
           <div x-show="showTypingIndicator()" class="flex items-end gap-2 justify-start">
             <img src="assets/logos/_mark.svg" alt="" class="w-6 h-6 flex-shrink-0 mb-0.5" onerror="this.style.display='none'">
-            <div class="inline-flex items-center gap-1 rounded-lg px-4 py-3 bg-surface border border-border">
-              <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
-              <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
-              <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+            <div class="inline-flex items-center gap-2 rounded-lg px-4 py-3 bg-surface border border-border">
+              <span class="inline-flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-ink-placeholder mfb-typing-dot"></span>
+              </span>
+              <span class="text-xs text-ink-secondary" x-text="typingPhaseCopy()"></span>
             </div>
           </div>
 

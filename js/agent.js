@@ -23,7 +23,7 @@ Non-negotiable rules:
 7. State/branch data follows a three-value model: confirmed present, confirmed absent, or not yet verified. If asked about a bank/state combination with no confirmed-present data in the provided dataset, say so plainly — e.g. "No confirmed branches found for [Bank] in [State] as of [date] — verify directly with the bank." Never say or imply a bank is "not available" in a state just because it's missing from the data; missing means unconfirmed, not absent. This is a factual-accuracy rule, so keep this phrasing pattern exact even though your overall tone is warm.
 8. A product's "can open online" field describes its GENERAL/standard opening flow (for someone with an SSN). Its "no-SSN requirements" field, when present, describes a SEPARATE, specific pathway for opening without an SSN (e.g. passport + F-1 visa + I-20), which is often in-person-only even when the general product is online-capable. These two facts can both be true for the same product at once — never present one as overriding or contradicting the other. If asked whether a product with no-SSN requirements can be opened online, explain both: the general online path (requires SSN) and the no-SSN path (its own actual requirements), rather than picking one answer.
 9. The dataset you're given always covers all 15 institutions, no matter what's shown as context. Context (a bank page the user was just viewing, or products they're comparing) only tells you what they were just looking at — it never limits what you can discuss. If a user asks about an institution that isn't the one in context, answer normally from the full dataset provided; never say you lack access to an institution that's actually present in it.
-10. When comparing multiple products, format the comparison as a standard markdown table — a header row, a separator row of dashes, then one data row per product — not a wall of prose. Cap any single table at 8 products. If more than 8 genuinely match the question, pick the 8 most relevant to what was actually asked, then say plainly that there are more: point to Compare (up to 4 products side by side there) for an exact comparison, or suggest narrowing the request (by state, eligibility, product type) for a more focused table. Never silently cut a table off mid-row without explaining why.
+10. When comparing multiple products, format the comparison as a standard markdown table — a header row, a separator row of dashes, then one data row per product — not a wall of prose. **A table is never longer than 8 data rows, no matter how the question is phrased** — this is a hard cap, not a suggestion, and it applies even if the user explicitly asks for "all," "every," or "the entire" dataset in one table. If more than 8 products genuinely match the question, pick the 8 most relevant to what was actually asked, then say plainly in the text after the table that there are more (name roughly how many): point to Compare (up to 4 products side by side there) for an exact comparison, or suggest narrowing the request (by state, eligibility, product type) for a more focused table. Never silently cut a table off mid-row without explaining why — and never respond to an "all/every" request by simply listing more than 8 rows anyway.
 
 Field glossary: "no_ssn_available"/"accepts_no_ssn" means at least one product doesn't require an SSN — check the specific product before stating details. "no_us_credit_history_ok" means at least one credit card from that institution doesn't require existing US credit history. "itin_accepted" means at least one product accepts an ITIN in place of an SSN. "no_ssn_requirements" lists the actual real-world requirements for that no-SSN pathway (e.g. passport, specific visa type, in-person application) — cite these specifics when known rather than speaking generically. "relationship_programs" and "referral_program" (in bank_programs_index, and in full detail for the institution in context) cover bank-wide relationship-tier and referral programs — check the specific bank's entry before saying one doesn't have something.`;
 
@@ -37,6 +37,9 @@ Field glossary: "no_ssn_available"/"accepts_no_ssn" means at least one product d
 // raw HTML/images from the model as a first layer, but that alone isn't a
 // substitute for sanitizing the final output.
 const mdRenderer = new marked.Renderer();
+const MD_ROW_MARKER = '<tr class="border-b border-border last:border-b-0">';
+const MD_TABLE_ROW_CAP = 8;
+
 mdRenderer.table = (header, body) => {
   // Tables with more than 3 columns are the ones actually likely to need
   // horizontal scroll on a phone-width screen (same 4-column legibility
@@ -45,9 +48,25 @@ mdRenderer.table = (header, body) => {
   // shows a misleading "there's more" hint on its own right edge.
   const columnCount = (header.match(/<th/g) || []).length;
   const scrollClass = columnCount > 3 ? " mfb-table-scroll" : "";
-  return `<div class="overflow-x-auto -mx-1 my-2 border border-border rounded-md${scrollClass}"><table class="w-full text-xs border-collapse"><thead>${header}</thead><tbody>${body}</tbody></table></div>`;
+
+  // Client-side hard backstop for SYSTEM_PROMPT rule 10's 8-row cap. Live
+  // testing found the model doesn't reliably self-limit when a question is
+  // phrased as "every institution" — it produced 36+ rows despite the
+  // prompt rule. A stronger instruction alone is still probabilistic;
+  // truncating here guarantees the cap regardless of what the model does,
+  // with the same "never silently truncate without explanation" note the
+  // prompt itself was already required to give.
+  const rows = body.split(MD_ROW_MARKER).filter(Boolean);
+  let finalBody = body;
+  let overflowNote = "";
+  if (rows.length > MD_TABLE_ROW_CAP) {
+    finalBody = rows.slice(0, MD_TABLE_ROW_CAP).map((r) => MD_ROW_MARKER + r).join("");
+    overflowNote = `<p class="text-xs text-ink-secondary mt-2">Showing the first ${MD_TABLE_ROW_CAP} of ${rows.length} matching products. Use <a href="compare.html" class="underline">Compare</a> for an exact side-by-side of up to 4, or ask a narrower question (by state, eligibility, or product type) for a more focused table.</p>`;
+  }
+
+  return `<div class="overflow-x-auto -mx-1 my-2 border border-border rounded-md${scrollClass}"><table class="w-full text-xs border-collapse"><thead>${header}</thead><tbody>${finalBody}</tbody></table></div>${overflowNote}`;
 };
-mdRenderer.tablerow = (content) => `<tr class="border-b border-border last:border-b-0">${content}</tr>`;
+mdRenderer.tablerow = (content) => `${MD_ROW_MARKER}${content}</tr>`;
 mdRenderer.tablecell = (content, flags) => {
   const tag = flags.header ? "th" : "td";
   const alignClass = flags.align ? ` text-${flags.align}` : "";

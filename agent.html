@@ -38,6 +38,11 @@
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <!-- Rendering the agent's markdown replies (tables, bold, lists) safely:
+       marked.js parses GFM markdown, DOMPurify sanitizes the output before
+       it's ever inserted into the page. See js/agent.js's mdToSafeHtml(). -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 </head>
 <body data-page="agent" class="bg-bg text-ink font-sans antialiased">
   <div id="site-navbar"></div>
@@ -83,9 +88,18 @@
                  x-transition:enter-start="opacity-0 translate-y-1"
                  x-transition:enter-end="opacity-100 translate-y-0">
               <img x-show="m.role !== 'user'" src="assets/logos/_mark.svg" alt="" class="w-6 h-6 flex-shrink-0 mb-0.5" onerror="this.style.display='none'">
-              <div class="inline-block max-w-[85%] rounded-lg px-4 py-2.5 text-sm text-left"
-                   :class="m.role === 'user' ? 'bg-ink text-white' : m.role === 'system' ? 'bg-hover text-ink-secondary border border-border' : 'bg-surface border border-border'">
-                <span x-text="m.text" style="white-space: pre-wrap;"></span>
+              <div class="inline-block rounded-lg px-4 py-2.5 text-sm text-left"
+                   :class="[m.role === 'user' ? 'max-w-[85%] bg-ink text-white' : 'max-w-full',
+                            m.role === 'system' ? 'bg-hover text-ink-secondary border border-border' : m.role !== 'user' ? 'bg-surface border border-border' : '']">
+                <!-- Assistant messages render as sanitized markdown (tables, bold,
+                     lists) once streaming finishes; user text and in-progress
+                     streams stay plain text — see isMarkdownRenderable() in agent.js. -->
+                <template x-if="isMarkdownRenderable(i)">
+                  <div class="mfb-agent-md" x-html="renderMarkdown(m.text)"></div>
+                </template>
+                <template x-if="!isMarkdownRenderable(i)">
+                  <span x-text="m.text" style="white-space: pre-wrap;"></span>
+                </template>
                 <span x-show="i === streamingIndex && m.text" class="inline-block w-1.5 h-3.5 bg-ink-secondary ml-0.5 align-middle" style="animation: mfb-cursor-blink 1s step-end infinite;"></span>
               </div>
             </div>

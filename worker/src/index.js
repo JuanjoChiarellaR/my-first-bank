@@ -121,7 +121,14 @@ export default {
         },
         body: JSON.stringify({
           model: MODEL,
-          max_tokens: 400,
+          // Raised from 400: an 8-product table with per-row detail (the
+          // cap SYSTEM_PROMPT rule 10 sets) runs an estimated 500-700 output
+          // tokens, and 400 would truncate it mid-row. This is a ceiling,
+          // not a fixed cost — short/typical replies aren't billed any more
+          // for the higher cap, only genuinely long ones get the room they
+          // need. Set directly without a prior measurement pass; verified
+          // post-deploy with a real 8-product comparison question instead.
+          max_tokens: 1000,
           stream: true,
           system: systemBlocks,
           messages: [

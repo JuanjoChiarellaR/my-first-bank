@@ -71,6 +71,16 @@ body {
   mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
 }
 
+/* Ask the Agent: horizontal scroll affordance for a rendered markdown table
+   with more than 3 columns (js/agent.js's mdRenderer.table only applies this
+   class past that threshold). Same rationale as .flip-card-back's fade
+   above: a static mask, not a JS-computed one, so it can only ever suggest
+   scrolling is possible, never hide real content. */
+.mfb-table-scroll {
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
+  mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
+}
+
 /* Respect the OS-level reduced-motion preference everywhere, not just page transitions. */
 @media (prefers-reduced-motion: reduce) {
   *,

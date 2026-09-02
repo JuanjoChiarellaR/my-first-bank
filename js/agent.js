@@ -19,12 +19,79 @@ Non-negotiable rules:
 3. Only use the dataset provided to you in this conversation. Never draw on general knowledge you may have about these institutions from training — if the dataset doesn't cover something, say so plainly and warmly instead of filling the gap, e.g. "I don't have that one in front of me for Chase — worth checking their site directly."
 4. Refuse out-of-scope questions (visa status, immigration law, tax filing, general financial or legal advice) warmly and briefly — name what they're actually asking, say plainly it's outside what you can help with here, then point to what you can do. E.g.: "That's more of an immigration-lawyer question than a banking one — not something I can help with here. But if you're trying to figure out which bank to open with as a newcomer, I've got you." Never a formal disclaimer-style refusal.
 5. Never ask for or store personal identifiers. If a user pastes something like a full SSN or account number, gently note they don't need to share that to get an answer, and don't repeat it back.
-6. Keep responses short — about 4 lines. Always include a brief reminder to verify current terms directly with the bank, and that the data has a last_verified_date (shown in the dataset).
+6. Keep typical conversational answers short — about 4 lines. When the user explicitly asks for a structured comparison across several products (a table, a multi-item list), use the format and length that comparison actually needs — a multi-row table is the correct answer to that question, not a rule violation. Always include a brief reminder to verify current terms directly with the bank, and that the data has a last_verified_date (shown in the dataset).
 7. State/branch data follows a three-value model: confirmed present, confirmed absent, or not yet verified. If asked about a bank/state combination with no confirmed-present data in the provided dataset, say so plainly — e.g. "No confirmed branches found for [Bank] in [State] as of [date] — verify directly with the bank." Never say or imply a bank is "not available" in a state just because it's missing from the data; missing means unconfirmed, not absent. This is a factual-accuracy rule, so keep this phrasing pattern exact even though your overall tone is warm.
 8. A product's "can open online" field describes its GENERAL/standard opening flow (for someone with an SSN). Its "no-SSN requirements" field, when present, describes a SEPARATE, specific pathway for opening without an SSN (e.g. passport + F-1 visa + I-20), which is often in-person-only even when the general product is online-capable. These two facts can both be true for the same product at once — never present one as overriding or contradicting the other. If asked whether a product with no-SSN requirements can be opened online, explain both: the general online path (requires SSN) and the no-SSN path (its own actual requirements), rather than picking one answer.
 9. The dataset you're given always covers all 15 institutions, no matter what's shown as context. Context (a bank page the user was just viewing, or products they're comparing) only tells you what they were just looking at — it never limits what you can discuss. If a user asks about an institution that isn't the one in context, answer normally from the full dataset provided; never say you lack access to an institution that's actually present in it.
+10. When comparing multiple products, format the comparison as a standard markdown table — a header row, a separator row of dashes, then one data row per product — not a wall of prose. Cap any single table at 8 products. If more than 8 genuinely match the question, pick the 8 most relevant to what was actually asked, then say plainly that there are more: point to Compare (up to 4 products side by side there) for an exact comparison, or suggest narrowing the request (by state, eligibility, product type) for a more focused table. Never silently cut a table off mid-row without explaining why.
 
 Field glossary: "no_ssn_available"/"accepts_no_ssn" means at least one product doesn't require an SSN — check the specific product before stating details. "no_us_credit_history_ok" means at least one credit card from that institution doesn't require existing US credit history. "itin_accepted" means at least one product accepts an ITIN in place of an SSN. "no_ssn_requirements" lists the actual real-world requirements for that no-SSN pathway (e.g. passport, specific visa type, in-person application) — cite these specifics when known rather than speaking generically. "relationship_programs" and "referral_program" (in bank_programs_index, and in full detail for the institution in context) cover bank-wide relationship-tier and referral programs — check the specific bank's entry before saying one doesn't have something.`;
+
+// --- Markdown rendering for assistant messages ------------------------------
+// The model is instructed (SYSTEM_PROMPT rule 10) to format multi-product
+// comparisons as GFM markdown tables, and naturally uses **bold**/lists
+// elsewhere. Rendered via marked.js with a custom renderer that emits only
+// this site's own Tailwind classes (never anything from the model's output),
+// then sanitized through DOMPurify with a strict tag/attribute allowlist —
+// DOMPurify is the actual security boundary here; the renderer already drops
+// raw HTML/images from the model as a first layer, but that alone isn't a
+// substitute for sanitizing the final output.
+const mdRenderer = new marked.Renderer();
+mdRenderer.table = (header, body) => {
+  // Tables with more than 3 columns are the ones actually likely to need
+  // horizontal scroll on a phone-width screen (same 4-column legibility
+  // threshold Compare's own UI already uses) — only those get the scroll
+  // affordance fade, so a small 2-3 column table that already fits never
+  // shows a misleading "there's more" hint on its own right edge.
+  const columnCount = (header.match(/<th/g) || []).length;
+  const scrollClass = columnCount > 3 ? " mfb-table-scroll" : "";
+  return `<div class="overflow-x-auto -mx-1 my-2 border border-border rounded-md${scrollClass}"><table class="w-full text-xs border-collapse"><thead>${header}</thead><tbody>${body}</tbody></table></div>`;
+};
+mdRenderer.tablerow = (content) => `<tr class="border-b border-border last:border-b-0">${content}</tr>`;
+mdRenderer.tablecell = (content, flags) => {
+  const tag = flags.header ? "th" : "td";
+  const alignClass = flags.align ? ` text-${flags.align}` : "";
+  const base = flags.header
+    ? "text-left font-medium text-ink-secondary bg-hover px-3 py-2 whitespace-nowrap"
+    : "px-3 py-2 align-top";
+  return `<${tag} scope="${flags.header ? "col" : "row"}" class="${base}${alignClass}">${content}</${tag}>`;
+};
+mdRenderer.strong = (text) => `<strong class="font-semibold text-ink">${text}</strong>`;
+mdRenderer.em = (text) => `<em>${text}</em>`;
+mdRenderer.list = (body, ordered) => {
+  const tag = ordered ? "ol" : "ul";
+  return `<${tag} class="${ordered ? "list-decimal" : "list-disc"} pl-5 space-y-1 my-1.5">${body}</${tag}>`;
+};
+mdRenderer.listitem = (text) => `<li class="leading-snug">${text}</li>`;
+mdRenderer.paragraph = (text) => `<p class="mb-2 last:mb-0 leading-relaxed">${text}</p>`;
+mdRenderer.codespan = (code) => `<code class="font-mono text-[11px] bg-hover px-1 py-0.5 rounded">${code}</code>`;
+mdRenderer.code = (code) => `<pre class="font-mono text-[11px] bg-hover px-2 py-1.5 rounded my-1.5 overflow-x-auto"><code>${code}</code></pre>`;
+mdRenderer.hr = () => `<hr class="border-border my-2">`;
+mdRenderer.br = () => "<br>";
+mdRenderer.image = () => ""; // no legitimate use case in a banking-facts chat — stripped entirely
+mdRenderer.html = () => ""; // raw HTML in the model's own output is dropped before it can reach DOMPurify at all
+mdRenderer.link = (href, _title, text) => {
+  try {
+    const url = new URL(href, location.href);
+    if (url.protocol !== "http:" && url.protocol !== "https:") return text;
+    return `<a href="${url.href}" target="_blank" rel="noopener noreferrer" class="underline decoration-border hover:text-ink-secondary">${text}</a>`;
+  } catch {
+    return text;
+  }
+};
+
+const MD_ALLOWED_TAGS = ["table", "thead", "tbody", "tr", "th", "td", "p", "strong", "em", "ul", "ol", "li", "code", "pre", "br", "hr", "div", "a"];
+const MD_ALLOWED_ATTR = ["class", "href", "target", "rel", "scope"];
+
+function mdToSafeHtml(text) {
+  if (!text) return "";
+  try {
+    const html = marked.parse(text, { renderer: mdRenderer, gfm: true, breaks: true });
+    return DOMPurify.sanitize(html, { ALLOWED_TAGS: MD_ALLOWED_TAGS, ALLOWED_ATTR: MD_ALLOWED_ATTR });
+  } catch {
+    return DOMPurify.sanitize(text, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+  }
+}
 
 function getSession() {
   try {
@@ -207,6 +274,18 @@ document.addEventListener("alpine:init", () => {
 
     showTypingIndicator() {
       return this.sending && (this.streamingIndex === -1 || !this.messages[this.streamingIndex]?.text);
+    },
+
+    // Assistant messages render as markdown (tables/bold/lists) once they're
+    // done streaming. While a message is still actively streaming it stays
+    // plain text — re-parsing an in-progress markdown table on every chunk
+    // would flicker/misalign as rows arrive mid-row; rendering happens once,
+    // right when the stream completes, instead.
+    isMarkdownRenderable(i) {
+      return this.messages[i].role === "assistant" && i !== this.streamingIndex;
+    },
+    renderMarkdown(text) {
+      return mdToSafeHtml(text);
     },
 
     scrollToBottom() {

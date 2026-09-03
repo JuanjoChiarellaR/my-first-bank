@@ -52,7 +52,10 @@
         <p>MyFirstBank is an independent, unaffiliated resource. All bank names, logos, and trademarks are the property of their respective owners.</p>
         <p class="pt-2">
           <a href="${base}privacy.html" class="underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Privacy Policy</a>
+          <span class="mx-2 text-ink-placeholder" aria-hidden="true">&middot;</span>
+          <a href="${base}privacy.html#accessibility" class="underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Accessibility</a>
         </p>
+        <p class="text-xs text-ink-placeholder pt-1">Dataset last touched <span id="mfb-last-updated">&hellip;</span> &mdash; individual products may have been verified earlier; see each product's own date.</p>
       </div>
     </footer>
   `;
@@ -67,6 +70,18 @@
     s.src = "//gc.zgo.at/count.js";
     s.dataset.goatcounter = "https://myfirstbank.goatcounter.com/count";
     document.head.appendChild(s);
+  }
+
+  // Footer renders synchronously on DOMContentLoaded, before MFB.dataReady
+  // resolves — the last-updated span starts as an ellipsis placeholder and
+  // gets filled in once the real data (and MFB.globalLastUpdated, computed
+  // in data-loader.js) is available. Same deferred-fill pattern as
+  // renderComparePill below, not a separate mechanism.
+  function renderLastUpdated() {
+    const el = document.getElementById("mfb-last-updated");
+    if (el && window.MFB && MFB.globalLastUpdated) {
+      el.textContent = MFB.globalLastUpdated;
+    }
   }
 
   function renderComparePill() {
@@ -97,6 +112,7 @@
     MFB.dataReady?.finally(() => {
       renderComparePill();
       MFB.compare?.onChange(renderComparePill);
+      renderLastUpdated();
     });
 
     const toggle = document.getElementById("mobile-nav-toggle");

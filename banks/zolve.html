@@ -3,9 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bank — MyFirstBank</title>
-  <meta name="description" content="Compare checking, savings, and credit card details for this institution on MyFirstBank." />
+  <!-- Zolve/zolve are substituted per bank by
+       scripts/generate-bank-pages.py — everything else in this template
+       stays byte-identical across all 15 generated pages, since the visible
+       body content is rendered entirely client-side from the bank_id in the
+       URL (see js/bank-detail.js). Title/description/OG tags are the one
+       exception: those must be correct in the raw static HTML because
+       search engines and social-share crawlers generally don't execute
+       JavaScript. -->
+  <title>Zolve — MyFirstBank</title>
+  <meta name="description" content="Compare checking, savings, and credit card details for Zolve on MyFirstBank." />
   <link rel="icon" href="../assets/logos/_mark.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Zolve — MyFirstBank" />
+  <meta property="og:description" content="Compare checking, savings, and credit card details for Zolve on MyFirstBank." />
+  <meta property="og:image" content="https://juanjochiarellar.github.io/my-first-bank/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://juanjochiarellar.github.io/my-first-bank/banks/zolve.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zolve — MyFirstBank" />
+  <meta name="twitter:description" content="Compare checking, savings, and credit card details for Zolve on MyFirstBank." />
+  <meta name="twitter:image" content="https://juanjochiarellar.github.io/my-first-bank/assets/og-image.png" />
 
   <link rel="stylesheet" href="../css/styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>

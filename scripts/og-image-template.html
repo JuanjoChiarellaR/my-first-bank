@@ -1,0 +1,90 @@
+<!doctype html>
+<!--
+  Source template for assets/og-image.png. Not served by the site — this is
+  a design source file, rendered once via a 1200x630 headless-browser
+  screenshot with zero browser chrome. Regenerate whenever the wordmark,
+  tagline, or design tokens change: open this file, screenshot it at exactly
+  1200x630, save over assets/og-image.png.
+
+  Reuses the site's real design tokens and the exact assets/logos/_mark.svg
+  markup (scaled up) rather than a site screenshot or a redrawn logo.
+-->
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    background: #FAFAF9;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  .canvas {
+    width: 1200px;
+    height: 630px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .mark {
+    width: 168px;
+    height: 168px;
+    margin-bottom: 28px;
+  }
+
+  .wordmark {
+    font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 64px;
+    color: #1F1F1D;
+    letter-spacing: -0.01em;
+  }
+
+  .tagline {
+    margin-top: 18px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+    color: #6B6B65;
+    max-width: 760px;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="MyFirstBank">
+      <defs>
+        <clipPath id="mfb-card-clip">
+          <rect x="15" y="28" width="70" height="46" rx="7" />
+        </clipPath>
+      </defs>
+      <g transform="rotate(-8 50 50)">
+        <rect x="15" y="28" width="70" height="46" rx="7" fill="#FFFFFF" stroke="#E4E3DD" stroke-width="1.5" />
+        <g clip-path="url(#mfb-card-clip)">
+          <rect x="24" y="40" width="13" height="9" rx="1.5" fill="#A3A29B" />
+          <g fill="none" stroke="#6B6B65" stroke-width="2" stroke-linecap="round">
+            <path d="M 73 34 A 5 5 0 0 1 78 29" />
+            <path d="M 69 34 A 9 9 0 0 1 78 25" />
+            <path d="M 65 34 A 13 13 0 0 1 78 21" />
+            <path d="M 61 34 A 17 17 0 0 1 78 17" />
+          </g>
+        </g>
+        <circle cx="83" cy="72" r="11" fill="#3FA76B" stroke="#FFFFFF" stroke-width="2.5" />
+        <path d="M 78 72 L 81.5 75.5 L 88 68" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </svg>
+    <div class="wordmark">MyFirstBank</div>
+    <div class="tagline">Compare US banks and fintechs as a newcomer &mdash; real eligibility details, side by side.</div>
+  </div>
+</body>
+</html>

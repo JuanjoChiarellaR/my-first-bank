@@ -20,7 +20,7 @@
       "linked_premium_checking"
     ],
     "product_url": "chase.com/personal/savings/chase-savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -50,7 +50,7 @@
       "first_6_months_new_customers"
     ],
     "product_url": "bankofamerica.com/deposits/savings/personal-savings-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -80,7 +80,7 @@
       "age_24_or_under"
     ],
     "product_url": "wellsfargo.com/savings-cds/way2save/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -110,7 +110,7 @@
       "first_3_months_new_customers"
     ],
     "product_url": "citi.com/banking/personal-banking-guide/savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -129,7 +129,7 @@
     "monthly_fee_usd": 0,
     "monthly_fee_waiver_conditions": [],
     "product_url": "capitalone.com/bank/savings-accounts/online-performance-savings-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -151,7 +151,7 @@
       "age_under_18"
     ],
     "product_url": "usbank.com/bank-accounts/savings-accounts/bank-smartly-savings.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "I-20",
@@ -178,7 +178,7 @@
       "auto_savings_transfer_25_plus_monthly"
     ],
     "product_url": "pnc.com/en/personal-banking/banking/savings.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "visa",
@@ -207,7 +207,7 @@
       "linked_truist_checking"
     ],
     "product_url": "truist.com/savings/truist-one-savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "in_person_application_required"
@@ -234,7 +234,7 @@
       "one_deposit_per_cycle"
     ],
     "product_url": "https://www.mtb.com/personal/savings-and-cds/relationship-savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -258,7 +258,7 @@
       "primary_holder_62_or_older"
     ],
     "product_url": "https://www.td.com/us/en/personal-banking/savings-accounts/simple",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -277,7 +277,7 @@
     "monthly_fee_usd": null,
     "monthly_fee_waiver_conditions": [],
     "product_url": "https://www.us.hsbc.com/savings-accounts/products/premier/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -296,7 +296,7 @@
     "monthly_fee_usd": 0,
     "monthly_fee_waiver_conditions": [],
     "product_url": "https://www.ally.com/bank/online-savings-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn a $100 bonus by opening a new Ally Savings account and setting up a recurring automated transfer or direct deposit within 30 days, repeated for 3 consecutive months. New customers only; offer through 2026-12-31."
   },
   {
@@ -318,7 +318,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.chase.com/personal/savings/interest-savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -340,7 +340,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.wellsfargo.com/savings-cds/platinum/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -359,7 +359,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.citi.com/banking/savings-account",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -381,7 +381,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.usbank.com/bank-accounts/savings-accounts/elite-money-market.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -403,7 +403,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.td.com/us/en/personal-banking/savings-accounts/signature",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Tiered/relationship interest rate structure (reported by third parties as roughly 0.01%-2.75% APY depending on balance tier, up to $250,000 for top tier, plus a linked-account rate bump) but TD's own product page does not disclose a single current numeric APY without entering a ZIP code, and third-party figures were inconsistent, so apy_current is left null rather than guessed. $2,500 minimum daily balance is required for non-TD ATM fee reimbursement.",
     "welcome_bonus_description": "Earn a $200 bonus by depositing $10,000+ within 20 days of opening and maintaining that balance for 90 additional days. Offer valid through 2026-09-30."
   },
@@ -423,7 +423,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.us.hsbc.com/savings-accounts/products/relationship-savings/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Distinct product from the existing hsbc_premier_savings entry - requires an active HSBC Premier checking account. Pays a Standard APY plus a higher 'Relationship APY' when at least one monthly qualifying behavior is met (e.g. $500+ debit card spend, $5,000+ direct deposits, HSBC-serviced mortgage, or Premier Elite status). Different official/third-party sources returned inconsistent current rate figures (values seen: 0.05% standard / 3.00%, 3.10%, and 4.40% relationship rate depending on source and possible page-template rendering issues), so apy_current is left null rather than reporting an unverified number. Monthly fee and minimum deposit not disclosed on the product page.",
     "no_ssn_requirements": [
       "passport",
@@ -448,7 +448,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.ally.com/bank/money-market-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Tiered APY: <$5,000, $5,000-$24,999.99, and $25,000+ balance tiers; 3.00% APY confirmed on the product page as of 08/24/26 (Ally states rates are variable and subject to change). Includes debit card and check-writing; ATM fees reimbursed up to $10/statement cycle; limited to 10 withdrawals per statement cycle. Ally requires SSN or ITIN and is limited to US citizens/legal residents.",
     "welcome_bonus_description": null
   },
@@ -468,7 +468,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -487,7 +487,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.truist.com/savings/truist-confidence-savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -508,7 +508,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.truist.com/savings/truist-one-money-market",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -530,7 +530,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.mtb.com/personal/savings-and-cds/premium-savings",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -552,7 +552,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.mtb.com/personal/savings-and-cds/preferred-money-market",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   }
 ]

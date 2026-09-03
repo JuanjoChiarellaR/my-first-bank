@@ -103,6 +103,30 @@ MFB.dataReady.then(() => {
     MFB.data.savingsAccounts.find((p) => p.product_id === productId) ||
     MFB.data.creditCards.find((p) => p.product_id === productId) ||
     null;
+
+  // Global "dataset last touched" date — the max last_verified_date across
+  // every product record AND every bank-level relationship/referral program
+  // entry (both are literally the same field name; a bank's logo/app-rating
+  // dates are separate, differently-named fields and intentionally excluded
+  // here). Always computed from the live data, never hardcoded, so it stays
+  // correct the moment any single record's date changes in a future refresh.
+  // ISO 8601 strings sort correctly even when mixing "YYYY-MM" and
+  // "YYYY-MM-DD" granularity (a same-prefix shorter string always sorts
+  // before the longer one), though in practice every date in this dataset
+  // is now the same YYYY-MM-DD granularity.
+  {
+    const dates = [];
+    const collect = (d) => { if (d) dates.push(d); };
+    MFB.data.checkingAccounts.forEach((p) => collect(p.last_verified_date));
+    MFB.data.savingsAccounts.forEach((p) => collect(p.last_verified_date));
+    MFB.data.creditCards.forEach((p) => collect(p.last_verified_date));
+    MFB.data.banks.forEach((b) => {
+      (b.relationship_programs || []).forEach((rp) => collect(rp.last_verified_date));
+      const referral = b.referral_program;
+      (Array.isArray(referral) ? referral : referral ? [referral] : []).forEach((entry) => collect(entry.last_verified_date));
+    });
+    MFB.globalLastUpdated = dates.length ? dates.sort().at(-1) : null;
+  }
 });
 
 // Compare selection — persisted to localStorage so an accidental reload

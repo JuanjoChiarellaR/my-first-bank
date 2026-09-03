@@ -26,7 +26,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "chase.com/personal/checking/total-checking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -62,7 +62,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "bankofamerica.com/deposits/checking/checking-account-advantage-plus-banking/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -99,7 +99,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "wellsfargo.com/checking/everyday/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -132,7 +132,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "citi.com/banking/citi-priority",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Up to $750 bonus, scaled to deposit tier (higher tiers require $30,000+ in new funds within 90 days). Offer through 2026-10-26."
   },
   {
@@ -160,7 +160,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "citi.com/banking/compare-bank-accounts",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn a $325 bonus with 2 or more direct deposits totaling $3,000+ within 90 days; paid between day 90-120. Offer through 2026-10-26."
   },
   {
@@ -185,7 +185,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "capitalone.com/bank/checking-accounts/online-checking-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn a $250 bonus (promo code CHECKING250) or $300 bonus (promo code OFFER300) with 2+ qualifying direct deposits of $500+ each within 75 days of account opening. Not eligible if you've held a 360 Checking, Simply Checking, or Total Control Checking account since 2022-01-01. A separate $250 debit-card bonus is available for 20 purchases of $10+ within 75 days."
   },
   {
@@ -217,7 +217,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "usbank.com/bank-accounts/checking-accounts/bank-smartly-checking.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "I-20",
@@ -250,7 +250,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "pnc.com/en/personal-banking/banking/checking/virtual-wallet.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -280,7 +280,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "truist.com/checking/truist-one-checking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "in_person_application_required"
@@ -309,7 +309,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.mtb.com/personal/checking-accounts/ezchoice-checking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -337,7 +337,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.td.com/us/en/personal-banking/checking-accounts/convenience",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -367,7 +367,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.us.hsbc.com/checking-accounts/products/premier/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Tiered new-account bonus based on total deposits/eligible investments added within 20 days and held 3 consecutive months: $1,500 ($150,000-$249,999), $2,500 ($250,000-$499,999), $3,500 ($500,000-$999,999), $5,000 ($1,000,000+). Offer valid for accounts opened by 2026-08-31; requires staying opted into HSBC marketing emails; bonus paid within 8 weeks."
   },
   {
@@ -392,7 +392,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.ally.com/bank/interest-checking-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn a $100 bonus by opening a new Ally Spending (checking) account, funding it within 30 days, and receiving a qualifying direct deposit within 60 days. New customers only; offer through 2026-12-31."
   },
   {
@@ -417,7 +417,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://zolve.com/us/bank-account",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Base APY 2.02%; +1.03% with active Zolve Credit Card in good standing; +2.06% with $250+/cycle direct deposit; up to 5.13% max APY if all conditions met. A valid SSN or ITIN is required to earn interest/APY (account can still be opened with passport alone, but interest requires SSN/ITIN). Free access to 60,000+ Allpoint ATMs; no incoming wire fee; $20 flat fee for international wire inwards. No mobile check deposit or cash deposit; no Zelle. FDIC insurance (up to $250,000) via partner bank Continental Bank, Salt Lake City, UT.",
     "welcome_bonus_description": null
   },
@@ -448,7 +448,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.chase.com/personal/checking/premier-plus-checking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -476,7 +476,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.chase.com/personal/secure-banking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -510,7 +510,7 @@
     "can_open_online": false,
     "requires_branch_visit": true,
     "product_url": "https://www.chase.com/personal/checking/private-client",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Up to $3,000 bonus for opening Chase Private Client Checking and depositing/maintaining qualifying new money or securities within 45 days, held for 90 days. Offer through 2026-10-14 (exact tier breakpoints not independently confirmed from a primary source)."
   },
   {
@@ -538,7 +538,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.bankofamerica.com/deposits/relationship-banking-account/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Tiered bonus based on qualifying direct deposits within 90 days of account opening: $100 ($2,000+), $300 ($5,000+), $500 ($10,000+). Offer through 2026-09-30."
   },
   {
@@ -567,7 +567,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.bankofamerica.com/deposits/checking/safebalance-banking/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -602,7 +602,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.wellsfargo.com/checking/clear-access-banking/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "F-1 or J-1 visa",
@@ -635,7 +635,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.wellsfargo.com/checking/prime/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -662,7 +662,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.wellsfargo.com/checking/premier/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -689,7 +689,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.citi.com/banking/compare-bank-accounts",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn a $325 bonus with 2 or more direct deposits totaling $3,000+ within 90 days; paid between day 90-120. Offer through 2026-10-26."
   },
   {
@@ -716,7 +716,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.citi.com/banking/citigold",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Up to $1,500 bonus for opening Citigold with qualifying new-money tiers up to $200,000+. Offer through 2026-10-26."
   },
   {
@@ -741,7 +741,7 @@
     "can_open_online": false,
     "requires_branch_visit": true,
     "product_url": "https://www.citi.com/banking/citigold-private-client",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -769,7 +769,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.usbank.com/bank-accounts/checking-accounts/platinum-checking.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -794,7 +794,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.usbank.com/bank-accounts/checking-accounts/checkless-checking.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -821,7 +821,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.td.com/us/en/personal-banking/checking-accounts/essential-banking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "No overdraft fees or overdraft services offered on this account by design (checkless, debit-card only). Monthly fee is not waivable for adult account holders except the 13-17 age exemption.",
     "welcome_bonus_description": null
   },
@@ -852,7 +852,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.td.com/us/en/personal-banking/checking-accounts/complete",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Out-of-network ATM fee waiver only applies to primary account holders aged 17-23; general population does not get reimbursement.",
     "welcome_bonus_description": "Earn a $200 bonus with $500+ in qualifying direct deposits within 60 days of account opening. Offer valid through 2026-09-30. Not available to existing/recent TD checking customers or prior bonus recipients."
   },
@@ -882,7 +882,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/checking/features-and-fees/virtual-wallet-performance-spend.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -911,7 +911,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/checking/features-and-fees/virtual-wallet-performance-select.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn up to $400 with qualifying direct deposits within 60 days of account opening. Offer valid through 2026-08-31; not eligible if you've had a PNC checking account in the last 12 months."
   },
   {
@@ -940,7 +940,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/content/dam/pnc-com/pdf/personal/Checking/service-charges-standard-checking-A.pdf",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "visa",
@@ -974,7 +974,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/checking/simple-checking.html",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "no_ssn_requirements": [
       "passport",
       "visa",
@@ -1010,7 +1010,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.truist.com/checking/truist-confidence-banking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -1037,7 +1037,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.mtb.com/personal/checking-accounts/myway-banking-checking",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -1065,7 +1065,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.mtb.com/personal/checking-accounts/mychoice-plus-checking-account",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": null
   },
   {
@@ -1093,7 +1093,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.mtb.com/personal/checking-accounts/mychoice-premium-checking-account",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "welcome_bonus_description": "Earn a $450 bonus (promo code TM) with $1,000+ in qualifying recurring electronic deposits (payroll, pension, or Social Security only) within 90 days of account opening. Not eligible if you've received an M&T personal checking bonus within the past 12 months. Offer through 2026-08-31."
   },
   {
@@ -1122,7 +1122,7 @@
     "can_open_online": true,
     "requires_branch_visit": false,
     "product_url": "https://www.td.com/us/en/personal-banking/checking-accounts/beyond",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Non-TD ATM surcharges are reimbursed only while the $2,500 minimum daily balance is maintained -- not a universal reimbursement.",
     "welcome_bonus_description": "Earn a $300 bonus with $2,500+ in qualifying direct deposits within 60 days of account opening. Not eligible for existing TD checking customers, accounts closed within the prior 12 months, or prior TD checking bonus recipients. Offer through 2026-09-30."
   }

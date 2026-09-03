@@ -41,7 +41,7 @@
     ],
     "welcome_bonus_description": "$25 statement credit for enrolling in automatic payments within first 3 months",
     "product_url": "creditcards.chase.com/cash-back-credit-cards/freedom/rise",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_customized_cash_rewards_secured",
@@ -81,7 +81,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "bankofamerica.com/credit-cards/products/secured-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "wells_fargo_active_cash",
@@ -121,7 +121,7 @@
     ],
     "welcome_bonus_description": "$200 cash rewards bonus after spending $500 in first 3 months (offer terms vary; verify current amount)",
     "product_url": "wellsfargo.com/credit-cards/active-cash/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_secured_mastercard",
@@ -157,7 +157,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "citi.com/credit-cards/citi-secured-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_quicksilver_cash_rewards",
@@ -198,7 +198,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "capitalone.com/credit-cards/quicksilver/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_quicksilver_secured_cash_rewards",
@@ -238,7 +238,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "capitalone.com/credit-cards/quicksilver-secured/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_altitude_go_visa_signature",
@@ -277,7 +277,7 @@
     ],
     "welcome_bonus_description": "20,000 bonus points after spending $1,000 in first 90 days",
     "product_url": "usbank.com/credit-cards/altitude-go-visa-signature-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_secured_visa",
@@ -311,7 +311,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "usbank.com/credit-cards/secured-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "pnc_core_visa",
@@ -343,7 +343,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "pnc.com/en/personal-banking/banking/credit-cards.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "pnc_secured_credit_card",
@@ -377,7 +377,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "pnc.com/en/personal-banking/banking/credit-cards/pnc-secured-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "truist_enjoy_cash",
@@ -415,7 +415,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "truist.com/credit-cards/enjoy-cash",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "truist_enjoy_cash_secured",
@@ -454,7 +454,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "truist.com/credit-cards/enjoy-cash-secured",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "mt_bank_secured_credit_card",
@@ -490,7 +490,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.mtb.com/personal/credit-cards/secured-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "td_cash_credit_card",
@@ -527,7 +527,7 @@
     ],
     "welcome_bonus_description": "$200 cash back after spending $1,000 within the first 90 days",
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/cash-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "hsbc_premier_world_mastercard",
@@ -568,7 +568,7 @@
     ],
     "welcome_bonus_description": "50,000 welcome bonus points (worth up to $625 in travel via HSBC Travel) after spending $4,000 in the first 3 months",
     "product_url": "https://www.us.hsbc.com/credit-cards/products/premier/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "zolve_credit_card",
@@ -605,7 +605,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://zolve.com/us/credit-card",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Credit limit up to $15,000 max, individually determined; not all applicants qualify for the full amount."
   },
   {
@@ -645,7 +645,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.firstcard.app",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Secured/charge-card style product \u2014 described as 0% APR with no revolving interest. Base foreign transaction fee is 3.0% on the free/Standard tier; discounted on Plus, waived on Premium subscription tier."
   },
   {
@@ -689,7 +689,7 @@
     ],
     "welcome_bonus_description": "$200 bonus after spending $500 on purchases in the first 3 months from account opening",
     "product_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "chase_freedom_flex",
@@ -732,7 +732,7 @@
     ],
     "welcome_bonus_description": "$200 bonus after spending $500 on purchases in the first 3 months from account opening",
     "product_url": "https://creditcards.chase.com/cash-back-credit-cards/freedom/flex",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "chase_sapphire_preferred",
@@ -776,7 +776,7 @@
     ],
     "welcome_bonus_description": "75,000 bonus points after spending $5,000 on purchases in the first 3 months from account opening",
     "product_url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "chase_sapphire_reserve",
@@ -820,7 +820,7 @@
     ],
     "welcome_bonus_description": "100,000 bonus points after spending $6,000 on purchases in the first 3 months from account opening",
     "product_url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "chase_slate_edge",
@@ -857,7 +857,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://creditcards.chase.com/credit-building-credit-cards/edge",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_travel_rewards",
@@ -894,7 +894,7 @@
     ],
     "welcome_bonus_description": "25,000 online bonus points after making at least $1,000 in purchases in the first 90 days of account opening",
     "product_url": "https://www.bankofamerica.com/credit-cards/products/travel-rewards-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_unlimited_cash_rewards",
@@ -931,7 +931,7 @@
     ],
     "welcome_bonus_description": "$250 online cash rewards bonus after making at least $1,000 in purchases in the first 90 days of account opening",
     "product_url": "https://www.bankofamerica.com/credit-cards/products/unlimited-cash-back-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_customized_cash_rewards",
@@ -969,7 +969,7 @@
     ],
     "welcome_bonus_description": "6% cash back in choice category for the first year plus a $200 online cash rewards bonus after making at least $1,000 in purchases in the first 90 days of account opening",
     "product_url": "https://www.bankofamerica.com/credit-cards/products/cash-back-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_premium_rewards",
@@ -1008,7 +1008,7 @@
     ],
     "welcome_bonus_description": "60,000 online bonus points after making at least $4,000 in purchases in the first 90 days of account opening",
     "product_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_premium_rewards_elite",
@@ -1049,7 +1049,7 @@
     ],
     "welcome_bonus_description": "75,000 online bonus points after making at least $5,000 in purchases in the first 90 days of account opening",
     "product_url": "https://www.bankofamerica.com/credit-cards/products/premium-rewards-elite-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "bofa_bankamericard",
@@ -1082,7 +1082,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.bankofamerica.com/credit-cards/products/zero-interest-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "wells_fargo_reflect",
@@ -1121,7 +1121,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://creditcards.wellsfargo.com/reflect-visa-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "wells_fargo_autograph",
@@ -1164,7 +1164,7 @@
     ],
     "welcome_bonus_description": "20,000 bonus points after spending $1,000 in purchases in the first 3 months (approx. $200 value)",
     "product_url": "https://creditcards.wellsfargo.com/autograph-visa-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "wells_fargo_autograph_journey",
@@ -1206,7 +1206,7 @@
     ],
     "welcome_bonus_description": "60,000 bonus points after spending $4,000 in purchases in the first 3 months (worth $600 toward travel)",
     "product_url": "https://creditcards.wellsfargo.com/autograph-journey-visa-credit-card/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_double_cash",
@@ -1247,7 +1247,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.citi.com/credit-cards/citi-double-cash-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_strata_card",
@@ -1287,7 +1287,7 @@
     ],
     "welcome_bonus_description": "Bonus ThankYou Points after meeting a minimum spend in the first months (successor product to the discontinued Citi Rewards+ Card)",
     "product_url": "https://www.citi.com/credit-cards/citi-strata-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_strata_premier",
@@ -1328,7 +1328,7 @@
     ],
     "welcome_bonus_description": "Bonus ThankYou Points after meeting a minimum spend in the first months",
     "product_url": "https://www.citi.com/credit-cards/citi-strata-premier-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_strata_elite",
@@ -1368,7 +1368,7 @@
     ],
     "welcome_bonus_description": "75,000 bonus points after spending $6,000 in the first 3 months",
     "product_url": "https://www.citi.com/credit-cards/citi-strata-elite-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_simplicity",
@@ -1404,7 +1404,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.citi.com/credit-cards/citi-simplicity-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "citi_diamond_preferred",
@@ -1439,7 +1439,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.citi.com/credit-cards/citi-diamond-preferred-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_venture_rewards",
@@ -1480,7 +1480,7 @@
     ],
     "welcome_bonus_description": "75,000 bonus miles after spending $4,000 in the first 3 months",
     "product_url": "https://www.capitalone.com/credit-cards/venture/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_ventureone_rewards",
@@ -1519,7 +1519,7 @@
     ],
     "welcome_bonus_description": "20,000 bonus miles after spending $500 in the first 3 months",
     "product_url": "https://www.capitalone.com/credit-cards/ventureone/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_venture_x_rewards",
@@ -1559,7 +1559,7 @@
     ],
     "welcome_bonus_description": "75,000 bonus miles after spending $4,000 in the first 3 months",
     "product_url": "https://www.capitalone.com/credit-cards/venture-x/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_savor_rewards",
@@ -1598,7 +1598,7 @@
     ],
     "welcome_bonus_description": "$200 cash bonus after spending $500 in the first 3 months",
     "product_url": "https://www.capitalone.com/credit-cards/savor/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_savorone_rewards",
@@ -1639,7 +1639,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.capitalone.com/credit-cards/savorone/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_quicksilverone_rewards",
@@ -1678,7 +1678,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.capitalone.com/credit-cards/quicksilver-one/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_platinum",
@@ -1713,7 +1713,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.capitalone.com/credit-cards/platinum/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "capital_one_platinum_secured",
@@ -1750,7 +1750,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.capitalone.com/credit-cards/platinum-secured/",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_cash_plus_visa_signature",
@@ -1790,7 +1790,7 @@
     ],
     "welcome_bonus_description": "$200 rewards bonus after spending $1,000 in eligible purchases within the first 90 days",
     "product_url": "https://www.usbank.com/credit-cards/cash-plus-visa-signature-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_shield_visa",
@@ -1831,7 +1831,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.usbank.com/credit-cards/shield-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_smartly_visa_signature",
@@ -1871,7 +1871,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.usbank.com/credit-cards/bank-smartly-visa-signature-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_altitude_connect_visa_signature",
@@ -1914,7 +1914,7 @@
     ],
     "welcome_bonus_description": "20,000 bonus points after spending $1,000 in net purchases within 90 days",
     "product_url": "https://www.usbank.com/credit-cards/altitude-connect-visa-signature-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_split_world_mastercard",
@@ -1949,7 +1949,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.usbank.com/credit-cards/split-card-world-mastercard-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_altitude_go_secured_visa",
@@ -1989,7 +1989,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.usbank.com/credit-cards/altitude-go-secured-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "us_bank_cash_plus_secured_visa",
@@ -2028,7 +2028,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.usbank.com/credit-cards/cash-plus-secured-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "td_double_up_credit_card",
@@ -2066,7 +2066,7 @@
     ],
     "welcome_bonus_description": "$200 cash back after spending $1,500 in first 90 days",
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/double-up",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "td_cash_secured_credit_card",
@@ -2104,7 +2104,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/secured-credit-card",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "TD Bank's own secured card is the one TD product confirmed to accept an ITIN in place of an SSN (branch application)."
   },
   {
@@ -2146,7 +2146,7 @@
     ],
     "welcome_bonus_description": "25,000 bonus miles (approx. $250 value) after spending $3,000 within first 6 billing cycles",
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/first-class-card",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Annual fee $89, waived the first year."
   },
   {
@@ -2184,7 +2184,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/flex-pay",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "td_clear_visa_platinum_credit_card",
@@ -2221,7 +2221,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.td.com/us/en/personal-banking/credit-cards/td-clear-credit-cards",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "apr_regular_min/max left null because this card structurally has no purchase APR/interest charges - it uses a flat monthly membership fee model instead. Do not treat null here as 'unknown'."
   },
   {
@@ -2267,7 +2267,7 @@
     ],
     "welcome_bonus_description": "60,000 welcome bonus points (worth up to $900 in travel) after spending $4,000 in first 3 months",
     "product_url": "https://www.us.hsbc.com/credit-cards/products/elite/",
-    "last_verified_date": "2026-08",
+    "last_verified_date": "2026-08-29",
     "notes": "Requires an existing HSBC Premier checking relationship to apply, same as the existing hsbc_premier_world_mastercard entry - this is a separate, higher-tier travel card ($495 annual fee vs. Premier World's lower fee), not a duplicate."
   },
   {
@@ -2303,7 +2303,7 @@
     ],
     "welcome_bonus_description": "$200 cash back after spending $1,000 in first 3 months",
     "product_url": "https://www.pnc.com/en/personal-banking/banking/credit-cards/pnc-cash-rewards-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "pnc_cash_unlimited_visa_signature",
@@ -2340,7 +2340,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/credit-cards/pnc-cash-unlimited-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "pnc_spend_wise_visa",
@@ -2377,7 +2377,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.pnc.com/en/personal-banking/banking/credit-cards/pnc-spend-wise-visa-credit-card.html",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "truist_enjoy_travel",
@@ -2416,7 +2416,7 @@
     ],
     "welcome_bonus_description": "20,000 bonus miles after spending $1,500 within 90 days",
     "product_url": "https://www.truist.com/credit-cards/enjoy-travel",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "truist_enjoy_beyond",
@@ -2454,7 +2454,7 @@
     ],
     "welcome_bonus_description": "30,000 bonus points after spending $1,500 within 90 days",
     "product_url": "https://www.truist.com/credit-cards/enjoy-beyond",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "truist_future_visa",
@@ -2486,7 +2486,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.truist.com/credit-cards/future",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "mt_bank_visa_credit_card",
@@ -2518,7 +2518,7 @@
     ],
     "welcome_bonus_description": null,
     "product_url": "https://www.mtb.com/personal/credit-cards/visa-credit-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "mt_bank_visa_with_rewards",
@@ -2553,7 +2553,7 @@
     ],
     "welcome_bonus_description": "10,000 bonus points ($100 value) after $500 in purchases within first 90 days",
     "product_url": "https://www.mtb.com/personal/credit-cards/card-with-rewards",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   },
   {
     "product_id": "mt_bank_visa_signature",
@@ -2591,6 +2591,6 @@
     ],
     "welcome_bonus_description": "10,000 bonus points ($100 value) after $500 in purchases within first 90 days",
     "product_url": "https://www.mtb.com/personal/credit-cards/signature-card",
-    "last_verified_date": "2026-08"
+    "last_verified_date": "2026-08-29"
   }
 ]

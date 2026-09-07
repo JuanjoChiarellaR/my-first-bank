@@ -51,9 +51,9 @@
         <p>This is not financial advice &mdash; informational only.</p>
         <p>MyFirstBank is an independent, unaffiliated resource. All bank names, logos, and trademarks are the property of their respective owners.</p>
         <p class="pt-2">
-          <a href="${base}privacy.html" class="underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Privacy Policy</a>
+          <a href="${base}privacy.html" class="inline-block py-1.5 underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Privacy Policy</a>
           <span class="mx-2 text-ink-placeholder" aria-hidden="true">&middot;</span>
-          <a href="${base}privacy.html#accessibility" class="underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Accessibility</a>
+          <a href="${base}privacy.html#accessibility" class="inline-block py-1.5 underline hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">Accessibility</a>
         </p>
         <p class="text-xs text-ink-placeholder pt-1">Dataset last touched <span id="mfb-last-updated">&hellip;</span> &mdash; individual products may have been verified earlier; see each product's own date.</p>
       </div>

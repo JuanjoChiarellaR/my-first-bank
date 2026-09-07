@@ -272,6 +272,13 @@ MFB.dataReady.then(() => {
     "hsbc_us_mortgage_500000_plus": "HSBC US mortgage of $500,000+",
     "link_citibank_checking": "Linked Citibank checking account",
     "link_qualifying_checking_account": "Linked qualifying checking account",
+    // Same tag as above with a "-ed" variant that exists in the actual data
+    // (e.g. Chase Private Client Checking) — found during the Phase 12
+    // audit rendering inconsistently ("Linked Qualifying Checking Account",
+    // generic title-case) versus its sibling ("Linked qualifying checking
+    // account") because this exact spelling was missing from the dictionary
+    // and silently fell through to the generic fallback formatter.
+    "linked_qualifying_checking_account": "Linked qualifying checking account",
     "linked_chase_first_mortgage_with_autopay": "Linked Chase first mortgage with autopay",
     "linked_chase_premier_plus_sapphire_or_private_client_checking": "Linked Chase Premier Plus, Sapphire, or Private Client Checking",
     "linked_eligible_td_checking_account": "Linked eligible TD checking account",

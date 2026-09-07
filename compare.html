@@ -119,8 +119,12 @@
                  cell is filled / bank-pending / fully-empty (active slot
                  only) / inert — see js/compare.js. table-fixed + explicit
                  widths keep columns a constant size regardless of content,
-                 so picking products never visibly resizes the table. -->
-            <section class="overflow-x-auto border border-border rounded-lg bg-surface mb-8">
+                 so picking products never visibly resizes the table.
+                 mfb-table-scroll: 4 columns need ~960px, far more than a
+                 375px mobile viewport shows at once (found during the
+                 Phase 12 audit) — the fade hints there's more to scroll to,
+                 same pattern already used for Ask the Agent's wide tables. -->
+            <section class="overflow-x-auto border border-border rounded-lg bg-surface mb-8 mfb-table-scroll">
               <table class="w-full text-sm table-fixed">
                 <colgroup>
                   <col class="w-32">
@@ -145,7 +149,7 @@
                               <div class="text-ink-secondary text-xs truncate" x-text="slotAt(i).product.bank.name"></div>
                               <div class="font-display truncate" x-text="slotAt(i).product.name"></div>
                               <button type="button" @click="removeProductOnly(i)"
-                                      class="text-[11px] text-ink-secondary underline hover:text-ink mt-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">
+                                      class="inline-block py-1.5 text-[11px] text-ink-secondary underline hover:text-ink mt-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink rounded-sm">
                                 Change product
                               </button>
                             </div>

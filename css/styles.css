@@ -71,11 +71,14 @@ body {
   mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
 }
 
-/* Ask the Agent: horizontal scroll affordance for a rendered markdown table
-   with more than 3 columns (js/agent.js's mdRenderer.table only applies this
-   class past that threshold). Same rationale as .flip-card-back's fade
-   above: a static mask, not a JS-computed one, so it can only ever suggest
-   scrolling is possible, never hide real content. */
+/* Horizontal scroll affordance, shared by Ask the Agent's rendered markdown
+   tables (js/agent.js's mdRenderer.table, >3 columns only) and Compare's own
+   4-column table (compare.html — found missing during the Phase 12 audit:
+   Compare's table needs 960px for 4 columns but a 375px mobile viewport
+   only shows ~340px, and with no hint, the page can look like it rendered
+   only 1 of 4 products instead of a table that scrolls). Same rationale as
+   .flip-card-back's fade above: a static mask, not a JS-computed one, so it
+   can only ever suggest scrolling is possible, never hide real content. */
 .mfb-table-scroll {
   -webkit-mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
   mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);

@@ -99,24 +99,41 @@ MFB.dataReady.then(() => {
   // no-context question like "which checking account has the best welcome
   // bonus?" is answerable in one lookup — see worker/README.md's token-size
   // sanity check for the measured cost of including it at this scale.
+  //
+  // last_verified_date de-duplication (Phase 13 cost audit): every product's
+  // date was identical after the Phase 9 normalization (~1,064 of the
+  // ~16,300-token baseline, ~6.5%, spent repeating the same 10-character
+  // string 129 times). Self-checking, not a one-time trim with a comment
+  // asking someone to remember to revert it: uniformProductsDate() below
+  // only omits the per-record field when every product's date genuinely
+  // still matches today; the moment a future refresh staggers verification
+  // dates again, this automatically falls back to per-record dates with no
+  // code change needed. See the field glossary in js/agent.js's
+  // SYSTEM_PROMPT for how the agent is told to read whichever shape it gets.
+  function uniformProductsDate(...lists) {
+    const dates = new Set(lists.flat().map((p) => p.last_verified_date).filter(Boolean));
+    return dates.size === 1 ? [...dates][0] : null;
+  }
+  const productsLastVerifiedDate = uniformProductsDate(checkingAccounts, savingsAccounts, creditCards);
+
   const all_checking_accounts = checkingAccounts.map((p) => ({
     bank_id: p.bank_id, bank_name: bankName(p.bank_id), product_id: p.product_id, name: p.name,
     monthly_fee_usd: p.monthly_fee_usd, accepts_no_ssn: p.accepts_no_ssn, accepts_itin: p.accepts_itin,
     can_open_online: p.can_open_online, welcome_bonus_description: p.welcome_bonus_description ?? null,
-    last_verified_date: p.last_verified_date,
+    ...(productsLastVerifiedDate ? {} : { last_verified_date: p.last_verified_date }),
   }));
   const all_savings_accounts = savingsAccounts.map((p) => ({
     bank_id: p.bank_id, bank_name: bankName(p.bank_id), product_id: p.product_id, name: p.name,
     apy_current: p.apy_current, accepts_no_ssn: p.accepts_no_ssn, accepts_itin: p.accepts_itin,
     can_open_online: p.can_open_online, welcome_bonus_description: p.welcome_bonus_description ?? null,
-    last_verified_date: p.last_verified_date,
+    ...(productsLastVerifiedDate ? {} : { last_verified_date: p.last_verified_date }),
   }));
   const all_credit_cards = creditCards.map((p) => ({
     bank_id: p.bank_id, bank_name: bankName(p.bank_id), product_id: p.product_id, name: p.name,
     annual_fee_usd: p.annual_fee_usd, apr_regular_min: p.apr_regular_min, apr_regular_max: p.apr_regular_max,
     requires_ssn: p.requires_ssn, accepts_itin: p.accepts_itin, accepts_no_us_credit_history: p.accepts_no_us_credit_history,
     welcome_bonus_description: p.welcome_bonus_description ?? null,
-    last_verified_date: p.last_verified_date,
+    ...(productsLastVerifiedDate ? {} : { last_verified_date: p.last_verified_date }),
   }));
 
   // --- (c) Precomputed eligibility index -----------------------------------
@@ -233,5 +250,9 @@ MFB.dataReady.then(() => {
     alternativePaths,
     bankProgramsIndex,
     glossary,
+    // Only set when every product's last_verified_date genuinely still
+    // matches (see uniformProductsDate above) — null falls this back to
+    // per-record dates on each product in layer (b) automatically.
+    productsLastVerifiedDate,
   };
 });

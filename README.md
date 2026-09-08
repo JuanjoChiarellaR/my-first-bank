@@ -239,8 +239,8 @@ Bank logos: since each of the 15 logos carries its own brand color, contain ever
 A tilted bank card icon: white card body, gray chip (top-left), a four-arc contactless symbol (top-right, matching the real ISO contactless payment symbol — concentric quarter-circle arcs of increasing radius, not a generic wifi icon), and a green checkmark badge overlapping the bottom-right corner. Card sits on the light gray page background. This same green checkmark visual language is reused throughout the UI for eligibility badges, tying the brand mark to the product's actual function.
 
 ### Motion
-- Page transitions (Browse Banks ↔ Bank Detail): a subtle slide + fade, ~300ms, content entering from the right when going deeper into the journey, reversing when going back. The navbar itself never animates — it's the fixed anchor.
-- No bounce/spring easing anywhere in this project — always ease-in-out, consistent with a serious financial-decision context.
+- Page navigation (Browse Banks ↔ Bank Detail, and everywhere else) is an instant, standard document load — normal, expected web behavior, not an animated transition. A cross-document slide/fade was considered (and a `.mfb-page-enter` keyframe exists in `css/styles.css` from that exploration) but never wired to any element: this is a static multi-page site with no client-side router, so a real cross-document transition would need the newer View Transitions API, which still has inconsistent cross-browser support — not worth the variability today. The navbar itself never animates regardless — it's the fixed anchor.
+- Within a page, in-place UI motion (flip cards, the chat's message entrance/reveal, hover states) uses no bounce/spring easing anywhere in this project — always ease-in-out, consistent with a serious financial-decision context.
 
 ### Accessibility (not optional)
 - Flip cards must announce front/back state to screen readers, not just visually.

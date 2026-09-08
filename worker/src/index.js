@@ -99,7 +99,7 @@ const CLASSIFIER_SCHEMA = {
   additionalProperties: false,
 };
 
-async function callAnthropic(body, apiKey, timeoutMs) {
+async function callAnthropic(body, apiKey, timeoutMs, extraHeaders = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -109,6 +109,7 @@ async function callAnthropic(body, apiKey, timeoutMs) {
         "Content-Type": "application/json",
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
+        ...extraHeaders,
       },
       body: JSON.stringify(body),
       signal: controller.signal,
@@ -117,6 +118,16 @@ async function callAnthropic(body, apiKey, timeoutMs) {
     clearTimeout(timer);
   }
 }
+
+// Beta header required for `cache_control: { type: "ephemeral", ttl: "1h" }`
+// on the generation call's system blocks (see below) — the default ephemeral
+// cache is 5 minutes, shorter than realistic pacing between a user's
+// questions (confirmed via real Console billing data: most real calls were
+// landing as cache misses, not the hits the original cost model assumed).
+// Only the generation call uses this; the classifier call's system prompt
+// isn't cache_control-tagged at all (see runComplianceCheck) since it's far
+// below Haiku 4.5's 4,096-token minimum cacheable-prefix floor.
+const EXTENDED_CACHE_HEADERS = { "anthropic-beta": "extended-cache-ttl-2025-04-11" };
 
 // Fail-closed by design: `blocked` starts true and is only ever flipped to
 // false inside the single narrow success path at the bottom, after every
@@ -215,15 +226,24 @@ export default {
     // switch busts — a no-context question after a bank-context one no
     // longer re-pays for the large shared baseline, only for this small
     // block appearing/disappearing).
+    //
+    // ttl: "1h" (not the default 5-minute ephemeral cache): real Console
+    // billing data showed most real questions landing as cache misses, not
+    // hits — the 5-minute window is shorter than realistic pacing between a
+    // user's questions (reading an answer, asking a follow-up minutes
+    // later). Requires EXTENDED_CACHE_HEADERS on this call. Pure
+    // infrastructure change — doesn't touch what's sent or how a response
+    // is judged, so it doesn't need the adversarial safety battery re-run.
+    const CACHE_1H = { type: "ephemeral", ttl: "1h" };
     const systemBlocks = [
-      { type: "text", text: system, cache_control: { type: "ephemeral" } },
-      { type: "text", text: `Dataset context (JSON):\n${JSON.stringify(layers)}`, cache_control: { type: "ephemeral" } },
+      { type: "text", text: system, cache_control: CACHE_1H },
+      { type: "text", text: `Dataset context (JSON):\n${JSON.stringify(layers)}`, cache_control: CACHE_1H },
     ];
     if (contextLayers) {
       systemBlocks.push({
         type: "text",
         text: `Current page context (JSON):\n${JSON.stringify(contextLayers)}`,
-        cache_control: { type: "ephemeral" },
+        cache_control: CACHE_1H,
       });
     }
 
@@ -247,7 +267,8 @@ export default {
           messages: [{ role: "user", content: buildUserContent(mode, question) }],
         },
         env.ANTHROPIC_API_KEY,
-        GENERATION_TIMEOUT_MS
+        GENERATION_TIMEOUT_MS,
+        EXTENDED_CACHE_HEADERS
       );
 
       if (!genRes.ok) {

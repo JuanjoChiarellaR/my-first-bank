@@ -37,6 +37,168 @@ const VALID_STATES = new Set([
 const VALID_PRODUCTS = new Set(["checking", "savings", "credit_card"]);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Same 51-entry [code, name] list independently duplicated in js/app.js:5-19,
+// js/agent.js, and js/stay-updated.js — this Lambda has never imported
+// frontend JS and shouldn't start now, so it's duplicated here too, matching
+// that established convention for small static lists.
+const STATE_NAMES = Object.fromEntries([
+  ["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"],
+  ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"],
+  ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"], ["ID", "Idaho"],
+  ["IL", "Illinois"], ["IN", "Indiana"], ["IA", "Iowa"], ["KS", "Kansas"],
+  ["KY", "Kentucky"], ["LA", "Louisiana"], ["ME", "Maine"], ["MD", "Maryland"],
+  ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"], ["MS", "Mississippi"],
+  ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"], ["NV", "Nevada"],
+  ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NY", "New York"],
+  ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"], ["OK", "Oklahoma"],
+  ["OR", "Oregon"], ["PA", "Pennsylvania"], ["RI", "Rhode Island"], ["SC", "South Carolina"],
+  ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], ["UT", "Utah"],
+  ["VT", "Vermont"], ["VA", "Virginia"], ["WA", "Washington"], ["WV", "West Virginia"],
+  ["WI", "Wisconsin"], ["WY", "Wyoming"], ["DC", "District of Columbia"],
+]);
+
+// Dependency-free HTML-entity escaping for lead-supplied strings
+// interpolated into htmlContent. validate() below only checks that
+// first_name/last_name are non-empty strings — it does NOT restrict their
+// character set the way js/stay-updated.js's browser-side regex does, so a
+// direct API caller (curl, bypassing the browser — already used repeatedly
+// this session as a normal testing method against this same Function URL)
+// could submit HTML/script content as a name. Same injection class the
+// welcome email deliberately avoids for interest_note; applied here
+// proactively for the same reason, even though not requested by name.
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+const PRODUCT_LABELS = { checking: "Checking", savings: "Savings", credit_card: "Credit Card" };
+const PRODUCT_ORDER = ["checking", "savings", "credit_card"];
+
+// item.interested_in reflects checkbox/submission order from the browser,
+// not a canonical order — without normalizing, two otherwise-identical
+// leads could get "Savings and Checking" vs. "Checking and Savings"
+// depending on click order. Always iterate in this fixed order instead.
+function orderedInterests(interestedIn) {
+  return PRODUCT_ORDER.filter((p) => interestedIn.includes(p));
+}
+
+// Body-copy joiner, Oxford-comma-less: 1→"Savings", 2→"Checking and
+// Savings", 3→"Checking, Savings and Credit Card".
+function joinInterestsAnd(orderedProducts) {
+  const labels = orderedProducts.map((p) => PRODUCT_LABELS[p]);
+  if (labels.length <= 1) return labels[0] || "";
+  if (labels.length === 2) return `${labels[0]} and ${labels[1]}`;
+  return `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
+}
+
+// Hidden-preheader joiner, same shape with "&" instead of "and" — matches
+// the user's 2-item example ("Checking & Savings"); the 3-item case mirrors
+// the body joiner's comma pattern with "&" swapped in.
+function joinInterestsAmpersand(orderedProducts) {
+  const labels = orderedProducts.map((p) => PRODUCT_LABELS[p]);
+  if (labels.length <= 1) return labels[0] || "";
+  if (labels.length === 2) return `${labels[0]} & ${labels[1]}`;
+  return `${labels.slice(0, -1).join(", ")} & ${labels[labels.length - 1]}`;
+}
+
+const MONTH_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+// Manual split, not `new Date(isoString)` — mirrors the same defensive
+// pattern already established in js/stay-updated.js's parseIsoDateLocal/
+// toIsoDateLocal (fixed a real UTC-midnight timezone bug there). Not
+// strictly needed server-side since Lambda defaults to UTC, but kept for
+// consistency with that established convention.
+function shortDate(isoDateStr) {
+  const [, m, d] = isoDateStr.split("-").map(Number);
+  return `${MONTH_SHORT[m - 1]} ${d}`;
+}
+
+// Whole calendar days between "today" (UTC midnight) and the arrival date
+// (also UTC midnight, since arrival_date has no time component), floored,
+// clamped at a minimum of 0 — never shows a negative number even in the
+// unlikely edge case of a cold-start retry landing exactly on the boundary.
+function daysLeft(isoDateStr, now = new Date()) {
+  const [y, m, d] = isoDateStr.split("-").map(Number);
+  const arrival = Date.UTC(y, m - 1, d);
+  const todayUtcMidnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  return Math.max(Math.floor((arrival - todayUtcMidnight) / 86400000), 0);
+}
+
+// Fixed label + static descriptive copy per product — text never changes
+// per lead, only row order/styling does (see buildProductRows below).
+const PRODUCT_ROWS = {
+  checking: { label: "Checking", copy: "Monthly fees, ATM network size, whether it accepts ITIN / no SSN" },
+  savings: { label: "Savings", copy: "APY, minimum balance, whether it accepts ITIN / no SSN" },
+  credit_card: { label: "Credit Card", copy: "Whether credit history is required, annual fee, secured vs. unsecured" },
+};
+
+// Always all 3 rows, selected products first. Selected rows get
+// background:#E7F3EC/color:#1F6B42 and a "✓ " prefix — a deliberate,
+// conscious exception to this site's usual "green reserved for eligibility
+// badges only" rule (this is an email, not the site itself; approved as
+// part of the reviewed email design). Unselected rows get
+// background:#F2F1EC/color:#A3A29B, no prefix.
+function buildProductRows(interestedIn) {
+  const selected = orderedInterests(interestedIn);
+  const unselected = PRODUCT_ORDER.filter((p) => !selected.includes(p));
+  return [...selected, ...unselected].map((key) => {
+    const isSelected = selected.includes(key);
+    const { label, copy } = PRODUCT_ROWS[key];
+    const bg = isSelected ? "#E7F3EC" : "#F2F1EC";
+    const color = isSelected ? "#1F6B42" : "#A3A29B";
+    const labelText = isSelected ? `✓ ${label}` : label;
+    return `
+              <tr style="background:${bg};">
+                <td style="border-radius:8px 0 0 8px; padding:12px 14px; font-family:'Inter',Arial,sans-serif; font-size:13px; font-weight:600; color:${color}; width:120px;">${labelText}</td>
+                <td style="border-radius:0 8px 8px 0; padding:12px 14px; font-family:'Inter',Arial,sans-serif; font-size:13px; color:${color};">${copy}</td>
+              </tr>`;
+  }).join("");
+}
+
+// Hidden preview-text technique: an invisible div as the very first element
+// inside <body>, padded with zero-width-joiner/nbsp filler so inbox clients
+// (which read forward into the visible body if the preheader is short)
+// don't leak real body text into the inbox preview snippet.
+function buildPreheader(interestedIn) {
+  const text = `What to check: ${joinInterestsAmpersand(orderedInterests(interestedIn))}`;
+  return `<div style="display:none; max-height:0px; overflow:hidden; opacity:0; mso-hide:all;">${escapeHtml(text)}${"&zwnj;&nbsp;".repeat(40)}</div>`;
+}
+
+const LOGO_URL = "https://juanjochiarellar.github.io/my-first-bank/assets/logos/_mark-email.png";
+// One pre-cropped (1200x480) licensed photo per state, self-hosted at
+// assets/state-collages/{CODE}.jpg — a zero-latency string lookup, never
+// Lambda-side image fetching/compositing (that would add network calls and
+// timeout risk to the critical send path). validate() already guarantees
+// item.state is a known 2-letter code, so every lookup hits; the fallback
+// below only guards against that invariant ever changing.
+const STATE_COLLAGE_BASE_URL = "https://juanjochiarellar.github.io/my-first-bank/assets/state-collages";
+function stateCollageUrl(stateCode) {
+  return `${STATE_COLLAGE_BASE_URL}/${stateCode}.jpg`;
+}
+
+// Footer social links — pre-rendered icon-in-circle PNGs (28x28, matching
+// the site's #F2F1EC/#6B6B65 muted style) rather than live SVG, since many
+// email clients strip <svg>. Same self-hosted-asset pattern as LOGO_URL.
+const SOCIAL_LINKS = [
+  { key: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/juanjo-chiarella/" },
+  { key: "instagram", label: "Instagram", url: "https://www.instagram.com/juanjo.chiarella/" },
+  { key: "facebook", label: "Facebook", url: "https://www.facebook.com/Juanjo.Chiarella" },
+  { key: "github", label: "GitHub", url: "https://github.com/JuanjoChiarellaR" },
+];
+
+function buildSocialLinksHtml() {
+  return SOCIAL_LINKS.map(({ key, label, url }, i) => {
+    const padding = i < SOCIAL_LINKS.length - 1 ? "padding-right:8px;" : "";
+    const iconUrl = `https://juanjochiarellar.github.io/my-first-bank/assets/logos/social/${key}.png`;
+    return `
+          <td style="${padding}"><a href="${url}"><img src="${iconUrl}" width="28" height="28" alt="${label}" style="display:block; width:28px; height:28px; border-radius:50%;"></a></td>`;
+  }).join("");
+}
+
 // Access-Control-* headers are deliberately NOT set here. The Lambda
 // Function URL's own CORS config (AllowOrigins: [ALLOWED_ORIGIN],
 // AllowMethods: [POST], AllowHeaders: [Content-Type] — see lambda/README.md)
@@ -89,15 +251,151 @@ async function brevoUpsertContact(item) {
   if (!res.ok) throw new Error(`Brevo contact upsert failed: ${res.status} ${await res.text()}`);
 }
 
+// Builds the fully-resolved subject + HTML for the welcome email. Split out
+// from brevoSendWelcomeEmail() so it can also be exercised in isolation
+// (e.g. for a local preview render) without making a real Brevo call.
+export function buildWelcomeEmail(item) {
+  const firstNameSafe = escapeHtml(item.first_name);
+  const stateName = STATE_NAMES[item.state] || item.state;
+  const selected = orderedInterests(item.interested_in);
+  const days = daysLeft(item.arrival_date);
+  // subject is a plain-text mail header, not HTML — raw first_name is
+  // correct here (escaping it would show a literal "&amp;" to a recipient
+  // whose name contains "&"). Anything inside htmlContent, including
+  // <title>, uses the HTML-escaped version instead.
+  const subject = `${item.first_name}, your ${stateName} checklist — ${days} days to go`;
+  const preheader = buildPreheader(item.interested_in);
+  const productRowsHtml = buildProductRows(item.interested_in);
+  const interestsJoinedAnd = joinInterestsAnd(selected);
+
+  const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(subject)}</title>
+<style>
+  @media screen and (max-width: 480px){
+    .cta-cell{ display:block !important; width:100% !important; padding:0 0 10px 0 !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#FAFAF9;">
+${preheader}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAFAF9;">
+  <tr>
+    <td style="padding:28px 32px 20px;">
+      <img src="${LOGO_URL}" width="150" alt="MyFirstBank" style="display:block; width:150px; height:auto;">
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding:0 32px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF; border:1px solid #E4E3DD; border-radius:12px;">
+        <tr>
+          <td style="padding:32px;">
+
+            <p style="font-family:'Inter',Arial,sans-serif; font-size:16px; color:#1F1F1D; margin:0 0 16px;">Hi ${firstNameSafe},</p>
+
+            <p style="font-family:'Inter',Arial,sans-serif; font-size:15px; line-height:1.6; color:#1F1F1D; margin:0 0 20px;">
+              You told us you're looking for <strong>${interestsJoinedAnd}</strong> for your move to <strong>${stateName}</strong> — happy to help with that search.
+            </p>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;">
+              <tr>
+                <td style="border-radius:12px; overflow:hidden;">
+                  <img src="${stateCollageUrl(item.state)}" width="100%" alt="${escapeHtml(stateName)}" style="display:block; width:100%; height:auto; border-radius:12px;">
+                </td>
+              </tr>
+            </table>
+
+            <p style="font-family:'Inter Tight',Arial,sans-serif; font-size:13px; font-weight:600; color:#1F1F1D; margin:0 0 12px; text-transform:uppercase; letter-spacing:.04em;">What to compare, product by product</p>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px; border-collapse:separate; border-spacing:0 8px;">${productRowsHtml}
+            </table>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F2F1EC; border-radius:10px; margin:0 0 28px;">
+              <tr>
+                <td style="padding:16px 20px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-family:'Inter',Arial,sans-serif; font-size:13px; color:#6B6B65;">Landing in ${stateName}</td>
+                      <td align="right" style="font-family:'IBM Plex Mono',Consolas,monospace; font-size:13px; color:#1F1F1D; font-weight:500;">${shortDate(item.arrival_date)} · ${days} days left</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td class="cta-cell" width="50%" style="padding-right:6px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td align="center" style="background:#1F1F1D; border-radius:8px; padding:12px 16px;">
+                        <a href="https://juanjochiarellar.github.io/my-first-bank/agent.html" style="display:block; font-family:'Inter',Arial,sans-serif; font-size:13px; font-weight:600; color:#FFFFFF; text-decoration:none;">Ask the Agent about your options</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="cta-cell" width="50%" style="padding-left:6px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td align="center" style="background:#FFFFFF; border:1px solid #1F1F1D; border-radius:8px; padding:11px 16px;">
+                        <a href="https://juanjochiarellar.github.io/my-first-bank/compare.html" style="display:block; font-family:'Inter',Arial,sans-serif; font-size:13px; font-weight:600; color:#1F1F1D; text-decoration:none;">Compare accounts side by side</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+
+            <p style="font-family:'Inter',Arial,sans-serif; font-size:14px; color:#6B6B65; margin:28px 0 0;">
+              We'll follow up before you land.<br>— The MyFirstBank Team
+            </p>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding:24px 32px 32px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 16px;">
+        <tr>
+${buildSocialLinksHtml()}
+        </tr>
+      </table>
+      <p style="font-family:'Inter',Arial,sans-serif; font-size:12px; color:#A3A29B; margin:0 0 8px; line-height:1.6;">
+        MyFirstBank · [Mailing address — pending]
+      </p>
+      <p style="font-family:'Inter',Arial,sans-serif; font-size:12px; color:#A3A29B; margin:0 0 8px;">
+        You're receiving this because you signed up for updates at MyFirstBank.
+        <a href="#" style="color:#A3A29B;">Manage preferences</a> · <a href="#" style="color:#A3A29B;">Unsubscribe</a>
+      </p>
+      <p style="font-family:'Inter',Arial,sans-serif; font-size:11px; color:#A3A29B; margin:0;">
+        © 2026 MyFirstBank. All rights reserved.
+      </p>
+    </td>
+  </tr>
+</table>
+</body>
+</html>`;
+
+  return { subject, htmlContent };
+}
+
 async function brevoSendWelcomeEmail(item) {
+  const { subject, htmlContent } = buildWelcomeEmail(item);
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: { "api-key": BREVO_API_KEY, "Content-Type": "application/json" },
     body: JSON.stringify({
       sender: { email: BREVO_SENDER_EMAIL, name: BREVO_SENDER_NAME },
       to: [{ email: item.email, name: `${item.first_name} ${item.last_name}` }],
-      subject: "You're on the list — MyFirstBank",
-      htmlContent: `<p>Hi ${item.first_name},</p><p>Thanks for signing up. We'll email you when we add a bank or product that matches what you told us you're looking for.</p><p>— MyFirstBank</p>`,
+      subject,
+      htmlContent,
     }),
   });
   if (!res.ok) throw new Error(`Brevo welcome email failed: ${res.status} ${await res.text()}`);

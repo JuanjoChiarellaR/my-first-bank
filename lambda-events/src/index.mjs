@@ -64,7 +64,11 @@ async function processEvent(raw) {
     message_id: raw["message-id"] ?? null,
     event_ts: raw.ts_epoch ?? raw.ts ?? raw.date ?? null,
     received_at: receivedAt,
-    link_url: raw.link ?? null, // only present on "click" events
+    // Brevo sends `link` as an empty string on non-click events too (e.g.
+    // proxy_open), not just omitting it — confirmed against a real captured
+    // payload, contradicting the initial "only present on click" assumption.
+    // `||` (not `??`) so that empty string also collapses to null.
+    link_url: raw.link || null,
     user_agent: raw.user_agent ?? null, // present on opened/uniqueOpened/click/unsubscribed
     // Brevo's standard transactional webhook payload does not expose the
     // recipient's IP (only `sending_ip`, Brevo's own outbound relay IP) —

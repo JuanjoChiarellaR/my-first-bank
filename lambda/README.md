@@ -103,3 +103,7 @@ No code redeploy needed — `src/index.mjs` already contains the three Brevo cal
 ## Known limitation
 
 `interest_note` is stored as a plain string, length-capped at 200 characters server-side, with no HTML sanitization at write time — there's no admin UI today that renders it. If a future admin dashboard displays this field, it must be escaped there (the same DOMPurify-style boundary `js/agent.js`'s markdown rendering already uses for model output), not assumed safe purely because it was length-capped at write time.
+
+## Planned future work
+
+**Move the welcome email's subject/HTML (and, if Brevo's SMS API supports it, the SMS copy) into a Brevo Template**, referenced by `templateId` instead of the inline `subject`/`htmlContent` currently hardcoded in `brevoSendWelcomeEmail()`. Decided explicitly (not yet implemented): for now the copy stays in this file, edited by redeploying code, same as everything else here. Moving to a Template later lets the content be edited directly in Brevo's visual editor without a code change or redeploy — **this does not reintroduce Brevo dashboard automation**: the Lambda still explicitly triggers every send via the transactional API exactly as it does today; only the static design/copy would move into Brevo, not the decision of *whether/when* to send.

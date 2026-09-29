@@ -5,4 +5,6 @@ worker/.dev.vars
 worker/.wrangler/
 lambda/.env
 lambda/*.zip
+lambda-events/.env
+lambda-events/*.zip
 *.log

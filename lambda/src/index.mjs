@@ -396,6 +396,10 @@ async function brevoSendWelcomeEmail(item) {
       to: [{ email: item.email, name: `${item.first_name} ${item.last_name}` }],
       subject,
       htmlContent,
+      // Echoed back on every webhook event Brevo sends for this message, so
+      // the events-capture Lambda (lambda-events/) can correlate opens/
+      // clicks/bounces back to this lead without cross-referencing email.
+      tags: [item.lead_id],
     }),
   });
   if (!res.ok) throw new Error(`Brevo welcome email failed: ${res.status} ${await res.text()}`);

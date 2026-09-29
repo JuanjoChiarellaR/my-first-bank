@@ -62,7 +62,7 @@ function validate(body) {
   if (!body.last_name || typeof body.last_name !== "string") return "last_name is required";
   if (!body.phone_country_code || typeof body.phone_country_code !== "string") return "phone_country_code is required";
   if (!body.phone_number || typeof body.phone_number !== "string") return "phone_number is required";
-  if (!body.email || typeof body.email !== "string" || !EMAIL_RE.test(body.email)) return "a valid email is required";
+  if (!body.email || typeof body.email !== "string" || body.email.length > 254 || !EMAIL_RE.test(body.email)) return "a valid email is required";
   if (!body.state || !VALID_STATES.has(body.state)) return "a valid state is required";
   if (!Array.isArray(body.interested_in) || body.interested_in.length === 0) return "interested_in must have at least one product";
   if (!body.interested_in.every((p) => VALID_PRODUCTS.has(p))) return "interested_in contains an invalid product";
@@ -167,6 +167,13 @@ export const handler = async (event) => {
   } catch {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid JSON" }) };
   }
+
+  // Normalize email server-side too, not just in js/stay-updated.js — the
+  // duplicate-email check below only works if "Juan@Gmail.com" and
+  // "juan@gmail.com" are treated as the same address, and the Lambda can't
+  // assume every caller (a future client, a direct API test) already
+  // lowercased it before sending.
+  if (typeof body.email === "string") body.email = body.email.trim().toLowerCase();
 
   // Honeypot: a filled value means a bot bypassed the client-side skip in
   // js/stay-updated.js entirely. Fake-succeed with a fresh throwaway

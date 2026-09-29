@@ -8,6 +8,12 @@
       "Resource": "arn:aws:dynamodb:us-east-2:797781631822:table/myfirstbank-leads"
     },
     {
+      "Sid": "DynamoDBEmailDuplicateCheck",
+      "Effect": "Allow",
+      "Action": "dynamodb:Query",
+      "Resource": "arn:aws:dynamodb:us-east-2:797781631822:table/myfirstbank-leads/index/email-index"
+    },
+    {
       "Sid": "OwnLogGroupOnly",
       "Effect": "Allow",
       "Action": ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],

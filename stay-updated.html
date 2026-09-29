@@ -67,11 +67,21 @@
       Sign-ups aren't connected in this deploy yet. The form below still works for review — submitting isn't wired to anything until it's deployed.
     </div>
 
-    <!-- Success state -->
-    <template x-if="submitted">
+    <!-- Success state — same card, different copy when the Lambda reports
+         this email was already registered (see js/stay-updated.js's
+         `duplicate` flag). Both cases return the same 200 status from the
+         Lambda on purpose, so this is a copy difference only, not a
+         security-relevant one. -->
+    <template x-if="submitted && !duplicate">
       <div class="border border-border bg-surface rounded-lg p-6 text-center">
         <h2 class="font-display text-lg font-semibold mb-2">You're on the list</h2>
         <p class="text-ink-secondary text-sm">We'll email you when something new matches what you told us. In the meantime, explore <a href="index.html" class="underline">Browse Banks</a> or <a href="agent.html" class="underline">Ask the Agent</a>.</p>
+      </div>
+    </template>
+    <template x-if="submitted && duplicate">
+      <div class="border border-border bg-surface rounded-lg p-6 text-center">
+        <h2 class="font-display text-lg font-semibold mb-2">Already on the list</h2>
+        <p class="text-ink-secondary text-sm">Looks like you're already on our list with this email — we'll notify you when something new matches what you're looking for. In the meantime, explore <a href="index.html" class="underline">Browse Banks</a> or <a href="agent.html" class="underline">Ask the Agent</a>.</p>
       </div>
     </template>
 

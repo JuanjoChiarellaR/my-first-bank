@@ -16,11 +16,12 @@
 
 import { randomUUID } from "node:crypto";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, PutCommand, UpdateCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
 
 const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: "us-east-2" }));
 
 const TABLE_NAME = process.env.TABLE_NAME || "myfirstbank-leads";
+const EMAIL_INDEX_NAME = process.env.EMAIL_INDEX_NAME || "email-index";
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "https://juanjochiarellar.github.io";
 const BREVO_API_KEY = process.env.BREVO_API_KEY || "";
 const BREVO_SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL || "";
@@ -116,6 +117,22 @@ async function brevoSendWelcomeSms(item) {
   if (!res.ok) throw new Error(`Brevo welcome SMS failed: ${res.status} ${await res.text()}`);
 }
 
+// Duplicate-email check, via the email-index GSI (partition key: email,
+// KEYS_ONLY projection — we only need to know whether a row exists, not
+// read any of its other fields). IAM is scoped to dynamodb:Query on this
+// one index's own ARN only, not the base table and not Scan — see
+// lambda/iam/permissions-policy.json.
+async function emailAlreadyExists(email) {
+  const res = await ddb.send(new QueryCommand({
+    TableName: TABLE_NAME,
+    IndexName: EMAIL_INDEX_NAME,
+    KeyConditionExpression: "email = :e",
+    ExpressionAttributeValues: { ":e": email },
+    Limit: 1,
+  }));
+  return (res.Items || []).length > 0;
+}
+
 async function appendSentCommunication(lead_id, label) {
   await ddb.send(new UpdateCommand({
     TableName: TABLE_NAME,
@@ -164,6 +181,23 @@ export const handler = async (event) => {
   const validationError = validate(body);
   if (validationError) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: validationError }) };
+  }
+
+  // Duplicate-email check: don't create a second row or fire Brevo again
+  // for an email already on the list. Responds 200 either way (never 409)
+  // so a bot can't enumerate which emails are already registered by
+  // watching the status code — {duplicate:true} is the only signal, and
+  // it's identical in shape/cost to a normal success from the outside.
+  // If the check itself errors (e.g. a transient DynamoDB issue), fail
+  // open — log it and proceed as a new signup rather than blocking a
+  // legitimate user over an infrastructure hiccup; a false negative here
+  // just means a possible duplicate row, not a security problem.
+  try {
+    if (await emailAlreadyExists(body.email)) {
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: true, duplicate: true }) };
+    }
+  } catch (err) {
+    console.error("Duplicate-email check failed, proceeding as new signup", { email: body.email, error: String(err) });
   }
 
   const lead_id = randomUUID();

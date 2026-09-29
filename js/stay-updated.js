@@ -102,6 +102,7 @@ document.addEventListener("alpine:init", () => {
     submitting: false,
     submitError: "",
     submitted: false,
+    duplicate: false,
 
     init() {
       // New query-param convention (?source=agent-cta / ?source=browse-banner)
@@ -179,6 +180,8 @@ document.addEventListener("alpine:init", () => {
           }),
         });
         if (!res.ok) throw new Error(`Lambda responded ${res.status}`);
+        const data = await res.json().catch(() => ({}));
+        this.duplicate = data.duplicate === true;
         this.submitted = true;
       } catch {
         this.submitError = "Something went wrong submitting the form. Please try again in a moment.";

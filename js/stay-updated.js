@@ -308,6 +308,10 @@ document.addEventListener("alpine:init", () => {
     // actually validates once the field has already been touched once,
     // per the blur-then-live timing rule.
     validateIfTouched(field) {
+      // A stale "already on the list" notice shouldn't linger once the
+      // person starts changing the email — most likely they're correcting
+      // a typo and trying a different address.
+      if (field === "email" && this.duplicate) this.duplicate = false;
       if (this.touched[field]) this.runValidation(field);
     },
 
@@ -409,8 +413,16 @@ document.addEventListener("alpine:init", () => {
           return;
         }
 
-        this.duplicate = data.duplicate === true;
-        this.submitted = true;
+        if (data.duplicate === true) {
+          // Not a success — nothing was created. Stay on the form (see the
+          // inline notice in stay-updated.html) instead of swapping to the
+          // success card, so the person keeps what they typed and can
+          // correct the email if it was a typo rather than losing the form.
+          this.duplicate = true;
+        } else {
+          this.duplicate = false;
+          this.submitted = true;
+        }
       } catch (err) {
         this.submitError = err.name === "AbortError"
           ? "This is taking longer than expected. Please check your connection and try again."

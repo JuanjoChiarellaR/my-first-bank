@@ -67,21 +67,20 @@
       Sign-ups aren't connected in this deploy yet. The form below still works for review — submitting isn't wired to anything until it's deployed.
     </div>
 
-    <!-- Success state — same card, different copy when the Lambda reports
-         this email was already registered (see js/stay-updated.js's
-         `duplicate` flag). Both cases return the same 200 status from the
-         Lambda on purpose, so this is a copy difference only, not a
-         security-relevant one. -->
-    <template x-if="submitted && !duplicate">
+    <!-- Success state — a new row was actually created. A duplicate-email
+         response is deliberately NOT treated as success: nothing was
+         created, so replacing the whole form with this card would discard
+         everything the person just typed and give them no way to fix a
+         possible email typo. See the inline notice near the submit button
+         instead (js/stay-updated.js's `duplicate` flag), which keeps the
+         form in place. Both responses share the same 200 status from the
+         Lambda on purpose (see lambda/README.md) — that's a network-level
+         anti-enumeration choice, independent of how the frontend renders
+         the two outcomes differently. -->
+    <template x-if="submitted">
       <div class="border border-border bg-surface rounded-lg p-6 text-center">
         <h2 class="font-display text-lg font-semibold mb-2">You're on the list</h2>
         <p class="text-ink-secondary text-sm">We'll email you when something new matches what you told us. In the meantime, explore <a href="index.html" class="underline">Browse Banks</a> or <a href="agent.html" class="underline">Ask the Agent</a>.</p>
-      </div>
-    </template>
-    <template x-if="submitted && duplicate">
-      <div class="border border-border bg-surface rounded-lg p-6 text-center">
-        <h2 class="font-display text-lg font-semibold mb-2">Already on the list</h2>
-        <p class="text-ink-secondary text-sm">Looks like you're already on our list with this email — we'll notify you when something new matches what you're looking for. In the meantime, explore <a href="index.html" class="underline">Browse Banks</a> or <a href="agent.html" class="underline">Ask the Agent</a>.</p>
       </div>
     </template>
 
@@ -209,6 +208,12 @@
           </button>
           <p class="text-xs text-ink-placeholder mt-2" x-show="!formReady">First name, last name, phone, email, state, at least one product interest, arrival date, and consent are all required.</p>
           <p class="text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 mt-3" x-show="submitError" x-text="submitError" aria-live="polite" role="status"></p>
+          <!-- Duplicate-email notice: deliberately stays on the form (not a
+               full-screen swap — see the success-card comment above) so the
+               person can still see/adjust what they typed, e.g. correct the
+               email if it was a typo. Cleared as soon as they edit the email
+               again — see js/stay-updated.js's validateIfTouched(). -->
+          <p class="text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 mt-3" x-show="duplicate" aria-live="polite" role="status">Looks like you're already on our list with this email — we'll notify you when something new matches what you're looking for.</p>
         </div>
       </form>
     </template>

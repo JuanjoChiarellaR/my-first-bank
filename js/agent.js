@@ -466,6 +466,7 @@ document.addEventListener("alpine:init", () => {
         this.revealIndex = assistantIndex;
         this.scrollToBottom();
         await this.revealText(assistantIndex, replyText);
+        this.messages[assistantIndex].cta = true;
 
         this.session = { count: this.session.count + 1 };
         saveSession(this.session);

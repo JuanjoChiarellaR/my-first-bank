@@ -114,6 +114,12 @@
                   <span x-text="m.text" style="white-space: pre-wrap;"></span>
                 </template>
                 <span x-show="i === revealIndex && m.text" class="inline-block w-1.5 h-3.5 bg-ink-secondary ml-0.5 align-middle" style="animation: mfb-cursor-blink 1s step-end infinite;"></span>
+                <!-- Client-side only, never model output — set right after
+                     revealText() resolves in dispatch(), never passed through
+                     mdToSafeHtml/DOMPurify. See js/agent.js. -->
+                <template x-if="m.cta && i !== revealIndex">
+                  <p class="text-xs text-ink-secondary mt-2">Get notified when we add new banks or products that match what you're looking for → <a href="stay-updated.html?source=agent-cta" class="underline">Stay updated</a></p>
+                </template>
               </div>
             </div>
           </template>

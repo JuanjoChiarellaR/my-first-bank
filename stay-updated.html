@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stay Updated — MyFirstBank</title>
+  <meta name="description" content="Get notified when MyFirstBank adds new banks or products that match what you're looking for." />
+  <link rel="icon" href="assets/logos/_mark.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Stay Updated — MyFirstBank" />
+  <meta property="og:description" content="Get notified when MyFirstBank adds new banks or products that match what you're looking for." />
+  <meta property="og:image" content="https://juanjochiarellar.github.io/my-first-bank/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://juanjochiarellar.github.io/my-first-bank/stay-updated.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stay Updated — MyFirstBank" />
+  <meta name="twitter:description" content="Get notified when MyFirstBank adds new banks or products that match what you're looking for." />
+  <meta name="twitter:image" content="https://juanjochiarellar.github.io/my-first-bank/assets/og-image.png" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#FAFAF9',
+            surface: '#FFFFFF',
+            border: '#E4E3DD',
+            ink: '#1F1F1D',
+            'ink-secondary': '#6B6B65',
+            'ink-placeholder': '#A3A29B',
+            hover: '#F2F1EC',
+            green: {
+              fill: '#3FA76B',
+              'fill-hover': '#2E9563',
+              tint: '#E7F3EC',
+              text: '#1F6B42',
+            },
+          },
+          fontFamily: {
+            display: ['Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<!-- data-page="stay-updated" matches nothing in js/shell.js's navItems array,
+     so no navbar tab highlights and this page stays reachable only via the
+     two CTAs (Ask the Agent + Browse Banks banner) — same "no navbar entry"
+     mechanism privacy.html already relies on. Deliberately no footer link
+     either; this page's only two entry points are those CTAs. -->
+<body data-page="stay-updated" class="bg-bg text-ink font-sans antialiased">
+  <div id="site-navbar"></div>
+
+  <main x-data="leadForm()" class="max-w-3xl mx-auto px-4 sm:px-6 py-10 min-h-[60vh]">
+    <h1 class="font-display text-2xl sm:text-3xl font-semibold mb-2">Stay updated</h1>
+    <p class="text-ink-secondary mb-6">Tell us what you're looking for and we'll let you know when we add a bank or product that matches — no spam, unsubscribe anytime.</p>
+
+    <div x-show="!configured" class="mb-5 text-sm bg-hover border border-border rounded-md px-4 py-2.5">
+      Sign-ups aren't connected in this deploy yet. The form below still works for review — submitting isn't wired to anything until it's deployed.
+    </div>
+
+    <!-- Success state -->
+    <template x-if="submitted">
+      <div class="border border-border bg-surface rounded-lg p-6 text-center">
+        <h2 class="font-display text-lg font-semibold mb-2">You're on the list</h2>
+        <p class="text-ink-secondary text-sm">We'll email you when something new matches what you told us. In the meantime, explore <a href="index.html" class="underline">Browse Banks</a> or <a href="agent.html" class="underline">Ask the Agent</a>.</p>
+      </div>
+    </template>
+
+    <!-- Form -->
+    <template x-if="!submitted">
+      <form class="relative grid grid-cols-1 sm:grid-cols-2 gap-3" @submit.prevent="submit()" novalidate>
+
+        <!-- Honeypot: off-screen (not display:none/hidden, since bots
+             increasingly skip those), never seen or filled by a real user.
+             A filled value here means a bot bypassed the JS entirely — the
+             client fakes success without a network call, and the Lambda
+             independently fakes success too if it ever receives this filled
+             directly. See lambda/src/index.mjs. -->
+        <div class="absolute -left-[9999px] top-0 w-px h-px overflow-hidden" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" x-model="form.website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="lf-first-name" class="text-xs font-medium text-ink-secondary">First name <span aria-hidden="true">*</span></label>
+          <input id="lf-first-name" type="text" x-model="form.firstName" required autocomplete="given-name"
+                 class="border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="lf-last-name" class="text-xs font-medium text-ink-secondary">Last name <span aria-hidden="true">*</span></label>
+          <input id="lf-last-name" type="text" x-model="form.lastName" required autocomplete="family-name"
+                 class="border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        </div>
+
+        <div class="flex flex-col gap-1 sm:col-span-2">
+          <label for="lf-phone-number" class="text-xs font-medium text-ink-secondary">Phone <span aria-hidden="true">*</span></label>
+          <div class="flex gap-2">
+            <label for="lf-phone-country" class="sr-only">Country code</label>
+            <select id="lf-phone-country" x-model="form.phoneCountryId"
+                    class="border border-border rounded-md px-2 py-2 text-sm bg-surface w-36 flex-shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <template x-for="c in countryCodes" :key="c.id">
+                <option :value="c.id" x-text="`${c.flag} ${c.dialCode}`"></option>
+              </template>
+            </select>
+            <input id="lf-phone-number" type="tel" x-model="form.phoneNumber" required autocomplete="tel-national" placeholder="5551234567"
+                   class="flex-1 border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="lf-email" class="text-xs font-medium text-ink-secondary">Email <span aria-hidden="true">*</span></label>
+          <input id="lf-email" type="email" x-model="form.email" required autocomplete="email"
+                 class="border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="lf-state" class="text-xs font-medium text-ink-secondary">State <span aria-hidden="true">*</span></label>
+          <select id="lf-state" x-model="form.state" required
+                  class="border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+            <option value="" disabled>Select one</option>
+            <template x-for="[code, name] in usStates" :key="code">
+              <option :value="code" x-text="name"></option>
+            </template>
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-1.5 sm:col-span-2">
+          <span class="text-xs font-medium text-ink-secondary">Interested in <span aria-hidden="true">*</span></span>
+          <div class="flex flex-wrap gap-2">
+            <label class="inline-flex items-center gap-1.5 text-sm border border-border rounded-full px-3 py-1.5 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
+              <input type="checkbox" class="accent-ink" x-model="form.interestedIn.checking">
+              <span>Checking</span>
+            </label>
+            <label class="inline-flex items-center gap-1.5 text-sm border border-border rounded-full px-3 py-1.5 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
+              <input type="checkbox" class="accent-ink" x-model="form.interestedIn.savings">
+              <span>Savings</span>
+            </label>
+            <label class="inline-flex items-center gap-1.5 text-sm border border-border rounded-full px-3 py-1.5 cursor-pointer hover:bg-hover has-[:checked]:bg-hover has-[:checked]:border-ink">
+              <input type="checkbox" class="accent-ink" x-model="form.interestedIn.creditCard">
+              <span>Credit card</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1 sm:col-span-2">
+          <label for="lf-note" class="text-xs font-medium text-ink-secondary">What are you most interested in? (optional)</label>
+          <textarea id="lf-note" x-model="form.interestNote" maxlength="200" rows="3" placeholder="e.g. a no-SSN checking account with branches in Texas"
+                    class="border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"></textarea>
+          <p class="text-xs text-ink-placeholder" x-text="`${form.interestNote.length}/200 characters`"></p>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="lf-arrival" class="text-xs font-medium text-ink-secondary">Arrival date <span aria-hidden="true">*</span></label>
+          <input id="lf-arrival" type="date" x-model="form.arrivalDate" required
+                 class="border border-border rounded-md px-3 py-2 text-sm bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        </div>
+
+        <div class="sm:col-span-2 pt-2 border-t border-border mt-2">
+          <label class="inline-flex items-start gap-2 text-sm cursor-pointer">
+            <input type="checkbox" class="accent-ink mt-0.5" x-model="form.consent" required>
+            <span>I agree to receive email/SMS updates from MyFirstBank. <span aria-hidden="true">*</span></span>
+          </label>
+        </div>
+
+        <div class="sm:col-span-2">
+          <button type="submit" :disabled="!formReady || submitting"
+                  class="bg-ink text-white text-sm font-medium rounded-md px-4 py-2.5 hover:bg-[#3A3A36] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+            <span x-text="submitting ? 'Submitting…' : 'Get notified'"></span>
+          </button>
+          <p class="text-xs text-ink-placeholder mt-2" x-show="!formReady">First name, last name, phone, email, state, at least one product interest, arrival date, and consent are all required.</p>
+          <p class="text-sm text-ink bg-hover border border-border rounded-md px-4 py-2.5 mt-3" x-show="submitError" x-text="submitError"></p>
+        </div>
+      </form>
+    </template>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data-loader.js"></script>
+  <script src="js/shell.js"></script>
+  <script src="js/stay-updated.js"></script>
+</body>
+</html>

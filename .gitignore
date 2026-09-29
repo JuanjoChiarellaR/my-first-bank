@@ -3,4 +3,6 @@
 node_modules/
 worker/.dev.vars
 worker/.wrangler/
+lambda/.env
+lambda/*.zip
 *.log

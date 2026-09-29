@@ -36,18 +36,24 @@ const VALID_STATES = new Set([
 const VALID_PRODUCTS = new Set(["checking", "savings", "credit_card"]);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function corsHeaders(originHeader) {
-  // Mirrors worker/src/index.js's corsHeaders(): echo the Origin back only
-  // if it matches exactly, never "*". Vary: Origin so shared caches don't
-  // serve one origin's CORS headers to another.
-  const allowed = originHeader && originHeader === ALLOWED_ORIGIN ? originHeader : ALLOWED_ORIGIN;
-  return {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": allowed,
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Vary": "Origin",
-  };
+// Access-Control-* headers are deliberately NOT set here. The Lambda
+// Function URL's own CORS config (AllowOrigins: [ALLOWED_ORIGIN],
+// AllowMethods: [POST], AllowHeaders: [Content-Type] — see lambda/README.md)
+// already adds them to every response whose real Origin matches, and adds
+// nothing when it doesn't. Setting them again from code produced a second,
+// duplicate Access-Control-Allow-Origin header on every real-origin
+// response — harmless to curl, but real browsers reject a response with
+// more than one value for that header outright (confirmed live: the actual
+// form submission failed in Chromium with exactly that CORS error, even
+// though curl showed a normal 200). One source of truth, not two.
+//
+// This does NOT make the explicit origin check below redundant: CORS is a
+// browser-only mechanism the Function URL's native config enforces for
+// browser requests, but a non-browser client (curl, a script) can send any
+// Origin header it likes and native CORS never even looks at it outside a
+// real browser context. The check below is what actually rejects that.
+function baseHeaders() {
+  return { "Content-Type": "application/json" };
 }
 
 function validate(body) {
@@ -122,7 +128,7 @@ async function appendSentCommunication(lead_id, label) {
 export const handler = async (event) => {
   const method = event.requestContext?.http?.method || "GET";
   const origin = event.headers?.origin || event.headers?.Origin || "";
-  const headers = corsHeaders(origin);
+  const headers = baseHeaders();
 
   if (method === "OPTIONS") {
     return { statusCode: 204, headers };

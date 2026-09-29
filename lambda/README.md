@@ -47,6 +47,18 @@ AWS account: `797781631822` (not a secret, just an account ID — appears in the
      --auth-type NONE \
      --cors '{"AllowOrigins":["https://juanjochiarellar.github.io"],"AllowMethods":["POST"],"AllowHeaders":["Content-Type"]}'
    ```
+   **`AuthType NONE` alone does not make the URL callable** — AWS also requires an explicit resource-based policy granting public invoke, as **two separate statements** (easy to miss; the console's own "Configuration → Function URL" tab surfaces a warning naming both if either is missing):
+   ```
+   aws lambda add-permission --profile myfirstbank --function-name myfirstbank-leads-handler \
+     --action lambda:InvokeFunctionUrl --statement-id FunctionURLAllowPublicAccess \
+     --principal "*" --function-url-auth-type NONE
+
+   aws lambda add-permission --profile myfirstbank --function-name myfirstbank-leads-handler \
+     --action lambda:InvokeFunction --statement-id FunctionURLAllowPublicInvoke \
+     --principal "*"
+   ```
+   (`lambda:InvokeFunction`'s statement can't carry the `--function-url-auth-type` condition — that flag is only valid on the `InvokeFunctionUrl` action. Without both statements, every request — even from the right origin with a correct payload — gets AWS's own `403 {"Message":"Forbidden..."}` before your code ever runs, which looks identical to a code-level CORS rejection unless you know to check for it.)
+
    Prints the live Function URL. Paste that into `LAMBDA_URL` at the top of `js/stay-updated.js` back in the repo root, commit, and push — `stay-updated.html`'s form won't call the Lambda until that constant is filled in (it ships empty on purpose, with a visible "not connected yet" banner instead of a broken fetch — same precedent as `WORKER_URL` in `js/agent.js` before the Worker existed).
 
 ## Brevo integration (once the user supplies the API key)
@@ -63,7 +75,7 @@ No code redeploy needed — `src/index.mjs` already contains the three Brevo cal
 ## What it does, end to end
 
 1. Browser POSTs the 9 form fields (plus the honeypot field) as JSON to the Function URL (see `js/stay-updated.js`'s `submit()`).
-2. `OPTIONS`/non-`POST` handled first; then an **independent, fail-closed origin check** — mirrors `worker/src/index.js`'s CORS pattern exactly: the `Access-Control-Allow-Origin` header only ever echoes `ALLOWED_ORIGIN` itself (never `*`, never blindly reflecting whatever `Origin` was sent), and a separate explicit check rejects the request outright (`403`) if the real `Origin` header doesn't match — the header is not itself the security boundary, the check is.
+2. `OPTIONS`/non-`POST` handled first (though in practice the Function URL's native CORS config answers real browser preflight before the function is ever invoked); then an **independent, fail-closed origin check**: a `403` if the real `Origin` header doesn't equal `ALLOWED_ORIGIN`. Unlike `worker/src/index.js`, this handler does **not** also set `Access-Control-Allow-Origin`/etc. itself — the Function URL's own CORS config already adds those to every response whose Origin matches, and adding them again from code produced a duplicate `Access-Control-Allow-Origin` header that real browsers (not `curl`) silently reject the whole response over. One source of truth for the CORS headers (the platform config), one independent source for the actual security check (the code) — see the comment above `baseHeaders()` in `src/index.mjs`.
 3. **Honeypot check**: a filled `website` field means a bot bypassed the client-side skip in `js/stay-updated.js` entirely — the Lambda fake-succeeds (`200`, fresh throwaway `lead_id`) with no DynamoDB write and no Brevo calls, so a scripted bot gets no signal it was caught. This is deliberately distinct from a real validation failure (missing/invalid field, unchecked consent), which always returns a genuine `400` — the honeypot's silent-success treatment is reserved only for honeypot detection.
 4. Real field validation (required fields, email format, state against the 51-entry list, `interested_in` non-empty and from the known 3 values, `consent_email_sms === true`) — genuine `400` on failure.
 5. `PutItem` the full record with `sent_communications: []`. This is the one write that has to succeed for the response to be a success — failure here returns `502` and nothing further is attempted.
@@ -73,7 +85,7 @@ No code redeploy needed — `src/index.mjs` already contains the three Brevo cal
 ## Security notes
 
 - No credential (AWS keys, Brevo key) is ever committed — `lambda/.env` is gitignored (see repo root `.gitignore`), `lambda/.env.example` holds placeholders only, and the real `BREVO_API_KEY`/AWS credentials live only as a Lambda environment variable and in `~/.aws/credentials` respectively, never in this repo.
-- CORS is locked to `https://juanjochiarellar.github.io` exactly, both in the Function URL's own CORS config and redundantly inside the handler code — verify with real `curl` tests (fake origin rejected, real origin gets `200`/`204`), not just by reading the config.
+- CORS is locked to `https://juanjochiarellar.github.io` exactly via the Function URL's own CORS config, with an independent code-level origin check as the actual security boundary (see above). Verify with **both** `curl` (confirms the code-level check and the DynamoDB/Brevo flow) **and** a real browser (confirms the CORS headers themselves are valid — `curl` doesn't enforce or even notice a malformed/duplicated `Access-Control-Allow-Origin` header the way a real browser does).
 - IAM permissions are scoped to exactly `dynamodb:PutItem`/`UpdateItem` on this one table's ARN and this one function's log group — verify the *effective* permissions actually match (e.g. `aws iam simulate-principal-policy` expecting `Scan`/`DeleteItem` to come back `implicitDeny`), don't just trust that the policy JSON was applied correctly.
 
 ## Known limitation
